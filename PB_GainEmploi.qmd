@@ -1,0 +1,17 @@
+---
+title: "PB-OFCE_GainEmploi"
+author: "Allegre & Pucci"
+format: ofce-html: default
+editor: visual
+---
+
+## La reprise d'emploi est-elle toujours rémunératrice ?
+
+La reprise d'emploi est-elle toujours rémunératrice ?
+
+```{r librairies}
+#| echo: false
+
+library(ofce)
+library()
+```
