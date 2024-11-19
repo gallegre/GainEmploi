@@ -1,13 +1,55 @@
 ---
-title: "PB-OFCE_GainEmploi"
-author: "Allegre & Pucci"
-format: ofce-html: default
+title: La reprise d'emploi est-elle roujours rémunératrice ?
+subtitle: Si oui, peut-on parler de trappe ? 
+author:
+  - name: Guillaume Allègre
+    email: guillaume.allegre@sciencespo.fr
+    affiliation: OFCE, Sciences Po Paris
+    affiliation-url: "http://www.ofce.fr"
+  - name: Muriel Pucci
+    email: muriel.pucci@gmail.com
+    affiliation: OFCE & Paris 1
+    affiliation-url: "http://www.ofce.fr"
+institution: "Observatoire Français des Conjonctures Économiques"
+date: today
+date-modified: today
+lang: fr
+abstract: "bla bla"
+citation:
+  type: article
+  container-title: "Document de travail de l'OFCE n°1/2025"
+  url: https://ofce.github.io/repriseemploi
+wp: 1/2025
+annee: 2025
+keywords: [RSA, Prime d'ativité, Smic, Pauvreté, Travail, Trappes à pauvreté]
+draft: true
+format:
+  wp-html: default
+  wp-pdf: default
+
+bibliography: WP_RepriseEmploi.bib
 editor: visual
 ---
 
-## La reprise d'emploi est-elle toujours rémunératrice ?
+# Introduction : les objectifs de la lutte contre la pauvreté par l'emploi
 
-La reprise d'emploi est-elle toujours rémunératrice ?
+Y a-t-il de bonnes raisons de reprendre un emploi payé au salaire minimum quand on touche des prestations sociales ? La question des gains liés à la reprise d'emploi est récurrente dans un contexte où les aides sociales sont critiquées pour leur trop grande générosité et où les politiques de tout bord insistent sur la valeur travail: le travail doit payer. Et bien plus que l'assistance.
+
+C'est ce qu'a encore demandé le Premier ministre le 3 octobre 2024 sur France 2. "Il faut que le travail paie plus que l'addition des allocation" a déclaré Michel Barnier, qui entend lancer le "chantier de l'allocation sociale unique", afin que "cela paye plus de travailler que de ne pas travailler". La stratégie nationale de prévention et de luttre contre la pauvreté (SNPLP), publiée en 2018 est même plus précise, puisqu'un des objectifs, alors assigné au revenu univesel d'activité est de "faire en sorte que le travail paye et qu’il paye de la même façon dans tous les cas".
+
+Un deuxième objectif donné aux politiques de lutte contre la pauvreté est que le travail sorte de la pauvreté. Cet objectif est inscrit dans la SNPLP (2018) soit "l’engagement d’une politique déterminée de sortie de la pauvreté par le travail". Etre pauvre bien que travailleur, travailleur mais pauvre, est perçu comme une anomalie que les politiques publiques doivent corriger (Allègre, 2024).
+
+Enfin un troisième objectif donné aux politiques de lutte contre la pauvreté est de "garantir un soutien financier aux ménages modestes" (SNPLP). Dans la stratégie de lutte contre la pauvreté, cet objectif est le plus souvent lié aux enfants et aux familles : ". Garantir l’accès de tous les enfants aux biens et aux services essentiels" est un des objectifs ; "La stratégie pauvreté déploiera enfin des mesures concrètes et ancrées dans le quotidien des Français pour réduire les privations." est affirmé dans le chapitre nommé "Garantir au quotidien les droits fondamentaux des enfants". On peut toutefois convenir que "réduire les privations", "garantir les droits fondamentaux" sont des objectifs qui concernent tout le monde, adultes et mineurs. Depuis 1946, le préambule de la Constitution affirme "Tout être humain qui, en raison de son âge, de son état physique ou mental, de la situation économique, se trouve dans l'incapacité de travailler a le droit d'obtenir de la collectivité des moyens convenables d'existence". Ce droit ne dit pas comment ces moyens convenables d'existence sont procurés, en nature (logement, santé, aide alimentaire...) ou en espèces.
+
+La stratégie nationale de lutte contre la pauvreté repose ainsi sur au moins trois objectifs : 1. faire en sorte que le travail paie ; 2. faire en sorte que le travail sorte de la pauvreté ; 3. Garantir des besoins essentiels ou minimaux. Les trois prochaines parties évaluent le système actuel par rapport à ces trois objectifs. Enfin, dans une quatrième partie, nous verrons ce qu'il faudrait faire si l'on veut atteindre simultanément ces trois objectifs.
+
+# 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de la même façon.
+
+# 2. L'emploi ne protège pas toujours de la pauvreté. 
+
+# 3. Le revers des incitations est l'augmentation de l'intensité de la pauvreté. 
+
+# 4. Que faire si l'on prend la lutte contre la pauvreté au sérieux ? 
 
 ```{r librairies}
 #| echo: false
