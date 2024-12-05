@@ -150,7 +150,7 @@ Le problème est que créer un écart de revenus à la fois entre l'inactivité 
 
 Faut-il revenir à une prestation différentielle ? Une possibilité est de revenir au système du RMI, qui permet à la fois un socle plus élevé et de réaffirmer le temps-plein comme norme de travail. Le problème est que cette norme s'est dégradée et qu'il est peut-être préférable de la renforcer, non pas avec des mesures qui visent les travailleurs et l'offre de travail, mais avec des mesures qui visent les entreprises.
 
-Il faut réaffirmer le droit à un travail à temps-plein et lutter contre le travail à temps-partiel contraint.
+Il faut donc réaffirmer le droit à un travail à temps-plein et lutter contre le travail à temps-partiel contraint. Comment ? Devetter, Pucci et Valentin montrent que le Smic n'est pas une protection suffisante contre la pauvreté des travailleurs, du fait du temps partiel contraint dans des métiers dont le taux horaire est faible. Le seuil de bas salaire mensuel (défini à 60% du salaire médian) étant proche du Smic mensuel, par construction les bas salaires manquent d'heures dans le mois par rapport à un temps-plein. Les métiers les plus touchés par les bas salaires sont les métiers du care, assistantes maternelles, aides à domicile (66% de bas salaires), les métiers du nettoyage (47%), les métiers de l'hottellerie-restauration (50%). Ces trois secteurs concentrent 43% des bas-salaires mensuels. Or ces professions concentrent forte amplitude de la journée de travail et faible densité de la journée de travail :
 
 ```{r librairies}
 #| echo: false
