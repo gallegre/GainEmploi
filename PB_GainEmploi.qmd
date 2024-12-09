@@ -34,6 +34,30 @@ share:
 ::: {#socialshare}
 :::
 
+```{r, include=FALSE}
+
+library(knitr) 
+library(tidyverse) 
+library(ofce) 
+library(tidyverse) 
+library(lubridate) 
+library(knitr) 
+library(viridis) 
+library(scales) 
+library(dplyr) 
+library(tibble) 
+library(readxl) 
+library(skimr) 
+library(tidyr) 
+library(insee) 
+library(rsdmx) 
+library(ggthemes) 
+
+opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
+
+
+```
+
 # Introduction : les objectifs de la lutte contre la pauvreté par l'emploi
 
 Y a-t-il de bonnes raisons de reprendre un emploi payé au salaire minimum quand on touche des prestations sociales ? La question des gains liés à la reprise d'emploi est récurrente dans un contexte où les aides sociales sont critiquées pour leur trop grande générosité et où les politiques de tout bord insistent sur la valeur travail. Le travail doit payer, et bien plus que l'assistance.
@@ -134,23 +158,9 @@ Pourtant, malgré l'augmentation des gains à la reprise d'emploi via le creusem
 
 ```{r fig-minimasociaux}
 #| label: fig-minima
-#| fig-cap: Evolution des mimina sociaux et du Smic horaire en base 100
+#| fig-cap: Evolution des mimina sociaux et du Smic horaire
 
-library(tidyverse)
-library(ofce)
-library(lubridate)
-library(knitr)
-library(viridis)
-library(scales)
-library(dplyr)
-library(tibble)
-library(readxl)
-library(skimr)
-library(tidyr)
-library(rsdmx)
-library(ggthemes)
 
-cah
 Bareme <- read_excel("DREES-BaremesMS.xlsx")
 Bareme <-Bareme %>% mutate_all(as.numeric)
 
@@ -209,10 +219,8 @@ graph <- Bareme_long %>%
   geom_line() +
   geom_point()+
   theme_ofce()+
-  ggtitle("Evolution des mimina sociaux et du Smic horaire")+
-  labs(caption="Source : DREES
-  base 100 = 1990
-  Smic horaire et minima sociaux en euros constants")+
+  labs(caption="Source : DREES ; 
+       base 100 = 1990 ; Smic horaire et minima sociaux en euros constants")+
   labs(x="", y="")+
   theme(text = element_text(size=8))
 
@@ -240,6 +248,16 @@ Dans le système actuel, le travail est plus rémunérateur que l'assistance car
 ## 4.2 Le Smic ou la prime d'activité ?
 
 Faut-il privilégier le soutien aux bas-salaires via le SMIC, éventuellement compensé par des exonérations de cotisations, ou via la prime d'activité, et notamment les bonus individuels ?
+
+La prime n'est pas un salaire
+
+Le salaire est totalement individualisé
+
+Il y a 2 objectifs. Le premier objectif est la redistribution, la lutte contre la pauvreté et ka réduction des écarts de niveaux de vie, par construction familialisée. Le deuxième objectif est le soutien aux bas-salaires, dans une logique de mérite, par construction individualisé. L'hybridation de ces deux logiques, la lutte contre la pauvreté laborieuse, crée des situations paradoxales car la pauvreté suit une logique familiale et le travail est individuel (Allegre, xxxx ; Ponthieux xxxx)
+
+Si l'on donne un poids à l'objectif de réduction de la pauvreté laborieuse, au-delà de celui que l'on donne à l'objectif de réduction de la pauvreté, alors il est préférable que certains pauvres ne travaillent pas (puisque le fait qu'ils travaillent augmentent la pauvreté laborieuse). Si l'on préfère toujours que les pauvres travaillent plus alors l'objectif n'est pas la réduction de la pauvreté laborieuse mais la réduction effciente de la pauvreté. La réduction est efficiente dans la mesure où l'emploi réduit le coût de la redistribution pour les contribuables.
+
+S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).
 
 ## 4.3 Quelle place pour le temps partiel ?
 
