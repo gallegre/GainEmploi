@@ -42,11 +42,19 @@ C'est ce qu'a encore demandé le Premier ministre le 3 octobre 2024 sur France 2
 
 Un deuxième objectif donné aux politiques de lutte contre la pauvreté est de faire en sorte que le travail sorte de la pauvreté. Cet objectif est inscrit dans la SNPLP (2018) soit "l'engagement d'une politique déterminée de sortie de la pauvreté par le travail". Etre pauvre bien que travailleur, travailleur mais pauvre, est perçu comme une anomalie que les politiques publiques doivent corriger (Allègre, 2024).
 
-Enfin un troisième objectif donné aux politiques de lutte contre la pauvreté est de "garantir un soutien financier aux ménages modestes" (SNPLP, 2018). Dans la stratégie de lutte contre la pauvreté, cet objectif est le plus souvent lié aux enfants et aux familles. Un des objectifs est de "garantir l'accès de tous les enfants aux biens et aux services essentiels" ; l'affirmation "la stratégie pauvreté déploiera enfin des mesures concrètes et ancrées dans le quotidien des Français pour réduire les privations" est affirmé dans le chapitre nommé "garantir au quotidien les droits fondamentaux des enfants".
+Enfin un troisième objectif attribué aux politiques de lutte contre la pauvreté est de "garantir un soutien financier aux ménages modestes" (SNPLP, 2018). Dans la stratégie de lutte contre la pauvreté, cet objectif est le plus souvent lié aux enfants et aux familles. Un des objectifs est de "garantir l'accès de tous les enfants aux biens et aux services essentiels" ; l'affirmation "la stratégie pauvreté déploiera enfin des mesures concrètes et ancrées dans le quotidien des Français pour réduire les privations" est affirmé dans le chapitre nommé "garantir au quotidien les droits fondamentaux des enfants". Mais "réduire les privations", "garantir les droits fondamentaux" sont des objectifs qui concernent tout le monde, adultes et mineurs.
 
-Mais "réduire les privations", "garantir les droits fondamentaux" sont des objectifs qui concernent tout le monde, adultes et mineurs. Depuis 1946, le préambule de la Constitution affirme ainsi "Tout être humain qui, en raison de son âge, de son état physique ou mental, de la situation économique, se trouve dans l'incapacité de travailler a le droit d'obtenir de la collectivité des moyens convenables d'existence". Toutefois la façon dont ce droit est écrit ne dit pas comment ces moyens convenables d'existence sont procurés, en nature (logement, santé, aide alimentaire...) ou en espèces. Alors que ce préambule date de 1946, le RMI n'a été mis en place qu'en 1989. Pour les foyers sans revenus, le RMI puis le RSA garantissent des niveaux de vie proches selon les configurations familiales, et en particulier selon la présence d'enfants ou non (voir les cas-types ci-dessous).
+Depuis 1946, le préambule de la Constitution affirme ainsi "Tout être humain qui, en raison de son âge, de son état physique ou mental, de la situation économique, se trouve dans l'incapacité de travailler a le droit d'obtenir de la collectivité des moyens convenables d'existence". Toutefois la façon dont ce droit est écrit ne dit pas comment ces moyens convenables d'existence sont procurés, en nature (logement, santé, aide alimentaire...) ou en espèces. Alors que ce préambule date de 1946, le RMI n'a été mis en place qu'en 1989. Pour les foyers sans revenus, le RMI puis le RSA garantissent des niveaux de vie proches selon les configurations familiales, et en particulier selon la présence d'enfants ou non (voir les cas-types ci-dessous).
 
-La lutte contre la pauvreté repose ainsi sur au moins trois objectifs : 1. Faire en sorte que le travail paie ; 2. Faire en sorte que le travail sorte de la pauvreté ; 3. Garantir des besoins essentiels ou minimaux. Les trois prochaines parties évaluent le système actuel par rapport à ces trois objectifs. Enfin, dans une quatrième partie, nous verrons ce qu'il faudrait faire si l'on veut atteindre simultanément ces trois objectifs.
+La lutte contre la pauvreté repose ainsi sur au moins trois objectifs, régulièrement réaffirmés par les pouvoirs publics :
+
+1\. Faire en sorte que le travail paie ;
+
+2\. Faire en sorte que le travail sorte de la pauvreté ;
+
+3\. Garantir des besoins essentiels ou minimaux.
+
+Les trois prochaines parties évaluent le système actuel par rapport à ces trois objectifs. Enfin, dans une quatrième partie prescriptive, nous verrons ce qu'il faudrait faire si l'on veut atteindre simultanément ces trois objectifs.
 
 ## 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de la même façon.
 
@@ -54,7 +62,7 @@ La lutte contre la pauvreté repose ainsi sur au moins trois objectifs : 1. Fair
 
 La reprise d'emploi est-elle rémunératrice ? Pour répondre à la question de façon concrète, nous raisonnons sur cas-type. Il s'agit d'illustrer les gains à la reprise d'emploi en prenant des exemples-type de situations de travail, de configuration familiale, de logement (pour calculer les allocations-logement) et de gardes (lorsqu'on calcule des frais de garde éventuelles). Dans ces situations, les gains à la reprise d'emploi, proviennent des salaires perçus et des prestations liées à l'emploi (Prime d'activité). Les "coûts" proviennent de l'augmentation des impôts et cotisations (IR, CSG, cotisations sociales) et de la baisse des prestations sociales (RSA, Allocations logement, allocations familiales, Prime d'activité...). La variable d'intérêt est la variation du revenu disponible des ménages. Le revenu disponible est calculé au niveau des ménages et ne tient pas compte de la répartition interindividuelle des revenus au sein des ménages. Seuls les impôts directs impactent ce revenu disponible : l'analyse ne tient pas compte de la TVA par exemple. L'analyse ne tient pas compte non plus des coûts à la reprise d'emploi en termes de transport ou d'habillement.
 
-*définition : taux marginal effectif de prélèvement*
+*Définition : taux marginal effectif de prélèvement*
 
 :   *Outre la variation de revenu disponible du ménage, il est également possible de calculer un taux marginal effectif de prélèvement (TMEP) qui correspond à la part de l'augmentation du revenu d'activité qui ne se traduit pas en augmentation de revenu disponible, du fait de l'augmentation des impôts et de la diminution des prestations. Si lorsque le revenu d'activité augmente de 1000 euros, le revenu disposible n'augmente que de 600 euros, on dira que le TMEP est de 40%.*
 
@@ -62,7 +70,7 @@ La reprise d'emploi est-elle rémunératrice ? Pour répondre à la question de 
 
 Le cas-type général commenté dans le texte est celui d'un ménage éligible au RSA (l'individu référent est âgé entre 25 et 64 ans, sans droit aux allocations chômage) et éligible aux allocations logement (le ménage est locataire du parc privé, en zone 2 des aides au logement (ville moyenne) pour un loyer égal au loyer plafond. Pour les ménages non éligibles à ces prestations, les presations sociales sont bien plus faibles, et les gains à la reprise d'emploi sont donc par construction beaucoup plus importantes. La zone des aides au logement n'a pas une très grande incidence et la plupart des ménages allocataires des aides au logement sont au loyer plafond. Pour les ménages avec enfants, nous supposons dans le cas général deux enfants de 5 à 8 ans mais un focus analyse la situation pour les enfants en bas âge devant être gardés durant la journée.
 
-Trois situations de reprise d'emploi au Smic horaire sont analysées : le temps-plein (35 heures hebdomadaires, 1399 euros mensuels) le mi-temps (699 euros). Pour les couples, ces reprises d'emploi sont analysées pour un conjoint inactif et un conjoint à temps-plein. L'analyse n'est pas genrée, mais chez les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce qu'elles ont tendance à plus s'occuper des charges familiales, et aussi parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi. L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différentes combinaisons de travail. Comme son nom l'indique le salaire minimum constitue un plancher. 85% des salariés ont un salaire supérieur, dans ces cas les gains en revenus disponibles, et les écarts de revenu disponible entre les personnes en emploi et les bénéficiaires du RSA, sont plus élevés.
+Trois situations de reprise d'emploi au Smic horaire sont principalement analysées : le temps-plein (35 heures hebdomadaires, soit un revenu de 1399 euros mensuels) le mi-temps (699 euros). Pour les couples, ces reprises d'emploi sont analysées pour un conjoint inactif et un conjoint à temps-plein. L'analyse n'est pas genrée, mais chez les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce qu'elles ont tendance à plus s'occuper des charges familiales, et aussi parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi. L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différentes combinaisons de travail. Comme son nom l'indique le salaire minimum constitue un plancher. 85% des salariés ont un salaire supérieur, dans ces cas les gains en revenus disponibles, et les écarts de revenu disponible entre les personnes en emploi et les bénéficiaires du RSA, sont plus élevés.
 
 Les tableaux dynamiques permettent de tester plus de configurations.
 
@@ -100,7 +108,7 @@ Le système social et fiscal remplit donc l'objectif qui lui a été fixé depui
 
 # 2. L'emploi ne protège pas toujours de la pauvreté.
 
-Si l'emploi est toujours rémunérateur il ne protège pas toujours de la pauvreté. Ceci peut se voir par cas-type et par l'existence d'une pauvreté en emploi. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté des personnes en emploi était de 7,7%. L'emploi réduit ainsi beaucoup le risque de pauvreté mais ne l'annule pas : sur les 9,1 millions de personnes pauvres, 2 millions sont en emploi (INSEE).
+Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté. Ceci peut se voir par cas-type mais aussi par l'existence d'une pauvreté en emploi. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté des personnes en emploi était de 7,7%. L'emploi réduit ainsi beaucoup le risque de pauvreté mais ne l'annule pas : sur les 9,1 millions de personnes pauvres, 2 millions sont en emploi (INSEE).
 
 *Définition : la pauvreté monétaire*
 
@@ -108,7 +116,7 @@ Si l'emploi est toujours rémunérateur il ne protège pas toujours de la pauvre
 
     *Le dernier seuil de pauvreté publié par l'Insee est de 1216 euros par uc pour l'année 2022. Pour le comparer aux montants des prestations en 2024, nous avons appliqué à ce seuil l'inflation observée entre 2022 et juillet 2024, soit 1309 euros par uc.*
 
-Le niveau de vie d'un célibataire sans enfant sans revenu d'activité et recourant à toutes les prestations est de 851 euros/uc ce qui correspond à 65% du seuil de pauvreté. Son intensité de pauvreté, égale à la distance au seuil de pauvreté, est donc de 35%. Un emploi à mi-temps au Smic ne lui permet pas de franchir le seuil de pauvreté (intensité de 9%). Le célibataire sans enfant franchit le seuil de pauvreté avec un Smic à plein temps (126% du seuil).
+Le niveau de vie d'un célibataire sans enfant sans revenus d'activité et recourant à toutes les prestations est de 851 euros/uc ce qui correspond à 65% du seuil de pauvreté. Son intensité de pauvreté, égale à la distance au seuil de pauvreté, est donc de 35%. Un emploi à mi-temps au Smic ne lui permet pas de franchir le seuil de pauvreté (intensité de 9%). Le célibataire sans enfant franchit le seuil de pauvreté avec un Smic à plein temps (126% du seuil).
 
 Une personne isolée avec enfant en emploi à plein-temps au Smic reste au-dessus du seuil, qu'elle ait un enfant (125%) du seuil), deux enfants (119%), ou trois enfants (124%). Le système socio-fiscal maintient ainsi le niveau de vie des personnes isolées lorsqu'elles travaillent au Smic et ont des enfants (un peu moins pour deux enfants).
 
@@ -124,13 +132,104 @@ En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum
 
 Pourtant, malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'écart entre le RSA et le SMIC et la montée en charge des compléments de revenus pour travailleurs pauvres, la part d'allocataires du RSA dans la population d'âge actif a augmenté, passant de 3,0% en 2008 à 4,1% en 2022. La réduction du niveau de vie relatif du RSA n'a donc pas eu d'effets visibles en termes de baisse du nombre d'allocataires.
 
+```{r fig-minimasociaux}
+#| label: fig-minima
+#| fig-cap: Evolution des mimina sociaux et du Smic horaire en base 100
+
+library(tidyverse)
+library(ofce)
+library(lubridate)
+library(knitr)
+library(viridis)
+library(scales)
+library(dplyr)
+library(tibble)
+library(readxl)
+library(skimr)
+library(tidyr)
+library(rsdmx)
+library(ggthemes)
+
+cah
+Bareme <- read_excel("DREES-BaremesMS.xlsx")
+Bareme <-Bareme %>% mutate_all(as.numeric)
+
+IPC2015 <- "https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/001763852" %>%
+  readSDMX %>%
+  as_tibble
+
+IPC <- IPC2015 %>%  
+  mutate(
+  OBS_VALUE=as.numeric(OBS_VALUE),
+  TIME=ym(TIME_PERIOD),
+  year=year(TIME),
+  month=month(TIME),
+   ) %>%  
+   select(TIME,year, month,OBS_VALUE)  %>% 
+   filter(month==1)
+
+Bareme_IPC <- left_join(Bareme, IPC, by="year")
+
+Bareme_IPC <- Bareme_IPC %>% 
+  mutate(
+    IPC2015=OBS_VALUE,
+    RMIcst=RMI/IPC2015*100,
+    AAHcst=AAH/IPC2015*100,
+    ASPAcst=ASPA/IPC2015*100,
+    SMICcst=(SMIC)/IPC2015*100,
+  )  
+
+annee_ref <- 1990
+
+# Transformation en base 100
+
+Bareme_base100 <- Bareme_IPC %>%
+  mutate(
+    RMI_RSA = (RMIcst / RMIcst[year == annee_ref]) * 100,
+    AAH_ = (AAHcst/AAHcst[year==annee_ref]*100),
+    ASPA_ = (ASPAcst/ASPAcst[year==annee_ref]*100),
+    SMIC_horaire = (SMICcst/SMICcst[year==annee_ref]*100)
+  )
+
+Bareme_long <- pivot_longer(
+  Bareme_base100,
+  cols = c(SMIC_horaire, AAH_, ASPA_, RMI_RSA), 
+  names_to = "variables", 
+  values_to ="valeurs") %>% 
+  select(year, variables, valeurs) %>% 
+  filter(year>1989)
+
+
+#Graphique simple
+
+
+graph <- Bareme_long %>%
+    ggplot() +
+  aes(x = year, y = valeurs, color = variables) +
+  geom_line() +
+  geom_point()+
+  theme_ofce()+
+  ggtitle("Evolution des mimina sociaux et du Smic horaire")+
+  labs(caption="Source : DREES
+  base 100 = 1990
+  Smic horaire et minima sociaux en euros constants")+
+  labs(x="", y="")+
+  theme(text = element_text(size=8))
+
+graph
+
+
+
+
+```
+
 # 4. Que faire si l'on prend la lutte contre la pauvreté au sérieux ?
 
 Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance. Mais avoir un emploi rémunéré au Smic n'est pas un gage de sortie de la pauvreté, et vivre sans emploi implique souvent d'être dans une situation de grande pauvreté. Que faire ?
 
 ## 4.1. Augmenter le socle
 
-Il est possible de concilier les trois objectifs -- travail rémunérateur, travail permettant de sortir de la pauvreté et niveau de vie minimum suffisamment élevé -- dans le système actuel d'intéressement de la prime d'activité en relevant le montant des prestations de solidarité (RSA et aides au logement).
+Il est possible de concilier les trois objectifs - travail rémunérateur, travail permettant de sortir de la pauvreté et niveau de vie minimum suffisamment élevé - dans le système actuel en relevant le montant des prestations de solidarité (RSA et aides au logement).
 
 Le RSA pourrait être revalorisé de sorte qu'un foyer sans emploi atteigne 50 % du niveau de vie médian, soit 1 090 euros pour une personne isolée sans enfant, et 2 290 euros pour un couple avec deux enfants. Avec les aides au logement actuelles, pour la personne seule vivant en zone 2 (villes de plus de 100 000 habitants), cela amènerait le montant du RSA à 798 euros.
 
@@ -139,6 +238,8 @@ En conservant les incitations actuelles, par alignement du socle de la prime d'a
 Dans le système actuel, le travail est plus rémunérateur que l'assistance car la prime d'activité compense le faible niveau du Smic. Si les personnes en emploi restent pauvres malgré les allocations et les incitations... c'est qu'ils partent de trop bas.
 
 ## 4.2 Le Smic ou la prime d'activité ?
+
+Faut-il privilégier le soutien aux bas-salaires via le SMIC, éventuellement compensé par des exonérations de cotisations, ou via la prime d'activité, et notamment les bonus individuels ?
 
 ## 4.3 Quelle place pour le temps partiel ?
 
