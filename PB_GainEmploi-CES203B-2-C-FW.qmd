@@ -1,33 +1,31 @@
 ---
-title: La reprise d'emploi est-elle toujours rémunératrice?
-subtitle: Si oui, quel est le vrai problème ? 
+title: "La reprise d'emploi est-elle toujours rémunératrice?"
+subtitle: "Si oui, quel est le vrai problème ?"
+keywords: Assistance, Prime d'activité, Trappes à inactivité, Incitations à l'emploi
+abstract: "Depuis les réformes visant à permettre aux personnes de cumuler revenus professionnels et prestations sociales, la reprise d'emploi est toujours rémunératrice, masi elle ne permet pas toujours de sortir de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum garanti aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie, mais les travailleurs partent de trop bas."
+
 author:
   - name: Guillaume Allègre
     email: guillaume.allegre@sciencespo.fr
-    affiliation: OFCE, Sciences Po Paris
-    affiliation-url: "http://www.ofce.fr"
+    affiliation: 
+      - OFCE, Sciences Po Paris
+   
   - name: Muriel Pucci
     email: muriel.pucci@gmail.com
-    affiliation: OFCE & Université Paris 1
-    affiliation-url: "http://www.ofce.fr"
-abstract: "Depuis les réformes visant à permettre aux personnes de cumuler revenus professionnels et prestations sociales, la reprise d'emploi est toujours rémunératrice, masi elle ne permet pas toujours de sortir de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum garanti aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie, mais les travailleurs partent de trop bas."
-date: today
-date-modified: now
-toc-title: "la reprise d'emploi est-elle rémunératrice?"
-categories: ["Assistance", "Prime d'activité", "Trappes à inactivité", "Incitations à l'emploi"]
+    affiliation: 
+      - OFCE & Université Paris 1
 
-share:
-  twitter: true
-  facebook: true
-  linkedin: true
-  mastodon: true
-  reddit: true
-  bluesky: true
-  email: true
-  pdf: https://www.ofce.sciences-po.fr/pdf/pbrief/2025/OFCEpbriefxxx.pdf
-  location: socialshare
-  permalink: https://www.ofce.sciences-po.fr/prev/prev2409/france/
-  description: "Perspectives 2024-2025 pour l'économie française. La croissance à l'épreuve du redressement budgétaire"
+
+annee: 2025
+date: today
+date-modified: today
+
+format:
+  wp-html: default
+  wp-pdf: default
+  docx: default
+editor: visual
+standalone: true
 ---
 
 ::: {#socialshare}
@@ -54,7 +52,7 @@ library(ggthemes)
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
 
-
+# pak::pak("ofce/ofce")
 ```
 
 # Introduction : les objectifs de la lutte contre la pauvreté par l'emploi
@@ -95,9 +93,9 @@ Le cas-type général commenté dans le texte est celui d'un ménage éligible, 
 
 [^1]: On suppose que le ménage est locataire en zone 2 des aides au logement (ville moyenne) pour un loyer compris entre 1 et 2,5 fois le loyer plafond.
 
-***Trois situations de reprise d'emploi sont analysées : le mi-temps au smic horaire (699 euros mensuels), le temps-plein au smic horaire (1399 euros mensuels) et le temps plein à 1,5 smic horaire (2098 euros mensuels). Pour les couples, ces reprises d'emploi sont analysées dans le cas d'un conjoint inactif sans revenu, d'un conjoint chômeur (avec un montant d'allocation chômage égal au smic mensuel) et d'un conjoint en emploi à temps-plein gagant le smic ou 1,5 fois le smic. L'analyse n'est pas genrée, mais chez les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce que le partage des tâches reste très inégalitaire et parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi. L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différentes combinaisons de travail. Comme son nom l'indique le salaire minimum constitue un plancher : 85% des salariés ont un salaire supérieur et pour ces salariés, les écarts de revenu disponible entre les personnes en emploi et les bénéficiaires du RSA sont plus élevés.***
+Trois situations de reprise d'emploi sont analysées : le mi-temps au smic horaire (699 euros mensuels), le temps-plein au smic horaire (1399 euros mensuels) et le temps plein à 1,5 smic horaire (2098 euros mensuels). Pour les couples, ces reprises d'emploi sont analysées dans le cas d'un conjoint inactif sans revenu, d'un conjoint chômeur (avec un montant d'allocation chômage égal au smic mensuel) et d'un conjoint en emploi à temps-plein gagnant le smic ou 1,5 fois le smic. L'analyse n'est pas genrée, mais dans les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce que le partage des tâches reste très inégalitaire et parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi. L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différentes combinaisons de travail. Comme son nom l'indique le salaire minimum constitue un plancher : 85% des salariés ont un salaire supérieur et pour ces salariés, les écarts de revenu disponible entre les personnes en emploi et les bénéficiaires du RSA sont plus élevés **(ref Devetter & Valentin)**.
 
-***Les tableaux dynamiques permettent de tester plus de configurations.***
+Les tableaux dynamiques permettent de tester plus de configurations.
 
 ## 1.2 Des reprises d'emploi rémunératrices
 
@@ -125,12 +123,12 @@ Le système social et fiscal remplit donc l'objectif qui lui a été fixé depui
 
 :   *Depuis le 1er janvier 2016, la Prime d'activité a remplacé le RSA activité et la prime pour l'emploi. Comme les instruments qu'elle remplace, la prime d'activité vise deux objectifs : soutenir l'offre de travail grâce à des incitations financières accrues et compléter les revenus des travailleurs ayant des revenus modestes. **La prime pour l'emploi et le RSA activité ont été critiqués pour leur faible efficacité.** Individualisée, la prime pour l'emploi versait de faibles montants à de nombreux bénéficiaires : trop faible pour être véritablement incitative, elle bénéficiait de plus à des ménages à niveau de vie intermédiaire et non aux plus modestes. Le RSA activité tenait compte de la composition et du revenu du ménage : il était davantage ciblé sur les travailleurs pauvres et créait des incitations à la reprise d'emploi substantielles et contemporaines. Néanmoins, son efficacité était minée par un non-recours élevé (68 %).*
 
-    *La prime d'activité est proche dans son fonctionnement du RSA activité : familialisée, versée mensuellement, après une déclaration trimestrielle de revenus, elle cible les travailleurs aux revenus modestes et conserve les incitations à la reprise d'emploi. Elle est en outre clairement identifiée comme une prestation à destination des personnes exerçant une activité, ce qui évite qu'elle apparaisse stigmatisante aux yeux de ceux qui la perçoivent. Par conséquent, le non-recours **(3x% pas d'estimations)** est bien plus faible que celui qui était observé pour le RSA activité.*
+    *La prime d'activité est proche dans son fonctionnement du RSA activité : familialisée, versée mensuellement, après une déclaration trimestrielle de revenus, elle cible les travailleurs aux revenus modestes et conserve les incitations à la reprise d'emploi. Elle est en outre clairement identifiée comme une prestation à destination des personnes exerçant une activité, ce qui évite qu'elle apparaisse stigmatisante aux yeux de ceux qui la perçoivent. Par conséquent, le non-recours **(pas d'estimations précises - donner ref pour approx)** est **probablement** bien plus faible que celui qui était observé pour le RSA activité.*
 
     *La formule de calcul de la prime d'activité est la suivante :*
 
     |  |  |
-    |---------------------|---------------------------------------------------|
+    |----------------------|--------------------------------------------------|
     | *Prime d'activité du foyer =* | *Montant forfaitaire qui dépend de la situation familiale* |
     |  | *+ bonus d'activité individuels* |
     |  | *- (forfait logement + prestations familiales + autres minima sociaux)* |
@@ -139,11 +137,13 @@ Le système social et fiscal remplit donc l'objectif qui lui a été fixé depui
 
     Le montant de la prime d'activité versée au foyer est nul si le résultat de ce calcul est inférieur à 15 euros.
 
-    *Si elle permet de garantir des gains entre inactivité et revenus du travail dans presque toutes les configurations, la prime d'activité a des limites. Par rapport à une hausse du Smic, c'est une prestation sociale et pas un salaire donnant des droits sociaux (chômage, retraites). Comme la formule le montre, les revenus non professionnels du foyer sont déduits à 100%. Dans un couple, si un des conjoints perd son emploi pour du chômage indemnisé, non seulement il perd son bonus d'activité individuel, mais son chômage est déduit de la prime de son conjoint. Par conséquent, dans la plupart des cas, les ménages incluant un chômeur indemnisé (ou un retraité) ne touchent pas de prime d'activité . Enfin, bien que visant à lutter contre les trappes, les compléments de revenus pour travailleurs pauvres sont critiqués par les trappes qu'ils créent (au-dessus) : ciblés sur le temps-partiel, ils créent une trappe à précarité ; ciblés sur le temps-plein, comme la prime d'activité, ils renforcent la trappe à bas-salaire. En matière d'incitations, ces compléments ciblés ne peuvent que creuser une nouvelle trappe pour en reboucher une : si la prime augmente l'écart avec l'inactivité, étant dégressive, elle ne peut que réduire l'écart quelque part plus haut.*
+    Si elle permet de garantir des gains entre inactivité et revenus du travail dans presque toutes les configurations, la prime d'activité a des limites. Par rapport à une hausse du Smic, c'est une prestation sociale et pas un salaire donnant des droits sociaux (chômage, retraites). Comme la formule le montre, les revenus non professionnels du foyer sont déduits à 100%. Dans un couple, si l'un des conjoints perd son emploi pour du chômage indemnisé, non seulement il perd son bonus d'activité individuel, mais son chômage est déduit de la prime de son conjoint. Par conséquent, dans la plupart des cas, les ménages incluant un chômeur indemnisé (ou un retraité) ne touchent pas de prime d'activité . Enfin, bien que visant à lutter contre les trappes, les compléments de revenus pour travailleurs pauvres sont critiqués par les trappes qu'ils créent (au-dessus) : ciblés sur le temps-partiel, ils créent une trappe à précarité ; ciblés sur le temps-plein, comme la prime d'activité, ils renforcent la trappe à bas-salaire. En matière d'incitations, ces compléments ciblés dégressifs ne peuvent que creuser une nouvelle trappe pour en reboucher une : si la prime augmente l'écart entre emploi et avec chômage ou inactivité, elle ne peut que réduire le gain de niveau de vie permis par une hausse de salaire.
 
 # 2. L'emploi ne protège pas toujours de la pauvreté monétaire.
 
-Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté monétaire. Ceci peut se voir par cas-type mais aussi par l'existence d'une pauvreté en emploi. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté monétairedes personnes en emploi était de 7,7%. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE).
+Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté monétaire. Ceci apparaît clairement sur cas types mais peut se voir également par l'existence d'une pauvreté en emploi, même our des bénéficiaires de la prime d'activité[^3]. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté monétaire des personnes en emploi était de 7,7% **et de xx% en se limitant aux allocataires dela prime d'activité**. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE). **ajouter stats selon nombre d'emplois/quotité**
+
+[^3]: Si la prime d'activité permet à certains foyers de franchir le seuil de pauvreté monétaire, l'analyse par cas types montre que certains foyers à bas salaire n'y sont pas éligibles. S'y ajoutent ceux qui ne recourent pas à cette prestation bien que leur niveau de vie soit inférieur au seuil de pauvreté monétaire.
 
 *Définition : la pauvreté monétaire*
 
@@ -155,15 +155,17 @@ Le niveau de vie d'un célibataire sans enfant sans revenus d'activité et recou
 
 Une personne isolée avec enfant(s) en emploi à plein-temps au Smic est au-dessus du seuil de pauvreté monétaire, qu'elle ait un enfant (125%) du seuil), deux enfants (119%), ou trois enfants (124%). Le système socio-fiscal permet donc bien de sortir les parents isolées de la pauvreté lorsqu'elles travaillent au Smic à temps plein. ***quid mi-temps ?***
 
-Les revenus d'un couple monoactif dans lequel l'un des conjoints travaille au Smic à plein-temps, et l'autre conjoint est en inactivité; permettent tout juste d'atteindre le seuil de pauvreté si le couple n'a pas d'enfant. Dans ce cas, le niveau de vie est égal à 100% du seuil de pauvreté. A ce niveau de revenus, le système social ne compense pas entièrement la charge des enfants, et le niveau des couples monoactifs avec enfants est légèrement plus faible. Ces ménages ont donc des revenus qui les placent sous le seuil de pauvretéb monétaire, avec une intensité de pauvreté de 7% avec 1 enfant, 9% avec 2 enfants, et 5% avec 3 enfants.
+Les revenus d'un couple monoactif dans lequel l'un des conjoints travaille au Smic à plein-temps, et l'autre conjoint est en inactivité; permettent tout juste d'atteindre le seuil de pauvreté si le couple n'a pas d'enfant. Dans ce cas, le niveau de vie est égal à 100% du seuil de pauvreté. A ce niveau de revenus, le système social ne compense pas entièrement la charge des enfants, et le niveau de vie des couples monoactifs avec enfants est légèrement plus faible. Ces ménages ont donc des revenus qui les placent sous le seuil de pauvreté monétaire, avec une intensité de pauvreté de 7% s'ils ont 1 enfant, 9% avec 2 enfants, et 5% avec 3 enfants.
 
-Les couples biactifs avec deux emploi au Smic à temps-plein ont un revenu disponible qui leur permet de dépassee le seuil de pauvreté monétaire. A ce niveau de revenus, le système fiscal et social compense moins la charge des enfants. Un couple biactif au Smic sans enfant a ainsi un niveau de vie équivalent à 142% du seuil de pauvreté. Avec un enfant, le niveau de vie descend à 119% du seuil de pauvreté, 108% avec deux enfants et 110% avec trois.
+Les couples biactifs avec deux emploi au Smic à temps-plein ont un revenu disponible qui leur permet de dépasser le seuil de pauvreté monétaire. A ce niveau de revenus, le système fiscal et social ne compense que partiellement la charge des enfants telle qu'elle est appréhedée par les unités de ocnsommation. Un couple biactif au Smic a ainsi un niveau de vie équivalent à 142% du seuil de pauvreté s'il n'a pas d'enfant, 119% du seuil de pauvreté s'il en a un, 108% avec deux enfants et 110% avec trois.
+
+**réfléchir aux stats à produire avec l'ERFS ou INes**
 
 # 3. Le revers des incitations est l'augmentation de l'intensité de la pauvreté des personnes sans emploi.
 
-Le niveau de vie des ménages sans revenus d'activité est faible, et a décru dans le temps. En outre, le niveau du minimum social en direction des personnes d'âge actif a progressé bien moins vite que le niveau du minimum vieillesse (ASPA) ou de l'allocation adulte handicapée (AAH).
+Le niveau de vie des ménages sans revenus d'activité est faible, et a décru dans le temps. En outre, **depuis xxxx,** le niveau du minimum social en direction des personnes d'âge actif a progressé bien moins vite que le niveau du minimum vieillesse (ASPA) ou de l'allocation adulte handicapée (AAH) **(graphique ou réf)**.
 
-En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum social pour les personnes valides d'âge actif. Si l'objectif est principalement distributif, le législateur a néanmoins voulu préserver les incitations à travailler ***en fixant le niveau du RMI par rapport au SMIC à temps plein (à préciser)***. Les débats font alors apparaître la volonté de garder une norme d'emploi à plein- temps. Dans les années 1990, le nombre d'allocataires augmente rapidement et atteint un niveau non anticipé par les décideurs publics : de 500 000 allocataires en 1990, ce nombre dépasse le million en 1996. Face à cette montée rapide, le discours sur les « trappes à pauvreté » se répand. En 2001, l'introduction de la prime pour l'emploi est une première réponse à ce discours. La PPE étant accusée d'être mal ciblée et de pénaliser les emplois à temps partiel, le RSA activité prend la relève en 2009 et permet de garantir que le revenu disponible d'un foyer augmente lorsque ses revenus d'activité augmentent, même à temps partiel ou très partiel. Il est ensuite remplacé par la prime d'activité en 2015, revalorisée lors de la crise des gilets jaunes. Durant cette période d'attention aux gains à l'emploi et à la pauvreté laborieuse, le montant de base du RSA est peu revalorisé.
+En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum social pour les personnes valides d'âge actif. Si l'objectif est principalement distributif, le législateur a néanmoins voulu préserver les incitations à travailler ***en fixant le niveau du RMI à 50 % du SMIC à temps plein*** . Les débats font alors apparaître la volonté de garder une norme d'emploi à plein-temps. Dans les années 1990, le nombre d'allocataires augmente rapidement et atteint un niveau non anticipé par les décideurs publics : de 500 000 allocataires en 1990, ce nombre dépasse le million en 1996. Face à cette montée rapide, le discours sur les « trappes à pauvreté » se répand. En 2001, l'introduction de la prime pour l'emploi (PPE) est une première réponse à ce discours. La PPE étant accusée d'être mal ciblée et de pénaliser les emplois à temps partiel, le RSA activité prend la relève en 2009 et permet de garantir que le revenu disponible d'un foyer augmente lorsque ses revenus d'activité augmentent, même à temps partiel ou très partiel. Il est ensuite remplacé par la prime d'activité en 2015, revalorisée lors de la crise des gilets jaunes **pour les salaires proches du smic**. Durant cette période d'attention aux gains à l'emploi et à la pauvreté laborieuse, le montant de base du RSA est peu revalorisé. **citaton de Nicolas sur le paradoxe incitation/précarisation**
 
 Pourtant, malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'écart entre le RSA et le SMIC et la montée en charge des compléments de revenus pour travailleurs pauvres, la part d'allocataires du RSA dans la population d'âge actif a augmenté, passant de 3,0% en 2008 à 4,1% en 2022. La réduction du niveau de vie relatif du RSA n'a donc pas eu d'effets visibles en termes de baisse du nombre d'allocataires.
 
@@ -244,41 +246,47 @@ graph
 
 # 4. Que faire si l'on prend la lutte contre la pauvreté au sérieux ?
 
-Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance. Mais avoir un emploi rémunéré au Smic n'est pas un gage de sortie de la pauvreté, et vivre sans emploi implique souvent d'être dans une situation de grande pauvreté. Que faire ?
+Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance. Mais avoir un emploi rémunéré au Smic n'est pas un gage de sortie de la pauvreté, et vivre sans emploi implique souvent d'être dans une situation de grande pauvreté. Que faire ? **Une solution passe par la réglementation du marché du travail (à rediger)... Les pistes que nous explorons ici prennent comme donnése la structure des emplois offerts et le développement de l'auto-entreprenariat précaire et reposent principalement sur des aménagements de dispositifs actuels.**
 
 ## 4.1. Augmenter le socle
 
-Il est possible de concilier les trois objectifs - travail rémunérateur, travail permettant de sortir de la pauvreté et niveau de vie minimum suffisamment élevé - dans le système actuel en relevant le montant des prestations de solidarité (RSA et aides au logement).
+Dans le système actuel, il est possible de concilier les trois objectifs - travail rémunérateur, travail permettant de sortir de la pauvreté et niveau de vie minimum suffisamment élevé - en relevant le montant des prestations de solidarité (RSA et aides au logement).
 
-Le RSA pourrait être revalorisé de sorte qu'un foyer sans emploi atteigne 50 % du niveau de vie médian, soit 1 090 euros pour une personne isolée sans enfant, et 2 290 euros pour un couple avec deux enfants. Avec les aides au logement actuelles, pour la personne seule vivant en zone 2 (villes de plus de 100 000 habitants), cela amènerait le montant du RSA à 798 euros.
+Le RSA pourrait être revalorisé de sorte qu'un foyer sans emploi atteigne 50 % du niveau de vie médian, soit 1 090 euros pour une personne isolée sans enfant, et 2 290 euros pour un couple avec deux enfants. Avec les aides au logement actuelles, pour la personne seule vivant en zone 2 (villes de plus de 100 000 habitants), cela amènerait le montant du RSA à **798 euros avant forfait logement (et xx€ après)**.
 
-En conservant les incitations actuelles, par alignement du socle de la prime d'activité sur le RSA, cette revalorisation permettrait aux couples avec deux enfants de franchir le seuil de pauvreté monétaire avec un seul emploi au Smic à temps plein.
+En conservant les incitations actuelles, par alignement du socle de la prime d'activité sur le RSA, cette revalorisation permettrait aux couples avec deux enfants de franchir le seuil de pauvreté monétaire avec un seul emploi au Smic à temps plein. **Graphique illustratif**
 
-Dans le système actuel, le travail est plus rémunérateur que l'assistance car la prime d'activité compense le faible niveau du Smic. Si les personnes en emploi restent pauvres malgré les allocations et les incitations... c'est qu'ils partent de trop bas.
+Dans le système actuel, le travail est plus rémunérateur que l'assistance car la prime d'activité compense le faible niveau du Smic **horaire et la prévalence des emplois rémunérés en dessous du smic mensuel**. Si les personnes en emploi restent pauvres malgré les allocations et les incitations... c'est qu'ils partent de trop bas.
 
 ## 4.2 Le Smic ou la prime d'activité ?
 
-Faut-il privilégier le soutien aux bas-salaires via le SMIC, éventuellement compensé par des exonérations de cotisations, ou via la prime d'activité, et notamment les bonus individuels ?
+Faut-il privilégier le soutien aux bas-salaires via le Smic**, ( enlever éventuellement compensé par des exonérations de cotisations, )** ou via la prime d'activité, et notamment les bonus individuels ?
 
-La prime n'est pas un salaire
+La prime d'activité n'est pas un salaire :
 
-Le salaire est totalement individualisé
+-   Le salaire est totalement individualisé : le bénéfice de la prime our un travailleur à bas salaire dépend de la composition de sa famille, du montant et de la nature des revenus de son conjoint
 
-Il y a 2 objectifs. Le premier objectif est la redistribution, la lutte contre la pauvreté et ka réduction des écarts de niveaux de vie, par construction familialisée. Le deuxième objectif est le soutien aux bas-salaires, dans une logique de mérite, par construction individualisé. L'hybridation de ces deux logiques, la lutte contre la pauvreté laborieuse, crée des situations paradoxales car la pauvreté suit une logique familiale et le travail est individuel (Allegre, xxxx ; Ponthieux xxxx)
+-   Le salaire est le plus souvent prévisible, au moins un minorant du salaire (en présence d'heures supplémentaires ou de part variable) : les travailleurs peuvent difficilement révoir le montant de la prime d'activité compte tenu de son mode de calcul et des risques d'indus et rappels.
 
-Si l'on donne un poids à l'objectif de réduction de la pauvreté laborieuse, au-delà de celui que l'on donne à l'objectif de réduction de la pauvreté, alors il est préférable que certains pauvres ne travaillent pas (puisque le fait qu'ils travaillent augmentent la pauvreté laborieuse). Si l'on préfère toujours que les pauvres travaillent plus alors l'objectif n'est pas la réduction de la pauvreté laborieuse mais la réduction effciente de la pauvreté. La réduction est efficiente dans la mesure où l'emploi réduit le coût de la redistribution pour les contribuables.
+-   le salaire procure des droits sociaux : le taux de remplacemet au chomage ou à la retraite est réduit pour les bénéficiaires de la prime
 
-S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).
+Il y a 2 objectifs. Le premier objectif est la redistribution, la lutte contre la pauvreté et la réduction des écarts de niveaux de vie, par construction familialisée. Le deuxième objectif est le soutien aux bas-salaires, dans une logique de mérite, par construction individualisé. L'hybridation de ces deux logiques, la lutte contre la pauvreté laborieuse, crée des situations paradoxales car la pauvreté suit une logique familiale et le travail est individuel (Allegre, xxxx ; Ponthieux xxxx). **idée : renvoyer à l'origine des prestations familiales avec les sursalaires familiaux : l'emploi permet aux travailleurs sans enfant de vivre décemment (modèle couple monoactif), les PF compensent les charges d'enfant (pour éviter une hausse généralisée des salaires sous la pression des travailleurs avec enfants)**
+
+**Si l'on donne un poids à l'objectif de réduction de la pauvreté laborieuse, au-delà de celui que l'on donne à l'objectif de réduction de la pauvreté, alors il est préférable que certains pauvres ne travaillent pas (puisque le fait qu'ils travaillent augmentent la pauvreté laborieuse). Si l'on préfère toujours que les pauvres travaillent plus alors l'objectif n'est pas la réduction de la pauvreté laborieuse mais la réduction efficiente de la pauvreté. La réduction est efficiente dans la mesure où l'emploi réduit le coût de la redistribution pour les contribuables.**
+
+**S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).**
+
+**parler de l'instabilité et de l'avantage qu'avait la PPE : presta sur base fiscale sans risque d'indus (sauf fraude et ceux qui demandaient la mensualisation)**
 
 ## 4.3 Quelle place pour le temps partiel ?
 
 Faut-il cibler les compléments de revenus pour travailleurs au niveau du temps-partiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles. En réalité redistribution et incitations sont des objectifs contradictoires : la redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, emploi et emploi mieux rémunéré, tandis que l'incitation implique de les maintenir ou de les augmenter.
 
-S'ajoute un autre objectif : le mérite. Selon cet objectif, l'augmentation des revenus d'activité doit s'accompagner d'une augmentation du revenu disponible, même en l'absence d'impact incitatif en termes d'emploi. Il est probable que beaucoup d'acteurs ont cet objectif en tête lorsqu'ils défendent l'idée que le travail doit payer (Allègre, 2011).
+S'ajoute un autre objectif : le mérite. Selon cet objectif, l'augmentation des revenus d'activité doit s'accompagner d'une augmentation du revenu disponible, même en l'absence d'impact incitatif en termes d'emploi. Il est probable que beaucoup d'acteurs ont cet objectif en tête lorsqu'ils défendent l'idée que le travail doit payer (Allègre, 2011). **précise ta pensée**
 
-Le problème est que créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein est probablement une des raisons de la dévalorisation du socle. En 1989, la norme d'emploi était à temps-plein, et le niveau du RMI a été choisi pour créer un écart avec l'emploi au Smic à temps-plein (il a été fixé en décembre 1988 à 50% du Smic à temps-plein). La prestation était différentielle : après période d'interessement temporaire, chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier. Les gains étaient concentrés entre le mi-temps et le temps-plein.
+Le problème est que créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein est probablement une des raisons de la dévalorisation du socle. En 1989, la norme d'emploi était **le CDI à temps-plein**, et le niveau du RMI a été choisi pour créer un écart avec l'emploi au Smic à temps-plein (il a été fixé en décembre 1988 à 50% du Smic à temps-plein). La prestation était différentielle : après période d'interessement temporaire (**à préciser**), chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier. Les gains étaient concentrés entre le mi-temps et le temps-plein. **Pourtant, il y avait des reprises d'emploi à temps partiel et même du cumul RSA-emploi (ref Petour Zajdela par exemple)**
 
-Faut-il revenir à une prestation différentielle ? Une possibilité est de revenir au système du RMI, qui permet à la fois un socle plus élevé et de réaffirmer le temps-plein comme norme de travail. Le problème est que cette norme s'est dégradée et qu'il est peut-être préférable de la renforcer, non pas avec des mesures qui visent les travailleurs et l'offre de travail, mais avec des mesures qui visent les entreprises.
+Faut-il revenir à une prestation différentielle ? Une possibilité est de revenir au système du RMI, qui permet à la fois un socle plus élevé et de réaffirmer le temps-plein comme norme de travail. Le problème est que cette norme s'est dégradée et qu'il est peut-être préférable de la renforcer, non pas avec des mesures qui visent les travailleurs et l'offre de travail, mais avec des mesures qui visent les entreprises. **A préciser**
 
 Il faut donc réaffirmer le droit à un travail à temps-plein et lutter contre le travail à temps-partiel contraint. Comment ? Devetter, Pucci et Valentin montrent que le Smic n'est pas une protection suffisante contre la pauvreté des travailleurs, du fait du temps partiel contraint dans des métiers dont le taux horaire est faible. Le seuil de bas salaire mensuel (défini à 60% du salaire médian) étant proche du Smic mensuel, par construction les bas salaires manquent d'heures dans le mois par rapport à un temps-plein. Les métiers les plus touchés par les bas salaires sont les métiers du care, assistantes maternelles, aides à domicile (66% de bas salaires), les métiers du nettoyage (47%), les métiers de l'hottellerie-restauration (50%). Ces trois secteurs concentrent 43% des bas-salaires mensuels. Or ces professions concentrent forte amplitude de la journée de travail et faible densité de la journée de travail :
 
