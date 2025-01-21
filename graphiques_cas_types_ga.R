@@ -11,7 +11,10 @@ library(patchwork)
 library(ggplot2)
 library(ggrepel)
 library(blorr)
-
+library(plotly)
+library(ggiraph)
+library(sf) 
+library(patchwork)
 
 castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
 
@@ -43,16 +46,16 @@ basegr$name<-factor(basegr$name,
 
 # Stacked
 
-couleurs <- c('Salaire' = 'grey', 'IR'='red','PF' = 'aquamarine', 
-              'PL' = 'darkcyan', 'RSA' = 'darkolivegreen',
-              'PA' = 'darkgreen')
+couleurs <- c('Salaire' = 'darkgrey', 'IR'='coral','PF' = 'blue4', 
+              'PL' = 'cadetblue4', 'RSA' = 'aquamarine3',
+              'PA' = 'aquamarine')
 
 graph<-ggplot(basegr %>% filter(name !='RDISP'), aes(fill=name, y=value, x=typrev)) + 
   scale_fill_manual(values = couleurs) +
-  geom_bar(position="stack", stat="identity")+
+  geom_bar_interactive(position="stack", stat="identity")+
   geom_hline(yintercept=seuilpm,linetype="dashed",color="grey",linewidth=1)+
   geom_text(aes(x=1, y=seuilpm+50,label="Seuil de pauvreté monétaire"),size=4,colour="grey")+
-  geom_point(data=basegr %>% filter(name=='RDISP'), 
+  geom_point_interactive(data=basegr %>% filter(name=='RDISP'), 
              aes(x=typrev,y=value, 
                  colour="Revenu disponible"),size=3)+
   theme_minimal()+
@@ -70,8 +73,80 @@ graph<-ggplot(basegr %>% filter(name !='RDISP'), aes(fill=name, y=value, x=typre
   scale_y_continuous(expand = c(0, 0),limits=c(0,2250),breaks=seq(0, 2250, by = 250)) +
 labs(title="Revenu disponible d'une personne seule selon son revenu professionnel" )
 
+graph
+igraph <- (girafe(ggobj = graph))
 
+igraph
+
+#----------------------------------------------------------------#
+
+
+basegr <- basegr %>%
+  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
+         "PF" = "Prestations familiales", "PL" = "Prestations logement")
+         )
+  
+couleurs <- c('Salaire' = 'darkgrey', 'Impôt sur le revenu'='coral','Prestations familiales' = 'blue4', 
+              'Prestations logement' = 'cadetblue4', 'RSA' = 'aquamarine3',
+              'Prime d activité' = 'aquamarine')
+
+
+
+graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, x = typrev)) + 
+  scale_fill_manual(values = couleurs) +
+  geom_bar_interactive(
+    position = "stack", 
+    stat = "identity", 
+    aes(tooltip = paste("Type de revenu:", name, "<br> Valeur:", round(value,2)))
+  ) +
+  geom_hline(
+    yintercept = seuilpm, 
+    linetype = "dashed", 
+    color = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = seuilpm + 50, label = "Seuil de pauvreté monétaire"),
+    size = 3, 
+    hjust = 0, #Left-justified
+    colour = "grey"
+  ) +
+  geom_point_interactive(
+    data = basegr %>% filter(name == 'RDISP'), 
+    aes(
+      x = typrev, y = round(value, 2), 
+      colour = "Revenu disponible", 
+      tooltip = paste("Revenu disponible:", scales::number(value, accuracy = 1))
+    ), 
+    size = 3
+  ) +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "white"), 
+    plot.background = element_rect(fill = "white"),
+    legend.position =  "right",
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.text = element_text(size = rel(0.7)),
+    legend.title = element_blank(),
+    plot.title = element_text(size = rel(0.8), hjust = 0.7),
+    plot.caption = element_text(size = rel(0.5)),
+    axis.ticks.y = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
+    scale_y_continuous(expand = c(0, 0),limits=c(0,2250),breaks=seq(0, 2250, by = 250)) +
+    labs(title="Revenu disponible d'une personne seule selon son revenu professionnel" )
+
+igraph <- girafe(ggobj = graph)
+igraph
+
+# save
 ggsave(graph,filename="graph/Cas type isolé sans enfant.png",width = 33,height = 14,units = "cm",dpi=300)
+htmltools::save_html(igraph, "graph/interactive_1C0E.html")
+
+
+
+
 
 
 # --------------------------------------------------------------------------
@@ -79,7 +154,7 @@ ggsave(graph,filename="graph/Cas type isolé sans enfant.png",width = 33,height 
 base<-castyp %>% 
   filter(isocou=="couple" & nbenf==2 & actconj=="Inactif") %>% 
   mutate(typrev=case_when(
-    activite==0 ~ "Sans revenu",in
+    activite==0 ~ "Sans revenu",
     activite==0.5 ~ "Avec un mi-temps \n au Smic",
     activite==1 & Salaire==smic ~ "Avec un temps plein\n au Smic",
     TRUE ~ "Avec un temps plein \n à 1,5 Smic")
@@ -102,9 +177,11 @@ basegr$name<-factor(basegr$name,
 
 # Stacked
 
-couleurs <- c('Salaire' = 'grey', 'IR'='red','PF' = 'darkgreen', 
-              'PL' = 'forestgreen', 'RSA' = '',
-              'PA' = '')
+couleurs <- c('Salaire' = 'darkgrey', 'IR'='coral','PF' = 'blue4', 
+              'PL' = 'cadetblue4', 'RSA' = 'aquamarine3',
+              'PA' = 'aquamarine')
+  
+
 
 graph<-ggplot(basegr %>% filter(name !='RDISP'), aes(fill=name, y=value, x=typrev)) + 
   scale_fill_manual(values = couleurs) +
