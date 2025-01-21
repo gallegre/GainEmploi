@@ -129,7 +129,7 @@ Le système social et fiscal remplit donc l'objectif qui lui a été fixé depui
     *La formule de calcul de la prime d'activité est la suivante :*
 
     |  |  |
-    |------------------------------------|------------------------------------|
+    |----|----|
     | *Prime d'activité du foyer =* | *Montant forfaitaire qui dépend de la situation familiale* |
     |  | *+ bonus d'activité individuels* |
     |  | *- (forfait logement + prestations familiales + autres minima sociaux)* |
