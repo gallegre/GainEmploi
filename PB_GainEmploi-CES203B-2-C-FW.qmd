@@ -14,18 +14,32 @@ author:
     email: muriel.pucci@gmail.com
     affiliation: 
       - OFCE & Université Paris 1
-
-
+      
 annee: 2025
 date: today
 date-modified: today
+lang: fr
 
+<<<<<<< Updated upstream
 #format:
 #  wp-html: default
 #  wp-pdf: default
 #  docx: default
 #editor: visual
 #standalone: true
+=======
+citation:
+  type: article
+  container-title: "Document de travail de l'OFCE n°x/2025"
+draft: true
+#format:
+#  wp-html: default
+#  wp-pdf: default
+  
+
+#bibliography: PB_gainemploi.bib
+#editor: visual
+>>>>>>> Stashed changes
 ---
 
 ::: {#socialshare}
@@ -129,7 +143,7 @@ Le système social et fiscal remplit donc l'objectif qui lui a été fixé depui
     *La formule de calcul de la prime d'activité est la suivante :*
 
     |  |  |
-    |----------------------|--------------------------------------------------|
+    |------------------------|------------------------------------------------|
     | *Prime d'activité du foyer =* | *Montant forfaitaire qui dépend de la situation familiale* |
     |  | *+ bonus d'activité individuels* |
     |  | *- (forfait logement + prestations familiales + autres minima sociaux)* |

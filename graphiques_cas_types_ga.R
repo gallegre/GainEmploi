@@ -97,7 +97,7 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
   geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes(tooltip = paste("Type de revenu:", name, "<br> Valeur:", round(value,2)))
+    aes(tooltip = paste(" ", name, ": ", round(value,2)))
   ) +
   geom_hline(
     yintercept = seuilpm, 

@@ -1,7 +1,7 @@
 ---
 title: "La reprise d'emploi est-elle toujours rémunératrice?"
 subtitle: "Si oui, quel est le vrai problème ?"
-keywords: Assistance, Prime d'activité, Trappes à inactivité, Incitations à l'emploi
+keywords: Assistance, Prime d'activité, Smic, Gains à l'emploi, Trappes à inactivité
 abstract: "Depuis les réformes visant à permettre aux personnes de cumuler revenus professionnels et prestations sociales, la reprise d'emploi est toujours rémunératrice, masi elle ne permet pas toujours de sortir de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum garanti aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie, mais les travailleurs partent de trop bas."
 
 author:
@@ -49,6 +49,23 @@ library(tidyr)
 library(insee) 
 library(rsdmx) 
 library(ggthemes) 
+library(haven)
+library(glue)
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(reshape2)
+library(MetricsWeighted)
+library(questionr)
+library(xlsx)
+library(patchwork)
+library(ggplot2)
+library(ggrepel)
+library(blorr)
+library(plotly)
+library(ggiraph)
+library(sf) 
+library(patchwork)
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
 
@@ -76,7 +93,7 @@ Pour résumer, la lutte contre la pauvreté repose sur au moins trois objectifs,
 
 3\. Garantir à tous la couverture des besoins essentiels ou minimaux.
 
-Les trois premières parties de ce document évaluent le système actuel par rapport à ces trois objectifs. Dans la quatrième partie, plus prescriptive, nous ferons de propositions afin d'atteindre au mieux ces trois objectifs.
+Les trois premières parties de ce document évaluent le système actuel par rapport à ces trois objectifs. La quatrième partie, rescriptive, fait des propositions qui permettent d'atteindre au mieux ces trois objectifs.
 
 ## 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de la même façon.
 
@@ -96,8 +113,6 @@ Le cas-type général commenté dans le texte est celui d'un ménage éligible, 
 
 Trois situations de reprise d'emploi sont analysées : le mi-temps au smic horaire (699 euros mensuels), le temps-plein au smic horaire (1399 euros mensuels) et le temps plein à 1,5 smic horaire (2098 euros mensuels). Pour les couples, ces reprises d'emploi sont analysées dans le cas d'un conjoint inactif sans revenu, d'un conjoint chômeur (avec un montant d'allocation chômage égal au smic mensuel) et d'un conjoint en emploi à temps-plein gagnant le smic ou 1,5 fois le smic. L'analyse n'est pas genrée, mais dans les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce que le partage des tâches reste très inégalitaire et parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi. L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différentes combinaisons de travail. Comme son nom l'indique le salaire minimum constitue un plancher : 85% des salariés ont un salaire supérieur et pour ces salariés, les écarts de revenu disponible entre les personnes en emploi et les bénéficiaires du RSA sont plus élevés.
 
-Les tableaux dynamiques permettent de tester plus de configurations.
-
 ## 1.2 Des reprises d'emploi rémunératrices
 
 Dans les cas types étudiés, le système socio-fiscal actuel garantit que la reprise d'emploi est toujours rémunératrice, mais pas nécessairement toujours dans les mêmes proportions.
@@ -106,9 +121,227 @@ Le cas d'une personne seule illustre la façon dont le système socio-fiscal ass
 
 [^2]: Son niveau de vie équivaut à 39% du niveau de vie médian.
 
+![Revenu disponible d'une personne seule selon son revenu professionnel](){#fig-1}
+
+```{r}
+
+
+castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+
+smic=1398.7
+
+base<-castyp %>% 
+  filter(isocou=="isolé" & nbenf==0) %>% 
+  mutate(typrev=case_when(
+    activite==0 ~ "Sans revenu",
+    activite==0.5 ~ "Avec un mi-temps \n au Smic",
+    activite==1 & Salaire==smic ~ "Avec un temps plein\n au Smic",
+    TRUE ~ "Avec un temps plein \n à 1,5 Smic")
+  ) %>% 
+  select(typrev,Salaire,PF,PL,RSA,PA,	IR,	RDISP,	NVIE)	
+
+basegr<-base %>% 
+  pivot_longer(cols=c(Salaire,PF,PL,RSA,PA,RDISP)) 
+
+
+seuilpm=1309
+
+
+basegr$typrev <- factor(basegr$typrev)
+basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
+
+basegr$name <- factor(basegr$name)
+basegr$name<-factor(basegr$name,
+                    levels=c("PA","RSA","PL","PF","Salaire","RDISP"))
+
+
+
+basegr <- basegr %>%
+  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
+         "PF" = "Prestations familiales", "PL" = "Prestations logement")
+         )
+  
+
+
+#__________________________________#
+
+basegr <- basegr %>%
+  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
+         "PF" = "Prestations familiales", "PL" = "Prestations logement")
+         )
+  
+couleurs <- c('Salaire' = 'darkgrey', 'Impôt sur le revenu'='coral','Prestations familiales' = 'blue4', 
+              'Prestations logement' = 'cadetblue4', 'RSA' = 'aquamarine3',
+              'Prime d activité' = 'aquamarine')
+
+
+# cas personne seule #
+
+graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, x = typrev)) + 
+  scale_fill_manual(values = couleurs) +
+  geom_bar_interactive(
+    position = "stack", 
+    stat = "identity", 
+    aes(tooltip = paste(" ", name, ": ", round(value,2)))
+  ) +
+  geom_hline(
+    yintercept = seuilpm, 
+    linetype = "dashed", 
+    color = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = seuilpm + 50, label = "Seuil de pauvreté monétaire"),
+    size = 3, 
+    hjust = 0, #Left-justified
+    colour = "grey"
+  ) +
+  geom_point_interactive(
+    data = basegr %>% filter(name == 'RDISP'), 
+    aes(
+      x = typrev, y = round(value, 2), 
+      colour = "Revenu disponible", 
+      tooltip = paste("Revenu disponible:", scales::number(value, accuracy = 1))
+    ), 
+    size = 3
+  ) +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "white"), 
+    plot.background = element_rect(fill = "white"),
+    legend.position =  "right",
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.text = element_text(size = rel(0.7)),
+    legend.title = element_blank(),
+    plot.title = element_text(size = rel(0.8), hjust = 0.7),
+    plot.caption = element_text(size = rel(0.5)),
+    axis.ticks.y = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
+    scale_y_continuous(expand = c(0, 0),limits=c(0,2250),breaks=seq(0, 2250, by = 250))
+ 
+
+igraph <- girafe(ggobj = graph)
+igraph
+
+# save
+ggsave(graph,filename="graph/Cas type isolé sans enfant.png",width = 33,height = 14,units = "cm",dpi=300)
+htmltools::save_html(igraph, "graph/interactive_1C0E.html")
+
+```
+
 Si cette personne reprend un emploi rémunéré au Smic, son revenu disponible augmente que l'emploi soit à temps partiel ou à temps plein, en dépit de la baisse du montant de prestations sociales. Avec un emploi à mi-temps, le revenu disponible est de 1 191 euros et le taux marginal effectif de prélevement (TMEP) est de 51,4%, ce qui veut dire que les ménages gardent en revenu disponible 48,6% de l'augmentation de leurs revenus d'activité (soit 340 euros sur les 699 euros de salaire reçu). Avec un emploi à temps-plein, le revenu disponible double quasiment (+94%) et atteint 1656 euros (soit une hausse de 805 euros) avec un TMEP de 42,5%. Si l'emploi à temps plein est rémunéré à 1,5 smic, le niveau de vie atteint 2 016 euros (hausse de 1 165 euros) et le TMEP est de 44,5%. ***commenter plus les variations de MS/PL/IR***
 
 Pour un couple avec deux enfants (âgés de 5 et 8 ans) initialement sans revenu et dont un des conjoints reprend un emploi à plein-temps, le gain de revenu disponible en euros est de 845 euros, soit un gain très proche de celui du célibataire sans enfant, et par conséquent un TMEP également similaire (40%). Si le gain en euro est similaire, ce couple a un revenu disponible plus important en situation d'inactivité (1 652 euros) et le gain relatif est donc moindre (+51%). De plus, ce couple comporte davantage d'unités de consommation que le célibataire et pour une augmentation équivalente du revenu disponible, le gain en niveau de vie est deux fois plus faible que pour le célibataire sans enfant (402 euros par UC). ***commenter plus les variations de MS/PL/IR***
+
+![Revenu disponible d'un couple avec deux enfants](){#fig-2}
+
+```{r}
+
+castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+
+smic=1398.7
+
+base<-castyp %>% 
+  filter(isocou=="couple" & nbenf==2 & actconj=="Inactif") %>% 
+  mutate(typrev=case_when(
+    activite==0 ~ "Sans revenu",
+    activite==0.5 ~ "Avec un mi-temps \n au Smic",
+    activite==1 & Salaire==smic ~ "Avec un temps plein\n au Smic",
+    TRUE ~ "Avec un temps plein \n à 1,5 Smic")
+  ) %>% 
+  select(typrev,Salaire,PF,PL,RSA,PA,	IR,	RDISP)	
+
+basegr<-base %>% 
+  pivot_longer(cols=c(Salaire,PF,PL,RSA,PA,RDISP)) 
+
+
+seuilpm=1309*2.1
+
+
+basegr$typrev <- factor(basegr$typrev)
+basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
+
+basegr$name <- factor(basegr$name)
+basegr$name<-factor(basegr$name,
+                    levels=c("PA","RSA","PL","PF","Salaire","RDISP"))
+
+
+basegr <- basegr %>%
+  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
+         "PF" = "Prestations familiales", "PL" = "Prestations logement")
+         )
+  
+
+
+#__________________________________#
+
+basegr <- basegr %>%
+  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
+         "PF" = "Prestations familiales", "PL" = "Prestations logement")
+         )
+  
+couleurs <- c('Salaire' = 'darkgrey', 'Impôt sur le revenu'='coral','Prestations familiales' = 'blue4','Prestations logement' = 'cadetblue4', 'RSA' = 'aquamarine3', 'Prime d activité' = 'aquamarine')
+
+
+# cas personne seule #
+
+graph2 <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, x = typrev)) + 
+  scale_fill_manual(values = couleurs) +
+  geom_bar_interactive(
+    position = "stack", 
+    stat = "identity", 
+    aes(tooltip = paste(" ", name, ": ", round(value,2)))
+  ) +
+  geom_hline(
+    yintercept = seuilpm, 
+    linetype = "dashed", 
+    color = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = first(typrev), y = seuilpm + 50, label = "Seuil de pauvreté monétaire"),
+    size = 3, 
+    hjust = 0, #Left-justified
+    colour = "grey"
+  ) +
+  geom_point_interactive(
+    data = basegr %>% filter(name == 'RDISP'), 
+    aes(
+      x = typrev, y = round(value, 2), 
+      colour = "coral", 
+      label = "Revenu disponible",
+      tooltip = paste("Revenu disponible:", scales::number(value, accuracy = 1))
+    ), 
+    size = 3
+  ) +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "white"), 
+    plot.background = element_rect(fill = "white"),
+    legend.position =  "right",
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.text = element_text(size = rel(0.7)),
+    legend.title = element_blank(),
+    plot.title = element_text(size = rel(0.8), hjust = 0.7),
+    plot.caption = element_text(size = rel(0.5)),
+    axis.ticks.y = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
+    scale_y_continuous(expand = c(0, 0),limits=c(0,2250),breaks=seq(0, 2250, by = 250))+
+    labs(title="" )
+ 
+
+igraph2 <- girafe(ggobj = graph2)
+igraph2
+
+# save
+ggsave(filename="graph/Cas type couple 2 enfants.png", plot=graph2)
+htmltools::save_html(igraph2, "graph/interactive_2A2E.html")
+
+```
 
 *Définition : niveau de vie*
 
@@ -129,7 +362,7 @@ Le système social et fiscal remplit donc l'objectif qui lui a été fixé depui
     *La formule de calcul de la prime d'activité est la suivante :*
 
     |  |  |
-    |----|----|
+    |------------------------------------|------------------------------------|
     | *Prime d'activité du foyer =* | *Montant forfaitaire qui dépend de la situation familiale* |
     |  | *+ bonus d'activité individuels* |
     |  | *- (forfait logement + prestations familiales + autres minima sociaux)* |
