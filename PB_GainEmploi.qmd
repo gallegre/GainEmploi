@@ -66,6 +66,7 @@ library(plotly)
 library(ggiraph)
 library(sf) 
 library(patchwork)
+library(ofce)
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
 
@@ -170,9 +171,7 @@ basegr <- basegr %>%
          "PF" = "Prestations familiales", "PL" = "Prestations logement")
          )
   
-couleurs <- c('Salaire' = 'darkgrey', 'Impôt sur le revenu'='coral','Prestations familiales' = 'blue4', 
-              'Prestations logement' = 'cadetblue4', 'RSA' = 'aquamarine3',
-              'Prime d activité' = 'aquamarine')
+couleurs <- c('Salaire' = 'darkgrey', 'Impôt sur le revenu'='coral','Prestations familiales' = 'blue4', 'Prestations logement' = 'cadetblue4', 'RSA' = 'aquamarine3', 'Prime d activité' = 'aquamarine')
 
 
 # cas personne seule #
@@ -182,7 +181,7 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
   geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes(tooltip = paste(" ", name, ": ", round(value,2)))
+    aes(tooltip = paste(" ", name, ": ",  scales::number(value, accuracy = 2)))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -201,11 +200,11 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
     aes(
       x = typrev, y = round(value, 2), 
       colour = "Revenu disponible", 
-      tooltip = paste("Revenu disponible:", scales::number(value, accuracy = 1))
+      tooltip = paste("Revenu disponible", scales::number(value, accuracy = 2))
     ), 
     size = 3
   ) +
-  theme_minimal() +
+  theme_ofce() +
   theme(
     panel.background = element_rect(fill = "white"), 
     plot.background = element_rect(fill = "white"),
@@ -219,7 +218,8 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
-    scale_y_continuous(expand = c(0, 0),limits=c(0,2250),breaks=seq(0, 2250, by = 250))
+    scale_y_continuous(expand = c(0, 0),limits=c(0,2250),breaks=seq(0, 2250, by = 250))+ 
+  theme(panel.border = element_blank())
  
 
 igraph <- girafe(ggobj = graph)
@@ -269,8 +269,7 @@ basegr$name<-factor(basegr$name,
 
 
 basegr <- basegr %>%
-  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
-         "PF" = "Prestations familiales", "PL" = "Prestations logement")
+  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu","PF" = "Prestations familiales", "PL" = "Prestations logement")
          )
   
 
@@ -278,8 +277,7 @@ basegr <- basegr %>%
 #__________________________________#
 
 basegr <- basegr %>%
-  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
-         "PF" = "Prestations familiales", "PL" = "Prestations logement")
+  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", "PF" = "Prestations familiales", "PL" = "Prestations logement")
          )
   
 couleurs <- c('Salaire' = 'darkgrey', 'Impôt sur le revenu'='coral','Prestations familiales' = 'blue4','Prestations logement' = 'cadetblue4', 'RSA' = 'aquamarine3', 'Prime d activité' = 'aquamarine')
@@ -292,16 +290,16 @@ graph2 <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value,
   geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes(tooltip = paste(" ", name, ": ", round(value,2)))
+    aes(tooltip = paste(" ", name, ": ", scales::number(value, accuracy = 1)))
   ) +
   geom_hline(
-    yintercept = seuilpm, 
+    yintercept = seuilpm,
     linetype = "dashed", 
     color = "lightgrey", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = first(typrev), y = seuilpm + 50, label = "Seuil de pauvreté monétaire"),
+    aes(x = first(typrev), y = seuilpm + 50*2.1, label = "Seuil de pauvreté monétaire"),
     size = 3, 
     hjust = 0, #Left-justified
     colour = "grey"
@@ -310,14 +308,14 @@ graph2 <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value,
     data = basegr %>% filter(name == 'RDISP'), 
     aes(
       x = typrev, y = round(value, 2), 
-      colour = "coral", 
-      label = "Revenu disponible",
+      colour = "Revenu disponible", 
       tooltip = paste("Revenu disponible:", scales::number(value, accuracy = 1))
     ), 
     size = 3
   ) +
-  theme_minimal() +
+  theme_ofce() +
   theme(
+    panel.border = element_blank(),
     panel.background = element_rect(fill = "white"), 
     plot.background = element_rect(fill = "white"),
     legend.position =  "right",
@@ -330,8 +328,9 @@ graph2 <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value,
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
-    scale_y_continuous(expand = c(0, 0),limits=c(0,2250),breaks=seq(0, 2250, by = 250))+
-    labs(title="" )
+    scale_y_continuous(expand = c(0, 0),limits=c(0,2250*2.1),breaks=seq(0, 2250*2.1, by = 250*2))+
+    labs(title="" ) +
+  theme(panel.border = element_blank())
  
 
 igraph2 <- girafe(ggobj = graph2)
@@ -343,6 +342,10 @@ htmltools::save_html(igraph2, "graph/interactive_2A2E.html")
 
 ```
 
+  
+
+ 
+
 *Définition : niveau de vie*
 
 :   *Le calcul du niveau de vie d'un ménage a pour objet de comparer les revenus disponibles de ménages de configuration différentes en tenant compte des économies d'échelle liées à la vie commune et des besoins des enfants. Il est obtenu en divisant le revenu disponible de l'ensemble du ménage par un nombre d'unités de consommation. En France et en Europe, les unités de consommation sont calculées par l'INSEE et Eurostat selon l'échelle d'équivalence dite de l'OCDE modifiée qui attribue 1 UC au premier adulte du ménage, 0,5 UC aux autres personnes de 14 ans ou plus et 0,3 UC aux enfants de moins de 14 ans (car considérés ayant moins de besoins).*
@@ -351,7 +354,7 @@ La situation est un peu différente pour une personne en couple avec deux enfant
 
 Enfin, si le conjoint est au chômage et perçoit une allocation d'un montant égal au Smic mensuel, le revenu du couple est de 1891 euros seulement lorsque la personne est inactive et de 2981 euros (+1090 euros) si elle travaille à temps plein au smic, ce qui correspond à un TMEP de 22%.
 
-Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance, de façon pérenne et pour toutes les reprises d'emploi. Toutefois les gains de reprise d'emploi ne sont pas homogènes, ce qui se voit en creux par la forte variabilité des taux marginaux effectifs de prélèvement. ***Mettre un graphique avec les TMEP de toutes les config pour un temps plein au smic (option mi-temsp et 1,5 smic) et refaire les commentaires.*** Dans les cas que nous étudiés, ***le taux varie de 6% pour le passage de la monoactivité à la biactivité d'un couple sans enfant, à 42% pour une personne seule passant de l'inactivité à l'activité à temps-plein. Le premier garde ainsi 94% de l'augmentation de ses revenus d'activité et le second 58%.*** ***Mais le premier est initialement beaucoup plus pauvre, et donc plus aidé. Le second cumule deux bonus individuels de prime d'activité.***
+Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance, de façon pérenne et pour toutes les reprises d'emploi. Toutefois les gains de reprise d'emploi ne sont pas homogènes, ce qui se voit en creux par la forte variabilité des taux marginaux effectifs de prélèvement. ***Mettre un graphique avec les TMEP de toutes les config pour un temps plein au smic (option mi-temsp et 1,5 smic) et refaire les commentaires.*** Dans les cas que nous avons étudiés, *le taux varie de 6% pour le passage de la monoactivité à la biactivité d'un couple sans enfant, à 42% pour une personne seule passant de l'inactivité à l'activité à temps-plein. Le premier garde ainsi 94% de l'augmentation de ses revenus d'activité et le second 58%.* *Mais le premier est initialement beaucoup plus pauvre, et donc plus aidé. Le second cumule deux bonus individuels de prime d'activité.*
 
 *La prime d'activité*
 
@@ -399,7 +402,7 @@ Les couples biactifs avec deux emploi au Smic à temps-plein ont un revenu dispo
 
 Le niveau de vie des ménages sans revenus d'activité est faible, et a décru dans le temps. En outre, **depuis xxxx,** le niveau du minimum social en direction des personnes d'âge actif a progressé bien moins vite que le niveau du minimum vieillesse (ASPA) ou de l'allocation adulte handicapée (AAH) **(graphique ou réf)**.
 
-En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum social pour les personnes valides d'âge actif. Si l'objectif est principalement distributif, le législateur a néanmoins voulu préserver les incitations à travailler ***en fixant le niveau du RMI à 50 % du SMIC à temps plein*** . Les débats font alors apparaître la volonté de garder une norme d'emploi à plein-temps. Dans les années 1990, le nombre d'allocataires augmente rapidement et atteint un niveau non anticipé par les décideurs publics : de 500 000 allocataires en 1990, ce nombre dépasse le million en 1996. Face à cette montée rapide, le discours sur les « trappes à pauvreté » se répand. En 2001, l'introduction de la prime pour l'emploi (PPE) est une première réponse à ce discours. La PPE étant accusée d'être mal ciblée et de pénaliser les emplois à temps partiel, le RSA activité prend la relève en 2009 et permet de garantir que le revenu disponible d'un foyer augmente lorsque ses revenus d'activité augmentent, même à temps partiel ou très partiel. Il est ensuite remplacé par la prime d'activité en 2015, revalorisée lors de la crise des gilets jaunes **pour les salaires proches du smic**. Durant cette période d'attention aux gains à l'emploi et à la pauvreté laborieuse, le montant de base du RSA est peu revalorisé. **citaton de Nicolas sur le paradoxe incitation/précarisation**
+En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum social pour les personnes valides d'âge actif. Si l'objectif est principalement distributif, le législateur a néanmoins voulu préserver les incitations à travailler ***en fixant le niveau du RMI à 50 % du SMIC à temps plein*** . Les débats font alors apparaître la volonté de garder une norme d'emploi à plein-temps. Dans les années 1990, le nombre d'allocataires augmente rapidement et atteint un niveau non anticipé par les décideurs publics : de 500 000 allocataires en 1990, ce nombre dépasse le million en 1996. Face à cette montée rapide, le discours sur les « trappes à pauvreté » se répand. En 2001, l'introduction de la prime pour l'emploi (PPE) est une première réponse à ce discours. La PPE étant accusée d'être mal ciblée et de pénaliser les emplois à temps partiel, le RSA activité prend la relève en 2009 et permet de garantir que le revenu disponible d'un foyer augmente lorsque ses revenus d'activité augmentent, même à temps partiel ou très partiel. Il est ensuite remplacé par la prime d'activité en 2015, revalorisée lors de la crise des gilets jaunes pour les salaires proches du smic. Durant cette période d'attention aux gains à l'emploi et à la pauvreté laborieuse, le montant de base du RSA est peu revalorisé. **citaton de Nicolas sur le paradoxe incitation/précarisation**
 
 Pourtant, malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'écart entre le RSA et le SMIC et la montée en charge des compléments de revenus pour travailleurs pauvres, la part d'allocataires du RSA dans la population d'âge actif a augmenté, passant de 3,0% en 2008 à 4,1% en 2022. La réduction du niveau de vie relatif du RSA n'a donc pas eu d'effets visibles en termes de baisse du nombre d'allocataires.
 
@@ -460,27 +463,36 @@ Bareme_long <- pivot_longer(
 #Graphique simple
 
 
-graph <- Bareme_long %>%
+graph3 <- Bareme_long %>%
     ggplot() +
   aes(x = year, y = valeurs, color = variables) +
   geom_line() +
-  geom_point()+
+  geom_point_interactive(
+    aes(tooltip = paste("Année:   ", year, "   ;", variables, ": ", round(valeurs, 0))),
+    size = 3
+  ) +
   theme_ofce()+
+  scale_color_brewer(palette = "Set2") +
   labs(caption="Source : DREES ; 
        base 100 = 1990 ; Smic horaire et minima sociaux en euros constants")+
   labs(x="", y="")+
   theme(text = element_text(size=8))
 
-graph
+#graph3
+igraph3 <- girafe(ggobj = graph3)
+igraph3
 
 
+ggsave(filename="graph/Evol.png", plot=graph3)
+
+htmltools::save_html(igraph3, "graph/Evolh.html")
 
 
 ```
 
 # 4. Que faire si l'on prend la lutte contre la pauvreté au sérieux ?
 
-Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance. Mais avoir un emploi rémunéré au Smic n'est pas un gage de sortie de la pauvreté, et vivre sans emploi implique souvent d'être dans une situation de grande pauvreté. Que faire ? **Une solution passe par la réglementation du marché du travail (à rediger)... Les pistes que nous explorons ici prennent comme donnése la structure des emplois offerts et le développement de l'auto-entreprenariat précaire et reposent principalement sur des aménagements de dispositifs actuels.**
+Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance. Mais avoir un emploi rémunéré au Smic n'est pas un gage de sortie de la pauvreté, et vivre sans emploi implique souvent d'être dans une situation de grande pauvreté. Que faire ? Une solution passe par la réglementation du marché du travail mais cela dépasse le champ de ce document... Les pistes que nous explorons ici prennent comme donnése la structure des emplois offerts et le développement de l'auto-entreprenariat précaire et reposent principalement sur des aménagements de dispositifs actuels.
 
 ## 4.1. Augmenter le socle
 
@@ -504,11 +516,11 @@ La prime d'activité n'est pas un salaire :
 
 -   le salaire procure des droits sociaux : le taux de remplacemet au chomage ou à la retraite est réduit pour les bénéficiaires de la prime
 
-Il y a 2 objectifs. Le premier objectif est la redistribution, la lutte contre la pauvreté et la réduction des écarts de niveaux de vie, par construction familialisée. Le deuxième objectif est le soutien aux bas-salaires, dans une logique de mérite, par construction individualisé. L'hybridation de ces deux logiques, la lutte contre la pauvreté laborieuse, crée des situations paradoxales car la pauvreté suit une logique familiale et le travail est individuel (Allegre, xxxx ; Ponthieux xxxx). **idée : renvoyer à l'origine des prestations familiales avec les sursalaires familiaux : l'emploi permet aux travailleurs sans enfant de vivre décemment (modèle couple monoactif), les PF compensent les charges d'enfant (pour éviter une hausse généralisée des salaires sous la pression des travailleurs avec enfants)**
+Il y a 2 objectifs. Le premier objectif est la redistribution, la lutte contre la pauvreté et la réduction des écarts de niveaux de vie, par construction familialisée. Le deuxième objectif est le soutien aux bas-salaires, dans une logique de mérite, par construction individualisé. L'hybridation de ces deux logiques, la lutte contre la pauvreté laborieuse, crée des situations paradoxales car la pauvreté suit une logique familiale et le travail est individuel (Ponthieux, 2009). **idée : renvoyer à l'origine des prestations familiales avec les sursalaires familiaux : l'emploi permet aux travailleurs sans enfant de vivre décemment (modèle couple monoactif), les PF compensent les charges d'enfant (pour éviter une hausse généralisée des salaires sous la pression des travailleurs avec enfants)**
 
-**Si l'on donne un poids à l'objectif de réduction de la pauvreté laborieuse, au-delà de celui que l'on donne à l'objectif de réduction de la pauvreté, alors il est préférable que certains pauvres ne travaillent pas (puisque le fait qu'ils travaillent augmentent la pauvreté laborieuse). Si l'on préfère toujours que les pauvres travaillent plus alors l'objectif n'est pas la réduction de la pauvreté laborieuse mais la réduction efficiente de la pauvreté. La réduction est efficiente dans la mesure où l'emploi réduit le coût de la redistribution pour les contribuables.**
+Si l'on donne un poids à l'objectif de réduction de la pauvreté laborieuse, au-delà de celui que l'on donne à l'objectif de réduction de la pauvreté, alors il est préférable que certains pauvres ne travaillent pas (puisque le fait qu'ils travaillent augmentent la pauvreté laborieuse). Si l'on préfère toujours que les pauvres travaillent plus alors l'objectif n'est pas la réduction de la pauvreté laborieuse mais la réduction efficiente de la pauvreté. La réduction est efficiente dans la mesure où l'emploi réduit le coût de la redistribution pour les contribuables.
 
-**S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).**
+S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).
 
 **parler de l'instabilité et de l'avantage qu'avait la PPE : presta sur base fiscale sans risque d'indus (sauf fraude et ceux qui demandaient la mensualisation)**
 
@@ -516,9 +528,9 @@ Il y a 2 objectifs. Le premier objectif est la redistribution, la lutte contre l
 
 Faut-il cibler les compléments de revenus pour travailleurs au niveau du temps-partiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles. En réalité redistribution et incitations sont des objectifs contradictoires : la redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, emploi et emploi mieux rémunéré, tandis que l'incitation implique de les maintenir ou de les augmenter.
 
-S'ajoute un autre objectif : le mérite. Selon cet objectif, l'augmentation des revenus d'activité doit s'accompagner d'une augmentation du revenu disponible, même en l'absence d'impact incitatif en termes d'emploi. Il est probable que beaucoup d'acteurs ont cet objectif en tête lorsqu'ils défendent l'idée que le travail doit payer (Allègre, 2011). **précise ta pensée**
+S'ajoute un autre objectif : le mérite. Selon cet objectif, l'augmentation des revenus d'activité doit s'accompagner d'une augmentation du revenu disponible, même en l'absence d'impact incitatif en termes d'emploi. Il est probable que beaucoup d'acteurs ont cet objectif en tête lorsqu'ils défendent l'idée que le travail doit payer (Allègre, 2011).
 
-Le problème est que créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein est probablement une des raisons de la dévalorisation du socle. En 1989, la norme d'emploi était **le CDI à temps-plein**, et le niveau du RMI a été choisi pour créer un écart avec l'emploi au Smic à temps-plein (il a été fixé en décembre 1988 à 50% du Smic à temps-plein). La prestation était différentielle : après période d'interessement temporaire (**à préciser**), chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier. Les gains étaient concentrés entre le mi-temps et le temps-plein. **Pourtant, il y avait des reprises d'emploi à temps partiel et même du cumul RSA-emploi (ref Petour Zajdela par exemple)**
+Le problème est que créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein est probablement une des raisons de la dévalorisation du socle. En 1989, la norme d'emploi était le CDI à temps-plein, et le niveau du RMI a été choisi pour créer un écart avec l'emploi au Smic à temps-plein (il a été fixé en décembre 1988 à 50% du Smic à temps-plein). La prestation était différentielle : après période d'interessement temporaire (**à préciser**), chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier. Les gains étaient concentrés entre le mi-temps et le temps-plein. Pourtant, il y avait des reprises d'emploi à temps partiel et même du cumul assistance-emploi (Guillemot, Petour et Zajdela, 2002)
 
 Faut-il revenir à une prestation différentielle ? Une possibilité est de revenir au système du RMI, qui permet à la fois un socle plus élevé et de réaffirmer le temps-plein comme norme de travail. Le problème est que cette norme s'est dégradée et qu'il est peut-être préférable de la renforcer, non pas avec des mesures qui visent les travailleurs et l'offre de travail, mais avec des mesures qui visent les entreprises. **A préciser**
 
