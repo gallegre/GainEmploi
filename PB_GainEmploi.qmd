@@ -22,8 +22,6 @@ editor: visual
 
 ```{r, include=FALSE}
 
-#pak::pak("ofce/ofce")
-
 library(knitr) 
 library(tidyverse) 
 library(ofce) 
@@ -82,6 +80,7 @@ Pour résumer, la lutte contre la pauvreté repose sur au moins trois objectifs,
 3\. Garantir à tous la couverture des besoins essentiels ou minimaux.
 
 Les trois premières parties de ce document évaluent le système actuel par rapport à ces trois objectifs. La quatrième partie, rescriptive, fait des propositions qui permettent d'atteindre au mieux ces trois objectifs.
+
 
 ## 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de la même façon.
 
