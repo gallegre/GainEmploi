@@ -81,7 +81,6 @@ Pour résumer, la lutte contre la pauvreté repose sur au moins trois objectifs,
 
 Les trois premières parties de ce document évaluent le système actuel par rapport à ces trois objectifs. La quatrième partie, rescriptive, fait des propositions qui permettent d'atteindre au mieux ces trois objectifs.
 
-
 ## 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de la même façon.
 
 ## 1.1. Une analyse par cas-type
@@ -92,9 +91,9 @@ La reprise d'emploi est-elle rémunératrice ? Pour répondre à la question de 
 
 > Outre la variation de revenu disponible du ménage, il est également possible de calculer un taux marginal effectif de prélèvement (TMEP) qui correspond à la part de l'augmentation du revenu professionnel qui ne se traduit pas en augmentation de revenu disponible du fait de la hausse des impôts et de la baisse des prestations. Si lorsque le revenu d'activité augmente de 1000 euros, le revenu disposible n'augmente que de 600 euros, on dira que le TMEP est de 40%. $$TMEP=1-\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}$$ On peut définir le taux de gain (TdG) comme la part de l'augmentation du revenu professionnel qui se traduit en augmentation du revenu disponible. Si lorsque le revenu d'activité augmente de 1000 euros, le revenu disponible augmente de 600 euros, on dira que le TdG est de 60%. $$TdG=\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}$$
 
-Le cas-type général commenté dans le texte est celui d'un ménage éligible, sous condition de ressources, au RSA (l'individu référent est âgé entre 25 et 64 ans) et aux allocations logement[^2] (le ménage est locataire du parc privé). Pour les ménages non éligibles à ces prestations, les presations sociales sont bien plus faibles, et les gains à la reprise d'emploi sont donc par construction beaucoup plus importantes. Pour les ménages avec enfants, nous supposons dans le cas général que les enfants sont d'âge scolaire (5, 8 ou 10 ans) mais la situation des familles ayant un efant en bas âge qui nécessite un mode de garde est étudiée dans l'encadré XX.
+Le cas-type général commenté dans le texte est celui d'un ménage éligible, sous condition de ressources, au RSA (l'individu référent est âgé entre 25 et 64 ans) et aux allocations logement[^1] (le ménage est locataire du parc privé). Pour les ménages non éligibles à ces prestations, les presations sociales sont bien plus faibles, et les gains à la reprise d'emploi sont donc par construction beaucoup plus importantes. Pour les ménages avec enfants, nous supposons dans le cas général que les enfants sont d'âge scolaire (5, 8 ou 10 ans) mais la situation des familles ayant un efant en bas âge qui nécessite un mode de garde est étudiée dans l'encadré XX.
 
-[^2]: On suppose que le ménage est locataire en zone 2 des aides au logement (ville moyenne) pour un loyer compris entre 1 et 2,5 fois le loyer plafond.
+[^1]: On suppose que le ménage est locataire en zone 2 des aides au logement (ville moyenne) pour un loyer compris entre 1 et 2,5 fois le loyer plafond.
 
 Trois situations de reprise d'emploi sont analysées : le mi-temps au smic horaire (699 euros mensuels), le temps-plein au smic horaire (1399 euros mensuels) et le temps plein à 1,5 smic horaire (2098 euros mensuels). Pour les couples, ces reprises d'emploi sont analysées dans le cas d'un conjoint inactif sans revenu, d'un conjoint chômeur (avec un montant d'allocation chômage égal au smic mensuel) et d'un conjoint en emploi à temps-plein gagnant le smic ou 1,5 fois le smic. L'analyse n'est pas genrée, mais dans les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce que le partage des tâches reste très inégalitaire et parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi. L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différentes combinaisons de travail. Comme son nom l'indique le salaire minimum constitue un plancher : 85% des salariés ont un salaire supérieur et pour ces salariés, les écarts de revenu disponible entre les personnes en emploi et les bénéficiaires du RSA sont plus élevés.
 
@@ -102,9 +101,9 @@ Trois situations de reprise d'emploi sont analysées : le mi-temps au smic horai
 
 Dans les cas types étudiés, le système socio-fiscal actuel garantit que la reprise d'emploi est toujours rémunératrice, mais pas nécessairement toujours dans les mêmes proportions.
 
-Le cas d'une personne seule illustre la façon dont le système socio-fiscal assure que le travail paie mieux que l'assistance, même pour de petites durées de travail. Sans revenus d'activité, cette personne peut percevoir 851 euros de prestations sociales (559 euros de RSA et 292 euros d'allocations logement), ce qui est juste en dessous du seuil de grande pauvreté à 40% du niveau de vie médian[^3].
+Le cas d'une personne seule illustre la façon dont le système socio-fiscal assure que le travail paie mieux que l'assistance, même pour de petites durées de travail. Sans revenus d'activité, cette personne peut percevoir 851 euros de prestations sociales (559 euros de RSA et 292 euros d'allocations logement), ce qui est juste en dessous du seuil de grande pauvreté à 40% du niveau de vie médian[^2].
 
-[^3]: Son niveau de vie équivaut à 39% du niveau de vie médian.
+[^2]: Son niveau de vie équivaut à 39% du niveau de vie médian.
 
 ```{r}
 #| label: fig-C1A0E
@@ -173,7 +172,7 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = seuilpm + 150, label = "Seuil de pauvreté monétaire"),
+    aes(x = 0.5, y = seuilpm + 80, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, #Left-justified
     colour = "grey"
@@ -283,7 +282,7 @@ graph2 <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value,
     linewidth = 1
   ) +
   geom_text(
-    aes(x = first(typrev), y = seuilpm + 300, label = "Seuil de pauvreté monétaire"),
+    aes(x = first(typrev), y = seuilpm + 400, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, #Left-justified
     colour = "grey"
@@ -392,7 +391,7 @@ graph3 <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value,
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = seuilpm + 300, label = "Seuil de pauvreté monétaire"),
+    aes(x = 0.5, y = seuilpm + 300, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, #Left-justified
     colour = "grey"
@@ -443,12 +442,9 @@ Enfin, si le conjoint est au chômage et perçoit une allocation d'un montant é
 
 Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance, de façon pérenne et pour toutes les reprises d'emploi. Toutefois les gains de reprise d'emploi ne sont pas homogènes, ce qui se voit en creux par la forte variabilité des taux marginaux effectifs de prélèvement.
 
-
-
-
 ```{r}
-#| label: fig-TdG
-#| fig-cap: Taux de gain pour une reprise d'emploi au Smic à temps-plein, selon la configuration familiale
+#| label: fig-TGE
+#| fig-cap: Taux de gain à l'emploi pour une reprise d'emploi au Smic à temps-plein, selon la configuration familiale
 
 castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
 
@@ -491,18 +487,11 @@ basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint sans 
                                                "Conjoint chômeur","Conjoint salarié au smic",
                                                "Conjoint salarié à 1,5 smic"))
 
-library(ggiraph)
-library(ggplot2)
-library(dplyr)
-
-library(ggplot2)
-library(ggiraph)
-library(scales)
 
 
 graph4 <- ggplot(basegr, aes(x = casconj, y = TGM_100, colour = enf)) +
   geom_point_interactive(aes(
-    tooltip = paste("Taux de gain :", number(TGM_100, accuracy = 1))
+    tooltip = paste("Taux de gain à l'emploi:", number(TGM_100, accuracy = 1))
   ), size = 3) +  
   theme_minimal() +
   scale_y_continuous(limits = c(40, 100)) +  
@@ -526,7 +515,6 @@ htmltools::save_html(igraph4, "graph/interactive_TdG.html")
 
 ```
 
-
 Dans les cas que nous avons étudiés, le taux varie de 6% pour le passage de la monoactivité à la biactivité d'un couple sans enfant, à 42% pour une personne seule passant de l'inactivité à l'activité à temps-plein. Le premier garde ainsi 94% de l'augmentation de ses revenus d'activité et le second 58%. Mais le premier est initialement beaucoup plus pauvre, et donc plus aidé. Le second cumule deux bonus individuels de prime d'activité.
 
 **La prime d'activité**
@@ -539,14 +527,13 @@ Dans les cas que nous avons étudiés, le taux varie de 6% pour le passage de la
 
 # 2. L'emploi ne protège pas toujours de la pauvreté monétaire.
 
-Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté monétaire. Ceci apparaît clairement sur cas types mais peut se voir également par l'existence d'une pauvreté en emploi, même our des bénéficiaires de la prime d'activité[^4]. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté monétaire des personnes en emploi était de 7,7% **et de xx% en se limitant aux allocataires de la prime d'activité**. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE). **ajouter stats selon nombre d'emplois/quotité**
+Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté monétaire. Ceci apparaît clairement sur cas types mais peut se voir également par l'existence d'une pauvreté en emploi, même our des bénéficiaires de la prime d'activité[^3]. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté monétaire des personnes en emploi était de 7,7% **et de xx% en se limitant aux allocataires de la prime d'activité**. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE). **ajouter stats selon nombre d'emplois/quotité**
 
-[^4]: Si la prime d'activité permet à certains foyers de franchir le seuil de pauvreté monétaire, l'analyse par cas types montre que certains foyers à bas salaire n'y sont pas éligibles. S'y ajoutent ceux qui ne recourent pas à cette prestation bien que leur niveau de vie soit inférieur au seuil de pauvreté monétaire.
+[^3]: Si la prime d'activité permet à certains foyers de franchir le seuil de pauvreté monétaire, l'analyse par cas types montre que certains foyers à bas salaire n'y sont pas éligibles. S'y ajoutent ceux qui ne recourent pas à cette prestation bien que leur niveau de vie soit inférieur au seuil de pauvreté monétaire.
 
-**Définition : la pauvreté monétaire** 
+**Définition : la pauvreté monétaire**
 
-> D'après la statistique publique (INSEE, Eurostat), un individu est pauvre d'un point de vue monétaire, si le niveau de vie du ménage auquel il appartient est inférieur à 60% du niveau de vie médian. La pauvreté monétaire est ainsi un concept relatif : si le niveau de vie de tous les ménages augmente de 10%, la pauvreté monétaire reste stable. Par convention, le seuil de pauvreté monétaire est le même dans tout le pays, mais il varie au sein de l'Union Européenne d'un pays à l'autre. La pauvreté est définie par les revenus. La seule prise en compte des besoins se fait à travers la composition familiale (nombre d'individus et âge des enfants). Le niveau de vie ne prend ainsi pas en compte le coût du logement ni les besoins différenciés en transport, logement ou chauffage selon le lieu de vie. 
-> Le dernier seuil de pauvreté publié par l'Insee est de 1216 euros par UC pour l'année 2022. Pour le comparer aux montants des prestations en 2024, nous avons appliqué à ce seuil l'inflation observée entre 2022 et juillet 2024, ce qui amène à un seuil de 1309 euros par UC.
+> D'après la statistique publique (INSEE, Eurostat), un individu est pauvre d'un point de vue monétaire, si le niveau de vie du ménage auquel il appartient est inférieur à 60% du niveau de vie médian. La pauvreté monétaire est ainsi un concept relatif : si le niveau de vie de tous les ménages augmente de 10%, la pauvreté monétaire reste stable. Par convention, le seuil de pauvreté monétaire est le même dans tout le pays, mais il varie au sein de l'Union Européenne d'un pays à l'autre. La pauvreté est définie par les revenus. La seule prise en compte des besoins se fait à travers la composition familiale (nombre d'individus et âge des enfants). Le niveau de vie ne prend ainsi pas en compte le coût du logement ni les besoins différenciés en transport, logement ou chauffage selon le lieu de vie. Le dernier seuil de pauvreté publié par l'Insee est de 1216 euros par UC pour l'année 2022. Pour le comparer aux montants des prestations en 2024, nous avons appliqué à ce seuil l'inflation observée entre 2022 et juillet 2024, ce qui amène à un seuil de 1309 euros par UC.
 
 Le niveau de vie d'un célibataire sans enfant sans revenus d'activité et recourant à toutes les prestations est de 851 euros/uc ce qui est inférieur de 35% au seuil de pauvreté monétaire : son intensité de pauvreté est donc de 35%. Un emploi à mi-temps au Smic ne lui permet pas de franchir le seuil de pauvreté (intensité de 9%). Le célibataire sans enfant franchit le seuil de pauvreté avec un Smic à plein temps (son niveau de vie atteint 126% du seuil).
 
@@ -565,7 +552,6 @@ Le niveau de vie des ménages sans revenus d'activité est faible, et a décru d
 En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum social pour les personnes valides d'âge actif. Si l'objectif est principalement distributif, le législateur a néanmoins voulu préserver les incitations à travailler en fixant le niveau du RMI à 50 % du SMIC à temps plein (mais sans l'indexer). Les débats font alors apparaître la volonté de garder une norme d'emploi à plein-temps. Dans les années 1990, le nombre d'allocataires augmente rapidement et atteint un niveau non anticipé par les décideurs publics : de 500 000 allocataires en 1990, ce nombre dépasse le million en 1996. Face à cette montée rapide, le discours sur les « trappes à pauvreté » se répand. En 2001, l'introduction de la prime pour l'emploi (PPE) est une première réponse à ce discours. La PPE étant accusée d'être mal ciblée et de pénaliser les emplois à temps partiel, le RSA activité prend la relève en 2009 et permet de garantir que le revenu disponible d'un foyer augmente lorsque ses revenus d'activité augmentent, même à temps partiel ou très partiel. Il est ensuite remplacé par la prime d'activité en 2015, revalorisée lors de la crise des gilets jaunes pour les salaires proches du smic. Durant cette période d'attention aux gains à l'emploi et à la pauvreté laborieuse, le montant de base du RSA est peu revalorisé. Quelque part, le dilemme entre incitation et redistribution est indépassable : incitation et inégalités sont les deux face de la même pièce.
 
 Pourtant, malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'écart entre le RSA et le SMIC et la montée en charge des compléments de revenus pour travailleurs pauvres, la part d'allocataires du RSA dans la population d'âge actif a augmenté, passant de 3,0% en 2008 à 4,1% en 2022. La réduction du niveau de vie relatif du RSA n'a donc pas eu d'effets visibles en termes de baisse du nombre d'allocataires.
-
 
 ```{r fig-minimasociaux}
 #| label: fig-minima
@@ -653,6 +639,87 @@ htmltools::save_html(igraph4, "graph/Evolh.html")
 
 ```
 
+```{r}
+#| label: fig-ndvminimum
+#| fig-cap: Niveau de vie du revenu d'assistance selon la configuration familiale
+
+castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+
+seuil60=seuilpm
+seuil50=seuilpm*5/6
+seuil40=seuilpm*4/6
+
+base<-castyp %>% 
+  filter(activite==0, Ract_conj==0) %>% 
+  mutate(
+       enf=case_when(nbenf==0 ~ "0 enfant",
+                  nbenf==1 ~ "1 enfant",
+                  nbenf==2 ~ "2 enfants",
+                  TRUE ~ "3 enfants")
+    ) %>% 
+  select(isocou, enf, NVIE)
+
+
+graph5 <- ggplot(base, aes(x = isocou, y = NVIE, colour=enf)) +
+  geom_point_interactive(aes(
+    tooltip = paste("Niveau de vie:", number(NVIE, accuracy = 1))
+  ), 
+  size = 3) +  
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 1500)) +  
+  geom_hline(
+    yintercept = seuil60,
+    linetype = "dashed", 
+    colour = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = seuil60 + 50, label = "Seuil de pauvreté (à 60%)"),
+    size = 3, 
+    hjust = 0, 
+    colour = "lightgrey") +
+  geom_hline(
+    yintercept = seuil50,
+    linetype = "dashed", 
+    colour = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = seuil50 + 50, label = "Seuil de pauvreté (à 50%)"),
+    size = 3, 
+    hjust = 0, 
+    colour = "lightgrey") +
+  geom_hline(
+    yintercept = seuil40,
+    linetype = "dashed", 
+    colour = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = seuil40 + 50, label = "Seuil de pauvreté (à 40%)"),
+    size = 3, 
+    hjust = 0, 
+    colour = "lightgrey") +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.title = element_blank(),
+    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
+  )
+
+igraph5<-girafe(ggobj = graph5)
+igraph5
+
+
+ggsave(filename="niveaudevie.png", plot=graph5)
+htmltools::save_html(igraph5, "graph/niveaudevie.html")
+
+
+
+```
+
 # 4. Que faire si l'on prend la lutte contre la pauvreté au sérieux ?
 
 Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance. Mais avoir un emploi rémunéré au Smic n'est pas un gage de sortie de la pauvreté, et vivre sans emploi implique souvent d'être dans une situation de grande pauvreté. Que faire ? Une solution passe par la réglementation du marché du travail mais cela dépasse le champ de ce document... Les pistes que nous explorons ici prennent comme donnése la structure des emplois offerts et le développement de l'auto-entreprenariat précaire et reposent principalement sur des aménagements de dispositifs actuels.
@@ -695,9 +762,9 @@ Faut-il cibler les compléments de revenus pour travailleurs au niveau du temps-
 
 S'ajoute un autre objectif : le mérite. Selon cet objectif, l'augmentation des revenus d'activité doit s'accompagner d'une augmentation du revenu disponible, même en l'absence d'impact incitatif en termes d'emploi. Il est probable que beaucoup d'acteurs ont cet objectif en tête lorsqu'ils défendent l'idée que le travail doit payer (Allègre, 2011).
 
-Le problème est que créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein est probablement une des raisons de la dévalorisation du socle. En 1989, la norme d'emploi était le CDI à temps-plein, et le niveau du RMI a été choisi pour créer un écart avec l'emploi au Smic à temps-plein (il a été fixé en décembre 1988 à 50% du Smic à temps-plein). La prestation était différentielle : après période d'interessement temporaire[^5], chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier. Les gains étaient concentrés entre le mi-temps et le temps-plein. Pourtant, il y avait des reprises d'emploi à temps partiel et même du cumul assistance-emploi (Guillemot, Petour et Zajdela, 2002)
+Le problème est que créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein est probablement une des raisons de la dévalorisation du socle. En 1989, la norme d'emploi était le CDI à temps-plein, et le niveau du RMI a été choisi pour créer un écart avec l'emploi au Smic à temps-plein (il a été fixé en décembre 1988 à 50% du Smic à temps-plein). La prestation était différentielle : après période d'interessement temporaire[^4], chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier. Les gains étaient concentrés entre le mi-temps et le temps-plein. Pourtant, il y avait des reprises d'emploi à temps partiel et même du cumul assistance-emploi (Guillemot, Petour et Zajdela, 2002)
 
-[^5]: Dès l'instauration du RMI, un mécanisme d'intéressement a été mis en place, permettant le cumul temporaire des revenus d'assitance et des revenus du travail. Cet "intéressement" devait servir de marchepied vers l'emploi stable à plein-temps. Comme l'insertion professionnelle des bénéficiaires du RMI était jugée insatisfaisante, ce mécanisme fut réformé presque constamment. Entre 1989 et 1999, la prime d'intéressement était proportionnelle au salaire perçu lors des 750 premières heures d'emploi. Ensuite jusqu'en 2006, la prime était proportionnelle lors des 15 premiers mois de reprise. Puis jusqu'en 2009, la prime était forfaitaire pendant 9 mois, après 3 mois de cumul intégral.
+[^4]: Dès l'instauration du RMI, un mécanisme d'intéressement a été mis en place, permettant le cumul temporaire des revenus d'assitance et des revenus du travail. Cet "intéressement" devait servir de marchepied vers l'emploi stable à plein-temps. Comme l'insertion professionnelle des bénéficiaires du RMI était jugée insatisfaisante, ce mécanisme fut réformé presque constamment. Entre 1989 et 1999, la prime d'intéressement était proportionnelle au salaire perçu lors des 750 premières heures d'emploi. Ensuite jusqu'en 2006, la prime était proportionnelle lors des 15 premiers mois de reprise. Puis jusqu'en 2009, la prime était forfaitaire pendant 9 mois, après 3 mois de cumul intégral.
 
 Faut-il revenir à une prestation différentielle ? Une possibilité est de revenir au système du RMI, qui permet à la fois un socle plus élevé et de réaffirmer le temps-plein comme norme de travail. Le problème est que cette norme s'est dégradée et qu'il est peut-être préférable de la renforcer, non pas avec des mesures qui visent les travailleurs et l'offre de travail, mais avec des mesures qui visent les entreprises (en renforçant par exemple le droit au passage au temps-plein, en pénalisant la fragmentation journalière du travail, voire en réduisant les allégements de cotisations pour les emplois à temps-partiels).
 
