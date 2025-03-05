@@ -16,7 +16,9 @@ author:
 annee: 2025
 date: today
 date-modified: today
-format: html
+format: 
+  html:
+    fig-cap-location: top
 editor: visual
 ---
 
@@ -27,7 +29,6 @@ library(tidyverse)
 library(ofce) 
 library(lubridate) 
 library(knitr) 
-library(viridis) 
 library(scales) 
 library(dplyr) 
 library(tibble) 
@@ -50,7 +51,9 @@ library(blorr)
 library(plotly)
 library(ggiraph)
 library(sf) 
-
+library(RColorBrewer)
+library(viridis)
+library(ggsci)
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
 
@@ -92,11 +95,9 @@ base<-castyp %>%
   select(isocou, enf, NVIE)
 
 
-graph5 <- ggplot(base, aes(x = isocou, y = NVIE, colour=enf)) +
-  geom_point_interactive(aes(
-    tooltip = paste("Niveau de vie:", number(NVIE, accuracy = 1))
-  ), 
-  size = 3) +  
+graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) + 
+  geom_bar(stat = "identity", position = "dodge") +  
+  scale_fill_economist() +  
   theme_minimal() +
   scale_y_continuous(limits = c(0, 1500)) +  
   geom_hline(
@@ -107,17 +108,6 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, colour=enf)) +
   ) +
   geom_text(
     aes(x = 0.5, y = seuil60 + 50, label = "Seuil de pauvreté (à 60%)"),
-    size = 3, 
-    hjust = 0, 
-    colour = "lightgrey") +
-  geom_hline(
-    yintercept = seuil50,
-    linetype = "dashed", 
-    colour = "lightgrey", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = seuil50 + 50, label = "Seuil de pauvreté (à 50%)"),
     size = 3, 
     hjust = 0, 
     colour = "lightgrey") +
@@ -141,13 +131,13 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, colour=enf)) +
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
   )
 
+
 igraph5<-girafe(ggobj = graph5)
 igraph5
 
 
 ggsave(filename="niveaudevie.png", plot=graph5)
 htmltools::save_html(igraph5, "graph/niveaudevie.html")
-
 
 
 ```
@@ -214,37 +204,19 @@ seuilpm=1309
 basegr$typrev <- factor(basegr$typrev)
 basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
 
+
+
 basegr$name <- factor(basegr$name)
 basegr$name<-factor(basegr$name,
-                    levels=c("PA","RSA","PL","PF","Salaire","RDISP"))
+                    levels=c("Salaire","PF","PL","RSA","PA","RDISP"))
 
-
-
-basegr <- basegr %>%
-  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
-         "PF" = "Prestations familiales", "PL" = "Prestations logement")
-         )
-  
-
-
-#__________________________________#
-
-basegr <- basegr %>%
-  mutate(name = recode(name, "PA" = "Prime d activité", "IR" ="Impôt sur le revenu", 
-         "PF" = "Prestations familiales", "PL" = "Prestations logement")
-         )
-  
-couleurs <- c('Salaire' = 'darkgrey', 'Impôt sur le revenu'='coral','Prestations familiales' = 'blue4', 'Prestations logement' = 'cadetblue4', 'RSA' = 'aquamarine3', 'Prime d activité' = 'aquamarine')
-
-
-# cas personne seule #
-
-graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, x = typrev)) + 
-  scale_fill_manual(values = couleurs) +
+graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = factor(name, levels = c("Salaire", "PF", "PL", "RSA", "PA")),
+  y = value, x = typrev)) + 
+  scale_fill_economist() +
   geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes(tooltip = paste(" ", name, ": ",  scales::number(value, accuracy = 2)))
+    aes(tooltip = paste(" ", name, ": ", scales::number(value, accuracy = 2)))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -255,10 +227,10 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
   geom_text(
     aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté\n (à 60%)"),
     size = 3, 
-    hjust = 0, #Left-justified
-    colour = "grey"
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
   ) +
-    geom_hline(
+  geom_hline(
     yintercept = (4/6)*seuilpm, 
     linetype = "dashed", 
     color = "lightgrey", 
@@ -267,8 +239,8 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
   geom_text(
     aes(x = 0.5, y = (4/6)*seuilpm + 100, label = "Seuil de grande \npauvreté (à 40%)"),
     size = 3, 
-    hjust = 0, #Left-justified
-    colour = "grey"
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
   ) +
   geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
@@ -279,7 +251,6 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
     ), 
     size = 3
   ) +
-  #theme_ofce() +
   theme(
     panel.background = element_rect(fill = "white"), 
     plot.background = element_rect(fill = "white"),
@@ -293,17 +264,18 @@ graph <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, 
     plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
-    scale_y_continuous(expand = c(0, 0),limits=c(0,2250),breaks=seq(0, 2250, by = 250))+ 
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
+  ) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2250), breaks = seq(0, 2250, by = 250)) + 
   theme(panel.border = element_blank())
- 
 
 igraph <- girafe(ggobj = graph)
 igraph
 
-# save
-ggsave(graph,filename="graph/Cas type isolé sans enfant.png",width = 33,height = 14,units = "cm",dpi=300)
-htmltools::save_html(igraph, "graph/interactive_1C0E.html")
+
+
+
+
 
 ```
 
@@ -419,7 +391,7 @@ graph2 <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value,
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
     scale_y_continuous(expand = c(0, 0),limits=c(0,2250*2.1),breaks=seq(0, 2250*2.1, by = 250*2))+
     labs(title="" ) +
-  theme(panel.border = element_blank())
+  theme(panel.border = element_blank()) 
  
 
 igraph2 <- girafe(ggobj = graph2)
@@ -847,7 +819,7 @@ htmltools::save_html(igraph4b, "graph/interactive_TdG-mt.html")
 > Depuis le 1er janvier 2016, la Prime d'activité a remplacé le RSA activité et la prime pour l'emploi. Comme les instruments qu'elle remplace, la prime d'activité vise deux objectifs : soutenir l'offre de travail grâce à des incitations financières accrues et compléter les revenus des travailleurs ayant des revenus modestes. La prime pour l'emploi et le RSA activité ont été critiqués pour leur faible efficacité (Cahuc, 2002 ; Domingo et Pucci 2014). Individualisée, la prime pour l'emploi versait de faibles montants à de nombreux bénéficiaires : trop faible pour être véritablement incitative, elle bénéficiait de plus à des ménages à niveau de vie intermédiaire et non aux plus modestes. Le RSA activité tenait compte de la composition et du revenu du ménage : il était davantage ciblé sur les travailleurs pauvres et créait des incitations à la reprise d'emploi substantielles et contemporaines. Néanmoins, son efficacité était minée par un non-recours élevé (68 %, voir Domingo et Pucci, 2014). La prime d'activité est proche dans son fonctionnement du RSA activité : familialisée, versée mensuellement, après une déclaration trimestrielle de revenus, elle cible les travailleurs aux revenus modestes et amplifie les incitations à la reprise d'emploi par le mécanisme des bonus individuels . Elle est en outre clairement identifiée comme une prestation à destination des personnes exerçant une activité, ce qui évite qu'elle apparaisse stigmatisante aux yeux de ceux qui la perçoivent. Par conséquent, le non-recours est probablement bien plus faible que celui qui était observé pour le RSA activité, bien qu'il n'y ait pas d'estimation précise (DREES, 2022). La formule de calcul de la prime d'activité est la suivante :
 >
 > |  |  |  |
-> |------------------------|----|--------------------------------------------|
+> |-------------------|-----------------|------------------------------------|
 > | *Prime d'activité du foyer* | = | *Montant forfaitaire (fonction de la situation familiale)* |
 > |  |  | *+ bonus d'activité individuels* |
 > |  |  | *- forfait logement + prestations familiales + minima sociaux* |
