@@ -192,16 +192,18 @@ base<-castyp %>%
     activite==1 & Salaire==smic ~ "Avec un temps plein\n au Smic",
     TRUE ~ "Avec un temps plein \n à 1,5 Smic")
   ) %>% 
-  select(typrev,Salaire,PF,PL,RSA,PA,	IR,	RDISP)	
+  select(typrev,Salaire,PF,PL,RSA,PA, RDISP)	
 
 basegr<-base %>% 
-  pivot_longer(cols=c(Salaire,PF,PL,RSA,PA, IR, RDISP)) 
+  pivot_longer(cols=c(Salaire,PF,PL,RSA,PA, RDISP)) 
 
 seuilpm=1309
 
 basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
 
-graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = factor(name, levels = c("Salaire", "PF", "PL", "RSA", "PA", "IR", "RDISP")),
+basegr$name<-factor(basegr$name, levels=rev(c("Salaire", "PF", "PL", "RSA", "PA", "RDISP")))
+
+graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
   y = value, x = typrev)) + 
   scale_fill_manual(
     values = c("Salaire" = "#482677FF", "PF" = "#39568CFF", "PL" = "#238A8DFF", 
@@ -214,10 +216,10 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = factor(name, level
                             ),
     guide = guide_legend(reverse = TRUE)  
   ) +
-   geom_bar_interactive(
+   geom_bar(
     position = "stack", 
     stat = "identity", 
-    aes(tooltip = paste(" ", name, ": ", scales::number(value, accuracy = 2)))
+    aes()
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -243,13 +245,12 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = factor(name, level
     hjust = 0, # Left-justified
     colour = "lightgrey"
   ) +
-  geom_point_interactive(
+  geom_point(
     data = basegr %>% filter(name == 'RDISP'), 
     aes(
       x = typrev, y = round(value, 2), 
       colour = "Revenu disponible", 
-      tooltip = paste("Revenu disponible", scales::number(value, accuracy = 2))
-    ), 
+      ), 
     size = 3
   ) +
   theme(
@@ -270,9 +271,7 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = factor(name, level
   scale_y_continuous(expand = c(0, 0), limits = c(0, 2250), breaks = seq(0, 2250, by = 250)) + 
   theme(panel.border = element_blank())
 
-igraph <- girafe(ggobj = graph)
-igraph
-
+graph
 
 
 
@@ -314,7 +313,6 @@ basegr2 <- basegr %>% filter(name == 'RDISP')
 
 
 basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Salaire", "PF", "PL", "RSA", "PA")) ))
-levels(basegr1$name)  # Vérifie l'ordre des niveaux
 
 # Création du graphique
 graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
@@ -386,9 +384,6 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
 
 graph2
 
-  
-graph2
-
 # Créer l'interaction et sauvegarder l'image
 #igraph2 <- girafe(ggobj = graph2)
 #igraph2
@@ -423,113 +418,106 @@ base<-castyp %>%
     activite==1 & Salaire==smic ~ "Avec un temps plein\n au Smic",
     TRUE ~ "Avec un temps plein \n à 1,5 Smic")
   ) %>% 
-  select(typrev,Salaire,Ract_conj,PF,PL,RSA,PA,	IR,	RDISP)	
+  select(typrev,Salaire,Ract_conj,PF,PL,RSA,PA,	RDISP)	
 
 basegr<-base %>% 
-  pivot_longer(cols=c(Ract_conj, Salaire,IR,RSA,PA, PL,PF,,RDISP)) 
+  pivot_longer(cols=c(Ract_conj, Salaire,RSA,PA, PL,PF, RDISP)) 
 
 
 seuilpm=1309*2.1
 
 
-basegr$typrev <- factor(basegr$typrev)
 basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
 
-basegr$name <- factor(basegr$name)
-basegr$name<-factor(basegr$name,
-                    levels=c("PF","PL","PA","RSA","IR","Salaire", "Ract_conj", "RDISP"))
+basegr1 <- basegr %>% filter(name != 'RDISP')
+basegr2 <- basegr %>% filter(name == 'RDISP')
 
 
-
-#__________________________________#
+basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Ract_conj", "Salaire", "PF", "PL", "RSA", "PA")) ))
+levels(basegr1$name)
 
 
 # cas couple avec conjoint au smic #
 
-graph3 <- ggplot(basegr %>% filter(name != 'RDISP' & name !="IR"), aes(fill = name, y = value, x = typrev)) + 
+graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
   scale_fill_manual(
     labels=c("Ract_conj" = "Salaire conjoint",
              "Salaire"="Salaire",
              "PF" = "Prestations familiales",
              "PL" = "Prestations logement",
              "RSA"="RSA",
-             "PA" = "Prime d activité"
+             "PA" = "Prime d'activité"
              ),
-    values = c('Ract_conj' = '#482677FF',
-               'Salaire' = '#440154FF',
-               'PF' = '#238A8DFF',
-               'PL' = '#39568CFF',
+    values = c('Ract_conj' = '#440154FF',
+               'Salaire' = '#482677FF',
+               'PF' = '#39568CFF',
+               'PL' = '#238A8DFF',
                'RSA' = '#55C667FF', 
                'PA' = '#95D840FF'
                )) +
-  geom_bar_interactive(
+geom_bar(
     position = "stack", 
-    stat = "identity", 
-    aes(tooltip = paste(" ", name, ": ", scales::number(value, accuracy = 1)))
+    stat = "identity" 
   ) +
   geom_hline(
-    yintercept = seuilpm,
+    yintercept = seuilpm, 
     linetype = "dashed", 
     color = "lightgrey", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = seuilpm + 300, label = "Seuil de pauvreté \n(à 60%)"),
+    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
-    hjust = 0, #Left-justified
-    colour = "grey"
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
   ) +
-    geom_hline(
-    yintercept = (4/6)*seuilpm,
+  geom_hline(
+    yintercept = (4 / 6) * seuilpm, 
     linetype = "dashed", 
     color = "lightgrey", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = (4/6)*seuilpm + 300, label = "Seuil de grande \npauvreté (à 40%)"),
+    aes(x = 0.5, y = (4 / 6) * seuilpm + 200, label = "Seuil de grande \npauvreté (40%)"),
     size = 3, 
-    hjust = 0, #Left-justified
-    colour = "black"
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
   ) +
-  geom_point_interactive(
-    data = basegr %>% filter(name == 'RDISP'), 
+  geom_point(
+    data = basegr2, 
     aes(
       x = typrev, y = round(value, 2), 
-      colour = "Revenu disponible", 
-      tooltip = paste("Revenu disponible:", scales::number(value, accuracy = 1))
+      color = "Revenu disponible"  
     ), 
     size = 3
   ) +
-  #theme_ofce() +
+  scale_color_manual(
+    values = c("Revenu disponible" = "orange")  
+  ) +
   theme(
-    panel.border = element_blank(),
     panel.background = element_rect(fill = "white"), 
     plot.background = element_rect(fill = "white"),
-    legend.position =  "right",
+    legend.position = "right",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.text = element_text(size = rel(0.7)),
     legend.title = element_blank(),
     plot.title = element_text(size = rel(0.8), hjust = 0.7),
     plot.caption = element_text(size = rel(0.5)),
-    plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
+    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
-    scale_y_continuous(expand = c(0, 0),limits=c(0,2250*2.1),breaks=seq(0, 2250*2.1, by = 250*2))+
-    labs(title="" ) +
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
+  ) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500)) + 
   theme(panel.border = element_blank())
- 
 
-igraph3 <- girafe(ggobj = graph3,
-       options = list(
-         opts_hover(css = "transform: scale(1.2);")
-       ))
-igraph3
+
+graph3
 
 # save
 ggsave(filename="graph/Cas type couple 2 enfants C1S.png", plot=graph3)
-htmltools::save_html(igraph3, "graph/interactive_2A2E_C1S.html")
+#htmltools::save_html(igraph3, "graph/interactive_2A2E_C1S.html")
 
 ```
 
@@ -561,104 +549,97 @@ basegr<-base %>%
 seuilpm=1309*2.1
 
 
-basegr$typrev <- factor(basegr$typrev)
 basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
 
-basegr$name <- factor(basegr$name)
-basegr$name<-factor(basegr$name,
-                    levels=c("PF","PL","PA","RSA","IR","Salaire", "Ract_conj", "RDISP"))
-
-#__________________________________#
+basegr1 <- basegr %>% filter(name != 'RDISP')
+basegr2 <- basegr %>% filter(name == 'RDISP')
 
 
+basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Ract_conj", "Salaire", "PF", "PL", "RSA", "PA")) ))
 
-# cas C2E conjoint chômeur #
 
-graph3b <- ggplot(basegr %>% filter(name != 'RDISP'), aes(fill = name, y = value, x = typrev)) + 
+# cas couple avec conjoint au smic #
+
+graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
   scale_fill_manual(
-    labels=c("Ract_conj" = "ARE conjoint",
+    labels=c("Ract_conj" = "Salaire conjoint",
              "Salaire"="Salaire",
-             "IR"="Impot sur le revenu",
-             "RSA"="RSA",
-             "PA" = "Prime d activité",
+             "PF" = "Prestations familiales",
              "PL" = "Prestations logement",
-             "PF" = "Prestations familiales" 
+             "RSA"="RSA",
+             "PA" = "Prime d'activité"
              ),
-    values = c('Ract_conj' = 'azure4',
-               'Salaire' = 'darkgrey',
-               'Impot sur le revenu'='coral', 
-               'RSA' = 'aquamarine3', 
-               'PA' = 'aquamarine',
-               'PL' = 'cadetblue4',
-               'PF' = 'blue4')) +
-  geom_bar_interactive(
+    values = c('Ract_conj' = '#440154FF',
+               'Salaire' = '#482677FF',
+               'PF' = '#39568CFF',
+               'PL' = '#238A8DFF',
+               'RSA' = '#55C667FF', 
+               'PA' = '#95D840FF'
+               )) +
+geom_bar(
     position = "stack", 
-    stat = "identity", 
-    aes(tooltip = paste(" ", name, ": ", scales::number(value, accuracy = 1)))
+    stat = "identity" 
   ) +
   geom_hline(
-    yintercept = seuilpm,
+    yintercept = seuilpm, 
     linetype = "dashed", 
     color = "lightgrey", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = seuilpm + 300, label = "Seuil de pauvreté \n(à 60%)"),
+    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
-    hjust = 0, #Left-justified
-    colour = "grey"
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
   ) +
-    geom_hline(
-    yintercept = (4/6)*seuilpm,
+  geom_hline(
+    yintercept = (4 / 6) * seuilpm, 
     linetype = "dashed", 
     color = "lightgrey", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = (4/6)*seuilpm + 300, label = "Seuil de grande \npauvreté (à 40%)"),
+    aes(x = 0.5, y = (4 / 6) * seuilpm + 200, label = "Seuil de grande \npauvreté (40%)"),
     size = 3, 
-    hjust = 0, #Left-justified
-    colour = "grey"
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
   ) +
-  geom_point_interactive(
-    data = basegr %>% filter(name == 'RDISP'), 
+  geom_point(
+    data = basegr2, 
     aes(
       x = typrev, y = round(value, 2), 
-      colour = "Revenu disponible", 
-      tooltip = paste("Revenu disponible:", scales::number(value, accuracy = 1))
+      color = "Revenu disponible"  
     ), 
     size = 3
   ) +
-  #theme_ofce() +
+  scale_color_manual(
+    values = c("Revenu disponible" = "orange")  
+  ) +
   theme(
-    panel.border = element_blank(),
     panel.background = element_rect(fill = "white"), 
     plot.background = element_rect(fill = "white"),
-    legend.position =  "right",
+    legend.position = "right",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.text = element_text(size = rel(0.7)),
     legend.title = element_blank(),
     plot.title = element_text(size = rel(0.8), hjust = 0.7),
     plot.caption = element_text(size = rel(0.5)),
-    plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
+    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1))+
-    scale_y_continuous(expand = c(0, 0),limits=c(0,2250*2.1),breaks=seq(0, 2250*2.1, by = 250*2))+
-    labs(title="" ) +
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
+  ) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500)) + 
   theme(panel.border = element_blank())
- 
 
-igraph3b <- girafe(ggobj = graph3b,
-       options = list(
-         opts_hover(css = "transform: scale(1.2);")
-       ))
-igraph3b
+
+graph3b
+
 
 # save
 ggsave(filename="graph/Cas type couple 2 enfants CCH.png", plot=graph3b)
-htmltools::save_html(igraph3b, "graph/interactive_2A2E_CCH.html")
+
 ```
 
 Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance, de façon pérenne et pour toutes les reprises d'emploi. Toutefois les gains ezffectifs à la reprise d'emploi sont loin d'être homogènes.
