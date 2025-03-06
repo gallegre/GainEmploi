@@ -201,7 +201,7 @@ seuilpm=1309
 
 basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
 
-graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = factor(name, levels = c("Salaire", "PF", "PL", "RSA", "PA", "RDISP", "IR")),
+graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = factor(name, levels = c("Salaire", "PF", "PL", "RSA", "PA", "IR", "RDISP")),
   y = value, x = typrev)) + 
   scale_fill_manual(
     values = c("Salaire" = "#482677FF", "PF" = "#39568CFF", "PL" = "#238A8DFF", 
@@ -313,11 +313,11 @@ basegr1 <- basegr %>% filter(name != 'RDISP')
 basegr2 <- basegr %>% filter(name == 'RDISP')
 
 
-basegr1$name <- factor(basegr1$name, levels = c("Salaire", "PF", "PL", "RSA", "PA"))
+basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Salaire", "PF", "PL", "RSA", "PA")) ))
+levels(basegr1$name)  # Vérifie l'ordre des niveaux
 
 # Création du graphique
-graph2 <- ggplot(basegr1, aes(fill = factor(name, levels = c("Salaire", "PF", "PL", "RSA", "PA")),
-  y = value, x = typrev)) + 
+graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
   scale_fill_manual(
     values = c("Salaire" = "#482677FF", "PF" = "#39568CFF", "PL" = "#238A8DFF", 
                "RSA" = "#55C667FF", "PA" = "#95D840FF"),
@@ -327,10 +327,9 @@ graph2 <- ggplot(basegr1, aes(fill = factor(name, levels = c("Salaire", "PF", "P
                "RSA" = "Revenu de solidarité active",
                "PA" = "Prime d'activité")
   ) +
-  geom_bar_interactive(
+  geom_bar(
     position = "stack", 
-    stat = "identity", 
-    aes(tooltip = paste(" ", name, ": ", scales::number(value, accuracy = 2)))
+    stat = "identity" 
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -356,19 +355,21 @@ graph2 <- ggplot(basegr1, aes(fill = factor(name, levels = c("Salaire", "PF", "P
     hjust = 0, # Left-justified
     colour = "lightgrey"
   ) +
-  geom_point_interactive(
+  geom_point(
     data = basegr2, 
     aes(
       x = typrev, y = round(value, 2), 
-      color = "revenu disponible", 
-      tooltip = paste("Revenu disponible", scales::number(value, accuracy = 2))
+      color = "Revenu disponible"  
     ), 
     size = 3
+  ) +
+  scale_color_manual(
+    values = c("Revenu disponible" = "orange")  
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
     plot.background = element_rect(fill = "white"),
-    legend.position =  "right",
+    legend.position = "right",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.text = element_text(size = rel(0.7)),
@@ -383,13 +384,18 @@ graph2 <- ggplot(basegr1, aes(fill = factor(name, levels = c("Salaire", "PF", "P
   scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 250)) + 
   theme(panel.border = element_blank())
 
+graph2
+
+  
+graph2
+
 # Créer l'interaction et sauvegarder l'image
-igraph2 <- girafe(ggobj = graph2)
-igraph2
+#igraph2 <- girafe(ggobj = graph2)
+#igraph2
 
 # Sauvegarde du graphique
 ggsave(filename = "graph/Cas type couple 2 enfants.png", plot = graph2)
-htmltools::save_html(igraph2, "graph/interactive_2A2E.html")
+#htmltools::save_html(igraph2, "graph/interactive_2A2E.html")
 
 
 
