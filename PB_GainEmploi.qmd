@@ -432,9 +432,7 @@ basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n 
 basegr1 <- basegr %>% filter(name != 'RDISP')
 basegr2 <- basegr %>% filter(name == 'RDISP')
 
-
 basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Ract_conj", "Salaire", "PF", "PL", "RSA", "PA")) ))
-levels(basegr1$name)
 
 
 # cas couple avec conjoint au smic #
@@ -807,6 +805,211 @@ htmltools::save_html(igraph4b, "graph/interactive_TdG-mt.html")
 >
 > Le montant de la prime d'activité versée au foyer est nul si le résultat de ce calcul est inférieur à 15 euros. Si elle permet de garantir des gains entre inactivité et revenus du travail dans presque toutes les configurations, la prime d'activité a des limites. Par rapport à une hausse du Smic, c'est une prestation sociale et pas un salaire donnant des droits sociaux (chômage, retraites). Comme la formule le montre, les revenus non professionnels du foyer sont déduits à 100%. Par conséquent, si dans un couple biactif l'un des conjoints perd son emploi pour du chômage indemnisé, non seulement il perd son bonus d'activité individuel, mais son allocation chômage est déduite intégralement ce qui peut annuler la prime d'activité pour son conjoint resté en emploi. En pratique, dans la plupart des cas, les ménages incluant un chômeur indemnisé (ou un retraité) ne touchent pas de prime d'activité. Enfin, visant à lutter contre les trappesà inactivité, les compléments de revenus pour travailleurs pauvres sont critiqués en raison des trappes à bas salaire qu'ils engendrent. En matière d'incitations, ces compléments ciblés dégressifs ne peuvent que creuser une nouvelle trappe pour reboucher l'autre : si la prime d'activité augmente l'écart entre emploi et chômage ou inactivité, elle ne peut que réduire le gain de niveau de vie induit par une hausse de salaire.
 
+## 1.3 Que change la prise en compte des coûts de garde des jeunes enfants ?
+
+A commenter...
+
+```{r fig_garde}
+#| label: fig-garde
+#| fig-cap: Revenu disponible après coût de garde selon revenu et configuration familiale
+
+castyp<-read.xlsx(file="cas types smic jeune enfant.xlsx",sheetName = "synthese") 
+
+#  Isolé 1 enfant
+smic=1398.7
+nbuc=1.3
+seuilpm=1309*nbuc
+
+base<-castyp %>% 
+  filter(isocou=="isolé" & nbenf==1) %>% 
+  mutate(typrev=case_when(
+    activite==0 ~ "Sans revenu",
+    activite==0.5 ~ "Avec un mi-temps \n au Smic",
+    activite==1 & Salaire==smic ~ "Avec un temps plein\n au Smic",
+    TRUE ~ "Avec un temps plein \n à 1,5 Smic")
+  ) %>% 
+  select(typrev,CGNET,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)	
+
+basegr<-base %>% 
+  pivot_longer(cols=c(CGNET,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)) 
+
+
+
+basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
+
+basegr$name<-factor(basegr$name, levels=rev(c("CGNET","Salaire", "PF", "PL", "RSA", "PA", "RDISP_NET_CG")))
+
+graphI1 <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
+                                                       y = value, x = typrev)) + 
+  scale_fill_manual(
+    values = c("CGNET"="darkred","Salaire"= "#482677FF", "PF" = "#39568CFF", "PL" = "#238A8DFF", 
+               "RSA" = "#55C667FF", "PA" = "#95D840FF"),
+    labels = c("CGNET"="Coût net de la garde",
+               "PA" = "Prime d'activité",
+               "RSA" = "Revenu de solidarité active",
+               "PF" = "Prestations familiales",
+               "PL" = "Prestations logement",
+               "Salaire" = "Salaire" 
+    ),
+    # guide = guide_legend(reverse = TRUE)  
+  ) +
+  geom_bar(
+    position = "stack", 
+    stat = "identity", 
+    aes()
+  ) +
+  geom_hline(
+    yintercept = seuilpm, 
+    linetype = "dashed", 
+    color = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
+    size = 3, 
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
+  ) +
+  geom_hline(
+    yintercept = (4/6)*seuilpm, 
+    linetype = "dashed", 
+    color = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = (4/6)*seuilpm + 100, label = "Seuil de grande \npauvreté (40%)"),
+    size = 3, 
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
+  ) +
+  geom_point(
+    data = basegr %>% filter(name == 'RDISP_NET_CG'), 
+    aes(
+      x = typrev, y = round(value, 2), 
+      colour = "Revenu disponible net du coût de la garde", 
+    ), 
+    size = 3
+  ) +
+  theme(
+    panel.background = element_rect(fill = "white"), 
+    plot.background = element_rect(fill = "white"),
+    legend.position =  "right",
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.text = element_text(size = rel(0.7)),
+    legend.title = element_blank(),
+    plot.title = element_text(size = rel(0.8), hjust = 0.7),
+    plot.caption = element_text(size = rel(0.5)),
+    plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
+    axis.ticks.y = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
+  ) +
+  labs(title="Isolé 1 enfant",size=5)+
+  # scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 500)) + 
+  theme(panel.border = element_blank())
+
+graphI1
+
+smic=1398.7
+nbuc=1.8
+seuilpm=1309*nbuc
+
+base<-castyp %>% 
+  filter(isocou=="couple" & actconj=="1 smic" & nbenf==1) %>% 
+  mutate(typrev=case_when(
+    activite==0 ~ "Sans revenu",
+    activite==0.5 ~ "Avec un mi-temps \n au Smic",
+    activite==1 & Salaire==smic ~ "Avec un temps plein\n au Smic",
+    TRUE ~ "Avec un temps plein \n à 1,5 Smic")
+  ) %>% 
+  select(typrev,CGNET,Ract_conj,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)	
+
+basegr<-base %>% 
+  pivot_longer(cols=c(CGNET,Ract_conj,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)) 
+
+
+basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
+
+basegr$name<-factor(basegr$name, levels=rev(c("CGNET","Ract_conj","Salaire", "PF", "PL", "RSA", "PA", "RDISP_NET_CG")))
+
+graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
+                                                                y = value, x = typrev)) + 
+  scale_fill_manual(
+    values = c("CGNET"="darkred",'Ract_conj' = '#440154FF',"Salaire"= "#482677FF", "PF" = "#39568CFF", "PL" = "#238A8DFF", 
+               "RSA" = "#55C667FF", "PA" = "#95D840FF"),
+    labels = c("CGNET"="Coût net de la garde",
+               "PA" = "Prime d'activité",
+               "RSA" = "Revenu de solidarité active",
+               "PF" = "Prestations familiales",
+               "PL" = "Prestations logement",
+               "Salaire" = "Salaire" ,
+               "Ract_conj"="Salaire conjoint"
+    ),
+    # guide = guide_legend(reverse = TRUE)  
+  ) +
+  geom_bar(
+    position = "stack", 
+    stat = "identity", 
+    aes()
+  ) +
+  geom_hline(
+    yintercept = seuilpm, 
+    linetype = "dashed", 
+    color = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
+    size = 3, 
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
+  ) +
+  geom_hline(
+    yintercept = (4/6)*seuilpm, 
+    linetype = "dashed", 
+    color = "lightgrey", 
+    linewidth = 1
+  ) +
+  geom_text(
+    aes(x = 0.5, y = (4/6)*seuilpm + 100, label = "Seuil de grande \npauvreté (40%)"),
+    size = 3, 
+    hjust = 0, # Left-justified
+    colour = "lightgrey"
+  ) +
+  geom_point(
+    data = basegr %>% filter(name == 'RDISP_NET_CG'), 
+    aes(
+      x = typrev, y = round(value, 2), 
+      colour = "Revenu disponible net du coût de la garde", 
+    ), 
+    size = 3
+  ) +
+  theme(
+    panel.background = element_rect(fill = "white"), 
+    plot.background = element_rect(fill = "white"),
+    legend.position =  "right",
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.text = element_text(size = rel(0.7)),
+    legend.title = element_blank(),
+    plot.title = element_text(size = rel(0.8), hjust = 0.7),
+    plot.caption = element_text(size = rel(0.5)),
+    plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
+    axis.ticks.y = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
+  ) +
+  labs(title="Couple 1 enfant - conjoint au smic",size=5)+
+  # scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 500)) + 
+  theme(panel.border = element_blank())
+
+graphC1_S
+
+
+
+```
+
 # 2. L'emploi ne protège pas toujours de la pauvreté monétaire.
 
 Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté monétaire. Ceci apparaît clairement sur cas types mais peut se voir également par l'existence d'une pauvreté monétaire en emploi, même pour des bénéficiaires de la prime d'activité[^3]. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté monétaire des personnes en emploi était de 7,8 % et de 15,2 %en se limitant aux personnes en emploi vivant dans un ménage allocataire de la prime d'activité. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE). **ajouter stats selon nombre d'emplois/quotité**
@@ -939,9 +1142,13 @@ En réduisant assez peu les taux effectifs de gain à l'emploi, par alignement d
 
 Dans le système actuel, le travail est plus rémunérateur que l'assistance car la prime d'activité compense le faible niveau du Smic horaire et la prévalence des emplois rémunérés en dessous du smic mensuel. Si les personnes en emploi restent pauvres malgré les allocations et les incitations... c'est qu'ils partent de trop bas.
 
-Plusieurs problèmes se posent par rapport à cette solution.
+Plusieurs questions voire problèmes se posent par rapport à cette solution.
 
-C'est la façon la plus directe de réduire la pauvreté, celle qui permet d'atteindre les trois objectifs à la fois. Mais c'est aussi la plus coûteuse. Le dilemme entre redistribution et incitation est un trilemme (redistribution/incitation/coût budgétaire). Une solution permettant de réduire le coût est de réduire le taux de cumul entre prestation d'assistance et revenus du travail (= réduire le taux de cumul de la prime d'activité), de sorte que les bénéfices de la hausse soient ciblés sur les plus pauvres. Les dépenses en allocation sont de **12 milliards** (2020 donner chiffre plus récent), augmenter le socle de 25% a un coût budgétaire a minima de 3 milliards, même en baissant le taux de cumul. **Faire une variante INES avec un taux de cumul à 50% ?**
+Relever le socle est la façon la plus directe de réduire la pauvreté, celle qui permet d'atteindre les trois objectifs à la fois de manière cohérente. Mais c'est aussi la plus coûteuse. Le dilemme entre redistribution et incitation est un trilemme (redistribution/incitation/coût budgétaire). Une solution permettant de réduire le coût est de réduire le taux de cumul entre prestation d'assistance et revenus du travail (= réduire le taux de cumul de la prime d'activité), de sorte que les bénéfices de la hausse soient ciblés sur les plus pauvres. Les dépenses en allocation sont de **12 milliards** (2020 donner chiffre plus récent), augmenter le socle de 25% a un coût budgétaire a minima de 3 milliards, même en baissant le taux de cumul. **Faire une variante INES avec un taux de cumul à 50% ?**
+
+Si la réforme consiste à relever le socle, la question du niveau du socle selon la configuration familiale se pose. Le barème du RSA avant forfait logement assure un même niveau de vie des bénéficiaires selon la configuration familiale puisque le socle est 1,5 fois supérieur pour un couple qu'une personne seule, plus 0,3 par enfant. S'ajoutent toutefois au RSA les prestations familiales et logement et le forfait logement est déduit du socle de sorte que l'addition de ces prestations n'est pas tout à fait cohérente avec les niveaux de vie (voir fig-ndvminimum). Une solution serait de fusionner ces prestations (ou de les articuler finement) de telle sorte à assurer un niveau de vie égal selon la configuration familiale. C'est ce qu'a fait le Royaume-Uni avec la réforme du Universal Credit. Il faudrait également supprimer le système de déduction forfaitaire d'un forfait logement. L'avantage de cette solution serait de discuter directement d'un niveau de vie garanti et donc de l'objectif de garantie de couverture des besoins essentiels, alors qu'aujourd'hui le niveau de vie des familles les plus pauvres dépend de prestations discutées séparément (avec leurs règles et justification propres). Un autre avantage serait de mieux maintriser les gains à l'emploi selon les configurations familiales : en fusionnant les prestations - prime d'activité comprise - le taux de gain à l'emploi est déterminé directement. A la fois le niveau de vie minimum et le taux de gain à l'emploi deviennent des paramètres affichés de la prestation.
+
+Une telle solution répondrait à l'idée, fortement présente dans le discours politique, que les prestations s'empilent de façon non maîtrisée. Comme nous l'avons montré, cette idée est fausse, mais une fusion y répondrait non pas de manière définitive, mais au moins de manière cohérente et visible. Cependant, le risque pour les bénéficiaires de la fusion des instruments est d'éventuellement perdre toutes les prestations en même temps en cas d'erreur administrative, de radiation ou de non-recours. Aussi, dans le système actuel, chez les couples, ce n'est pas nécessairement le même conjoint qui est allocataire de la prestation. Par exemple, dans certains cas, la mère est l'allocataire des prestations familiales tandis que le père est l'allocataire des prestations logement. Cela favorise une plus juste répartition du pouvoir de négociation dans le ménage (et des ressources immédiatement disponibles en cas de séparation).
 
 ## 4.2 Le Smic ou la prime d'activité ?
 
@@ -955,13 +1162,13 @@ La prime d'activité n'est pas un salaire :
 
 -   le salaire procure des droits sociaux : le taux de remplacemet au chomage ou à la retraite est réduit pour les bénéficiaires de la prime
 
-Il y a deux objectifs. Le premier objectif est la redistribution, la lutte contre la pauvreté et la réduction des écarts de niveaux de vie, par construction familialisée. Le deuxième objectif est le soutien aux bas-salaires, dans une logique de mérite, par construction individualisé. L'hybridation de ces deux logiques, la lutte contre la pauvreté laborieuse, crée des situations paradoxales car la pauvreté suit une logique familiale et le travail est individuel (Ponthieux, 2009).
+Il y a deux objectifs. Le premier objectif est la redistribution, la lutte contre la pauvreté et la réduction des écarts de niveaux de vie, alors que pauvreté et niveaux de vie sont par construction familialisés (ce qui est en partie discutable). Le deuxième objectif est le soutien aux bas-salaires, dans une logique de mérite, par construction individualisé. L'hybridation de ces deux logiques, la lutte contre la pauvreté laborieuse, crée des situations paradoxales car la pauvreté suit une logique familiale et le travail est individuel (Ponthieux, 2009).
 
-A l'orgine des prestations familiales, les sursalaires familiaux répondaient à un dilème similaire : pour éviter d'augmenter les salaires de tous les travailleurs tout en permettant aux pères de famille de subvenir à leurs besoins, les employeurs ont mis en place un système de prestations versées pour es enfants en plus du salaire de base.
+A l'origine des prestations familiales, les sursalaires familiaux répondaient à un dilemne similaire : pour éviter d'augmenter les salaires de tous les travailleurs tout en permettant aux pères de famille de subvenir à leurs besoins, les employeurs ont mis en place un système de prestations versées pour es enfants en plus du salaire de base.
 
-Si l'on donne un poids à l'objectif de réduction de la pauvreté laborieuse, au-delà de celui que l'on donne à l'objectif de réduction de la pauvreté, alors il est préférable que certains pauvres ne travaillent pas (puisque le fait qu'ils travaillent augmentent la pauvreté laborieuse). Si l'on préfère toujours que les pauvres travaillent plus alors l'objectif n'est pas la réduction de la pauvreté laborieuse mais la réduction du coût public de la pauvreté.
+Si l'on donne un poids à l'objectif de réduction de la pauvreté laborieuse, au-delà de celui que l'on donne à l'objectif de réduction de la pauvreté, alors il est préférable que certains pauvres ne travaillent pas (puisque le fait qu'ils travaillent augmentent la pauvreté laborieuse). Si l'on préfère toujours que les pauvres travaillent plus alors le vrai objectif n'est pas la réduction de la pauvreté laborieuse. Dans un tel contexte l'incitation à l'emploi sert avant tout à réduire le coût public de la pauvreté. Dans une logique libérale, si le fait d'être en emploi est bon pour les bénéficiaires des allocations, il n'y a pas de raison qu'il ne le reconnaisse pas et acceptent ces emplois : lorsqu'il n'y avait pas de gain monétaire à cumuler RMI et faibles heures de travail, de nombreux allocataires le faisaient tout de même (**ref**).
 
-S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).
+S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, et puisque l'objectif principal des instruments est la lutte contre les inégalités, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).
 
 **parler de l'instabilité et de l'avantage qu'avait la PPE : presta sur base fiscale sans risque d'indus (sauf fraude et ceux qui demandaient la mensualisation)**
 
@@ -975,6 +1182,16 @@ Le problème est que créer un écart de revenus à la fois entre l'inactivité 
 
 [^5]: Dès l'instauration du RMI, un mécanisme d'intéressement a été mis en place, permettant le cumul temporaire des revenus d'assitance et des revenus du travail. Cet "intéressement" devait servir de marchepied vers l'emploi stable à plein-temps. Comme l'insertion professionnelle des bénéficiaires du RMI était jugée insatisfaisante, ce mécanisme fut réformé presque constamment. Entre 1989 et 1999, la prime d'intéressement était proportionnelle au salaire perçu lors des 750 premières heures d'emploi. Ensuite jusqu'en 2006, la prime était proportionnelle lors des 15 premiers mois de reprise. Puis jusqu'en 2009, la prime était forfaitaire pendant 9 mois, après 3 mois de cumul intégral.
 
-Faut-il revenir à une prestation différentielle ? Une possibilité est de revenir au système du RMI, qui permet à la fois un socle plus élevé et de réaffirmer le temps-plein comme norme de travail. Le problème est que cette norme s'est dégradée et qu'il est peut-être préférable de la renforcer, non pas avec des mesures qui visent les travailleurs et l'offre de travail, mais avec des mesures qui visent les entreprises (en renforçant par exemple le droit au passage au temps-plein, en pénalisant la fragmentation journalière du travail, voire en réduisant les allégements de cotisations pour les emplois à temps-partiels).
+Faut-il revenir à une prestation différentielle ? Une possibilité est de revenir au système du RMI, qui permet à la fois un socle plus élevé et de réaffirmer le temps-plein comme norme de travail. Le problème est que cette norme s'est dégradée et que dans ce nouveau contexte, il est peut-être préférable de la renforcer, non pas avec des mesures qui visent les travailleurs et l'offre de travail, mais avec des mesures qui visent les entreprises (en renforçant par exemple le droit au passage au temps-plein, en pénalisant la fragmentation journalière du travail, voire en réduisant les allégements de cotisations pour les emplois à temps-partiels).
 
 Il faut donc réaffirmer le droit à un travail à temps-plein et lutter contre le travail à temps-partiel contraint. Comment ? Devetter, Pucci et Valentin montrent que le Smic n'est pas une protection suffisante contre la pauvreté des travailleurs, du fait du temps partiel contraint dans des métiers dont le taux horaire est faible. Le seuil de bas salaire mensuel (défini à 60% du salaire médian) étant proche du Smic mensuel, par construction les bas salaires manquent d'heures dans le mois par rapport à un temps-plein. Les métiers les plus touchés par les bas salaires sont les métiers du care, assistantes maternelles, aides à domicile (66% de bas salaires), les métiers du nettoyage (47%), les métiers de l'hottellerie-restauration (50%). Ces trois secteurs concentrent 43% des bas-salaires mensuels. Or ces professions concentrent forte amplitude de la journée de travail et faible densité de la journée de travail.
+
+## 4.4 L'incitation à s'en sortir ne doit-elle concerner que le travail?
+
+Le débat sur les gains, les taux de prélèvements, les incitations ne concernent aujourd'hui que le travail. Cela montre l'importance du mérite perçu. Les pauvres peuvent cumuler prestations sociales et revenus du travail, mais pas prestations sociales et revenus du capital qui sont déduits à 100% de la prestation. Dans le même temps, pour les plus riches, grâce au prélèment fortaifaire unique (PFU) le taux d'imposition est plus faible sur les revenus du capital que sur les revenus du travail. Les ressources déduites du RSA et de la prime d'activité sont : les revenus de remplacement (retraite, chômage), les pensions alimentaires, les héritages et les dons, les gains aux jeux, les loyers reçus pour un logement loué, la valeur locative des logements non loués (!), les revenus des capitaux, et les revenus fictifs des biens non productifs, comme les contrats d'assurance-vie, imputés à hauteur de 3% de leur valeur marchande. Nombre de ces ressources ne sont pas comprises dans la base fiscale des plus aisés, le conseil constitutionnel a même tranché contre la prise en compte de revenus non effectifs (la valeur locative de logements non loués ne peut rentrer dans le revenu au titre de l'imposition sur le revenu). Mais le RSA, prestation assistancielle, ne suit pas une logique de "capacité contributive" mais une logique de "subsidiarité" : le demandeur doit démontrer avoir fait valoir tous ses droits, aux autres prestations sociales et créances alimentaires, et même aux revenus de ses biens non utilisés.
+
+Tous les revenus sont déductibles à 100% du RSA et de la prime d'activité : un don de 100 euros, une chambre à louer, les revenus d'un peu d'épargne. Cette logique crée des situations impossibles pour les allocataires mêmes sincères s'ils reçoivent une aide familiale dans une situation d'urgence, une chaudière qui tombe en panne, un enfant malade, un évènement à l'autre bout de la France. Ils doivent déclarer cette aide qui sera entièrement déduite de l'allocation versée. La conséquence est qu'il y aura plus de fraudes détectées chez les personnes vulnérables, obligées de contourner une technocratie d'autant plus rigoureuse que cette rigueur est asymétrique entre les plus pauvres et les plus aisés. C'est d'autant plus problématique que la rigueur du calcul technocratique au moindre euro près s'applique à une prestation faible. La situation décrite ici est crée un phénomène de spirale de la pauvreté puisque la moindre aide à s'en sortir, le moindre effort d'épargne est annulé.
+
+Une solution serait de rendre le calcul de la prestation plus bienveillant en mettant en place un abattement sur l’ensemble des petits revenus (et non pas seulement les revenus du travail) : par exemple, les 600 premiers euros par trimestre (200 euros par mois) ne seraient pas pris en compte dans le calcul de la prestation, quelle que soit leur origine. Un autre avantage de cette solution est que le demandeur de l’allocation ayant des petits revenus n’aurait pas à détailler leur origine lors de la demande, il cocherait simplement la case « ressources inférieures à 600 euros ». Un tel système réduirait la peur de se tromper, la peur des indus à rembourser, et donc le non-recours. Les premiers revenus d’activité seraient gardés à 100 % par les travailleurs, ce qui répond aussi à la problématique des coûts fixes à la reprise d’emploi. Au-delà de l’abattement, le taux de cumul des revenus d’activité et de la prime d’activité pourrait être abaissé pour garder les gains à la reprise d’emploi à plein temps constants par rapport à la situation actuelle. Si l’objectif est que les allocataires des minima sociaux en sortent par le haut, il faut aussi éviter d’annuler le moindre coup de pouce ou coup de chance.
+
+**Simulation INES ?**
