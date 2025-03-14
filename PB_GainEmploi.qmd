@@ -16,13 +16,16 @@ author:
 annee: 2025
 date: today
 date-modified: today
+
+lang: fr
+
 format: 
   html:
     fig-cap-location: top
 editor: visual
 ---
 
-```{r, include=FALSE}
+```{r library, include=FALSE}
 
 library(knitr) 
 library(tidyverse) 
@@ -57,6 +60,11 @@ library(ggsci)
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
 
+knitr::opts_knit$set(
+  language = list(
+    figure = "Graphique")
+)
+
 
 ```
 
@@ -72,7 +80,7 @@ Un deuxième objectif donné aux politiques de lutte contre la pauvreté est de 
 
 Enfin un troisième objectif attribué aux politiques de lutte contre la pauvreté est de "garantir un soutien financier aux ménages modestes" (SNPLP, 2018). Dans la stratégie de lutte contre la pauvreté, cet objectif est le plus souvent lié aux enfants et aux familles. Un des objectifs est de "garantir l'accès de tous les enfants aux biens et aux services essentiels" ; l'affirmation "la stratégie pauvreté déploiera enfin des mesures concrètes et ancrées dans le quotidien des Français pour réduire les privations" est affirmé dans le chapitre nommé "garantir au quotidien les droits fondamentaux des enfants". S'il est admis que les personnes sans emploi puissent petre pauvres, il ne faut pas que leurs privations soient trop sévères, en particulier losrqu'elles ont des enfants.
 
-Plus généralement, "réduire les privations", "garantir les droits fondamentaux" sont des objectifs qui concernent tout le monde, adultes et mineurs. Depuis 1946, le préambule de la Constitution affirme ainsi "Tout être humain qui, en raison de son âge, de son état physique ou mental, de la situation économique, se trouve dans l'incapacité de travailler a le droit d'obtenir de la collectivité des moyens convenables d'existence". Toutefois la façon dont ce droit est écrit ne définit pas explicitement ces moyens convenables d'existence et ne dit pas s'ils doivent être procurés en nature (logement, santé, aide alimentaire...) ou en espèces. Alors que ce préambule date de 1946, le RMI n'a été mis en place qu'en 1989. Pour les foyers sans revenus, le RMI puis le RSA garantissent des niveaux de vie inégaux mais proches selon les configurations familiales, et en particulier selon la présence d'enfants ou non (graphique fig_ndvminimum).
+Plus généralement, "réduire les privations", "garantir les droits fondamentaux" sont des objectifs qui concernent tout le monde, adultes et mineurs. Depuis 1946, le préambule de la Constitution affirme ainsi "Tout être humain qui, en raison de son âge, de son état physique ou mental, de la situation économique, se trouve dans l'incapacité de travailler a le droit d'obtenir de la collectivité des moyens convenables d'existence". Toutefois la façon dont ce droit est écrit ne définit pas explicitement ces moyens convenables d'existence et ne dit pas s'ils doivent être procurés en nature (logement, santé, aide alimentaire...) ou en espèces. Alors que ce préambule date de 1946, le RMI n'a été mis en place qu'en 1989. Pour les foyers sans revenus, le RMI puis le RSA garantissent des niveaux de vie inégaux mais proches selon les configurations familiales, et en particulier selon la présence d'enfants ou non (graphique 1).
 
 ```{r}
 #| label: fig-ndvminimum
@@ -96,7 +104,9 @@ base<-castyp %>%
 
 
 graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) + 
-  geom_bar(stat = "identity", position = "dodge") +  
+  geom_bar_interactive(stat = "identity", position = "dodge", 
+    aes(y=NVIE, fill=enf,tooltip=paste("niveau de vie :",round(NVIE,0), "euros"))
+  ) + 
   scale_fill_economist() +  
   theme_minimal() +
   scale_y_continuous(limits = c(0, 1500)) +  
@@ -136,8 +146,6 @@ igraph5<-girafe(ggobj = graph5)
 igraph5
 
 
-ggsave(filename="niveaudevie.png", plot=graph5)
-htmltools::save_html(igraph5, "graph/niveaudevie.html")
 
 
 ```
@@ -216,10 +224,10 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
                             ),
     guide = guide_legend(reverse = TRUE)  
   ) +
-   geom_bar(
+   geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes()
+    aes(y=value, fill=name,tooltip=paste(name,round(value,0), "euros"))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -245,12 +253,12 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
     hjust = 0, # Left-justified
     colour = "lightgrey"
   ) +
-  geom_point(
+  geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
     aes(
       x = typrev, y = round(value, 2), 
       colour = "Revenu disponible", 
-      ), 
+      tooltip=paste("Revenu disponible",round(value,0), "euros")), 
     size = 3
   ) +
   theme(
@@ -271,7 +279,8 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
   scale_y_continuous(expand = c(0, 0), limits = c(0, 2250), breaks = seq(0, 2250, by = 250)) + 
   theme(panel.border = element_blank())
 
-graph
+igraph <- girafe(ggobj = graph)
+igraph
 
 
 
@@ -324,10 +333,11 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
                "PL" = "Prestations logement",
                "RSA" = "Revenu de solidarité active",
                "PA" = "Prime d'activité")
-  ) +
-  geom_bar(
+  )  +
+   geom_bar_interactive(
     position = "stack", 
-    stat = "identity" 
+    stat = "identity", 
+    aes(y=value, fill=name,tooltip=paste(name,round(value,0), "euros"))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -353,12 +363,12 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     hjust = 0, # Left-justified
     colour = "lightgrey"
   ) +
-  geom_point(
-    data = basegr2, 
+  geom_point_interactive(
+    data = basegr %>% filter(name == 'RDISP'), 
     aes(
       x = typrev, y = round(value, 2), 
-      color = "Revenu disponible"  
-    ), 
+      colour = "Revenu disponible", 
+      tooltip=paste("Revenu disponible",round(value,0), "euros")), 
     size = 3
   ) +
   scale_color_manual(
@@ -382,15 +392,9 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 250)) + 
   theme(panel.border = element_blank())
 
-graph2
+igraph2 <- girafe(ggobj = graph2)
+igraph2
 
-# Créer l'interaction et sauvegarder l'image
-#igraph2 <- girafe(ggobj = graph2)
-#igraph2
-
-# Sauvegarde du graphique
-ggsave(filename = "graph/Cas type couple 2 enfants.png", plot = graph2)
-#htmltools::save_html(igraph2, "graph/interactive_2A2E.html")
 
 
 
@@ -452,10 +456,11 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
                'PL' = '#238A8DFF',
                'RSA' = '#55C667FF', 
                'PA' = '#95D840FF'
-               )) +
-geom_bar(
+               ))  +
+   geom_bar_interactive(
     position = "stack", 
-    stat = "identity" 
+    stat = "identity", 
+    aes(y=value, fill=name,tooltip=paste(name,round(value,0), "euros"))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -481,12 +486,12 @@ geom_bar(
     hjust = 0, # Left-justified
     colour = "lightgrey"
   ) +
-  geom_point(
-    data = basegr2, 
+  geom_point_interactive(
+    data = basegr %>% filter(name == 'RDISP'), 
     aes(
       x = typrev, y = round(value, 2), 
-      color = "Revenu disponible"  
-    ), 
+      colour = "Revenu disponible", 
+      tooltip=paste("Revenu disponible",round(value,0), "euros")), 
     size = 3
   ) +
   scale_color_manual(
@@ -511,18 +516,14 @@ geom_bar(
   theme(panel.border = element_blank())
 
 
-graph3
-
-# save
-ggsave(filename="graph/Cas type couple 2 enfants C1S.png", plot=graph3)
-#htmltools::save_html(igraph3, "graph/interactive_2A2E_C1S.html")
+igraph3 <- girafe(ggobj = graph3)
+igraph3
 
 ```
 
 Les gains à l'emploi sont encore plus importants si le revenu du conjoint, pour un même montant égal au smic à temps plein, est une allocations chômage. Dans ce cas, lorsque le travailleur étudié n'a aucun revenu, le couple monoactif a un revenu disponible plus faible que dans le cas précédent (1 891 euros contre 2 497 euros) car contrairement au salaire, l'allocation chômage du conjoint n'ouvre pas droit à la prime d'activité. La reprise d'emploi a donc un effet plus faible sur le montant de prestations perçus et le gain à l'emploi pour un smic à temps plein est de 1 090 euros, ce qui correspond à un TEG de 78%. Le taux effectif de gain est également élevé pour un emploi a mi-temps (71%) ou à temps plein avec un salaire de 1,5 smic (83 %).
 
 ```{r}
-
 #| label: fig-C2A2ECCH
 #| fig-cap: Revenu disponible couple 2 enfants, conjoint au chômage (ARE=1 smic)
 
@@ -555,28 +556,30 @@ basegr2 <- basegr %>% filter(name == 'RDISP')
 
 basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Ract_conj", "Salaire", "PF", "PL", "RSA", "PA")) ))
 
+basegr1 <- basegr1  %>% mutate(name = recode(name, "Ract_conj" = "ARE conjoint"))
 
 # cas couple avec conjoint au smic #
 
 graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
   scale_fill_manual(
-    labels=c("Ract_conj" = "ARE conjoint",
+    labels=c("ARE conjoint" = "ARE conjoint",
              "Salaire"="Salaire",
              "PF" = "Prestations familiales",
              "PL" = "Prestations logement",
              "RSA"="RSA",
              "PA" = "Prime d'activité"
              ),
-    values = c('Ract_conj' = '#440154FF',
+    values = c('ARE conjoint' = '#440154FF',
                'Salaire' = '#482677FF',
                'PF' = '#39568CFF',
                'PL' = '#238A8DFF',
                'RSA' = '#55C667FF', 
                'PA' = '#95D840FF'
-               )) +
-geom_bar(
+               ))  +
+   geom_bar_interactive(
     position = "stack", 
-    stat = "identity" 
+    stat = "identity", 
+    aes(y=value, fill=name,tooltip=paste(name,round(value,0), "euros"))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -602,12 +605,12 @@ geom_bar(
     hjust = 0, # Left-justified
     colour = "lightgrey"
   ) +
-  geom_point(
-    data = basegr2, 
+  geom_point_interactive(
+    data = basegr %>% filter(name == 'RDISP'), 
     aes(
       x = typrev, y = round(value, 2), 
-      color = "Revenu disponible"  
-    ), 
+      colour = "Revenu disponible", 
+      tooltip=paste("Revenu disponible",round(value,0), "euros")), 
     size = 3
   ) +
   scale_color_manual(
@@ -632,11 +635,9 @@ geom_bar(
   theme(panel.border = element_blank())
 
 
-graph3b
+igraph3b <- girafe(ggobj = graph3b)
+igraph3b
 
-
-# save
-ggsave(filename="graph/Cas type couple 2 enfants CCH.png", plot=graph3b)
 
 ```
 
