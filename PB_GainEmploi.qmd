@@ -1,6 +1,6 @@
 ---
 title: "La reprise d'emploi est-elle toujours rémunératrice?"
-subtitle: "Si oui, quel est le vrai problème ?"
+subtitle: "Gains à l'emploi des bénéficiaires de l'assistance"
 keywords: Assistance, Prime d'activité, Smic, Gains à l'emploi, Trappes à inactivité
 abstract: "Depuis les réformes visant à permettre aux personnes de cumuler durablement revenus professionnels et prestations sociales, la reprise d'emploi est toujours rémunératrice, mais elle ne permet pas toujours de sortir de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum garanti aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie, mais les travailleurs partent de trop bas."
 
@@ -60,10 +60,6 @@ library(ggsci)
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
 
-knitr::opts_knit$set(
-  language = list(
-    figure = "Graphique")
-)
 
 
 ```
@@ -113,25 +109,25 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
   geom_hline(
     yintercept = seuil60,
     linetype = "dashed", 
-    colour = "lightgrey", 
+    colour = "grey40", 
     linewidth = 1
   ) +
   geom_text(
     aes(x = 0.5, y = seuil60 + 50, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, 
-    colour = "lightgrey") +
+    colour = "grey40") +
   geom_hline(
     yintercept = seuil40,
     linetype = "dashed", 
-    colour = "lightgrey", 
+    colour = "grey40", 
     linewidth = 1
   ) +
   geom_text(
     aes(x = 0.5, y = seuil40 + 50, label = "Seuil de pauvreté (à 40%)"),
     size = 3, 
     hjust = 0, 
-    colour = "lightgrey") +
+    colour = "grey40") +
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
@@ -144,10 +140,6 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
 
 igraph5<-girafe(ggobj = graph5)
 igraph5
-
-
-
-
 ```
 
 Pour résumer, la lutte contre la pauvreté repose sur au moins trois objectifs, régulièrement réaffirmés par les pouvoirs publics :
@@ -160,7 +152,7 @@ Pour résumer, la lutte contre la pauvreté repose sur au moins trois objectifs,
 
 Les trois premières parties de ce document évaluent le système actuel par rapport à ces trois objectifs. Certaines politiques peuvent être positives du point de vue d'un objectif mais négative du point de vue des autres : par exemple, réduire les prestations d'assistance augmente l'écart entre les revenus d'assisstance et les revenus du travail, mais est négatif du point de vue de la garantie de la couverture de besoins essentiels. La quatrième partie, prescriptive, discute des arbitrages auxquels différentes stratégies de lutte contre la pauvreté font face et fait des propositions qui permettent d'atteindre au mieux ces trois objectifs.
 
-## 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de la même façon.
+## 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de façon homogène.
 
 ## 1.1. Une analyse par cas-type
 
@@ -170,7 +162,7 @@ La reprise d'emploi est-elle rémunératrice ? Pour répondre à la question de 
 
 > Outre la variation de revenu disponible du ménage, il est également possible de calculer un taux effectif de prélèvement (TEP) qui correspond à la part de l'augmentation du revenu professionnel qui ne se traduit pas en augmentation de revenu disponible du fait de la hausse des impôts et de la baisse des prestations. Si lorsque le revenu d'activité augmente de 1000 euros, le revenu disposible n'augmente que de 600 euros, on dira que le TEP est de 40%. $$TEP=1-\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}$$ On peut définir le taux effectif de gain à l'emploi (TEG) comme la part de l'augmentation du revenu professionnel qui se traduit en augmentation du revenu disponible. Si lorsque le revenu d'activité augmente de 1000 euros, le revenu disponible augmente de 600 euros, on dira que le TEG est de 60%. $$TEG=\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}$$
 
-Le cas-type général commenté dans le texte est celui d'un ménage éligible, sous condition de ressources, au RSA (l'individu référent est âgé entre 25 et 64 ans) et aux allocations logement[^1] (le ménage est locataire du parc privé). Pour les ménages non éligibles à ces prestations, les presations sociales sont bien plus faibles, et les gains à la reprise d'emploi sont donc par construction plus importantes. Pour les ménages avec enfants, nous supposons dans le cas général que les enfants sont d'âge scolaire (5, 8 ou 10 ans) mais la situation des familles ayant un enfant en bas âge qui nécessite un mode de garde est étudiée dans l'encadré XX.
+Le cas-type général commenté dans le texte est celui d'un ménage éligible, sous condition de ressources, au RSA (l'individu référent est âgé entre 25 et 64 ans) et aux allocations logement[^1] (le ménage est locataire du parc privé). Pour les ménages non éligibles à ces prestations, les presations sociales sont bien plus faibles, et les gains à la reprise d'emploi sont donc par construction plus importantes. Pour les ménages avec enfants, nous supposons dans le cas général que les enfants sont d'âge scolaire (5, 8 ou 10 ans) mais la situation des familles ayant un enfant en bas âge qui nécessite un mode de garde est étudiée plus loin.
 
 [^1]: On suppose que le ménage est locataire en zone 2 des aides au logement (ville moyenne) pour un loyer compris entre 1 et 2,5 fois le loyer plafond.
 
@@ -232,26 +224,26 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
   geom_hline(
     yintercept = seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
     aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_hline(
     yintercept = (4/6)*seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = (4/6)*seuilpm + 100, label = "Seuil de grande \npauvreté (40%)"),
+    aes(x = 0.5, y = (4/6)*seuilpm + 125, label = "Seuil de grande \npauvreté (40%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
@@ -342,26 +334,26 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   geom_hline(
     yintercept = seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
     aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_hline(
     yintercept = (4 / 6) * seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
     aes(x = 0.5, y = (4 / 6) * seuilpm + 200, label = "Seuil de grande \npauvreté (40%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
@@ -465,26 +457,26 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   geom_hline(
     yintercept = seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
+    aes(x = 0.5, y = seuilpm + 210, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_hline(
     yintercept = (4 / 6) * seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = (4 / 6) * seuilpm + 200, label = "Seuil de grande \npauvreté (40%)"),
+    aes(x = 0.5, y = (4 / 6) * seuilpm + 250, label = "Seuil de grande \npauvreté (40%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
@@ -521,7 +513,7 @@ igraph3
 
 ```
 
-Les gains à l'emploi sont encore plus importants si le revenu du conjoint, pour un même montant égal au smic à temps plein, est une allocations chômage. Dans ce cas, lorsque le travailleur étudié n'a aucun revenu, le couple monoactif a un revenu disponible plus faible que dans le cas précédent (1 891 euros contre 2 497 euros) car contrairement au salaire, l'allocation chômage du conjoint n'ouvre pas droit à la prime d'activité. La reprise d'emploi a donc un effet plus faible sur le montant de prestations perçus et le gain à l'emploi pour un smic à temps plein est de 1 090 euros, ce qui correspond à un TEG de 78%. Le taux effectif de gain est également élevé pour un emploi a mi-temps (71%) ou à temps plein avec un salaire de 1,5 smic (83 %).
+Les gains à l'emploi sont encore plus importants si le revenu du conjoint, pour un même montant égal au smic à temps plein, est une allocations chômage. Dans ce cas, lorsque le travailleur étudié n'a aucun revenu, le couple monoactif a un revenu disponible plus faible que dans le cas précédent (1 891 euros contre 2 497 euros) car contrairement au salaire, l'allocation chômage du conjoint n'ouvre pas droit à la prime d'activité. La reprise d'emploi a donc un effet plus faible sur le montant de prestations perçus et le gain à l'emploi pour un smic à temps plein est de 1 090 euros, ce qui correspond à un TEG de 78%. Le taux effectif de gain est également élevé pour un emploi a mi-temps (71 %) ou à temps plein avec un salaire de 1,5 smic (83 %).
 
 ```{r}
 #| label: fig-C2A2ECCH
@@ -584,26 +576,26 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   geom_hline(
     yintercept = seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
+    aes(x = 0.5, y = seuilpm + 210, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_hline(
     yintercept = (4 / 6) * seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = (4 / 6) * seuilpm + 200, label = "Seuil de grande \npauvreté (40%)"),
+    aes(x = 0.5, y = (4 / 6) * seuilpm + 300, label = "Seuil de grande \npauvreté (40%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
@@ -641,7 +633,7 @@ igraph3b
 
 ```
 
-Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance, de façon pérenne et pour toutes les reprises d'emploi. Toutefois les gains ezffectifs à la reprise d'emploi sont loin d'être homogènes.
+Le système social et fiscal remplit donc l'objectif qui lui a été fixé depuis la mise en place du RSA en 2009 : rendre le travail plus rémunérateur que l'assistance, de façon pérenne et pour toutes les reprises d'emploi. Toutefois les gains effectifs à la reprise d'emploi sont loin d'être homogènes.
 
 ```{r}
 #| label: fig-TGE
@@ -709,14 +701,12 @@ igraph4<-girafe(ggobj = graph4)
 igraph4
 
 
-ggsave(filename="graph/Tauxdegain.png", plot=graph4)
-htmltools::save_html(igraph4, "graph/interactive_TdG.html")
 
 
 
 ```
 
-Pour les cas que nous avons étudiés, le taux effectif de gain pour le passage de l'inactivité à un emploi à temps plein rémunéré au smic varie de 58% à 65% pour une personne seule selon le nombre d'enfants à charge et de 52% à 94% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Le TEG le plus faible est alors obtenu avec 3 enfants lorsque le conjoint est salarié au smic car la prise d'emploi réduit à la fois les montants de prestations familiales (-97 €), d'aides au logement (-349 €) et de prime d'activité (-231 €). Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge car le couple ne bénéficie initialement que des aides au logement (89€) et n'a donc que ça à perdre.
+Pour les cas que nous avons étudiés, le taux effectif de gain pour le passage de l'inactivité à un emploi à temps plein rémunéré au smic varie de 58% à 65% pour une personne seule selon le nombre d'enfants à charge et de 52% à 94% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Le TEG le plus faible est alors obtenu avec 3 enfants lorsque le conjoint est salarié au smic car la prise d'emploi réduit à la fois les montants de prestations familiales (-97 €), d'aides au logement (-349 €) et de prime d'activité (-231 €). Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge car le couple ne bénéficie initialement que des aides au logement (89€) et n'a donc que cela à perdre.
 
 Le taux effectif de gain pour le passage de l'inactivité à un emploi à mi-temps au smic est plus faible. Il varie de 48% à 58% pour une personne seule selon le nombre d'enfants à charge et de 36% à 87% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Comme pour l'emploi à temps plein, le TEG le plus faible est alors obtenu avec 3 enfants lorsque le conjoint est salarié au smic et le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge.
 
@@ -785,9 +775,6 @@ graph4b <- ggplot(basegr, aes(x = casconj, y = TGM_50, colour = enf)) +
 igraph4b<-girafe(ggobj = graph4b)
 igraph4b
 
-
-ggsave(filename="graph/Tauxdegain_mi_temps.png", plot=graph4b)
-htmltools::save_html(igraph4b, "graph/interactive_TdG-mt.html")
 
 
 ```
@@ -862,26 +849,26 @@ graphI1 <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
   geom_hline(
     yintercept = seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
+    aes(x = 0.5, y = seuilpm + 200, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_hline(
     yintercept = (4/6)*seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = (4/6)*seuilpm + 100, label = "Seuil de grande \npauvreté (40%)"),
+    aes(x = 0.5, y = (4/6)*seuilpm + 300, label = "Seuil de grande \npauvreté (40%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_point(
     data = basegr %>% filter(name == 'RDISP_NET_CG'), 
@@ -957,26 +944,26 @@ graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
   geom_hline(
     yintercept = seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
+    aes(x = 0.5, y = seuilpm + 200, label = "Seuil de pauvreté (à 60%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_hline(
     yintercept = (4/6)*seuilpm, 
     linetype = "dashed", 
-    color = "lightgrey", 
+    color = "grey40", 
     linewidth = 1
   ) +
   geom_text(
-    aes(x = 0.5, y = (4/6)*seuilpm + 100, label = "Seuil de grande \npauvreté (40%)"),
+    aes(x = 0.5, y = (4/6)*seuilpm + 300, label = "Seuil de grande \npauvreté (40%)"),
     size = 3, 
     hjust = 0, # Left-justified
-    colour = "lightgrey"
+    colour = "grey40"
   ) +
   geom_point(
     data = basegr %>% filter(name == 'RDISP_NET_CG'), 
@@ -1021,7 +1008,7 @@ Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvr
 
 > D'après la statistique publique (INSEE, Eurostat), un individu est pauvre d'un point de vue monétaire si le niveau de vie du ménage auquel il appartient est inférieur à 60% du niveau de vie médian. La pauvreté monétaire est ainsi un concept relatif : si le niveau de vie de tous les ménages augmente de 10%, le taux de pauvreté monétaire restera inchangé. Par convention, le seuil de pauvreté monétaire est le même dans tout le pays, mais il varie au sein de l'Union Européenne d'un pays à l'autre. La pauvreté monétaire est donc définie uniquement par les revenus. La seule prise en compte des différences de besoins se fait par l'échelle d'équivalence qui définit le nombre d'unités de consommation du ménage selon sa composition. Le niveau de vie ne prend donc pas en compte le coût du logement ni les besoins différenciés en transport, logement ou chauffage selon le lieu de vie. Le dernier seuil de pauvreté monétaire publié par l'Insee est de 1 216 euros par UC pour l'année 2022. Pour le comparer aux montants des prestations en 2024, nous avons appliqué à ce seuil l'inflation observée entre 2022 et juillet 2024, ce qui amène à un seuil de 1 309 euros par UC.
 
-Le niveau de vie d'un célibataire sans enfant sans revenus d'activité et recourant à toutes les prestations est de 851 euros/uc ce qui est inférieur de 35% au seuil de pauvreté monétaire : son intensité de pauvreté est donc de 35%. Un emploi à mi-temps au Smic ne lui permet pas de franchir le seuil de pauvreté (intensité de 9%). Le célibataire sans enfant franchit le seuil de pauvreté monétaire avec un Smic à plein temps même s'il ne recourt pas à la prime d'activité et son niveau de vie atteint 126% du seuil s'il y recourt. En revanche, un emploi à mi-temps ne permet pas se sortir de la pauvreté même si la prime d'activité en réduit l'intensité (de 30% avant prime à 9% après)
+Le niveau de vie d'un célibataire sans enfant sans revenus d'activité et recourant à toutes les prestations est de 851 euros/uc ce qui est inférieur de 35% au seuil de pauvreté monétaire : son intensité de pauvreté est donc de 35%. Un emploi à mi-temps au Smic ne lui permet pas de franchir le seuil de pauvreté (intensité de 9%). Le célibataire sans enfant franchit le seuil de pauvreté monétaire avec un Smic à plein temps même s'il ne recourt pas à la prime d'activité et son niveau de vie atteint 126% du seuil s'il y recourt. En revanche, un emploi à mi-temps ne permet pas se sortir de la pauvreté même si la prime d'activité en réduit l'intensité (de 30% avant prime à 9% après).
 
 Une personne isolée avec enfant(s) en emploi à plein-temps au Smic est au-dessus du seuil de pauvreté monétaire, qu'elle ait un enfant (125%) du seuil), deux enfants (119%), ou trois enfants (124%) et elle le serait même sans la prime d'activité. Le système socio-fiscal permet donc bien aux parents isolés de la pauvreté lorsqu'elles travaillent au Smic à temps plein et la prime d'activité leur permet de dépasser largement le seuil. La prime d'activité permet même aux parents isolés d'atteindre[^4] le seuil de pauvreté avec un emploi à mi-temps au smic.
 
@@ -1120,10 +1107,6 @@ igraph4 <- girafe(ggobj = graph4)
 igraph4
 
 
-ggsave(filename="graph/Evol.png", plot=graph4)
-
-htmltools::save_html(igraph4, "graph/Evolh.html")
-
 
 ```
 
@@ -1173,11 +1156,13 @@ S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut af
 
 **parler de l'instabilité et de l'avantage qu'avait la PPE : presta sur base fiscale sans risque d'indus (sauf fraude et ceux qui demandaient la mensualisation)**
 
-## 4.3 Quelle place pour le temps partiel ?
+## 4.3 Le temps partiel : marche-pied ou hors-norme ?
 
-Faut-il cibler les compléments de revenus pour travailleurs au niveau du temps-partiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles. En réalité redistribution et incitations sont des objectifs contradictoires : la redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, emploi et emploi mieux rémunéré, tandis que l'incitation implique de les maintenir ou de les augmenter.
+Faut-il cibler les compléments de revenus pour travailleurs au niveau du temps-partiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles, dont les revenus les placent plus souvent sous le seuil de pauvreté. En réalité redistribution et incitations sont des objectifs contradictoires : la redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, emploi et emploi mieux rémunéré, tandis que l'incitation implique de les maintenir ou de les augmenter.
 
 S'ajoute un autre objectif : le mérite. Selon cet objectif, l'augmentation des revenus d'activité doit s'accompagner d'une augmentation du revenu disponible, même en l'absence d'impact incitatif en termes d'emploi. Il est probable que beaucoup d'acteurs ont cet objectif en tête lorsqu'ils défendent l'idée que le travail doit payer (Allègre, 2011).
+
+Deux visions s'opposent. Selon la première, il faudrait créer une norme de temps-plein, forme d'emploi la plus propice à réduire la pauvreté dans
 
 Le problème est que créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein est probablement une des raisons de la dévalorisation du socle. En 1989, la norme d'emploi était le CDI à temps-plein, et le niveau du RMI a été choisi pour créer un écart avec l'emploi au Smic à temps-plein (il a été fixé en décembre 1988 à 50% du Smic à temps-plein). La prestation était différentielle : après période d'interessement temporaire[^5], chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier. Les gains étaient concentrés entre le mi-temps et le temps-plein. Pourtant, il y avait des reprises d'emploi à temps partiel et même du cumul assistance-emploi (Guillemot, Petour et Zajdela, 2002)
 
@@ -1187,7 +1172,7 @@ Faut-il revenir à une prestation différentielle ? Une possibilité est de reve
 
 Il faut donc réaffirmer le droit à un travail à temps-plein et lutter contre le travail à temps-partiel contraint. Comment ? Devetter, Pucci et Valentin montrent que le Smic n'est pas une protection suffisante contre la pauvreté des travailleurs, du fait du temps partiel contraint dans des métiers dont le taux horaire est faible. Le seuil de bas salaire mensuel (défini à 60% du salaire médian) étant proche du Smic mensuel, par construction les bas salaires manquent d'heures dans le mois par rapport à un temps-plein. Les métiers les plus touchés par les bas salaires sont les métiers du care, assistantes maternelles, aides à domicile (66% de bas salaires), les métiers du nettoyage (47%), les métiers de l'hottellerie-restauration (50%). Ces trois secteurs concentrent 43% des bas-salaires mensuels. Or ces professions concentrent forte amplitude de la journée de travail et faible densité de la journée de travail.
 
-## 4.4 L'incitation à s'en sortir ne doit-elle concerner que le travail?
+## 4.4 L'incitation à sortir de l'assistance ne doit-elle concerner que le travail?
 
 Le débat sur les gains, les taux de prélèvements, les incitations ne concernent aujourd'hui que le travail. Cela montre l'importance du mérite perçu. Les pauvres peuvent cumuler prestations sociales et revenus du travail, mais pas prestations sociales et revenus du capital qui sont déduits à 100% de la prestation. Dans le même temps, pour les plus riches, grâce au prélèment fortaifaire unique (PFU) le taux d'imposition est plus faible sur les revenus du capital que sur les revenus du travail. Les ressources déduites du RSA et de la prime d'activité sont : les revenus de remplacement (retraite, chômage), les pensions alimentaires, les héritages et les dons, les gains aux jeux, les loyers reçus pour un logement loué, la valeur locative des logements non loués (!), les revenus des capitaux, et les revenus fictifs des biens non productifs, comme les contrats d'assurance-vie, imputés à hauteur de 3% de leur valeur marchande. Nombre de ces ressources ne sont pas comprises dans la base fiscale des plus aisés, le conseil constitutionnel a même tranché contre la prise en compte de revenus non effectifs (la valeur locative de logements non loués ne peut rentrer dans le revenu au titre de l'imposition sur le revenu). Mais le RSA, prestation assistancielle, ne suit pas une logique de "capacité contributive" mais une logique de "subsidiarité" : le demandeur doit démontrer avoir fait valoir tous ses droits, aux autres prestations sociales et créances alimentaires, et même aux revenus de ses biens non utilisés.
 
