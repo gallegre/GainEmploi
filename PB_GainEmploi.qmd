@@ -142,6 +142,65 @@ igraph5<-girafe(ggobj = graph5)
 igraph5
 ```
 
+```{r}
+#| label: fig-gainsmarginaux
+#| fig-cap: Gain marginaux effectifs selon la configuration familiale et niveau de revenu
+
+castyp<-read.xlsx(file="cas types gains marginaux.xlsx",sheetName = "synthese") 
+
+base<-castyp %>% 
+  mutate(
+    cas = case_when(isocou=="isolé" & nbenf==0 ~ "isolé sans enfant",
+                    #isocou=="isolé" & nbenf==2 ~ "isolé deux enfants",
+                    #isocou=="couple" & actconj=="Inactif" & nbenf==0 ~ "couple monoactif sans enfant",
+                    isocou=="couple" & actconj=="Inactif" & nbenf==2 ~ "couple monoactif deux enfants",
+                    isocou=="couple" & actconj=="1 smic" & nbenf==0 ~ "couple biactif sans enfant",
+                    isocou=="couple" & actconj=="1 smic" & nbenf==2 ~ "couple biactif deux enfants", 
+    TRUE ~ "autre"
+  )) %>% 
+  filter(cas != "autre")  %>% 
+  mutate(
+    gainmarginal = RDISP
+  ) %>% 
+  select(cas, activite, gainmarginal)
+
+graphG<-ggplot(base, aes(x = activite, y = gainmarginal, colour = cas)) +
+  geom_point_interactive(aes(
+    tooltip = paste("Gain marginal :", gainmarginal, accuracy = 0)
+  ), size = 3) +  
+  geom_line(aes(group = cas), size = 1) +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 100)) +  
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.title = element_blank(),
+    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
+  )
+ 
+igraphG<-girafe(ggobj = graphG)
+igraphG
+
+base <- base  %>% 
+  mutate(
+    revenu=as.character(activite)
+  )
+
+
+graphG2<-ggplot() +
+  geom_col(data = base, aes(x = revenu, y = gainmarginal, fill = cas),
+           position = "dodge")+
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set2") +
+  scale_y_continuous(limits = c(0, 100)) 
+graphG2
+
+
+#afaire : augmenter l'espace entre les groupes d'histogrammes, trouver des couleurs...
+```
+
 Pour résumer, la lutte contre la pauvreté repose sur au moins trois objectifs, régulièrement réaffirmés par les pouvoirs publics :
 
 1\. Faire en sorte que le travail paie ;
