@@ -219,7 +219,7 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
    geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes(y=value, fill=name,tooltip=paste(name,round(value,0), "euros"))
+    aes(y=value, fill=name,tooltip=paste(name, ":", round(value,0),"euros"))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -329,7 +329,7 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
    geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes(y=value, fill=name,tooltip=paste(name,round(value,0), "euros"))
+    aes(y=value, fill=name,tooltip=paste(name,":",round(value,0), "euros"))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -452,7 +452,7 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
    geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes(y=value, fill=name,tooltip=paste(name,round(value,0), "euros"))
+    aes(y=value, fill=name,tooltip=paste(name,":", round(value,0), "euros"))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -483,7 +483,7 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     aes(
       x = typrev, y = round(value, 2), 
       colour = "Revenu disponible", 
-      tooltip=paste("Revenu disponible",round(value,0), "euros")), 
+      tooltip=paste("Revenu disponible :",round(value,0), "euros")), 
     size = 3
   ) +
   scale_color_manual(
@@ -571,7 +571,7 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
    geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes(y=value, fill=name,tooltip=paste(name,round(value,0), "euros"))
+    aes(y=value, fill=name,tooltip=paste(name,":",round(value,0), "euros"))
   ) +
   geom_hline(
     yintercept = seuilpm, 
@@ -602,7 +602,7 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     aes(
       x = typrev, y = round(value, 2), 
       colour = "Revenu disponible", 
-      tooltip=paste("Revenu disponible",round(value,0), "euros")), 
+      tooltip=paste("Revenu disponible :",round(value,0), "euros")), 
     size = 3
   ) +
   scale_color_manual(
@@ -684,7 +684,7 @@ basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint sans 
 
 graph4 <- ggplot(basegr, aes(x = casconj, y = TGM_100, colour = enf)) +
   geom_point_interactive(aes(
-    tooltip = paste("Taux effectif de gain à l'emploi:", number(TGM_100, accuracy = 1))
+    tooltip = paste(casconj, enf, "<br>Taux effectif de gain à l'emploi:", number(TGM_100, accuracy = 1), "%")
   ), size = 3) +  
   theme_minimal() +
   scale_y_continuous(limits = c(40, 100)) +  
@@ -1098,7 +1098,68 @@ Les revenus d'un couple monoactif dans lequel l'un des conjoints travaille au Sm
 
 Les couples biactifs avec deux emploi au Smic à temps-plein ont un revenu disponible avant prime d'activité supérieur au seuil de pauvreté et dépassent largement ce seuil avec la prime. Qu'ils recourent ou non à la prime d'activité, le système socio-fiscal ne compense que partiellement la charge des enfants telle qu'elle est appréhedée par les unités de consommation. Un couple biactif au Smic recourant à al prime d'activité a ainsi un niveau de vie équivalent à 153% du seuil de pauvreté s'il n'a pas d'enfant, 135% du seuil de pauvreté s'il en a un, 124% avec deux enfants et 117% avec trois (contre 142%, 119%, 108% et 110% respectivement s'il n'y recourt pas).
 
-**réfléchir aux stats à produire avec l'ERFS ou INes**
+```{r fig-pauv}
+#| label: fig-pauv
+#| fig-cap: taux de pauvreté selon la tranche de revenu salarial et la configuration familiale
+
+castypp<-read.xlsx(file="Sorties_Privation.xlsx",sheetName = "Sorties_Privation")
+
+base <- castypp %>%
+pivot_longer(cols = c(TX_PAUVRETE, TX_ISO_PAUVRETE, TX_COU_PAUVRETE), names_to = "cas", values_to = "taux") %>%
+  select(modalite, cas, taux) %>%
+  filter(modalite!="Ensemble")
+
+
+base <- base %>%
+  mutate(cas = fct_recode(cas,
+                              "Ensemble" = "TX_PAUVRETE",
+                              "Célibataire" = "TX_ISO_PAUVRETE", 
+                              "En couple"= "TX_COU_PAUVRETE" ),
+         taux=taux*100)
+
+base$modalite<-factor(base$modalite, levels=c("moins de 0,3 smic", "[0,3 à 0,6[", "[0,6 à 0,9[", "[0,9 à 1,2[", "[1,2 à 1,5[", "[1,5 à 1,8[", "1,8 smic et plus"))
+
+
+graphG <- ggplot() +
+  geom_col(data = base, aes(x = modalite, y = taux, fill = cas,
+                            text = paste("cas: ", cas, "<br>salaire:", modalite, "<br>taux de pauvreté: ", round(taux,1),"%"
+                                         )), 
+           position = position_dodge(width = 0.6),  # Position des barres
+           width = 0.4) +  # Largeur des barres
+  theme_minimal() +
+  scale_fill_brewer(palette = "Spectral") +
+  scale_y_continuous(limits = c(0, 51)) +
+  #scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
+  labs(#title = "",
+       x = "Revenu en tranche de smic",
+       y = "Taux de pauvreté") + 
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    axis.title.x = element_text(size = 8),  
+    axis.title.y = element_text(size = 8), 
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 6),
+    )+
+  guides(fill = guide_legend(nrow = 2))   
+
+graphG_interactif <- ggplotly(graphG, tooltip = "text")
+graphG_interactif <- graphG_interactif %>%
+  layout(
+     legend = list(
+      orientation = 'h',  
+      x = 0.5,  
+      xanchor = 'center',  
+      y = -0.3,
+      title = list(text = ""),
+      itemwidth=60,
+      traceorder='normal'
+    )
+  )
+
+graphG_interactif
+
+
+```
 
 # 3. Le revers des incitations est l'augmentation de l'intensité de la pauvreté des personnes sans emploi
 
@@ -1259,5 +1320,3 @@ Le débat sur les gains, les taux de prélèvements, les incitations ne concerne
 Tous les revenus sont déductibles à 100% du RSA et de la prime d'activité : un don de 100 euros, une chambre à louer, les revenus d'un peu d'épargne. Cette logique crée des situations impossibles pour les allocataires mêmes sincères s'ils reçoivent une aide familiale dans une situation d'urgence, une chaudière qui tombe en panne, un enfant malade, un évènement à l'autre bout de la France. Ils doivent déclarer cette aide qui sera entièrement déduite de l'allocation versée. La conséquence est qu'il y aura plus de fraudes détectées chez les personnes vulnérables, obligées de contourner une technocratie d'autant plus rigoureuse que cette rigueur est asymétrique entre les plus pauvres et les plus aisés. C'est d'autant plus problématique que la rigueur du calcul technocratique au moindre euro près s'applique à une prestation faible. La situation décrite ici est crée un phénomène de spirale de la pauvreté puisque la moindre aide à s'en sortir, le moindre effort d'épargne est annulé.
 
 Une solution serait de rendre le calcul de la prestation plus bienveillant en mettant en place un abattement sur l’ensemble des petits revenus (et non pas seulement les revenus du travail) : par exemple, les 600 premiers euros par trimestre (200 euros par mois) ne seraient pas pris en compte dans le calcul de la prestation, quelle que soit leur origine. Un autre avantage de cette solution est que le demandeur de l’allocation ayant des petits revenus n’aurait pas à détailler leur origine lors de la demande, il cocherait simplement la case « ressources inférieures à 600 euros ». Un tel système réduirait la peur de se tromper, la peur des indus à rembourser, et donc le non-recours. Les premiers revenus d’activité seraient gardés à 100 % par les travailleurs, ce qui répond aussi à la problématique des coûts fixes à la reprise d’emploi. Au-delà de l’abattement, le taux de cumul des revenus d’activité et de la prime d’activité pourrait être abaissé pour garder les gains à la reprise d’emploi à plein temps constants par rapport à la situation actuelle. Si l’objectif est que les allocataires des minima sociaux en sortent par le haut, il faut aussi éviter d’annuler le moindre coup de pouce ou coup de chance.
-
-**Simulation INES ?**
