@@ -166,7 +166,7 @@ Le cas-type général commenté dans le texte est celui d'un ménage éligible, 
 
 [^1]: On suppose que le ménage est locataire en zone 2 des aides au logement (ville moyenne) pour un loyer compris entre 1 et 2,5 fois le loyer plafond.
 
-Trois situations de reprise d'emploi sont analysées : le mi-temps au smic horaire (699 euros mensuels), le temps-plein au smic horaire (1399 euros mensuels) et le temps plein à 1,5 smic horaire (2098 euros mensuels). Pour les couples, ces reprises d'emploi sont analysées dans le cas d'un conjoint inactif sans revenu, d'un conjoint chômeur (avec un montant d'allocation chômage égal au smic mensuel) et d'un conjoint en emploi à temps-plein gagnant le smic ou 1,5 fois le smic. L'analyse n'est pas genrée, mais dans les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce que le partage des tâches reste très inégalitaire et parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi. L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différentes combinaisons de travail. Le salaire minimum constitue un plancher de rémunération horaire et non mensuel. Néanmoins, **85% des salariés** **(à vérifier)** ont un salaire supérieur au smic mensuel à temps plein et, pour ces salariés, les écarts de revenu disponible entre les personnes en emploi et les bénéficiaires du RSA sont plus élevés.
+Trois situations de reprise d'emploi sont analysées : le mi-temps au smic horaire (699 euros mensuels), le temps-plein au smic horaire (1399 euros mensuels) et le temps plein à 1,5 smic horaire (2098 euros mensuels). Pour les couples, ces reprises d'emploi sont analysées dans le cas d'un conjoint inactif sans revenu, d'un conjoint chômeur (avec un montant d'allocation chômage égal au smic mensuel) et d'un conjoint en emploi à temps-plein gagnant le smic ou 1,5 fois le smic. L'analyse n'est pas genrée, mais dans les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce que le partage des tâches reste très inégalitaire et parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi. L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différentes combinaisons de travail. Le salaire minimum constitue un plancher de rémunération horaire et non mensuel. Néanmoins, seuls environ 15% des salariés sont concernés par le Smic et pour les autres salariés les écarts de revenu disponible entre les personnes en emploi et les bénéficiaires du RSA sont plus élevés.
 
 ## 1.2 Des reprises d'emploi rémunératrices
 
@@ -875,7 +875,7 @@ graphG2_interactif
 
 ## 1.4 Que change la prise en compte des coûts de garde des jeunes enfants ?
 
-A commenter...
+Comme le montre le graphique suivant, le coût net de la garde est relativement modéré et représente 300 euros maximum, soit environ 10% du revenu disponible lorsque les deux conjoints sont au Smic à temps-plein. Néanmoins on peut également voir que le coût net de la garde augmente rapidement dans la configuration familiale étudiée entre le mi-temps et le temps-plein (il passe de 50 à 300 euros). Par conséquent, les incitations à passer du mi-temps au temps-plein deviennent faibles dans ces cas.
 
 ```{r fig_garde}
 #| label: fig-garde
@@ -1014,8 +1014,7 @@ graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
                "Salaire" = "Salaire" ,
                "Ract_conj"="Salaire conjoint"
     ),
-    # guide = guide_legend(reverse = TRUE)  
-  ) +
+     ) +
   geom_bar(
     position = "stack", 
     stat = "identity", 
@@ -1072,6 +1071,7 @@ graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
   # scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 500)) + 
   theme(panel.border = element_blank())
 
+
 graphC1_S
 
 
@@ -1080,7 +1080,7 @@ graphC1_S
 
 # 2. L'emploi ne protège pas toujours de la pauvreté monétaire.
 
-Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté monétaire. Ceci apparaît clairement sur cas types mais peut se voir également par l'existence d'une pauvreté monétaire en emploi, même pour des bénéficiaires de la prime d'activité[^3]. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté monétaire des personnes en emploi était de 7,8 % et de 15,2 %en se limitant aux personnes en emploi vivant dans un ménage allocataire de la prime d'activité. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE). **ajouter stats selon nombre d'emplois/quotité**
+Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté monétaire. Ceci apparaît clairement sur cas types mais peut se voir également par l'existence d'une pauvreté monétaire en emploi, même pour des bénéficiaires de la prime d'activité[^3]. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. Le taux de pauvreté monétaire des personnes en emploi était de 7,8 % et de 15,2 %en se limitant aux personnes en emploi vivant dans un ménage allocataire de la prime d'activité. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE).
 
 [^3]: Si la prime d'activité permet à certains foyers de franchir le seuil de pauvreté monétaire, l'analyse par cas types montre que certains foyers à bas salaire n'y sont pas éligibles. S'y ajoutent ceux qui ne recourent pas à cette prestation bien que leur niveau de vie soit inférieur au seuil de pauvreté monétaire.
 
@@ -1132,7 +1132,7 @@ graphG <- ggplot() +
   #scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
   labs(#title = "",
        x = "Revenu en tranche de smic",
-       y = "Taux de pauvreté") + 
+       y = "Taux de pauvreté monétaire") + 
   theme(
     legend.position = "bottom",
     legend.title = element_blank(),
@@ -1156,10 +1156,76 @@ graphG_interactif <- graphG_interactif %>%
     )
   )
 
+##########graph2############*
+
+base2 <- castypp %>%
+pivot_longer(cols = c(TX_PMS, TX_ISO_PMS, TX_COU_PMS), names_to = "cas", values_to = "taux") %>%
+  select(modalite, cas, taux) %>%
+  filter(modalite!="Ensemble")
+
+
+base2 <- base2 %>%
+  mutate(cas = fct_recode(cas,
+                              "Ensemble" = "TX_PMS",
+                              "Célibataire" = "TX_ISO_PMS", 
+                              "En couple"= "TX_COU_PMS" ),
+         taux=taux*100)
+
+base2$modalite<-factor(base2$modalite, levels=c("moins de 0,3 smic", "[0,3 à 0,6[", "[0,6 à 0,9[", "[0,9 à 1,2[", "[1,2 à 1,5[", "[1,5 à 1,8[", "1,8 smic et plus"))
+
+
+graphG2 <- ggplot() +
+  geom_col(data = base2, aes(x = modalite, y = taux, fill = cas,
+                            text = paste("cas: ", cas, "<br>salaire:", modalite, "<br>taux de pauvreté: ", round(taux,1),"%"
+                                         )), 
+           position = position_dodge(width = 0.6),  # Position des barres
+           width = 0.4) +  # Largeur des barres
+  theme_minimal() +
+  scale_fill_brewer(palette = "Spectral") +
+  scale_y_continuous(limits = c(0, 51)) +
+  #scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
+  labs(#title = "",
+       x = "Revenu en tranche de smic",
+       y = "Taux de pauvreté en privation") + 
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    axis.title.x = element_text(size = 8),  
+    axis.title.y = element_text(size = 8), 
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 6),
+    )+
+  guides(fill = guide_legend(nrow = 2))   
+
+graphG_interactif2 <- ggplotly(graphG2, tooltip = "text")
+graphG_interactif2 <- graphG_interactif2 %>%
+  layout(
+     legend = list(
+      orientation = 'h',  
+      x = 0.5,  
+      xanchor = 'center',  
+      y = -0.3,
+      title = list(text = ""),
+      itemwidth=60,
+      traceorder='normal'
+    )
+  )
+
 graphG_interactif
+graphG_interactif2
+
+
+
+
+
 
 
 ```
+
+Les graphiques représentent les taux de pauvreté monétaire (haut) et en privation (bas) des individus selon leur revenu salarial mensuel (en tranche de Smic) et leur situation conjugale (en couple ou célibataire). Le taux de pauvreté monétaire baisse nettement lorsque les revenus salariaux augmentent. Cette baisse de la pauvreté est liée directement à l'augmentation des salaires (qui rentrent directement dans le niveau de vie, mais aussi à des caractéristiques plus favorables.
+
+Le taux de pauvreté en privation baisse également lorsque le salaire augmente, mais la baisse est plus franche à des niveaux plus élevés : au Smic puis au-dessus du Smic. Cela suggère qu'il existe un coût à travailler de faibles nombre d'heures et que ce coût compense la hausse du salaire net et du revenu disponible. Ce coût peut être lié au transport ou à la garde d'enfants. Aussi, puisque la réponse à la question des privations est déclarative, on peut imaginer un coût psychologique à l'emploi précaire.
+
+Si l'hypothèse du coût pour les emplois à temps-partiel est juste, il existe deux réponses possibles en termes de politiques publiques : inciter monétairement les individus pour qu'ils acceptent ces emplois ; favoriser une norme de plein-emploi. Avant d'exposer nos recommendations en partie 4, on peut noter qu'inciter au temps-partiel ou très-partiel, que ce soit côté entreprises ou côtés individus, est potentiellement coûteux socialement en présence de coûts fixes à l'emploi (par exemple sous la forme de transports). Cette politique peut par exemple inciter un individu à accepter un travail à temps très partiel et éloigné de chez lui. Or, ce type d'emploi ne sert pas toujours de marchepied et peut réduire les efforts de recherche et la probabilité d'obtenir un emploi de meilleure qualité (voir par exemple, Autor et Houseman, 2006).
 
 # 3. Le revers des incitations est l'augmentation de l'intensité de la pauvreté des personnes sans emploi
 
@@ -1261,15 +1327,15 @@ Dans le système actuel, il est possible de concilier les trois objectifs - tr
 
 Le RSA et le socle de la prime d'activité pourraient être revalorisés de telle sorte qu'un foyer sans emploi atteigne 50 % du niveau de vie médian, soit 1 090 euros pour une personne isolée sans enfant, et 2 290 euros pour un couple avec deux enfants.
 
-Avec les aides au logement actuelles, pour la personne seule vivant en zone 2 (villes de plus de 100 000 habitants), cela amènerait le montant du RSA à 798 euros avant forfait logement **(et xx€ après)**.
+Avec les aides au logement actuelles, pour la personne seule vivant en zone 2 (villes de plus de 100 000 habitants), cela amènerait le montant du RSA à 798 euros avant forfait logement.
 
-En réduisant assez peu les taux effectifs de gain à l'emploi, par alignement du socle de la prime d'activité sur le RSA, cette revalorisation permettrait aux couples avec deux enfants de franchir le seuil de pauvreté monétaire avec un seul emploi au Smic à temps plein. **Graphique illustratif**
+En réduisant assez peu les taux effectifs de gain à l'emploi, par alignement du socle de la prime d'activité sur le RSA, cette revalorisation permettrait aux couples avec deux enfants de franchir le seuil de pauvreté monétaire avec un seul emploi au Smic à temps plein.
 
 Dans le système actuel, le travail est plus rémunérateur que l'assistance car la prime d'activité compense le faible niveau du Smic horaire et la prévalence des emplois rémunérés en dessous du smic mensuel. Si les personnes en emploi restent pauvres malgré les allocations et les incitations... c'est qu'ils partent de trop bas.
 
 Plusieurs questions voire problèmes se posent par rapport à cette solution.
 
-Relever le socle est la façon la plus directe de réduire la pauvreté, celle qui permet d'atteindre les trois objectifs à la fois de manière cohérente. Mais c'est aussi la plus coûteuse. Le dilemme entre redistribution et incitation est un trilemme (redistribution/incitation/coût budgétaire). Une solution permettant de réduire le coût est de réduire le taux de cumul entre prestation d'assistance et revenus du travail (= réduire le taux de cumul de la prime d'activité), de sorte que les bénéfices de la hausse soient ciblés sur les plus pauvres. Les dépenses en allocation sont de **12 milliards** (2020 donner chiffre plus récent), augmenter le socle de 25% a un coût budgétaire a minima de 3 milliards, même en baissant le taux de cumul. **Faire une variante INES avec un taux de cumul à 50% ?**
+Relever le socle est la façon la plus directe de réduire la pauvreté, celle qui permet d'atteindre les trois objectifs à la fois de manière cohérente. Mais c'est aussi la plus coûteuse. Le dilemme entre redistribution et incitation est un trilemme (redistribution/incitation/coût budgétaire). Une solution permettant de réduire le coût est de réduire le taux de cumul entre prestation d'assistance et revenus du travail (= réduire le taux de cumul de la prime d'activité), de sorte que les bénéfices de la hausse soient ciblés sur les plus pauvres.
 
 Si la réforme consiste à relever le socle, la question du niveau du socle selon la configuration familiale se pose. Le barème du RSA avant forfait logement assure un même niveau de vie des bénéficiaires selon la configuration familiale puisque le socle est 1,5 fois supérieur pour un couple qu'une personne seule, plus 0,3 par enfant. S'ajoutent toutefois au RSA les prestations familiales et logement et le forfait logement est déduit du socle de sorte que l'addition de ces prestations n'est pas tout à fait cohérente avec les niveaux de vie (voir fig-ndvminimum). Une solution serait de fusionner ces prestations (ou de les articuler finement) de telle sorte à assurer un niveau de vie égal selon la configuration familiale. C'est ce qu'a fait le Royaume-Uni avec la réforme du Universal Credit. Il faudrait également supprimer le système de déduction forfaitaire d'un forfait logement. L'avantage de cette solution serait de discuter directement d'un niveau de vie garanti et donc de l'objectif de garantie de couverture des besoins essentiels, alors qu'aujourd'hui le niveau de vie des familles les plus pauvres dépend de prestations discutées séparément (avec leurs règles et justification propres). Un autre avantage serait de mieux maintriser les gains à l'emploi selon les configurations familiales : en fusionnant les prestations - prime d'activité comprise - le taux de gain à l'emploi est déterminé directement. A la fois le niveau de vie minimum et le taux de gain à l'emploi deviennent des paramètres affichés de la prestation.
 
@@ -1293,9 +1359,7 @@ A l'origine des prestations familiales, les sursalaires familiaux répondaient �
 
 Si l'on donne un poids à l'objectif de réduction de la pauvreté laborieuse, au-delà de celui que l'on donne à l'objectif de réduction de la pauvreté, alors il est préférable que certains pauvres ne travaillent pas (puisque le fait qu'ils travaillent augmentent la pauvreté laborieuse). Si l'on préfère toujours que les pauvres travaillent plus alors le vrai objectif n'est pas la réduction de la pauvreté laborieuse. Dans un tel contexte l'incitation à l'emploi sert avant tout à réduire le coût public de la pauvreté. Dans une logique libérale, si le fait d'être en emploi est bon pour les bénéficiaires des allocations, il n'y a pas de raison qu'il ne le reconnaisse pas et acceptent ces emplois : lorsqu'il n'y avait pas de gain monétaire à cumuler RMI et faibles heures de travail, de nombreux allocataires le faisaient tout de même (**ref**).
 
-S'il y a 2 objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, et puisque l'objectif principal des instruments est la lutte contre les inégalités, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).
-
-**parler de l'instabilité et de l'avantage qu'avait la PPE : presta sur base fiscale sans risque d'indus (sauf fraude et ceux qui demandaient la mensualisation)**
+S'il y a deux objectifs distincts, alors selon le principe de Tinbergen, il faut affecter prioritairement à des instruments distincts la poursuite de ces objectifs. D'une part, le RSA et une prime d'activité entièrement familialisée doivent poursuivre l'objectif de lutte contre la pauvreté et les inégalités de niveau de vie. Dans cette architecture, et puisque l'objectif principal des instruments est la lutte contre les inégalités, il faudrait réfléchir à étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). D'autre part, le Smic doit être l'instrument monétaire privilégié de soutien aux bas-salaires. Mais si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises reposent sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs (voir Devetter, Pucci et Valentin 2020 et la section suivante).
 
 ## 4.3 Le temps partiel : marche-pied ou hors-norme ?
 
