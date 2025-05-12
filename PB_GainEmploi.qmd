@@ -20,7 +20,7 @@ date-modified: today
 lang: fr
 
 format: 
-  html:
+  pdf:
     fig-cap-location: top
 editor: visual
 ---
@@ -57,6 +57,7 @@ library(sf)
 library(RColorBrewer)
 library(viridis)
 library(ggsci)
+library(quarto)
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
 
@@ -137,9 +138,15 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
   )
 
-
 igraph5<-girafe(ggobj = graph5)
-igraph5
+
+if (is_html_output()) {
+  print(igraph5)
+} else {
+  print(graph5)
+}
+
+
 ```
 
 Pour résumer, la lutte contre la pauvreté repose sur au moins trois objectifs, régulièrement réaffirmés par les pouvoirs publics :
@@ -272,7 +279,12 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
   theme(panel.border = element_blank())
 
 igraph <- girafe(ggobj = graph)
-igraph
+
+if (is_html_output()) {
+  print(igraph)
+} else {
+  print(graph)
+}
 
 
 
@@ -385,7 +397,12 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   theme(panel.border = element_blank())
 
 igraph2 <- girafe(ggobj = graph2)
-igraph2
+
+if (is_html_output()) {
+  print(igraph2)
+} else {
+  print(graph2)
+}
 
 
 
@@ -509,7 +526,13 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
 
 
 igraph3 <- girafe(ggobj = graph3)
-igraph3
+
+if (is_html_output()) {
+  print(igraph3)
+} else {
+  print(graph3)
+}
+
 
 ```
 
@@ -628,7 +651,13 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
 
 
 igraph3b <- girafe(ggobj = graph3b)
-igraph3b
+
+if (is_html_output()) {
+  print(igraph3b)
+} else {
+  print(graph3b)
+}
+
 
 
 ```
@@ -698,7 +727,13 @@ graph4 <- ggplot(basegr, aes(x = casconj, y = TGM_100, colour = enf)) +
   )
 
 igraph4<-girafe(ggobj = graph4)
-igraph4
+
+if (is_html_output()) {
+  print(igraph4)
+} else {
+  print(graph4)
+}
+
 
 
 
@@ -762,7 +797,7 @@ graph4b <- ggplot(basegr, aes(x = casconj, y = TGM_50, colour = enf)) +
     tooltip = paste("Taux effectif de gain à l'emploi:", number(TGM_50, accuracy = 1))
   ), size = 3) +  
   theme_minimal() +
-  scale_y_continuous(limits = c(40, 100)) +  
+  scale_y_continuous(limits = c(30, 100)) +  
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
@@ -773,7 +808,13 @@ graph4b <- ggplot(basegr, aes(x = casconj, y = TGM_50, colour = enf)) +
   )
 
 igraph4b<-girafe(ggobj = graph4b)
-igraph4b
+
+if (is_html_output()) {
+  print(igraph4b)
+} else {
+  print(graph4b)
+}
+
 
 
 
@@ -867,7 +908,13 @@ graphG2_interactif <- graphG2_interactif %>%
     )
   )
 
-graphG2_interactif
+
+if (is_html_output()) {
+  print(graphG2_interactif)
+} else {
+  print(graphG2)
+}
+
 
 
 
@@ -1210,10 +1257,18 @@ graphG_interactif2 <- graphG_interactif2 %>%
     )
   )
 
-graphG_interactif
-graphG_interactif2
 
+if (is_html_output()) {
+  print(graphG_interactif)
+} else {
+  print(graphG)
+}
 
+if (is_html_output()) {
+  print(graphG_interactif2)
+} else {
+  print(graphG2)
+}
 
 
 
@@ -1311,7 +1366,12 @@ graph4 <- Bareme_long %>%
     )
 
 igraph4 <- girafe(ggobj = graph4)
-igraph4
+
+if (is_html_output()) {
+  print(igraph4)
+} else {
+  print(graph4)
+}
 
 
 
