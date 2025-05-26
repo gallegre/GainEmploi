@@ -12,11 +12,11 @@ format:
 ofce::init_qmd()
 ```
 
-## Pourquoi cette question ?
+## Pourquoi cette question aujourd'hui ?
 
 Une commande d'Alternatives Economiques : <https://www.alternatives-economiques.fr/non-on-ne-gagne-plus-allocations-quen-travaillant/00112653>
 
-Une question récurente. L'idée que "le travail ne paie plus" est devenu une tarte à la crème pour politiques et essayistes.
+Une question récurrente. L'idée que "le travail ne paie plus" est devenu une tarte à la crème pour politiques et essayistes, à l'origine de la création du RSA.
 
 ![](images/6075-Foucher-Sortir-du-travail-qui-ne-paie-plus-ep4-scaled.webp){width="202"}
 

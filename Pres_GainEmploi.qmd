@@ -1,0 +1,36 @@
+---
+title: "La reprise d'emploi est-elle toujours rémunératrice?"
+subtitle: "Séminaire IRES-OFCE"
+author-footer: OFCE
+date: 2025-06-13
+format: 
+  pres-revealjs:
+    toc-depth: 1
+    embed-resources: true
+---
+
+```{r, include=FALSE}
+ofce::init_qmd()
+```
+
+# Propos introductif
+
+## Pourquoi cette question aujourd'hui ?  {.smaller}
+
+La réponse à une commande d'alternatives économiques :
+
+Une question récurrente à l'origine du RSA.
+
+## Les objectifs de la stratégie nationale de prévention et de lutte contre la pauvreté (SNPLP)
+
+-   Faire en sorte que le travail paye et de la même façon dans tous les cas
+
+-   Faire en sorte que le travaille permette d'échapper à la pauvreté
+
+-   Garantir un soutien financier aux ménages modestes
+
+    en lien avec le préambule de la constitution : "[Tout être humain qui, en raison de son âge, de son état physique ou mental, de la situation économique, se trouve dans l'incapacité de travailler a le droit d'obtenir de la collectivité des moyens convenables d'existence]{style="color : red"}"
+
+# 1. La reprise d'emploi est toujours rémunératrice mais de façon hétérogène
+
+## Des reprises d'emploi rémunératrices  {.smaller}
