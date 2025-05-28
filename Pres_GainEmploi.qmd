@@ -1,7 +1,7 @@
 ---
 title: "La reprise d'emploi est-elle toujours rémunératrice?"
 subtitle: "Séminaire IRES-OFCE"
-author-footer: OFCE
+author-footer: Allegre-Pucci
 date: 2025-06-13
 format: 
   pres-revealjs:
@@ -15,11 +15,21 @@ ofce::init_qmd()
 
 # Propos introductif
 
-## Pourquoi cette question aujourd'hui ?  {.smaller}
+## Pourquoi cette question aujourd'hui ? {.smaller}
 
 La réponse à une commande d'alternatives économiques :
 
-Une question récurrente à l'origine du RSA.
+![tribune alter éco](Images/AE_Allegre_Pucci.png){width="700"}
+
+<https://www.alternatives-economiques.fr/non-on-ne-gagne-plus-allocations-quen-travaillant/00112653>
+
+## Une question récurrente
+
+Rapport Hirsch (2005) :
+
+![](Images/Rapport Hirsch.png)
+
+![](Images/Godino_ACR.png)
 
 ## Les objectifs de la stratégie nationale de prévention et de lutte contre la pauvreté (SNPLP)
 
@@ -33,4 +43,4 @@ Une question récurrente à l'origine du RSA.
 
 # 1. La reprise d'emploi est toujours rémunératrice mais de façon hétérogène
 
-## Des reprises d'emploi rémunératrices  {.smaller}
+## Des reprises d'emploi rémunératrices {.smaller}
