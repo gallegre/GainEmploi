@@ -27,9 +27,11 @@ La réponse à une commande d'alternatives économiques :
 
 Rapport Hirsch (2005) :
 
-![](Images/Rapport Hirsch.png)
+![](Images/Rapport Hirsch.png){fig-align="center" width="500"}
 
-![](Images/Godino_ACR.png)
+Proposition d'ACR (Pour une réforme du RMI, 1999) :
+
+![](Images/Godino_ACR.png){fig-align="center" width="500"}
 
 ## Les objectifs de la stratégie nationale de prévention et de lutte contre la pauvreté (SNPLP)
 
