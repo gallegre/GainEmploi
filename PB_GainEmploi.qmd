@@ -189,11 +189,6 @@ base<-castyp %>%
 basegr<-base %>% 
   pivot_longer(cols=c(Salaire,PF,PL,RSA,PA, RDISP)) 
 
-basegr<-basegr %>%
-  mutate(
-  seuil60=1309
-  )
-
 seuilpm=1309
 
 
@@ -218,37 +213,25 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
     stat = "identity", 
     aes(y=value, fill=name,tooltip=paste(name, ":", round(value,0),"euros"))
   ) +
-  geom_hline(
-    yintercept = seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = seuilpm + 125, label = "Seuil de pauvreté (à 60%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
-  geom_hline(
-    yintercept = (4/6)*seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = (4/6)*seuilpm + 125, label = "Seuil de grande \npauvreté (40%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
-  geom_point_interactive(
+    geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
     aes(
       x = typrev, y = round(value, 2), 
       colour = "Revenu disponible", 
       tooltip=paste("Revenu disponible",round(value,0), "euros")), 
     size = 3
+  ) +
+    geom_hline(
+  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
+              color = "grey40",linewidth = 0.5)+
+    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
+    color = "grey40",linewidth = 0.5)+
+  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
+                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
+    guides(
+    fill = guide_legend(order = 1),  # La légende des couleurs en premier
+    colour=guide_legend(order = 2),
+    linetype = guide_legend(order = 3) # La légende des lignes en dernier
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -333,30 +316,6 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     stat = "identity", 
     aes(y=value, fill=name,tooltip=paste(name,":",round(value,0), "euros"))
   ) +
-  geom_hline(
-    yintercept = seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = seuilpm + 100, label = "Seuil de pauvreté (à 60%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
-  geom_hline(
-    yintercept = (4 / 6) * seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = (4 / 6) * seuilpm + 200, label = "Seuil de grande \npauvreté (40%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
   geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
     aes(
@@ -367,6 +326,18 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   ) +
   scale_color_manual(
     values = c("Revenu disponible" = "orange")  
+  ) +
+      geom_hline(
+  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
+              color = "grey40",linewidth = 0.5)+
+    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
+    color = "grey40",linewidth = 0.5)+
+  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
+                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
+    guides(
+    fill = guide_legend(order = 1),  # La légende des couleurs en premier
+    colour=guide_legend(order = 2),
+    linetype = guide_legend(order = 3) # La légende des lignes en dernier
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -463,30 +434,6 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     stat = "identity", 
     aes(y=value, fill=name,tooltip=paste(name,":", round(value,0), "euros"))
   ) +
-  geom_hline(
-    yintercept = seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = seuilpm + 250, label = "Seuil de pauvreté (à 60%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
-  geom_hline(
-    yintercept = (4 / 6) * seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = (4 / 6) * seuilpm + 270, label = "Seuil de grande \npauvreté (40%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
   geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
     aes(
@@ -497,6 +444,18 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   ) +
   scale_color_manual(
     values = c("Revenu disponible" = "orange")  
+  ) +
+      geom_hline(
+  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
+              color = "grey40",linewidth = 0.5)+
+    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
+    color = "grey40",linewidth = 0.5)+
+  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
+                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
+    guides(
+    fill = guide_legend(order = 1),  # La légende des couleurs en premier
+    colour=guide_legend(order = 2),
+    linetype = guide_legend(order = 3) # La légende des lignes en dernier
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -588,30 +547,6 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     stat = "identity", 
     aes(y=value, fill=name,tooltip=paste(name,":",round(value,0), "euros"))
   ) +
-  geom_hline(
-    yintercept = seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = seuilpm + 210, label = "Seuil de pauvreté (à 60%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
-  geom_hline(
-    yintercept = (4 / 6) * seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = (4 / 6) * seuilpm + 390, label = "Seuil de grande \npauvreté (40%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
   geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP'), 
     aes(
@@ -622,6 +557,18 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   ) +
   scale_color_manual(
     values = c("Revenu disponible" = "orange")  
+  ) +
+      geom_hline(
+  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
+              color = "grey40",linewidth = 0.5)+
+    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
+    color = "grey40",linewidth = 0.5)+
+  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
+                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
+    guides(
+    fill = guide_legend(order = 1),  # La légende des couleurs en premier
+    colour=guide_legend(order = 2),
+    linetype = guide_legend(order = 3) # La légende des lignes en dernier
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -965,30 +912,6 @@ graphI1 <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
     stat = "identity", 
     aes()
   ) +
-  geom_hline(
-    yintercept = seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = seuilpm + 200, label = "Seuil de pauvreté (à 60%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
-  geom_hline(
-    yintercept = (4/6)*seuilpm, 
-    linetype = "dashed", 
-    color = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = (4/6)*seuilpm + 300, label = "Seuil de grande \npauvreté (40%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey40"
-  ) +
   geom_point(
     data = basegr %>% filter(name == 'RDISP_NET_CG'), 
     aes(
@@ -996,6 +919,18 @@ graphI1 <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
       colour = "Revenu disponible net du coût de la garde", 
     ), 
     size = 3
+  ) +
+      geom_hline(
+  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
+              color = "grey40",linewidth = 0.5)+
+    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
+    color = "grey40",linewidth = 0.5)+
+  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
+                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
+    guides(
+    fill = guide_legend(order = 1),  # La légende des couleurs en premier
+    colour=guide_legend(order = 2),
+    linetype = guide_legend(order = 3) # La légende des lignes en dernier
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -1059,30 +994,6 @@ graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
     stat = "identity", 
     aes()
   ) +
-  geom_hline(
-    yintercept = seuilpm, 
-    linetype = "dashed", 
-    color = "grey20", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = seuilpm + 150, label = "Seuil de pauvreté (à 60%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey20"
-  ) +
-  geom_hline(
-    yintercept = (4/6)*seuilpm, 
-    linetype = "dashed", 
-    color = "grey20", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = (4/6)*seuilpm + 300, label = "Seuil de grande \n pauvreté (40%)"),
-    size = 3, 
-    hjust = 0, # Left-justified
-    colour = "grey20"
-  ) +
   geom_point(
     data = basegr %>% filter(name == 'RDISP_NET_CG'), 
     aes(
@@ -1090,6 +1001,18 @@ graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
       colour = "Revenu disponible net \n du coût de la garde", 
     ), 
     size = 3
+  ) +
+      geom_hline(
+  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
+              color = "grey40",linewidth = 0.5)+
+    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
+    color = "grey40",linewidth = 0.5)+
+  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
+                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
+    guides(
+    fill = guide_legend(order = 1),  # La légende des couleurs en premier
+    colour=guide_legend(order = 2),
+    linetype = guide_legend(order = 3) # La légende des lignes en dernier
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -1318,28 +1241,17 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
   scale_fill_economist() +  
   theme_minimal() +
   scale_y_continuous(limits = c(0, 1500)) +  
-  geom_hline(
-    yintercept = seuil60,
-    linetype = "dashed", 
-    colour = "grey40", 
-    linewidth = 1
+    geom_hline(
+  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
+              color = "grey40",linewidth = 0.5)+
+    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
+    color = "grey40",linewidth = 0.5)+
+  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
+                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
+    guides(
+    fill = guide_legend(order = 1),  # La légende des couleurs en premier
+    linetype = guide_legend(order = 2) # La légende des lignes en dernier
   ) +
-  geom_text(
-    aes(x = 0.5, y = seuil60 + 50, label = "Seuil de pauvreté (à 60%)"),
-    size = 3, 
-    hjust = 0, 
-    colour = "grey40") +
-  geom_hline(
-    yintercept = seuil40,
-    linetype = "dashed", 
-    colour = "grey40", 
-    linewidth = 1
-  ) +
-  geom_text(
-    aes(x = 0.5, y = seuil40 + 50, label = "Seuil de pauvreté (à 40%)"),
-    size = 3, 
-    hjust = 0, 
-    colour = "grey40") +
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
@@ -1500,11 +1412,11 @@ Avec le système actuel, les pouvoirs publics poursuivent deux objectifs : lutt
 
 Selon le principe de Tinbergen, lorsqu’il y a deux objectifs distincts, ici la lutte contre la pauvreté et les gains à l’emploi, il faut affecter à des instruments distincts la poursuite de ces objectifs. Dans cette optique, on pourrait considérer que le RSA et une prime d’activité entièrement familialisée (sans bonus individuels) permettent de lutter contre la pauvreté et les inégalités de niveau de vie mais n’ont pas pour objectif d’augmenter les gains l’emploi. Dans ce cas, il faudrait étendre le bénéfice de la prime d’activité aux chômeurs (les travailleurs sans emploi). Pour ce qui est de l’objectif de soutien aux bas salaires, le Smic, associé à la norme du temps plein, doit être l’instrument monétaire privilégié. Si l’objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises puissent se reposer sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs.
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Encadré : simulation de deux réformes : quelques ordres de grandeur**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Nous simulons deux réformes illustratives pour donner des ordres de grandeur concernant le coût de ce types de réformes ainsi que la répartition des foyers gagnants ou perdants. Pour cela, nous utilisons le modèle de microsimulation sociale et fiscale INES développé par l’INSEE, la DREES et la CNAF. La version utilisée d’INES simule la législation 2022 sur les données de l’Enquête Revenus fiscaux et sociaux (ERFS) 2020 actualisées à l’aide des dernières données démographiques et économiques disponibles. Nos simulations font l’hypothèse d’un taux de non-recours inchangé (en masse financière)[^6]. Les deux réformes simulées s’appuient sur les points évoqués dans la section précédentes. La première réforme consiste simplement à augmenter le socle du RSA et à baisser le taux de cumul de la prime d’activité. Cela répond directement au point 4.1. Une telle réforme serait moins favorable aux incitations à temps-partiel (les travailleurs à temps-partiel ne seraient pas perdants mais l’écart avec les revenus d’assistance seraient réduits). Cette réforme est justifiée si on prend au sérieux la lutte contre la grande pauvreté, si on souhaite verser un revenu minimum un peu plus décent, et/ou si l’on considère que les incitations ne jouent pas ou peu à ce niveau-là, les obstacles à la reprise d’emploi étant autres que les faibles gains. Le problème de cette réforme est son coût. Fixer le socle à 900 euros par mois pour une personne seule, permettant d’atteindre le seuil de pauvreté à 50%, compensé par une baisse du cumul de la prime d’activité de 61 à 45% (qui laisserait le point de sortie de la prime d’activité constant pour une personne seule) coûterait jusqu’à 30 milliards d’euros en plein recours et 24 milliards d’euros à taux de recours inchangé. Par construction, une telle réforme ne ferait presque pas de perdants : presque tous les bénéficiaires du RSA et de la prime d’activité actuels seraient gagnants mais il n’y aurait pas de gagnants au-delà. D’ailleurs le coût en termes de prime d’activité (13 milliards à recours inchangé) serait supérieur à celui du RSA (11 milliards). Par construction les plus gros gains sont concentrés sur le premier décile (avec une variation moyenne de revenu de 260 euros mensuels) puis sont très fortement dégressifs (170 euros pour les foyers du 2ème décile des niveaux de vie, et 60 € pour un niveau de vie médian). La deuxième réforme consiste à changer le mécanisme de cumul. Afin de permettre aux foyers allocataires de bénéficier de coups de pouces et de simplifier les déclarations, nous permettons un cumul à 100% jusqu’à 150 euros par mois (en pratique 450 € par trimestre) de l’ensemble des revenus hors prestations familiales et sociales (salaires, revenus de remplacement - chômage, retraites, dons, revenus du patrimoine financier et foncier). Le mécanisme se rapprocherait des mécanismes d’*earnings disregards,* relativement communs dans les pays anglo-saxons. L’abattement de revenus peut être justifié par des coûts fixes de reprise d’emploi ou pour minimiser les démarches administratives pour des revenus très faibles. En gardant la même pente de prime d’activité, le coût pour les finances publiques serait de 2,2 milliards en plein recours et 1,8 milliard à taux de non-recours inchangé. Pour atteindre la neutralité budgétaire, il conviendrait de réduire le taux de cumul de la prime d’activité de 61 à 58,5%. Cette réforme ferait quelques gagnants en bas de l’échelle des revenus (9% des ménages sont gagnants) et des perdants au-delà (16% de ménages perdants). Selon notre microsimulation, les gagnants se situeraient surtout dans le 1er décile (gain moyen de 19 euros mensuels sur l’ensemble des ménages du 1er décile), tandis que les perdants se situent dans le 4ème décile (perte de 8 euros mensuels).  |
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Encadré : simulation de deux réformes : quelques ordres de grandeur**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Nous simulons deux réformes illustratives pour donner des ordres de grandeur concernant le coût de ce types de réformes ainsi que la répartition des foyers gagnants ou perdants. Pour cela, nous utilisons le modèle de microsimulation sociale et fiscale INES développé par l’INSEE, la DREES et la CNAF. La version utilisée d’INES simule la législation 2022 sur les données de l’Enquête Revenus fiscaux et sociaux (ERFS) 2020 actualisées à l’aide des dernières données démographiques et économiques disponibles. Nos simulations font l’hypothèse d’un taux de non-recours inchangé (en masse financière)[^6]. Les deux réformes simulées s’appuient sur les points évoqués dans la section précédentes. La première réforme consiste simplement à augmenter le socle du RSA et à baisser le taux de cumul de la prime d’activité. Cela répond directement au point 4.1. Une telle réforme serait moins favorable aux incitations à temps-partiel (les travailleurs à temps-partiel ne seraient pas perdants mais l’écart avec les revenus d’assistance seraient réduits). Cette réforme est justifiée si on prend au sérieux la lutte contre la grande pauvreté, si on souhaite verser un revenu minimum un peu plus décent, et/ou si l’on considère que les incitations ne jouent pas ou peu à ce niveau-là, les obstacles à la reprise d’emploi étant autres que les faibles gains. Le problème de cette réforme est son coût. Fixer le socle à 900 euros par mois pour une personne seule, permettant d’atteindre le seuil de pauvreté à 50%, compensé par une baisse du cumul de la prime d’activité de 61 à 45% (qui laisserait le point de sortie de la prime d’activité constant pour une personne seule) coûterait jusqu’à 30 milliards d’euros en plein recours et 24 milliards d’euros à taux de recours inchangé. Par construction, une telle réforme ne ferait presque pas de perdants : presque tous les bénéficiaires du RSA et de la prime d’activité actuels seraient gagnants mais il n’y aurait pas de gagnants au-delà. D’ailleurs le coût en termes de prime d’activité (13 milliards à recours inchangé) serait supérieur à celui du RSA (11 milliards). Par construction les plus gros gains sont concentrés sur le premier décile (avec une variation moyenne de revenu de 260 euros mensuels) puis sont très fortement dégressifs (170 euros pour les foyers du 2ème décile des niveaux de vie, et 60 € pour un niveau de vie médian). La deuxième réforme consiste à changer le mécanisme de cumul. Afin de permettre aux foyers allocataires de bénéficier de coups de pouces et de simplifier les déclarations, nous permettons un cumul à 100% jusqu’à 150 euros par mois (en pratique 450 € par trimestre) de l’ensemble des revenus hors prestations familiales et sociales (salaires, revenus de remplacement - chômage, retraites, dons, revenus du patrimoine financier et foncier). Le mécanisme se rapprocherait des mécanismes d’*earnings disregards,* relativement communs dans les pays anglo-saxons. L’abattement de revenus peut être justifié par des coûts fixes de reprise d’emploi ou pour minimiser les démarches administratives pour des revenus très faibles. En gardant la même pente de prime d’activité, le coût pour les finances publiques serait de 2,2 milliards en plein recours et 1,8 milliard à taux de non-recours inchangé. Pour atteindre la neutralité budgétaire, il conviendrait de réduire le taux de cumul de la prime d’activité de 61 à 58,5%. Cette réforme ferait quelques gagnants en bas de l’échelle des revenus (9% des ménages sont gagnants) et des perdants au-delà (16% de ménages perdants). Selon notre microsimulation, les gagnants se situeraient surtout dans le 1er décile (gain moyen de 19 euros mensuels sur l’ensemble des ménages du 1er décile), tandis que les perdants se situent dans le 4ème décile (perte de 8 euros mensuels). |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 [^6]: Dès l’instauration du RMI, un mécanisme d’intéressement a été mis en place, permettant le cumul temporaire des revenus d’assistance et des revenus du travail. Cet “intéressement” devait servir de marchepied vers l’emploi stable à plein-temps. Comme l’insertion professionnelle des bénéficiaires du RMI était jugée insatisfaisante, ce mécanisme fut réformé presque constamment. Entre 1989 et 1999, la prime d’intéressement était proportionnelle au salaire perçu lors des 750 premières heures d’emploi. Ensuite jusqu’en 2006, la prime était proportionnelle lors des 15 premiers mois de reprise. Puis jusqu’en 2009, la prime était forfaitaire pendant 9 mois, après 3 mois de cumul intégral.
 
