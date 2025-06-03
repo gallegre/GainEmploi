@@ -20,9 +20,8 @@ date-modified: today
 lang: fr
 
 format: 
-  pdf:
+  html :
     fig-cap-location: top
-    fig-prefix: Graphique
 editor: visual
 ---
 
@@ -121,7 +120,7 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
 igraph5<-girafe(ggobj = graph5)
 
 if (is_html_output()) {
-  print(igraph5)
+  igraph5
 } else {
   print(graph5)
 }
@@ -254,7 +253,7 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
 igraph <- girafe(ggobj = graph)
 
 if (is_html_output()) {
-  print(igraph)
+  igraph
 } else {
   print(graph)
 }
@@ -360,7 +359,7 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
 igraph2 <- girafe(ggobj = graph2)
 
 if (is_html_output()) {
-  print(igraph2)
+  igraph2
 } else {
   print(graph2)
 }
@@ -479,7 +478,7 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
 igraph3 <- girafe(ggobj = graph3)
 
 if (is_html_output()) {
-  print(igraph3)
+  igraph3
 } else {
   print(graph3)
 }
@@ -525,6 +524,10 @@ basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Ract_conj", "S
 basegr1 <- basegr1  %>% mutate(name = recode(name, "Ract_conj" = "ARE conjoint"))
 
 # cas couple avec conjoint au smic #
+
+graph3b <- ggplot()+
+  geom_bar(data = basegr1, aes(fill = name, y = value, x = typrev, text = paste("Revenu disponible :",round(value,0), "euros")), size = 3 +
+  
 
 graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
   scale_fill_manual(
@@ -592,7 +595,7 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
 igraph3b <- girafe(ggobj = graph3b)
 
 if (is_html_output()) {
-  print(igraph3b)
+  igraph3b
 } else {
   print(graph3b)
 }
@@ -648,25 +651,38 @@ basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint sans 
 
 
 
-graph4 <- ggplot(basegr, aes(x = casconj, y = TGM_100, colour = enf)) +
-  geom_point_interactive(aes(
-    tooltip = paste(casconj, enf, "<br>Taux effectif de gain à l'emploi:", number(TGM_100, accuracy = 1), "%")
+graph4 <- ggplot() +
+  geom_point(data=basegr, aes(x = casconj, y = TGM_100, colour = enf, text = paste("Taux effectif de gain à l'emploi:", number(TGM_100, accuracy = 1))
   ), size = 3) +  
   theme_minimal() +
-  scale_y_continuous(limits = c(40, 100)) +  
+  scale_y_continuous(limits = c(25, 100)) + 
+  labs(title = "Les taux de gains sont plus hétèrogènes en présence d'une conjoint")+
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.title = element_blank(),
     plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1),
+    plot.title = element_text(size = 10, color="#5E4FA2")
   )
 
-igraph4<-girafe(ggobj = graph4)
+igraph4<-ggplotly(graph4, tooltip="text")
+igraph4<-igraph4 %>%
+  plotly::layout(
+     legend = list(
+      orientation = 'v',  
+      x = 1,  
+      xanchor = 'left',  
+      y = 0.5,
+      title = list(text = ""),
+      itemwidth=60,
+      traceorder='normal'
+    )
+  )
 
 if (is_html_output()) {
-  print(igraph4)
+  igraph4
 } else {
   print(graph4)
 }
@@ -725,25 +741,38 @@ basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint sans 
 
 
 
-graph4b <- ggplot(basegr, aes(x = casconj, y = TGM_50, colour = enf)) +
-  geom_point_interactive(aes(
-    tooltip = paste("Taux effectif de gain à l'emploi:", number(TGM_50, accuracy = 1))
+graph4b <- ggplot() +
+  geom_point(data=basegr, aes(x = casconj, y = TGM_50, colour = enf, text = paste("Taux effectif de gain à l'emploi:", number(TGM_50, accuracy = 1))
   ), size = 3) +  
   theme_minimal() +
-  scale_y_continuous(limits = c(30, 100)) +  
+  scale_y_continuous(limits = c(25, 100)) + 
+  labs(title = "Les taux de gains sont plus faibles quand le conjoint travaille")+
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.title = element_blank(),
     plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
+    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1),
+    plot.title = element_text(size = 10, color="#5E4FA2")
   )
 
-igraph4b<-girafe(ggobj = graph4b)
+igraph4b<-ggplotly(graph4b, tooltip="text")
+igraph4b<-igraph4b %>%
+  plotly::layout(
+     legend = list(
+      orientation = 'v',  
+      x = 1,  
+      xanchor = 'left',  
+      y = 0.5,
+      title = list(text = ""),
+      itemwidth=60,
+      traceorder='normal'
+    )
+  )
 
 if (is_html_output()) {
-  print(igraph4b)
+  igraph4b
 } else {
   print(graph4b)
 }
@@ -792,12 +821,10 @@ castyp<-read.xlsx(file="cas types gains marginaux.xlsx",sheetName = "synthese")
 base<-castyp %>% 
   mutate(
     cas = case_when(isocou=="isolé" & nbenf==0 ~ "isolé sans enfant",
-                    #isocou=="isolé" & nbenf==2 ~ "isolé deux enfants",
-                    #isocou=="couple" & actconj=="Inactif" & nbenf==0 ~ "couple monoactif sans enfant",
                     isocou=="couple" & actconj=="Inactif" & nbenf==2 ~ "couple monoactif deux enfants",
                     isocou=="couple" & actconj=="1 smic" & nbenf==0 ~ "couple biactif sans enfant",
                     isocou=="couple" & actconj=="1 smic" & nbenf==2 ~ "couple biactif deux enfants", 
-    TRUE ~ "autre"
+                    TRUE ~ "autre"
   )) %>% 
   filter(cas != "autre")  %>% 
   mutate(
@@ -816,26 +843,27 @@ base$cas <- factor(base$cas, levels = c("isolé sans enfant", "couple monoactif 
 graphG2 <- ggplot() +
   geom_col(data = base, aes(x = revenu, y = gainmarginal, fill = cas,
                             text = paste("cas-type : ", cas, "<br>Revenu: ", revenu, "<br>Gain Marginal: ", round(gainmarginal, 0))), 
-           position = position_dodge(width = 0.6),  # Position des barres
-           width = 0.4) +  # Largeur des barres
+           position = position_dodge(width = 0.6),  
+           width = 0.4) +  
   theme_minimal() +
   scale_fill_brewer(palette = "Spectral") +
   scale_y_continuous(limits = c(0, 100)) +
   scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
-  labs(#title = "Les taux marginaux de gain à l'emploi font une courbe en U : l'imposition marginale est devenu plus élevée sur les revenus médians !!",
+  labs(title = " -Les taux marginaux d'imposition sont devenus plus élevés sur les revenus médians (gains plus faibles)",
        x = "Revenu individuel en parts de smic",
        y = "Taux de gain marginal") + 
   theme(
     legend.position = "bottom",
     legend.title = element_blank(),
     axis.title.x = element_text(size = 10),  
-    axis.title.y = element_text(size = 10),  
+    axis.title.y = element_text(size = 10),
+    plot.title = element_text(size = 10, color = "#FDAE61", face = "bold")
     )+
   guides(fill = guide_legend(nrow = 2))   
 
-graphG2_interactif <- ggplotly(graphG2, tooltip = "text")
-graphG2_interactif <- graphG2_interactif %>%
-  layout(
+graphG2i <- ggplotly(graphG2, tooltip = "text")
+graphG2i <- graphG2i %>%
+  plotly::layout(
      legend = list(
       orientation = 'h',  
       x = 0.5,  
@@ -849,7 +877,7 @@ graphG2_interactif <- graphG2_interactif %>%
 
 
 if (is_html_output()) {
-  print(graphG2_interactif)
+  graphG2i
 } else {
   print(graphG2)
 }
@@ -1116,7 +1144,7 @@ graphG <- ggplot() +
 
 graphG_interactif <- ggplotly(graphG, tooltip = "text")
 graphG_interactif <- graphG_interactif %>%
-  layout(
+  plotly::layout(
      legend = list(
       orientation = 'h',  
       x = -2,  
@@ -1170,7 +1198,7 @@ graphG2 <- ggplot() +
 
 graphG_interactif2 <- ggplotly(graphG2, tooltip = "text")
 graphG_interactif2 <- graphG_interactif2 %>%
-  layout(
+  plotly::layout(
      legend = list(
       orientation = 'h',  
       x = 0.2,  
@@ -1264,7 +1292,7 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
 igraph5<-girafe(ggobj = graph5)
 
 if (is_html_output()) {
-  print(igraph5)
+  igraph5
 } else {
   print(graph5)
 }
@@ -1357,7 +1385,7 @@ graph4 <- Bareme_long %>%
 igraph4 <- girafe(ggobj = graph4)
 
 if (is_html_output()) {
-  print(igraph4)
+  igraph4
 } else {
   print(graph4)
 }
