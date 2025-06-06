@@ -362,6 +362,8 @@ graphG2 <- ggplot() +
 graphG2i <- ggplotly(graphG2, tooltip = "text")
 graphG2i <- graphG2i %>%
   plotly::layout(
+    width = 800,   # largeur en pixels (à ajuster)
+    height = 550,  # hauteur en pixels (à ajuster)
      legend = list(
       orientation = 'h',  
       x = 0.5,  
@@ -584,7 +586,12 @@ basegr<-base %>%
 
 basegr$enf <- factor(basegr$enf, levels=c("0 enfant","1 enfant","2 enfants","3 enfants"))
 
-basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint sans revenu", "Conjoint chômeur","Conjoint au smic", "Conjoint à 1,5 smic"))
+
+basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint sans revenu",
+                                               "Conjoint chômeur","Conjoint salarié au smic",
+                                               "Conjoint salarié à 1,5 smic"))
+
+
 
 
 graph4 <- ggplot() +
@@ -605,7 +612,7 @@ graph4 <- ggplot() +
     axis.title.y = element_blank(),
     legend.title = element_blank(),
     legend.text = element_text(size=rel(1.2)), 
-    plot.margin = margin(t = 20, r = 10, b = 10, l = 10),
+    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(1.2), angle = 40, hjust = 1, vjust = 1),
     plot.title = element_text(size = rel(1.2), color="#5E4FA2")
@@ -620,16 +627,15 @@ igraph4<-igraph4 %>%
       xanchor = 'left',  
       y = 0.5,
       title = list(text = ""),
-      itemwidth=30,
+      itemwidth=60,
       traceorder='normal'
     )
   )
-
 igraph4
 
 ```
 
-## Taux effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps 
+## Taux effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps
 
 ```{r}
 #| label: fig-TGE2
@@ -697,6 +703,8 @@ graph4b <- ggplot() +
 igraph4b<-ggplotly(graph4b, tooltip="text")
 igraph4b<-igraph4b %>%
   plotly::layout(
+    width = 900,   # largeur en pixels (à ajuster)
+    height = 580,  # hauteur en pixels (à ajuster)
      legend = list(
       orientation = 'v',  
       x = 1,  
@@ -715,7 +723,7 @@ igraph4b
 
 ```
 
-# 2. L'emploi ne protège pas toujours de la pauvreté 
+# 2. L'emploi ne protège pas toujours de la pauvreté
 
 ## Taux de pauvreté en fonction du revenu d'activité
 
@@ -766,7 +774,9 @@ graphG <- ggplot() +
 graphGi <- ggplotly(graphG, tooltip = "text")
 graphGi <- graphGi %>%
   plotly::layout(
-     legend = list(
+    width = 800,   # largeur en pixels (à ajuster)
+    height = 550,  # hauteur en pixels (à ajuster)
+         legend = list(
       orientation = 'v',  
       x = 1,  
       xanchor = 'left',  
@@ -829,6 +839,8 @@ graphG2 <- ggplot() +
 graphG_interactif2 <- ggplotly(graphG2, tooltip = "text")
 graphG_interactif2 <- graphG_interactif2 %>%
   plotly::layout(
+    width = 800,   # largeur en pixels (à ajuster)
+    height = 550,  # hauteur en pixels (à ajuster)
      legend = list(
       orientation = 'h',  
       x = 0.2,  
@@ -893,7 +905,7 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.title = element_blank(),
-    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
+    plot.margin = margin(t = 20, r = 10, b = 70, l = 10),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
   )
@@ -1029,4 +1041,4 @@ Faut-il privilégier le soutien aux bas-salaires via le Smic (les salaires) ou v
 
 ## **Deux objectifs, deux instruments**
 
-Selon le principe de Tinbergen, **lorsqu’il y a deux objectifs distincts, ici la lutte contre la pauvreté et les gains à l’emploi, il faut affecter à des instruments distincts la poursuite de ces objectifs**. Dans cette optique, on pourrait considérer que le **RSA et une prime d’activité entièrement familialisée** (sans bonus individuels) permettent de lutter contre la pauvreté et les inégalités de niveau de vie mais n’ont pas 
+Selon le principe de Tinbergen, **lorsqu’il y a deux objectifs distincts, ici la lutte contre la pauvreté et les gains à l’emploi, il faut affecter à des instruments distincts la poursuite de ces objectifs**. Dans cette optique, on pourrait considérer que le **RSA et une prime d’activité entièrement familialisée** (sans bonus individuels) permettent de lutter contre la pauvreté et les inégalités de niveau de vie mais n’ont pas
