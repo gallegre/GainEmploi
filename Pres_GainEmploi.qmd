@@ -79,6 +79,8 @@ On peut dégager **trois objectifs de la SNPLP** (en réalité, les mêmes que d
 
     en lien avec le préambule de la constitution : "[Tout être humain qui, en raison de son âge, de son état physique ou mental, de la situation économique, se trouve dans l'incapacité de travailler a le droit d'obtenir de la collectivité des moyens convenables d'existence]{style="color : red"}"
 
+**-\> Question : le système social et fiscal atteint-il ces objectifs ?**
+
 # 1. La reprise d'emploi est toujours rémunératrice mais de façon hétérogène
 
 ## L'emploi est rémunérateur à chaque niveau (cas de la personne seule) {.smaller}
@@ -203,7 +205,7 @@ castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese")
 smic=1398.7
 
 base<-castyp %>% 
-  filter(isocou=="couple" & nbenf==2 & actconj=="1 smic") %>% 
+  filter(isocou=="couple" & nbenf==2 & actconj=="Inactif") %>% 
   mutate(typrev=case_when(
     activite==0 ~ "Sans revenu",
     activite==0.5 ~ "Avec un mi-temps \n au Smic",
@@ -229,7 +231,7 @@ basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Ract_conj", "S
 
 # cas couple avec conjoint au smic #
 
-graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
+graph3a <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
   scale_fill_manual(
     labels=c("Ract_conj" = "Salaire conjoint",
              "Salaire"="Salaire",
@@ -285,8 +287,8 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   theme(panel.border = element_blank())
 
 
-igraph3 <- girafe(
-  ggobj = graph3,
+igraph3a <- girafe(
+  ggobj = graph3a,
   options = list(
     opts_tooltip(
       css = "
@@ -300,9 +302,121 @@ igraph3 <- girafe(
   )
 )
 
-igraph3
+igraph3a
 
 ```
+
+## (cas du couple avec 2 enfants, conjoint au smic) {.smaller}
+
+```{r}
+
+castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+
+smic=1398.7
+
+base<-castyp %>% 
+  filter(isocou=="couple" & nbenf==2 & actconj=="1 smic") %>% 
+  mutate(typrev=case_when(
+    activite==0 ~ "Sans revenu",
+    activite==0.5 ~ "Avec un mi-temps \n au Smic",
+    activite==1 & Salaire==smic ~ "Avec un temps plein\n au Smic",
+    TRUE ~ "Avec un temps plein \n à 1,5 Smic")
+  ) %>% 
+  select(typrev,Salaire,Ract_conj,PF,PL,RSA,PA,	RDISP)	
+
+basegr<-base %>% 
+  pivot_longer(cols=c(Ract_conj, Salaire,RSA,PA, PL,PF, RDISP)) 
+
+
+seuilpm=1309*2.1
+RDmin=min(base$RDISP)
+
+basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
+
+basegr1 <- basegr %>% filter(name != 'RDISP')
+basegr2 <- basegr %>% filter(name == 'RDISP')
+
+basegr1 <- basegr1 %>% mutate(name = factor(name, levels = rev(c("Ract_conj", "Salaire", "PF", "PL", "RSA", "PA")) ))
+
+
+# cas couple avec conjoint au smic #
+
+graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) + 
+  scale_fill_manual(
+    labels=c("Ract_conj" = "Salaire conjoint",
+             "Salaire"="Salaire",
+             "PF" = "Prestations familiales",
+             "PL" = "Prestations logement",
+             "RSA"="RSA",
+             "PA" = "Prime d'activité"
+             ),
+    values = c('Ract_conj' = '#440154FF',
+               'Salaire' = '#482677FF',
+               'PF' = '#39568CFF',
+               'PL' = '#238A8DFF',
+               'RSA' = '#55C667FF', 
+               'PA' = '#95D840FF'
+               ))  +
+   geom_bar_interactive(
+    position = "stack", 
+    stat = "identity", 
+    aes(y=value, fill=name,tooltip=paste(name,":", round(value,0), "euros"))
+  ) +
+  geom_point_interactive(
+    data = basegr %>% filter(name == 'RDISP'), 
+    aes(
+      x = typrev, y = round(value, 2), 
+      colour = "Revenu disponible", 
+      tooltip=paste("Revenu disponible :",round(value,0), "euros, soit +",round(value-RDmin,0))), 
+    size = 3
+  ) +
+  scale_color_manual(
+    values = c("Revenu disponible" = "orange")  
+  ) +
+    guides(
+    fill = guide_legend(order = 2),  # La légende des couleurs en premier
+    colour=guide_legend(order = 1),
+    
+  ) +
+  theme(
+    panel.background = element_rect(fill = "white"), 
+    plot.background = element_rect(fill = "white"),
+    legend.position = "right",
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.text = element_text(size = rel(1.1)),
+    legend.title = element_blank(),
+    plot.title = element_text(size = rel(0.8), hjust = 0.7),
+    plot.caption = element_text(size = rel(0.5)),
+    plot.margin = margin(t = 20, r = 10, b = 40, l = 10),
+    axis.ticks.y = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(1.1), angle = 40, hjust = 1, vjust = 1)
+  ) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500)) + 
+  theme(panel.border = element_blank())
+
+
+igraph3b <- girafe(
+  ggobj = graph3b,
+  options = list(
+    opts_tooltip(
+      css = "
+        background-color: red ;
+        color: white;
+        padding: 6px;
+        border-radius: 4px;
+        font-size: 20px;
+      "
+    )
+  )
+)
+
+igraph3b
+
+```
+
+## 
 
 ## La nouvelle courbe des gains marginaux à l’emploi
 
@@ -769,7 +883,7 @@ igraph4b
 
 # 2. L'emploi ne protège pas toujours de la pauvreté
 
-## Niveau de vie et taux de pauvreté avec un emploi au smic à mi-temps
+## Niveau de vie et risque de pauvreté avec un emploi au Smic à mi-temps
 
 ```{r}
 
@@ -867,7 +981,7 @@ igraphtppm <- girafe(
 igraphtppm
 ```
 
-## Niveau de vie et taux de pauvreté avec un emploi au smic à temps complet
+## Niveau de vie et risque de pauvreté avec un emploi au Smic à temps complet
 
 ```{r}
 castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
@@ -1232,12 +1346,6 @@ graph4 <- Bareme_long %>%
         )
 
 
-
-
-
-
-
-
 igraph4 <- girafe(ggobj = graph4)
 
 igraph4
@@ -1269,7 +1377,7 @@ Le dilemme entre redistribution et incitation est en fait un **triangle d’inco
 
 -   Simulation d'une réforme à coût constants : ne pas déclarer les revenus inférieurs à 450 par trimestre quelle que soit leur nature et réduite le taux e cumul avec les revenus d'activité de 61% à 58,5%
 
-    *des gagants dans le 1er décile, des perdants (pour de faibles montants) dans le 4ème décile*
+    *Des gagnants dans le 1er décile, des perdants (pour de faibles montants) dans le 4ème décile*
 
 ## **Soutenir les emplois à temps partiel ou promouvoir la norme du temps plein ?**
 
@@ -1279,7 +1387,7 @@ Le dilemme entre redistribution et incitation est en fait un **triangle d’inco
 
 -   pour **réduire la pauvreté laborieuse**, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles.
 
-A la redistribution et l’incitation, s’ajoute un autre objectif : **rémunérer le « mérite »** : **deux philosophies** s'opposent.
+L'objectif de **rémunérer le « mérite »** ne résout pas le problème car **deux philosophies** s'opposent.
 
 -   **le travail à temps-plein doit payer :** Il faudrait créer une norme de temps-plein, forme d’emploi la plus propice à réduire la pauvreté.
 
@@ -1303,8 +1411,8 @@ Dans cette optique, on pourrait considérer que
 
 -   le **RSA et une prime d’activité entièrement familialisée** (sans bonus individuels) ont pour seul objectifs de lutter contre la pauvreté et les inégalités de niveau de vie
 
-    *Possibilité d'inclue les allocations chômage dans les "revenus d'activité"*
+    *Possibilité d'inclure les allocations chômage dans les "revenus d'activité"*
 
--   une **norme de salaire minimum mensuel**, et non plus horaire (smic + norme de l'emploi à temps plein) vise à assurer des gains à l'emploi suffisants
+-   une **norme de salaire minimum mensuel**, et non plus horaire (Smic + norme de l'emploi à temps plein) vise à assurer des gains à l'emploi suffisants
 
     *Eviter que les entreprises s'appuient sur le système social pour offrir des emplois qui ne sont pas viables*
