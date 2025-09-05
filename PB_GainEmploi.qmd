@@ -2,7 +2,7 @@
 title: "La reprise d'emploi est-elle toujours rémunératrice?"
 subtitle: "Les contradictions des politiques de lutte contre la pauvreté et comment les surmonter"
 keywords: Assistance, Prime d'activité, Smic, Gains à l'emploi, Trappes à inactivité
-abstract: "Depuis les réformes visant à permettre aux personnes de cumuler durablement revenus professionnels et prestations sociales, la reprise d'emploi est toujours rémunératrice. Mais travailler ne permet pas toujours de sortir de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum garanti aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie que l'assistance, mais les travailleurs partent de trop bas."
+abstract: "Depuis les réformes visant à permettre aux personnes de cumuler durablement revenus professionnels et prestations sociales, la reprise d'emploi est toujours rémunératrice. Mais travailler ne permet pas toujours de sortir de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum garanti aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie plus que l'assistance, mais les travailleurs partent de trop bas."
 
 author:
   - name: Guillaume Allègre
@@ -20,7 +20,7 @@ date-modified: today
 lang: fr
 
 format: 
-  pdf :
+  html :
     fig-cap-location: top
 editor: visual
 ---
@@ -46,7 +46,6 @@ library(readr)
 library(reshape2)
 library(MetricsWeighted)
 library(questionr)
-library(xlsx)
 library(patchwork)
 library(ggplot2)
 library(ggrepel)
@@ -59,6 +58,7 @@ library(viridis)
 library(ggsci)
 library(quarto)
 library(patchwork)
+library(readxl)
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
 
@@ -70,21 +70,22 @@ opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.
 
 Y a-t-il de bonnes raisons de reprendre un emploi payé au salaire minimum quand on touche des prestations sociales ? Il existe des raisons non-monétaires de prendre un emploi, notamment en termes d'insertion sociale. Mais la question posée de façon récurrente est celle des gains monétaires à l'emploi. On peut ainsi distinguer deux questions : l'existence des gains, et la sensibilité des travailleurs à ces gains (l'élasticité de l'offre de travail). Nous nous intéressons ici à la première de ces questions. Dans un contexte où les aides sociales sont critiquées pour leur trop grande générosité et où les politiques de tout bord insistent sur la valeur travail, le travail doit payer et bien plus que l'assistance.
 
-C'est ce qu'a encore demandé le premier ministre (de l'époque) le 3 octobre 2024 sur France 2. "Il faut que le travail paie plus que l'addition des allocation" a déclaré Michel Barnier, qui entendait alors lancer le "chantier de l'allocation sociale unique", afin que "cela paye plus de travailler que de ne pas travailler". Les ministres changent, de même que les circonstances et les instruments sociaux-fiscaux, mais ce discours est une constante depuis la création du RMI en 1989, alors que l'existence même de bénéficiaires de revenus d'assistance est considérée comme un problème public auquel il faut remédier (voir Allègre, 2024).
+La stratégie nationale de prévention et de lutte contre la pauvreté (SNPLP), publiée en 2018 permet de préciser les objectifs de la politique sociale en termes de lutte contre la pauvreté et de gains à l'emploi. Elle prévoit la création d'un revenu universel d'activité (RUA) permettant à chacun de vivre décemment et d'accéder plus rapidement à l'emploi. Plus précisément, on peut dégager les trois objectifs suivant de la stratégie :
 
-La stratégie nationale de prévention et de lutte contre la pauvreté (SNPLP), publiée en 2018 était plus précise, puisqu'un des objectifs, alors assigné à un "revenu universel d'activité" était de "faire en sorte que le travail paye et qu'il paye de la même façon dans tous les cas". Cet objectif, qui implique de fusionner plusieurs instruments, semble avoir été abandonné. Nous verrons que le travail est certes rémunérateur, mais qu'il paye différemment selon la situation familiale.
+1.  "faire en sorte que le travail paye et qu'il paye de la même façon dans tous les cas" ;
+2.  "engager une poltique déterminée de sortie de la pauvreté par le travail"
+3.  "garantir un souvien financier aux ménages modestes"
 
-Un deuxième objectif donné aux politiques de lutte contre la pauvreté est de faire en sorte que le travail permette d'échapper à la pauvreté. Cet objectif est inscrit dans la SNPLP (2018) soit "l'engagement d'une politique déterminée de sortie de la pauvreté par le travail". S'il est implicitement admis que les personnes sans emploi puissent vivre sous le seuil de pauvreté, être pauvre bien que travailleur, travailleur mais pauvre, est perçu comme une anomalie que les politiques publiques doivent corriger (Allègre, 2024).
+Puisque le travail doit faire sortir de la pauvreté, la stratégie admet implicitiment que les personnes sans emploi puissent être pauvres. Mais il ne faut pas que leurs privations soient trop sévères, en particulier lorsqu'elles ont des enfants. en revanche, la pauvreté en emploi est perçue comme une anomalie que les politiques publiques doivent corriger (Allègre, 2024).
 
-Enfin un troisième objectif attribué aux politiques de lutte contre la pauvreté est de "garantir un soutien financier aux ménages modestes" (SNPLP, 2018). Dans la stratégie de lutte contre la pauvreté, cet objectif est le plus souvent lié aux enfants et aux familles. Il s'agit de "garantir l'accès de tous les enfants aux biens et aux services essentiels". L'affirmation "la stratégie pauvreté déploiera enfin des mesures concrètes et ancrées dans le quotidien des Français pour réduire les privations" est affirmé dans le chapitre nommé "garantir au quotidien les droits fondamentaux des enfants". S'il est admis que les personnes sans emploi puissent être pauvres, il ne faut donc pas que leurs privations soient trop sévères, en particulier lorsqu’elles ont des enfants.
-
-Plus généralement, "réduire les privations", "garantir les droits fondamentaux" sont des objectifs qui concernent tout le monde, adultes et enfants. Depuis 1946, le préambule de la Constitution affirme ainsi "Tout être humain qui, en raison de son âge, de son état physique ou mental, de la situation économique, se trouve dans l'incapacité de travailler a le droit d'obtenir de la collectivité des moyens convenables d'existence". Toutefois la façon dont ce droit est écrit ne définit pas explicitement ces moyens convenables d'existence et ne dit pas s'ils doivent être procurés en nature (logement, santé, aide alimentaire...) ou en espèces. Alors que ce préambule date de 1946, le RMI n'a été mis en place qu'en 1989. Pour les foyers sans revenus, le RMI puis le RSA garantissent des niveaux de vie inégaux mais proches selon le nombre d'enfants pour les couples et croissant avec le nombre d'enfants pour les familles monoparentales (graphique 1). Cependant, le calcul du niveau de vie pour les familles monoparentales a fait l'objet de critiques (voir par exemple Martin et Périvier et Drees).
+Ce document évalue le système actuel à l'aune de ces trois objectifs puis discute des contradiction su système social et des pistes de réforme.
 
 ```{r}
 #| label: fig-ndv
 #| fig-cap: Niveau de vie (en euros par uc) du revenu d'assistance et des allocations logement selon la configuration familiale, pour un foyer sans revenu primaire 
- 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+
+
+castyp <- read_excel("cas types smic.xlsx", sheet = "synthese")
 seuilpm=1308
 seuil60=seuilpm
 seuil50=seuilpm*5/6
@@ -128,20 +129,6 @@ if (is_html_output()) {
 
 ```
 
-Pour résumer, la lutte contre la pauvreté repose sur au moins trois objectifs, régulièrement réaffirmés par les pouvoirs publics :
-
-1\. Faire en sorte que le travail paie ;
-
-2\. Faire en sorte que le travail fasse sortir de la pauvreté ;
-
-3\. Garantir à tous la couverture des besoins essentiels ou minimaux.
-
-Les trois premières parties de ce document évaluent le système actuel par rapport à ces trois objectifs. La quatrième partie discute des arbitrages auxquels les politiques de lutte contre la pauvreté font face et propose des réformes visant à atteindre au mieux ces trois objectifs.
-
-## 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de façon homogène
-
-## 1.1. Une analyse par cas-type
-
 La reprise d'emploi est-elle rémunératrice ? Pour répondre à la question de façon concrète, nous raisonnons sur cas-type. Il s'agit d'illustrer les gains à la reprise d'emploi en prenant des exemples-type de situations de travail, de configuration familiale, de logement (pour calculer les allocations-logement) et éventuellement de modes de gardes des jeunes enfants. Dans ces situations, les gains à la reprise d'emploi, proviennent des salaires nets perçus et de la Prime d'activité. Les "coûts" proviennent de l'augmentation de l'impôt sur le revenu et de la baisse des prestations sociales (RSA, Allocations logement, prestations familiales...). La variable d'intérêt est le revenu disponible qui est calculé au niveau du ménage et ne tient pas compte de la répartition interindividuelle des revenus au sein des couples. L'analyse porte sur la variation du revenu disponible lorsqu'une personne passe de l'inactivité à l'emploi ou augmente sa durée de travail sans tenir compte des coûts associés en termes de transport ou d'habillement.
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -156,7 +143,13 @@ Le cas-type général commenté dans le texte est celui d'un ménage éligible, 
 
 Trois situations de reprise d'emploi sont analysées : le mi-temps au Smic horaire (699 euros mensuels), le temps-plein au Smic horaire (1399 euros mensuels) et le temps plein à 1,5 Smic horaire (2098 euros mensuels). Pour les couples, ces reprises d'emploi sont analysées dans le cas d'un conjoint inactif sans revenu, d'un conjoint chômeur (avec un montant d'allocation chômage égal au Smic mensuel) et d'un conjoint en emploi à temps-plein gagnant le Smic ou 1,5 fois le Smic. L'analyse n'est pas genrée, mais dans les couples, ce sont le plus souvent les femmes qui prennent des emplois à mi-temps, à la fois parce que le partage des tâches reste très inégalitaire et parce qu'elles ont des emplois dans des secteurs où elles plus sont plus susceptibles d'être en temps-partiel subi (ref). L'analyse est descriptive et ne présume pas que les ménages ou individus ont le choix entre les différents horaires de travail ou taux de salaire.
 
-## 1.2 Des reprises d'emploi rémunératrices
+L'approche en termes de revenus disponibles, ou niveaux de vie, ne tient compte ni des différences de coûts de la vie induits par le fait de travailler plutôt qu'être au foyer, en particulier dans les ménages avec enfants, ou lorsque le trajet domicile-travail est coûteux, ni des aides locales sous conditions de ressources (tarification de la cantine scolaire). Elle ne tient pas compte non plus des avantages économiques liés à l’emploi qu’ils soient immédiats (tickets restaurant, prise en charge des cartes de transport) ou différés droits ouverts en termes de chômage ou retraite). L’approche néglige également le fait que les personnes peuvent valoriser différemment les salaires et les prestations sociales. Cette approche est simplificatrice mais elle est cohérente avec la mesure du niveau de vie et de la pauvreté monétaire.
+
+L’approche par cas-type est critiquable dans la mesure où elle ne représente pas la diversité des situations individuelles. Par construction, elle renseigne, de façon synthétique, plutôt sur les caractéristiques du système social et fiscal que sur celles des ménages concernés. L’analyse est descriptive et ne présuppose pas que les individus ont le choix entre les différents horaires de travail ou taux de salaire
+
+## 1. La reprise d'emploi est toujours rémunératrice, mais pas toujours de façon homogène
+
+## 1.1. Des reprises d'emploi rémunératrices
 
 Dans les cas types étudiés, le système socio-fiscal actuel garantit que la reprise d'emploi est toujours rémunératrice, mais pas nécessairement toujours dans les mêmes proportions.
 
@@ -168,7 +161,7 @@ Le cas d'une personne seule illustre la façon dont le système socio-fiscal ass
 #| label: fig-C1A0E
 #| fig-cap: Revenu disponible d'une personne seule selon son revenu professionnel
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
 
 smic=1398.7
 
@@ -270,7 +263,7 @@ Pour un couple avec deux enfants (âgés de 5 et 8 ans) initialement sans revenu
 #| label: fig-C2A2ECI
 #| fig-cap: Revenu disponible d'un couple avec 2 enfants selon le revenu professionnel, conjoint inactif
 
-castyp <- read.xlsx(file = "cas types smic.xlsx", sheetName = "synthese") 
+castyp <- read_excel("cas types smic.xlsx",sheet = "synthese") 
 
 smic <- 1398.7
 
@@ -369,11 +362,11 @@ if (is_html_output()) {
 
 ```
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Définition : niveau de vie**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Le niveau de vie d'un ménage est un indicateur conçu pour comparer les revenus disponibles de ménages de configuration différentes en tenant compte des économies d'échelle liées à la vie commune et des dépenses pour les enfants. Il est obtenu en divisant le revenu disponible de l'ensemble du ménage par un nombre d'unités de consommation. En France et en Europe, les unités de consommation sont calculées par l'INSEE et Eurostat selon l'échelle d'équivalence dite de l'OCDE modifiée qui attribue 1 UC au premier adulte du ménage, 0,5 UC aux autres personnes de 14 ans ou plus et 0,3 UC aux enfants de moins de 14 ans (car considérés ayant moins de besoins). Selon cette convention, le niveau de vie est considéré identique pour une personne seule avec un revenu disponible de 2 000 euros, un couple sans enfant qui dispose 3000 euros (1,5x2000), ou un couple avec un enfants de 10 ans qui dispose de 3 600 euros (1,8x2000). |
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Définition : niveau de vie**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Le niveau de vie d'un ménage est un indicateur conçu pour comparer les revenus disponibles de ménages de configuration différentes en tenant compte des économies d'échelle liées à la vie commune et des dépenses pour les enfants. Il est obtenu en divisant le revenu disponible de l'ensemble du ménage par un nombre d'unités de consommation. En France et en Europe, les unités de consommation sont calculées par l'INSEE et Eurostat selon l'échelle d'équivalence dite de l'OCDE modifiée qui attribue 1 UC au premier adulte du ménage, 0,5 UC aux autres personnes de 14 ans ou plus et 0,3 UC aux enfants de moins de 14 ans (car considérés comme ayant moins de besoins). Selon cette convention, le niveau de vie est considéré comme identique pour une personne seule avec un revenu disponible de 2 000 euros, un couple sans enfant qui dispose 3000 euros (1,5x2000), ou un couple avec un enfants de 10 ans qui dispose de 3 600 euros (1,8x2000). |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 La situation est un peu différente pour une personne en couple avec deux enfants si le conjoint est actif en emploi, rémunéré sur la base d'un Smic mensuel. Dans ce cas, le revenu disponible du couple avec deux enfants est de 2 497 euros en cas de monoactivité, ce qui le situe au-dessus du seuil de grande pauvreté, et la reprise d'emploi permet de franchir le seuil de pauvreté à 60 % même avec un emploi à mi-temps. La reprise d'emploi à temps plein au Smic est plus rémunératrice que pour une personne seule ou un couple monoactif avec deux enfants car la dégressivité des aides est moindre. Cela s'explique par le fait que le couple ne perçoit pas le RSA avant la reprise d'emploi et que celle-ci se traduit uniquement par une baisse des aides au logement du montant de prime d'activité du couple. Le gain associé au second emploi dans le couple est alors de 911 € ce qui correspond à un TEG de 65%.
 
@@ -381,7 +374,7 @@ La situation est un peu différente pour une personne en couple avec deux enfant
 #| label: fig-C2A2EC1S
 #| fig-cap: Revenu disponible couple 2 enfants, conjoint au Smic à plein-temps
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
 
 smic=1398.7
 
@@ -486,13 +479,13 @@ if (is_html_output()) {
 
 ```
 
-Les gains à l'emploi sont encore plus importants si le revenu du conjoint, pour un même montant égal au Smic à temps plein, est une allocations chômage. Dans ce cas, lorsque le travailleur étudié n'a aucun revenu, le couple monoactif a un revenu disponible plus faible que dans le cas précédent (1 891 euros contre 2 497 euros) car contrairement au salaire, l'allocation chômage du conjoint n'ouvre pas droit à la prime d'activité. La reprise d'emploi a donc un effet plus faible sur le montant de prestations perçus et le gain à l'emploi pour un Smic à temps plein est de 1 090 euros, ce qui correspond à un TEG de 78%. Le taux effectif de gain est également élevé pour un emploi a mi-temps (71%) ou à temps plein avec un salaire de 1,5 Smic (83%).
+Les gains à l'emploi sont encore plus importants si le revenu du conjoint, pour un même montant égal au Smic à temps plein, est une allocation chômage. Dans ce cas, lorsque le travailleur étudié n'a aucun revenu, le couple monoactif a un revenu disponible plus faible que dans le cas précédent (1 891 euros contre 2 497 euros) car contrairement au salaire, l'allocation chômage du conjoint n'ouvre pas droit à la prime d'activité. La reprise d'emploi a donc un effet plus faible sur le montant de prestations perçues et le gain à l'emploi pour un Smic à temps plein est de 1 090 euros, ce qui correspond à un TEG de 78%. Le taux effectif de gain est également élevé pour un emploi a mi-temps (71%) ou à temps plein avec un salaire de 1,5 Smic (83%).
 
 ```{r}
 #| label: fig-C2A2ECCH
 #| fig-cap: Revenu disponible d'un couple avec deux enfants selon le revenu professionnel, conjoint au chômage (ARE=1 smic)
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
 
 smic=1398.7
 
@@ -604,7 +597,7 @@ Le système social et fiscal remplit donc l'objectif qui lui a été fixé depui
 #| label: fig-TGE
 #| fig-cap: Taux  effectif de gain à l'emploi pour une reprise d'emploi au Smic à temps-plein, selon la configuration familiale
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
 
 base<-castyp %>% 
   mutate(
@@ -686,7 +679,7 @@ if (is_html_output()) {
 
 ```
 
-Pour les cas que nous avons étudiés, le taux effectif de gain pour le passage de l'inactivité à un emploi à temps plein rémunéré au Ssmic varie de 58% à 65% pour une personne seule selon le nombre d'enfants à charge et de 52% à 94% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Le TEG le plus faible est alors obtenu avec 3 enfants lorsque le conjoint est salarié au Smic car la prise d'emploi réduit à la fois les montants de prestations familiales (-97 €), d'aides au logement (-349 €) et de prime d'activité (-231 €). Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge car le couple ne bénéficie initialement que des aides au logement (89€) et n'a donc que cela à perdre.
+Pour les cas que nous avons étudiés, le taux effectif de gain pour le passage de l'inactivité à un emploi à temps plein rémunéré au Smic varie de 58% à 65% pour une personne seule selon le nombre d'enfants à charge et de 52% à 94% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Le TEG le plus faible est alors obtenu avec 3 enfants lorsque le conjoint est salarié au Smic car la reprise d'emploi réduit à la fois les montants de prestations familiales (-97 €), d'aides au logement (-349 €) et de prime d'activité (-231 €). Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge car le couple ne bénéficie initialement que des aides au logement (89€) et n'a donc que cela à perdre.
 
 Le taux effectif de gain pour le passage de l'inactivité à un emploi à mi-temps au Smic est plus faible. Il varie de 48% à 58% pour une personne seule selon le nombre d'enfants à charge et de 36% à 87% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Comme pour l'emploi à temps plein, le TEG le plus faible est alors obtenu avec 3 enfants lorsque le conjoint est salarié au Smic et le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge.
 
@@ -694,7 +687,7 @@ Le taux effectif de gain pour le passage de l'inactivité à un emploi à mi-tem
 #| label: fig-TGE2
 #| fig-cap: Taux  effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps selon la configuration familiale
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
 
 base<-castyp %>% 
   mutate(
@@ -812,7 +805,7 @@ Le débat sans fin sur les trappes plaiderait pour une égalisation des gains ma
 #| label: fig-gainsmarginaux
 #| fig-cap: Gain marginaux effectifs pour une augmentation de 100 euros du revenu d'activité, selon la configuration familiale et le niveau de revenu initial
 
-castyp<-read.xlsx(file="cas types gains marginaux.xlsx",sheetName = "synthese") 
+castyp <- read_excel("cas types gains marginaux.xlsx",sheet = "synthese")
 
 base<-castyp %>% 
   mutate(
@@ -845,8 +838,7 @@ graphG2 <- ggplot() +
   scale_fill_brewer(palette = "Spectral") +
   scale_y_continuous(limits = c(0, 100)) +
   scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
-  labs(title = " -Les taux marginaux d'imposition sont devenus plus élevés sur les revenus médians (gains plus faibles)",
-       x = "Revenu individuel en parts de smic",
+  labs(x = "Revenu individuel en parts de smic",
        y = "Taux de gain marginal") + 
   theme(
     legend.position = "bottom",
@@ -887,11 +879,11 @@ Pour illustrer les effets du coût de la garde sur les gains à l'emploi des fam
 
 Comme le montre le graphique suivant, le coût net de la garde est relativement modéré et représente 300 euros maximum, soit environ 10% du revenu disponible lorsque les deux conjoints sont au Smic à temps-plein. Néanmoins on peut également voir que le coût net de la garde augmente rapidement entre le mi-temps et le temps-plein (il passe de 50 à 300 euros). Par conséquent, les incitations à passer du mi-temps au temps-plein deviennent faibles dans ces cas.
 
-```{r fig_garde}
+```{r}
 #| label: fig-garde
-#| fig-cap: Revenu disponible après coût de garde selon le revenu professionnel et la configuration familiale
+#| fig-cap: Revenu disponible après coût de garde selon le revenu professionnel (isolé un enfant)
 
-castyp<-read.xlsx(file="cas types smic jeune enfant.xlsx",sheetName = "synthese") 
+castyp <- read_excel("cas types smic jeune enfant.xlsx",sheet = "synthese")
 
 #  Isolé 1 enfant
 smic=1398.7
@@ -910,7 +902,6 @@ base<-castyp %>%
 
 basegr<-base %>% 
   pivot_longer(cols=c(CGNET,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)) 
-
 
 
 basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
@@ -964,17 +955,31 @@ graphI1 <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
     axis.title.y = element_blank(),
     legend.text = element_text(size = rel(0.7)),
     legend.title = element_blank(),
-    plot.title = element_text(size = rel(0.8), hjust = 0.7),
+    #plot.title = element_text(size = rel(0.8), hjust = 0.7),
     plot.caption = element_text(size = rel(0.5)),
     plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
   ) +
-  labs(title="Isolé 1 enfant",size=5)+
-  #scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 500)) + 
   theme(panel.border = element_blank())
 
+
+
+
+graphI1
+
+
+
+
+
+
+
+```
+
+```{r}
+#| label: fig-garde2
+#| fig-cap: Revenu disponible après coût de garde selon le revenu professionnel (couple monoactif, 1 enfant)
 
 
 smic=1398.7
@@ -1046,31 +1051,26 @@ graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
     axis.title.y = element_blank(),
     legend.text = element_text(size = rel(0.7)),
     legend.title = element_blank(),
-    plot.title = element_text(size = rel(0.8), hjust = 0.7),
+    #plot.title = element_text(size = rel(0.8), hjust = 0.7),
     plot.caption = element_text(size = rel(0.5)),
     plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
   ) +
-  labs(title="Couple 1 enfant - conjoint au smic",size=5)+
+  #labs(title="Couple 1 enfant - conjoint au smic",size=5)+
   #scale_y_continuous(expand = c(0, 0), limits = c(0, 4000), breaks = seq(0, 4000, by = 500)) + 
   theme(panel.border = element_blank())
 
-graphI1
+
 graphC1_S
-
-
-
-
-
 
 
 ```
 
 # 2. L'emploi ne protège pas toujours de la pauvreté
 
-Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvreté monétaire. Ceci apparaît clairement sur cas types mais peut se voir également par l'existence d'une pauvreté monétaire en emploi, même pour des bénéficiaires de la prime d'activité[^3]. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. et celui des personnes en emploi de 7,8 %. Mais en se limitant aux personnes en emploi vivant dans un ménage allocataire de la prime d'activité, ce taux atteint 15,2 %. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE).
+Si l'emploi est toujours rémunérateur (1), il ne protège pas toujours de la pauvreté monétaire. Ceci apparaît clairement sur cas types mais peut se voir également par l'existence d'une pauvreté monétaire en emploi, même pour des bénéficiaires de la prime d'activité[^3]. En 2022, selon l'INSEE le taux de pauvreté sur l'ensemble de la population était de 14,4%. et celui des personnes en emploi de 7,8 %. Mais en se limitant aux personnes en emploi vivant dans un ménage allocataire de la prime d'activité, ce taux atteint 15,2 %. L'emploi réduit ainsi beaucoup le risque de pauvreté monétaire mais ne l'annule pas : sur les 9,1 millions de personnes vivant sous le seuil de pauvreté monétaire, 2 millions sont en emploi (INSEE).
 
 [^3]: Si la prime d'activité permet à certains foyers de franchir le seuil de pauvreté monétaire, l'analyse par cas types montre que certains foyers à bas salaire n'y sont pas éligibles. S'y ajoutent ceux qui ne recourent pas à cette prestation bien que leur niveau de vie soit inférieur au seuil de pauvreté monétaire.
 
@@ -1094,11 +1094,10 @@ Les revenus d'un couple monoactif dans lequel l'un des conjoints travaille au Sm
 
 Les couples biactifs avec deux emploi au Smic à temps-plein ont un revenu disponible avant prime d'activité supérieur au seuil de pauvreté et dépassent largement ce seuil avec la prime. Qu'ils recourent ou non à la prime d'activité, le système socio-fiscal ne compense que partiellement la charge des enfants telle qu'elle est appréhendée par les unités de consommation. Un couple biactif au Smic recourant à la prime d'activité a ainsi un niveau de vie équivalent à 153% du seuil de pauvreté s'il n'a pas d'enfant, 135% du seuil de pauvreté s'il en a un, 124% avec deux enfants et 117% avec trois (contre 142%, 119%, 108% et 110% respectivement s'il n'y recourt pas).
 
-```{r fig-pauv}
-#| label: fig-pauv
+```{r fig-pauvreté}
 #| fig-cap: taux de pauvreté et taux de privation matérielle selon la tranche de revenu salarial et la configuration familiale
 
-castypp<-read.xlsx(file="Sorties_Privation.xlsx",sheetName = "Sorties_Privation")
+castypp<-read_excel("Sorties_Privation.xlsx",sheet = "Sorties_Privation")
 
 base <- castypp %>%
 pivot_longer(cols = c(TX_PAUVRETE, TX_ISO_PAUVRETE, TX_COU_PAUVRETE), names_to = "cas", values_to = "taux") %>%
@@ -1235,13 +1234,15 @@ Si l'hypothèse du coût pour les emplois à temps-partiel est juste, il existe 
 
 # 3. Le revers des incitations est l'augmentation de l'intensité de la pauvreté des personnes sans emploi
 
+La reprise d'emploi est toujours rémunératrice (1) mais l'intentisté de la pauvreté des ménages sans emploi est forte.
+
 Dans les cas-types étudiés, les revenus d'assistance procurent un niveau de vie inférieur au seuil de pauvreté à 60%, et même inférieur au seuil de grande pauvreté à 40% pour les couples et les personnes seules (graphique).
 
 ```{r}
 #| label: fig-ndvminimum
 #| fig-cap: Niveau de vie (en euros par uc) du revenu d'assistance et des allocations logement selon la configuration familiale, pour un foyer sans revenu primaire 
  
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic.xlsx",sheet = "synthese") 
 seuilpm=1308
 seuil60=seuilpm
 seuil50=seuilpm*5/6
@@ -1302,7 +1303,6 @@ En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum
 Pourtant, malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'écart entre le RSA et le SMIC et la montée en charge des compléments de revenus pour travailleurs pauvres, la part d'allocataires du RSA dans la population d'âge actif a augmenté, passant de 3,0% en 2008 à 4,1% en 2022. La réduction du niveau de vie relatif du RSA n'a donc pas eu d'effets visibles en termes de baisse du nombre d'allocataires.
 
 ```{r fig-minimasociaux}
-#| label: fig-minima
 #| fig-cap: Evolution des mimina sociaux et du Smic horaire, base 100 = 1990
 
 
@@ -1416,13 +1416,13 @@ On peut interpréter le coût de cette réforme comme une mesure de l’injustic
 
 [^5]: Pour les plus riches, grâce au prélèvement forfaitaire unique (PFU) le taux d’imposition est plus faible sur les revenus du capital que sur les revenus du travail.
 
-## 4.2 **Soutenir les emplois à temps partiel ou promouvoir la norme du temps plein ?**
+## 4.2 Soutenir les emplois à temps partiel ou promouvoir la norme du temps plein ?
 
 Faut-il cibler les compléments de revenus pour travailleurs au niveau du temps-partiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles, souvent sous le seuil de pauvreté. Le débat sur la place du temps-partiel dans le dispositif de compléments de revenus pour travailleurs à bas revenus, date des débuts de la prime pour l’emploi en 2001 (voir notamment Cahuc, 2002). Redistribution et incitation sont des objectifs non seulement inconciliables mais contradictoires. La redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, temps partiel, temps-plein au Smic et emploi mieux rémunéré. L’incitation implique de les maintenir ou de les augmenter. Il est possible de dépasser le dilemme localement (en augmentant le revenu disponible par les transferts à la fois à temps-partiel et à temps-plein au Smic), mais le problème est alors déplacé plus haut, à l’endroit où la prestation devient dégressive. On parle aujourd’hui de trappes à bas salaires (voir le rapport Bozio-Wasmer, 2024).
 
 A la redistribution et l’incitation, s’ajoute un autre objectif : rémunérer le « mérite ». Il est probable que beaucoup d’acteurs ont cet objectif en tête lorsqu’ils défendent l’idée que le travail doit payer (Allègre, 2011). Mais dans cet optique, faut-il cibler la prime d’activité sur le temps-partiel ou sur le temps-plein ? Tout dépend de la norme sociale prédominante. Deux philosophies s’opposent. Selon la première, le travail à temps-plein doit payer. Il faudrait créer une norme de temps-plein, forme d’emploi la plus propice à réduire la pauvreté. A la création du RMI, l’écart entre le RMI et le Smic a été calculé sur la base d’un temps-plein. Initialement, le montant du RMI a été fixé à 50% du Smic. Cet écart peut être interprété en termes incitatif ou de mérite. Selon la seconde philosophie, chaque heure de travail doit payer, c’est-à-dire mérite une hausse du revenu disponible. La volonté de créer un écart de revenus à la fois entre l’inactivité et le mi-temps et entre le mi-temps et le temps-plein crée une pression à la baisse sur le niveau des revenus d’assistance (et en haut la création de “trappes à bas salaires”). En 1989, la norme d’emploi était le CDI à temps-plein. Le RMI était différentiel : après période d’intéressement temporaire[\[2\]](#_ftn2), chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu’à terme une personne seule reprenant un emploi à mi-temps n’avait aucun gain financier par rapport au revenu d’assistance. Les gains étaient concentrés entre le mi-temps et le temps-plein. À cette époque, malgré l’absence de gain financier, il y avait tout de même des reprises d’emploi à temps partiel et même du cumul assistance-emploi (Guillemot, Petour et Zajdela, 2002), signe que les personnes concernées reconnaissaient les aspects positifs de l’emploi au-delà du revenu. Faut-il revenir à une prestation différentielle pour augmenter le socle ? Une possibilité est de revenir au système prévalent de 1989 jusqu’à la création du RSA en 2009. Ce système permet à la fois d’avoir un socle plus élevé et de réaffirmer le temps-plein comme norme de travail et de renforcer cette norme non pas avec des mesures qui visent les travailleurs, mais en visant les entreprises et en limitant le nombre de postes à pourvoir à temps-partiel (voir conclusion).
 
-## 4.3 **Augmenter les gains à l’emploi par la hausse du Smic ou grâce à la prime d’activité ?**
+## 4.3 Augmenter les gains à l’emploi par la hausse du Smic ou grâce à la prime d’activité ?
 
 Faut-il privilégier le soutien aux bas-salaires via le Smic (les salaires) ou via la prime d’activité et ses bonus individuels renforcés à la suite de la crise des gilets jaunes ? Smic et prime d’activité ne sont pas équivalents car la prime d’activité n’est pas un salaire :
 
@@ -1437,7 +1437,7 @@ Avec le système actuel, les pouvoirs publics poursuivent deux objectifs : lutt
 Selon le principe de Tinbergen, lorsqu’il y a deux objectifs distincts, ici la lutte contre la pauvreté et les gains à l’emploi, il faut affecter à des instruments distincts la poursuite de ces objectifs. Dans cette optique, on pourrait considérer que le RSA et une prime d’activité entièrement familialisée (sans bonus individuels) permettent de lutter contre la pauvreté et les inégalités de niveau de vie mais n’ont pas pour objectif d’augmenter les gains l’emploi. Dans ce cas, il faudrait étendre le bénéfice de la prime d’activité aux chômeurs (les travailleurs sans emploi). Pour ce qui est de l’objectif de soutien aux bas salaires, le Smic, associé à la norme du temps plein, doit être l’instrument monétaire privilégié. Si l’objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises puissent se reposer sur le système social pour proposer des emplois qui ne seraient pas viables par ailleurs.
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Encadré : simulation de deux réformes : quelques ordres de grandeur**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **Encadré : simulation de deux réformes**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Nous simulons deux réformes illustratives pour donner des ordres de grandeur concernant le coût de ce types de réformes ainsi que la répartition des foyers gagnants ou perdants. Pour cela, nous utilisons le modèle de microsimulation sociale et fiscale INES développé par l’INSEE, la DREES et la CNAF. La version utilisée d’INES simule la législation 2022 sur les données de l’Enquête Revenus fiscaux et sociaux (ERFS) 2020 actualisées à l’aide des dernières données démographiques et économiques disponibles. Nos simulations font l’hypothèse d’un taux de non-recours inchangé (en masse financière)[^6]. Les deux réformes simulées s’appuient sur les points évoqués dans la section précédentes. La première réforme consiste simplement à augmenter le socle du RSA et à baisser le taux de cumul de la prime d’activité. Cela répond directement au point 4.1. Une telle réforme serait moins favorable aux incitations à temps-partiel (les travailleurs à temps-partiel ne seraient pas perdants mais l’écart avec les revenus d’assistance seraient réduits). Cette réforme est justifiée si on prend au sérieux la lutte contre la grande pauvreté, si on souhaite verser un revenu minimum un peu plus décent, et/ou si l’on considère que les incitations ne jouent pas ou peu à ce niveau-là, les obstacles à la reprise d’emploi étant autres que les faibles gains. Le problème de cette réforme est son coût. Fixer le socle à 900 euros par mois pour une personne seule, permettant d’atteindre le seuil de pauvreté à 50%, compensé par une baisse du cumul de la prime d’activité de 61 à 45% (qui laisserait le point de sortie de la prime d’activité constant pour une personne seule) coûterait jusqu’à 30 milliards d’euros en plein recours et 24 milliards d’euros à taux de recours inchangé. Par construction, une telle réforme ne ferait presque pas de perdants : presque tous les bénéficiaires du RSA et de la prime d’activité actuels seraient gagnants mais il n’y aurait pas de gagnants au-delà. D’ailleurs le coût en termes de prime d’activité (13 milliards à recours inchangé) serait supérieur à celui du RSA (11 milliards). Par construction les plus gros gains sont concentrés sur le premier décile (avec une variation moyenne de revenu de 260 euros mensuels) puis sont très fortement dégressifs (170 euros pour les foyers du 2ème décile des niveaux de vie, et 60 € pour un niveau de vie médian). La deuxième réforme consiste à changer le mécanisme de cumul. Afin de permettre aux foyers allocataires de bénéficier de coups de pouces et de simplifier les déclarations, nous permettons un cumul à 100% jusqu’à 150 euros par mois (en pratique 450 € par trimestre) de l’ensemble des revenus hors prestations familiales et sociales (salaires, revenus de remplacement - chômage, retraites, dons, revenus du patrimoine financier et foncier). Le mécanisme se rapprocherait des mécanismes d’*earnings disregards,* relativement communs dans les pays anglo-saxons. L’abattement de revenus peut être justifié par des coûts fixes de reprise d’emploi ou pour minimiser les démarches administratives pour des revenus très faibles. En gardant la même pente de prime d’activité, le coût pour les finances publiques serait de 2,2 milliards en plein recours et 1,8 milliard à taux de non-recours inchangé. Pour atteindre la neutralité budgétaire, il conviendrait de réduire le taux de cumul de la prime d’activité de 61 à 58,5%. Cette réforme ferait quelques gagnants en bas de l’échelle des revenus (9% des ménages sont gagnants) et des perdants au-delà (16% de ménages perdants). Selon notre microsimulation, les gagnants se situeraient surtout dans le 1er décile (gain moyen de 19 euros mensuels sur l’ensemble des ménages du 1er décile), tandis que les perdants se situent dans le 4ème décile (perte de 8 euros mensuels). |
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

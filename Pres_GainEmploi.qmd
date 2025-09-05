@@ -32,7 +32,6 @@ library(readr)
 library(reshape2)
 library(MetricsWeighted)
 library(questionr)
-library(xlsx)
 library(patchwork)
 library(ggplot2)
 library(ggrepel)
@@ -45,6 +44,7 @@ library(viridis)
 library(ggsci)
 library(quarto)
 library(patchwork)
+library(readxl)
 ```
 
 # Propos introductif
@@ -87,7 +87,7 @@ On peut dégager **trois objectifs de la SNPLP** (en réalité, les mêmes que d
 
 ```{r}
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp <- read_excel("cas types smic.xlsx", sheet = "synthese")
 
 smic=1398.7
 
@@ -200,7 +200,7 @@ igraph
 
 ```{r}
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic.xlsx", sheet = "synthese")
 
 smic=1398.7
 
@@ -310,7 +310,7 @@ igraph3a
 
 ```{r}
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic.xlsx", sheet = "synthese")
 
 smic=1398.7
 
@@ -422,8 +422,7 @@ igraph3b
 
 ```{r}
 
-
-castyp<-read.xlsx(file="cas types gains marginaux.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types gains marginaux.xlsx", sheet = "synthese") 
 
 base<-castyp %>% 
   mutate(
@@ -456,8 +455,7 @@ graphG2 <- ggplot() +
   scale_fill_brewer(palette = "Spectral") +
   scale_y_continuous(limits = c(0, 100)) +
   scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
-  labs(title = " -Les taux marginaux d'imposition sont devenus plus élevés sur les revenus proches du smic à temps plein (gains plus faibles)",
-       x = "Revenu individuel en parts de smic",
+  labs(x = "Revenu individuel en parts de smic",
        y = "Taux de gain marginal",
        fill="") + 
   theme(
@@ -500,7 +498,7 @@ graphG2i <- ggplotly(graphG2, tooltip = "text",
 
 ```{r}
 
-castyp<-read.xlsx(file="cas types smic jeune enfant.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic jeune enfant.xlsx", sheet = "synthese") 
 
 #  Isolé 1 enfant
 smic=1398.7
@@ -709,7 +707,7 @@ igraphC1_S
 
 ```{r}
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic.xlsx",sheet = "synthese") 
 
 base<-castyp %>% 
   mutate(
@@ -799,7 +797,7 @@ igraph4
 
 ```{r}
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic.xlsx", sheet = "synthese") 
 
 base<-castyp %>% 
   mutate(
@@ -887,7 +885,7 @@ igraph4b
 
 ```{r}
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic.xlsx",sheet = "synthese") 
 
 base<-castyp %>% 
   mutate(
@@ -984,7 +982,7 @@ igraphtppm
 ## Niveau de vie et risque de pauvreté avec un emploi au Smic à temps complet
 
 ```{r}
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic.xlsx",sheet = "synthese") 
 
 base<-castyp %>% 
   mutate(
@@ -1079,7 +1077,7 @@ igraphtcpm
 
 ```{r}
 
-castypp<-read.xlsx(file="Sorties_Privation.xlsx",sheetName = "Sorties_Privation")
+castypp<-read_excel("Sorties_Privation.xlsx",sheet = "Sorties_Privation")
 
 base <- castypp %>%
 pivot_longer(cols = c(TX_PAUVRETE, TX_ISO_PAUVRETE, TX_COU_PAUVRETE), names_to = "cas", values_to = "taux") %>%
@@ -1144,7 +1142,7 @@ graphGi
 
 ```{r}
 
-castypp<-read.xlsx(file="Sorties_Privation.xlsx",sheetName = "Sorties_Privation")
+castypp<-read_excel("Sorties_Privation.xlsx",sheet = "Sorties_Privation")
 
 
 base2 <- castypp %>%
@@ -1214,7 +1212,7 @@ graphGi2
 
 ```{r}
 
-castyp<-read.xlsx(file="cas types smic.xlsx",sheetName = "synthese") 
+castyp<-read_excel("cas types smic.xlsx",sheet = "synthese") 
 seuilpm=1308
 seuil60=seuilpm
 seuil50=seuilpm*5/6
