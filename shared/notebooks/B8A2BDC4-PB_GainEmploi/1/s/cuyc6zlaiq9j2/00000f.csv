@@ -1,131 +1,37 @@
 "0",""
 "0","library(knitr) "
 "0","library(tidyverse) "
-"2","── [1mAttaching core tidyverse packages[22m ─────────────────────────────────────────────── tidyverse 2.0.0 ──
-[32m✔[39m [34mdplyr    [39m 1.1.4     [32m✔[39m [34mreadr    [39m 2.1.5
-[32m✔[39m [34mforcats  [39m 1.0.0     [32m✔[39m [34mstringr  [39m 1.5.1
-[32m✔[39m [34mggplot2  [39m 3.5.2     [32m✔[39m [34mtibble   [39m 3.2.1
-[32m✔[39m [34mlubridate[39m 1.9.4     [32m✔[39m [34mtidyr    [39m 1.3.1
-[32m✔[39m [34mpurrr    [39m 1.0.4     "
-"2","── [1mConflicts[22m ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
-[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
-[36mℹ[39m Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors"
 "0","library(ofce) "
 "0","library(lubridate) "
 "0","library(knitr) "
 "0","library(scales) "
-"2","
-Attachement du package : ‘scales’
-
-"
-"2","L'objet suivant est masqué depuis ‘package:purrr’:
-
-    discard
-
-"
-"2","L'objet suivant est masqué depuis ‘package:readr’:
-
-    col_factor
-
-"
 "0","library(dplyr) "
 "0","library(tibble) "
 "0","library(readxl) "
 "0","library(skimr) "
-"2","Registered S3 methods overwritten by 'htmltools':
-  method               from         
-  print.html           tools:rstudio
-  print.shiny.tag      tools:rstudio
-  print.shiny.tag.list tools:rstudio
-"
 "0","library(tidyr) "
 "0","library(rsdmx) "
 "0","library(ggthemes) "
-"2","
-Attachement du package : ‘ggthemes’
-
-"
-"2","L'objet suivant est masqué depuis ‘package:ofce’:
-
-    theme_foundation
-
-"
 "0","library(haven)"
 "0","library(glue)"
 "0","library(readr)"
 "0","library(reshape2)"
-"2","
-Attachement du package : ‘reshape2’
-
-"
-"2","L'objet suivant est masqué depuis ‘package:tidyr’:
-
-    smiths
-
-"
 "0","library(MetricsWeighted)"
 "0","library(questionr)"
-"0","library(xlsx)"
 "0","library(patchwork)"
 "0","library(ggplot2)"
 "0","library(ggrepel)"
 "0","library(blorr)"
-"2","Registered S3 method overwritten by 'data.table':
-  method           from
-  print.data.table     
-"
-"2","Check out our interactive apps for quick data exploration. Visit:
-https://apps.rsquaredacademy.com/.
-"
 "0","library(plotly)"
-"2","Registered S3 method overwritten by 'htmlwidgets':
-  method           from         
-  print.htmlwidget tools:rstudio
-"
-"2","
-Attachement du package : ‘plotly’
-
-"
-"2","L'objet suivant est masqué depuis ‘package:ggplot2’:
-
-    last_plot
-
-"
-"2","L'objet suivant est masqué depuis ‘package:stats’:
-
-    filter
-
-"
-"2","L'objet suivant est masqué depuis ‘package:graphics’:
-
-    layout
-
-"
 "0","library(ggiraph)"
 "0","library(sf) "
-"2","Linking to GEOS 3.13.1, GDAL 3.10.2, PROJ 9.5.1; sf_use_s2() is TRUE
-"
 "0","library(RColorBrewer)"
 "0","library(viridis)"
-"2","Le chargement a nécessité le package : viridisLite
-"
-"2","
-Attachement du package : ‘viridis’
-
-"
-"2","L'objet suivant est masqué depuis ‘package:scales’:
-
-    viridis_pal
-
-"
 "0","library(ggsci)"
 "0","library(quarto)"
-"2","Registered S3 method overwritten by 'rmarkdown':
-  method         from
-  print.paged_df     
-"
 "0","library(patchwork)"
+"0","library(readxl)"
+"0","library(tinytex)"
 "0",""
 "0","opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos=""H"", out.extra="""", dev=""ragg_png"", fig.showtext=TRUE, cache=FALSE)"
 "0",""

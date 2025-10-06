@@ -418,7 +418,7 @@ igraph3b
 
 ## 
 
-## La nouvelle courbe des gains marginaux à l’emploi
+## La nouvelle courbe des gains marginaux à l'emploi
 
 ```{r}
 
@@ -1353,17 +1353,17 @@ igraph4
 
 # 4. Peut-on dépasser les dilemmes du système social ?
 
-## Avantages et limites d’une augmentation du socle
+## Avantages et limites d'une augmentation du socle
 
-**Si les personnes en emploi restent pauvres malgré les allocations et les incitations… c’est qu’elles partent de trop bas**.
+**Si les personnes en emploi restent pauvres malgré les allocations et les incitations... c'est qu'elles partent de trop bas**.
 
--   Il est possible de concilier les trois objectifs - *travail rémunérateur, travail permettant de sortir de la pauvreté et niveau de vie minimum suffisamment élevé* - en **relevant le montant des prestations de solidarité** (RSA et aides au logement) et en gardant un minimum d’incitations.
+-   Il est possible de concilier les trois objectifs - *travail rémunérateur, travail permettant de sortir de la pauvreté et niveau de vie minimum suffisamment élevé* - en **relevant le montant des prestations de solidarité** (RSA et aides au logement) et en gardant un minimum d'incitations.
 
--   Cette réforme est la **plus juste** : elle réduit fortement les inégalités avec, probablement, de très faibles coûts en termes d’efficacité et d’emploi (voir par exemple Bargain, 2014 et Simmonet et Danzin, 2014).
+-   Cette réforme est la **plus juste** : elle réduit fortement les inégalités avec, probablement, de très faibles coûts en termes d'efficacité et d'emploi (voir par exemple Bargain, 2014 et Simmonet et Danzin, 2014).
 
--   Mais **cette réforme est aussi la plus coûteuse :** augmenter le socle à 900 euros avec une légère baisse du taux de cumul de la prime d’activité aurait un coût d’environ **24 milliards d’euros** (11 milliards de RSA et 13 milliards de prime d’activité).
+-   Mais **cette réforme est aussi la plus coûteuse :** augmenter le socle à 900 euros avec une légère baisse du taux de cumul de la prime d'activité aurait un coût d'environ **24 milliards d'euros** (11 milliards de RSA et 13 milliards de prime d'activité).
 
-Le dilemme entre redistribution et incitation est en fait un **triangle d’incompatibilité entre redistribution, incitations monétaires et coût budgétaire** (Bozio et Grenet 2017).
+Le dilemme entre redistribution et incitation est en fait un **triangle d'incompatibilité entre redistribution, incitations monétaires et coût budgétaire** (Bozio et Grenet 2017).
 
 ## Ne pas annihiler les coups de pouce
 
@@ -1387,27 +1387,27 @@ Le dilemme entre redistribution et incitation est en fait un **triangle d’inco
 
 L'objectif de **rémunérer le « mérite »** ne résout pas le problème car **deux philosophies** s'opposent.
 
--   **le travail à temps-plein doit payer :** Il faudrait créer une norme de temps-plein, forme d’emploi la plus propice à réduire la pauvreté.
+-   **le travail à temps-plein doit payer :** Il faudrait créer une norme de temps-plein, forme d'emploi la plus propice à réduire la pauvreté.
 
--   **chaque heure de travail doit payer**, c’est-à-dire mérite une hausse du revenu disponible : créer un écart de revenus à la fois entre l’inactivité et le mi-temps et entre le mi-temps et le temps-plein exerce une pression à la baisse sur le niveau des revenus d’assistance.
+-   **chaque heure de travail doit payer**, c'est-à-dire mérite une hausse du revenu disponible : créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein exerce une pression à la baisse sur le niveau des revenus d'assistance.
 
-## **Augmenter les gains à l’emploi par la hausse du Smic ou grâce à la prime d’activité ?**
+## **Augmenter les gains à l'emploi par la hausse du Smic ou grâce à la prime d'activité ?**
 
-Faut-il privilégier le soutien aux bas-salaires via le Smic (les salaires) ou via la prime d’activité et ses bonus individuels renforcés à la suite de la crise des gilets jaunes ? Smic et prime d’activité ne sont pas équivalents car la prime d’activité n’est pas un salaire :
+Faut-il privilégier le soutien aux bas-salaires via le Smic (les salaires) ou via la prime d'activité et ses bonus individuels renforcés à la suite de la crise des gilets jaunes ? Smic et prime d'activité ne sont pas équivalents car la prime d'activité n'est pas un salaire :
 
 -   **Le salaire est totalement individualisé** : le bénéfice de la prime pour un travailleur à bas salaire dépend de la composition de sa famille, du montant et de la nature des revenus de son conjoint
 
--   **Le salaire est plus prévisible pour les travailleurs.** Ils peuvent difficilement anticiper le montant de la prime d’activité compte tenu de son mode de calcul et des risques d’indus et de suspension/rappels
+-   **Le salaire est plus prévisible pour les travailleurs.** Ils peuvent difficilement anticiper le montant de la prime d'activité compte tenu de son mode de calcul et des risques d'indus et de suspension/rappels
 
--   **le salaire procure des droits sociaux** : le taux de remplacement au chômage ou à la retraite est réduit pour les bénéficiaires de la prime si l’on raisonne en revenus nets.
+-   **le salaire procure des droits sociaux** : le taux de remplacement au chômage ou à la retraite est réduit pour les bénéficiaires de la prime si l'on raisonne en revenus nets.
 
 ## **Deux objectifs, deux instruments**
 
-Selon le principe de Tinbergen, **lorsqu’il y a deux objectifs distincts, ici la lutte contre la pauvreté et les gains à l’emploi, il faut affecter à des instruments distincts la poursuite de ces objectifs**.
+Selon le principe de Tinbergen, **lorsqu'il y a deux objectifs distincts, ici la lutte contre la pauvreté et les gains à l'emploi, il faut affecter à des instruments distincts la poursuite de ces objectifs**.
 
 Dans cette optique, on pourrait considérer que
 
--   le **RSA et une prime d’activité entièrement familialisée** (sans bonus individuels) ont pour seul objectifs de lutter contre la pauvreté et les inégalités de niveau de vie
+-   le **RSA et une prime d'activité entièrement familialisée** (sans bonus individuels) ont pour seul objectifs de lutter contre la pauvreté et les inégalités de niveau de vie
 
     *Possibilité d'inclure les allocations chômage dans les "revenus d'activité"*
 
