@@ -1,7 +1,7 @@
 ---
 title: "La reprise d'emploi est-elle toujours rémunératrice?"
 subtitle: "Contradictions des politiques de lutte contre la pauvreté et pistes pour les surmonter"
-keywords: Assistance, Prime d'activité, Smic, Gains à l'emploi, Trappes à inactivité, TRappes à bas salaire
+keywords: Assistance, Prime d'activité, Smic, Gains à l'emploi, Trappes à inactivité, Trappes à bas salaire
 abstract: "Depuis les réformes instaurant le RSA activité en 2009 puis la prime d'activité en 2025, l'emploi est toujours plus rémunérateur que l'inactivité. Toutefois, travailler ne garantit pas la sortie de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum garanti aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie plus que l'assistance, mais les travailleurs partent de trop bas."
 
 author:
@@ -20,7 +20,7 @@ date-modified: today
 lang: fr
 
 format: 
-  #ofce-pdf: default
+  ofce-pdf: default
   ofce-html: default
  
 editor: visual
@@ -93,7 +93,7 @@ Pour répondre à la question « la reprise d'emploi est-elle rémunératrice?
 L'approche par cas-type est simplificatrice. Les revenus disponibles, ou niveaux de vie, ne tiennent pas compte ni des différences de coûts de la vie induites par le fait de travailler plutôt qu'être au foyer, en particulier dans les ménages avec enfants, ou lorsque le trajet domicile-travail est coûteux ; ni des aides locales sous conditions de ressources (tarification de la cantine scolaire par exemple). Elle ne tient pas compte non plus des avantages économiques liés à l'emploi qu'ils soient immédiats (tickets restaurant, prise en charge des cartes de transport) ou différés en termes de droits ouverts de chômage ou de retraite. L'approche néglige également le fait que les personnes peuvent accorder une valeur différente aux salaires et aux prestations sociales. Néanmoins, cette approche est cohérente avec la définition du niveau de vie utilisée pour mesurer les inégalités de revenus (rapport inter-décile, indice de Gini) et la pauvreté monétaire (voir @tip-ndvdef). Ces indicateurs, largement utilisés dans le débat public, ne tiennent pas compte, eux non plus, de la tarification de la cantine scolaire ou de l'avantage lié aux tickets-restaurant par exemple. Il ne faut donc pas exagérer le caractère simplificateur des cas-types que nous présentons : l'approche par le revenu disponible est une vision simplificatrice mais tangible, qui se traduit concrètement sur le compte en banque.
 
 ::: {#tip-ndvdef .callout-tip collapse="false"}
-##Définition du niveau de vie
+## Définition du niveau de vie
 
 Le niveau de vie d'un ménage est un indicateur conçu pour comparer les revenus disponibles de ménages de configuration différentes en tenant compte des économies d'échelle liées à la vie commune et des dépenses pour les enfants. Il est obtenu en divisant le revenu disponible (revenus professionnels ou de remplacement, revenus fonciers ou financiers auxquels on ajoute les prestations sociales reçues et dont on déduit les impôts directs sur le revenu) de l'ensemble du ménage par un nombre d'unités de consommation. En France et en Europe, les unités de consommation sont définies par l'INSEE et Eurostat selon l'échelle d'équivalence dite de l'OCDE modifiée qui attribue 1 UC au premier adulte du ménage, 0,5 UC aux autres personnes de 14 ans ou plus et 0,3 UC aux enfants de moins de 14 ans (car considérés comme ayant moins de besoins). Selon cette convention, le niveau de vie est considéré comme identique pour une personne seule avec un revenu disponible de 2 000 euros, un couple sans enfant qui dispose 3000 euros (1,5x2000), ou un couple avec un enfants de 10 ans qui dispose de 3 600 euros (1,8x2000).
 :::
@@ -113,8 +113,17 @@ L'approche par cas-type est critiquable dans la mesure où elle ne représente p
 Dans les cas-types étudiés, le système socio-fiscal actuel garantit que la reprise d'emploi est toujours rémunératrice, mais pas nécessairement toujours dans les mêmes proportions. Pour le mesurer, on utilisera deux indicateurs : le taux de prélèvement effectif et le taux effectif de gain à l'emploi (voir @tip-teg).
 
 ::: {#tip-teg .callout-tip collapse="false"}
-##Taux effectif de prélèvement et taux effectif de gain à l'emploi                                                    
-Outre la variation de revenu disponible du ménage, il est également possible de calculer un taux effectif de prélèvement (TEP) qui correspond à la baisse des transferts sociaux (nets d'impôt) par euro supplémentaire de revenu professionnel. Si, lorsque le revenu d'activité augmente de 1000 euros, les transferts sociaux nets baissent de 400 euros on dira que le TEP est de 40%. Dans ce cas, le revenu disponible augmente de 600 euros. $$TEP=\frac{\text{-Variation des transferts sociaux nets}}{\text{Variation du revenu professionnel}}=1-\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}$$ On peut définir le taux effectif de gain à l'emploi (TEG) comme la part de l'augmentation du revenu professionnel qui se traduit en augmentation du revenu disponible. Si lorsque le revenu d'activité augmente de 1000 euros, le revenu disponible augmente de 600 euros, on dira que le TEG est de 60%. $$TEG=\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}$$ 
+## Taux effectif de prélèvement et taux effectif de gain à l'emploi
+
+Outre la variation de revenu disponible du ménage, il est également possible de calculer un taux effectif de prélèvement (TEP) qui correspond à la baisse des transferts sociaux (nets d'impôt) par euro supplémentaire de revenu professionnel. Si, lorsque le revenu d'activité augmente de 1000 euros, les transferts sociaux nets baissent de 400 euros on dira que le TEP est de 40%. Dans ce cas, le revenu disponible augmente de 600 euros.
+
+$$
+TEP=\frac{\text{-Variation des transferts sociaux nets}}{\text{Variation du revenu professionnel}}=1-\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}
+$$
+
+On peut définir le taux effectif de gain à l'emploi (TEG) comme la part de l'augmentation du revenu professionnel qui se traduit en augmentation du revenu disponible. Si lorsque le revenu d'activité augmente de 1000 euros, le revenu disponible augmente de 600 euros, on dira que le TEG est de 60%. $$
+TEG=\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}
+$$
 :::
 
 Le cas d'une personne seule illustre la façon dont le système socio-fiscal assure que le travail paie mieux que l'assistance, même pour de petites durées de travail. Sans revenus d'activité, cette personne peut percevoir 851 euros de prestations sociales (559 euros de RSA et 292 euros d'allocations logement).
@@ -175,17 +184,9 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
       tooltip=paste("Revenu disponible",round(value,0), "euros")), 
     size = 3
   ) +
-#    geom_hline(
-#  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
-#              color = "grey40",linewidth = 0.5)+
-#    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
-#    color = "grey40",linewidth = 0.5)+
-  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
-                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
     guides(
     fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    colour=guide_legend(order = 2),
-    linetype = guide_legend(order = 3) # La légende des lignes en dernier
+    colour=guide_legend(order = 2)  # La légende du point en dernier
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -202,7 +203,7 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
   ) +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 2250), breaks = seq(0, 2250, by = 250)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2500), breaks = seq(0, 2500, by = 500)) + 
   theme(panel.border = element_blank())
 
 igraph <- girafe(ggobj = graph)
@@ -285,17 +286,9 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   scale_color_manual(
     values = c("Revenu disponible" = "orange")  
   ) +
-#      geom_hline(
-#  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
-#              color = "grey40",linewidth = 0.5)+
-#    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
-#    color = "grey40",linewidth = 0.5)+
-  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
-                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
     guides(
     fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    colour=guide_legend(order = 2),
-    linetype = guide_legend(order = 3) # La légende des lignes en dernier
+    colour=guide_legend(order = 2)
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -312,7 +305,7 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
   ) +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 250)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 500)) + 
   theme(panel.border = element_blank())
 
 igraph2 <- girafe(ggobj = graph2)
@@ -397,17 +390,9 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   scale_color_manual(
     values = c("Revenu disponible" = "orange")  
   ) +
-#      geom_hline(
-#  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
-#              color = "grey40",linewidth = 0.5)+
-#    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
-#    color = "grey40",linewidth = 0.5)+
-  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
-                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
     guides(
     fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    colour=guide_legend(order = 2),
-    linetype = guide_legend(order = 3) # La légende des lignes en dernier
+    colour=guide_legend(order = 2)
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -510,17 +495,9 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   scale_color_manual(
     values = c("Revenu disponible" = "orange")  
   ) +
-#      geom_hline(
-#  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
-#              color = "grey40",linewidth = 0.5)+
-#    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
-#    color = "grey40",linewidth = 0.5)+
-  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
-                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
     guides(
     fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    colour=guide_legend(order = 2),
-    linetype = guide_legend(order = 3) # La légende des lignes en dernier
+    colour=guide_legend(order = 2)
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -551,17 +528,14 @@ if (is_html_output()) {
 
 ```
 
-
 ::: {#tip-mdg .callout-tip collapse="false"}
-##Que change la prise en compte des coûts de garde des jeunes enfants ?                                          
-Pour illustrer les effets du coût de la garde sur les gains à l'emploi des familles avec de jeunes enfants, nous étudions ici deux cas-types de familles avec un enfant de 1 an : une mère isolée et un couple dans lequel le conjoint travaille à temps plein rémunéré au Smic. On suppose que lorsque la mère travaille, l'enfant est gardé par une assistante maternelle, la garde onéreuse la plus courante, au prorata du temps de travail de la mère.        
+## Que change la prise en compte des coûts de garde des jeunes enfants ?
 
-Le coût net de la garde est relativement modéré et représente 300 euros maximum, soit environ 10% du revenu disponible lorsque les deux conjoints sont au Smic à temps plein. Néanmoins, on peut également voir que le coût net de la garde augmente rapidement entre le mi-temps et le temps plein (il passe de 50 à 300 euros). Par conséquent, les incitations à passer du mi-temps au temps plein sont très faibles en présence d'un enfant d'âge préscolaire. 
- Le taux de privation matérielle et sociale est un indicateur social utilisé dans l'Union européenne, défini comme la part de personnes ne pouvant pas couvrir les dépenses liées à au moins cinq éléments de la vie courante sur treize considérés comme souhaitables, voire nécessaires, pour avoir un niveau de vie acceptable (Guio et al., 2017).  
+Pour illustrer les effets du coût de la garde sur les gains à l'emploi des familles avec de jeunes enfants, nous étudions ici deux cas-types de familles avec un enfant de 1 an : une mère isolée et un couple dans lequel le conjoint travaille à temps plein rémunéré au Smic. On suppose que lorsque la mère travaille, l'enfant est gardé par une assistante maternelle, la garde onéreuse la plus courante, au prorata du temps de travail de la mère.
+
+Le coût net de la garde est relativement modéré et représente 300 euros maximum, soit environ 10% du revenu disponible lorsque les deux conjoints sont au Smic à temps plein. Néanmoins, on peut également voir que le coût net de la garde augmente rapidement entre le mi-temps et le temps plein (il passe de 50 à 300 euros). Par conséquent, les incitations à passer du mi-temps au temps plein sont très faibles en présence d'un enfant d'âge préscolaire. Le taux de privation matérielle et sociale est un indicateur social utilisé dans l'Union européenne, défini comme la part de personnes ne pouvant pas couvrir les dépenses liées à au moins cinq éléments de la vie courante sur treize considérés comme souhaitables, voire nécessaires, pour avoir un niveau de vie acceptable (Guio et al., 2017).
 
 ```{r}
-#| label: fig-garde
-#| fig-cap: Revenu disponible après coût de garde selon le revenu professionnel (isolé un enfant)
 
 castyp <- read_excel("cas types smic jeune enfant.xlsx",sheet = "synthese")
 
@@ -571,89 +545,17 @@ nbuc=1.3
 seuilpm=1312*nbuc
 
 base<-castyp %>% 
-  filter(isocou=="isolé" & nbenf==1) %>% 
-  mutate(typrev=case_when(
+   mutate(typrev=case_when(
     activite==0 ~ "Sans revenu",
     activite==0.5 ~ "Mi-temps au Smic",
     activite==1 & Salaire==smic ~ "Temps plein au Smic",
-    TRUE ~ "Temps plein à 1,5 Smic")
+    TRUE ~ "Temps plein à 1,5 Smic"),
+    typfam=case_when(isocou=="isolé" & nbenf==1 ~ "Parent isolé",
+                           isocou=="couple" & actconj=="1 smic" & nbenf==1 ~ "En couple\nconjoint au smic",
+                     TRUE ~ "autre")
   ) %>% 
-  select(typrev,CGNET,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)	
-
-basegr<-base %>% 
-  pivot_longer(cols=c(CGNET,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)) 
-
-
-basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Mi-temps au Smic","Temps plein au Smic","Temps plein à 1,5 Smic"))
-
-basegr$name<-factor(basegr$name, levels=rev(c("CGNET","Salaire", "PF", "PL", "RSA", "PA", "RDISP_NET_CG")))
-
-graphI1 <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
-                                                       y = value, x = typrev)) + 
-  scale_fill_manual(
-    values = c("CGNET"="darkred","Salaire"= "#482677FF", "PF" = "#39568CFF", "PL" = "#238A8DFF", 
-               "RSA" = "#55C667FF", "PA" = "#95D840FF"),
-    labels = c("CGNET"="Coût net de la garde",
-               "PA" = "Prime d'activité",
-               "RSA" = "Revenu de solidarité active",
-               "PF" = "Prestations familiales",
-               "PL" = "Prestations logement",
-               "Salaire" = "Salaire" 
-    ),
-    # guide = guide_legend(reverse = TRUE)  
-  ) +
-  geom_bar(
-    position = "stack", 
-    stat = "identity", 
-    aes()
-  ) +
-  geom_point(
-    data = basegr %>% filter(name == 'RDISP_NET_CG'), 
-    aes(
-      x = typrev, y = round(value, 2), 
-      colour = "Revenu disponible net du coût de la garde", 
-    ), 
-    size = 3
-  ) +
-#      geom_hline(
-#  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
-#              color = "grey40",linewidth = 0.5)+
-#    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
-#    color = "grey40",linewidth = 0.5)+
-  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
-                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
-  labs(title = "Famille monoparentale\n avec un enfant")+
-    guides(
-    fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    colour=guide_legend(order = 2),
-    linetype = guide_legend(order = 3) # La légende des lignes en dernier
-  ) +
-  theme(
-    panel.background = element_rect(fill = "white"), 
-    plot.background = element_rect(fill = "white"),
-    legend.position = "none",
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    legend.text = element_text(size = rel(0.7)),
-    legend.title = element_blank(),
-    plot.title = element_text(size = rel(0.8), hjust = 0.7),
-    plot.caption = element_text(size = rel(0.5)),
-    plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
-    axis.ticks.y = element_blank(),
-    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
-  ) +
-  theme(panel.border = element_blank())
-
-base<-castyp %>% 
-  filter(isocou=="couple" & actconj=="1 smic" & nbenf==1) %>% 
-  mutate(typrev=case_when(
-    activite==0 ~ "Sans revenu",
-    activite==0.5 ~ "Mi-temps au Smic",
-    activite==1 & Salaire==smic ~ "Temps plein au Smic",
-    TRUE ~ "Temps plein à 1,5 Smic")
-  ) %>% 
-  select(typrev,CGNET,Ract_conj,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)	
+  filter(typfam!="autre") %>% 
+  select(typrev,typfam,CGNET,Ract_conj,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)	
 
 basegr<-base %>% 
   pivot_longer(cols=c(CGNET,Ract_conj,Salaire,PF,PL,RSA,PA, RDISP_NET_CG)) 
@@ -663,8 +565,12 @@ basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Mi-temps au Smic","T
 
 basegr$name<-factor(basegr$name, levels=rev(c("CGNET","Ract_conj","Salaire", "PF", "PL", "RSA", "PA", "RDISP_NET_CG")))
 
-graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
+basegr$typfam<-factor(basegr$typfam,levels=c("Parent isolé","En couple\nconjoint au smic"))
+
+
+graph_cmg <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
                                                                 y = value, x = typrev)) + 
+  facet_wrap(~ typfam)+
   scale_fill_manual(
     values = c("CGNET"="darkred",'Ract_conj' = 'grey50',"Salaire"= "#482677FF", "PF" = "#39568CFF", "PL" = "#238A8DFF", 
                "RSA" = "#55C667FF", "PA" = "#95D840FF"),
@@ -677,31 +583,24 @@ graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
                "Ract_conj"="Salaire du conjoint"
     ),
      ) +
-  geom_bar(
+   geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
-    aes()
+    aes(y=value, fill=name,tooltip=paste(name,":",round(value,0), "euros"))
   ) +
-  geom_point(
+    geom_point_interactive(
     data = basegr %>% filter(name == 'RDISP_NET_CG'), 
     aes(
       x = typrev, y = round(value, 2), 
       colour = "Revenu disponible net \n du coût de la garde", 
-    ), 
+      tooltip=paste("Revenu disponible net \n du coût de la garde :",round(value,0), "euros")), 
     size = 3
   ) +
-#      geom_hline(
-#  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
-#              color = "grey40",linewidth = 0.5)+
-#    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
-#    color = "grey40",linewidth = 0.5)+
-  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
-                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
-  labs(title = "Couple avec un enfant")+
+  
+labs(title = "Revenu disponible d'une famille avec un enfant âgé de 1 \nan gardé par sa mère et/ou une assitante maternelle")+
     guides(
     fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    colour=guide_legend(order = 2),
-    linetype = guide_legend(order = 3) # La légende des lignes en dernier
+    colour=guide_legend(order = 2)
   ) +
   theme(
     panel.background = element_rect(fill = "white"), 
@@ -716,19 +615,25 @@ graphC1_S <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
     plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
+    axis.text.x = element_text(size = rel(0.8), angle = 40, hjust = 1,vjust = 1),
+    axis.text.y = element_text(size = rel(0.8)),
+    strip.background = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.3),
+    strip.text=element_text(size = rel(0.7),face="bold")
   ) +
-  #labs(title="Couple 1 enfant - conjoint au smic",size=5)+
-  #scale_y_continuous(expand = c(0, 0), limits = c(0, 4000), breaks = seq(0, 4000, by = 500)) + 
+  scale_y_continuous(limits = c(-500, 4000), breaks = seq(-500, 4000, by = 500)) + 
   theme(panel.border = element_blank())
 
-graph_cdg<-graphI1+graphC1_S
 
-graph_cdg
+igraph_cmg <- girafe(ggobj = graph_cmg)
 
+if (is_html_output()) {
+  igraph_cmg
+} else {
+  print(graph_cmg)
+}
 ```
 :::
-
 
 ## Disparité du taux effectif de gain à l'emploi et rôle de la prime d'activité
 
@@ -736,20 +641,24 @@ Depuis le 1er janvier 2016, la prime d'activité a remplacé le RSA activité et
 
 $$
 \begin{aligned}
-\text{Prime d'activité du foyer} = &\text{Montant forfaitaire (fonction de la situation familiale)}\\
-&+ \text{bonus d'activité individuels}\\ 
-&- \text{aides au logement dans la limite d'un forfait logement}\\ 
-&- \text{( prestations familiales + minima sociaux)}\\ 
-&- \text{39 % des revenus professionnels}\\ 
-&- \text{100 % des revenus non professionnels.}\\
+\text{Prime d'activité du foyer }&=\text{ Montant forfaitaire (selon la situation familiale)}\\
+&+ \text{ bonus d'activité individuels}\\ 
+&- \text{ aides au logement dans la limite d'un forfait logement}\\ 
+&- \text{ (prestations familiales + minima sociaux)}\\ 
+&- \text{ 39 \% des revenus professionnels}\\ 
+&- \text{ 100 \% des revenus non professionnels.}
 \end{aligned}
-$$ Le montant de la prime d'activité versée au foyer est nul si le résultat de ce calcul est inférieur à 15 euros.
+$$
+
+Le montant de la prime d'activité versée au foyer est nul si le résultat de ce calcul est inférieur à 15 euros.
 
 Avec la prime d'activité, le système social et fiscal remplit bien l'objectif qui lui a été fixé : rendre le travail plus rémunérateur que l'assistance, de façon pérenne et pour toutes les reprises d'emploi. Toutefois, les gains effectifs à la reprise d'emploi sont loin d'être homogènes et le rôle de la prime d'activité pour un travailleur rémunéré au Smic diffère selon les caractéristiques de son ménage.
 
 Pour les cas que nous avons étudiés, le taux effectif de gain pour le passage de l'inactivité à un emploi à mi-temps au Smic est plus faible que pour un emploi à temps complet. Il varie de 48% à 58% pour une personne seule selon le nombre d'enfants à charge et de 36% à 87% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature et le nombre d'enfants à charge. Le TEG le plus faible est obtenu avec 3 enfants lorsque le conjoint est salarié au Smic car la reprise d'emploi réduit à la fois les montants d'aides au logement (-174 €) et de prime d'activité (-271 €). Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge car le couple ne bénéficie initialement que des aides au logement (89 €) et n'a donc que cela à perdre.
 
 Le taux effectif de gain pour le passage de l'inactivité à un emploi à temps plein rémunéré au Smic est plus élevé que pour un mi-temps. Il varie de 58% à 65% pour une personne seule selon le nombre d'enfants à charge et de 52% à 94% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Comme pour l'emploi à mi-temps, le TEG le plus faible est obtenu avec 3 enfants lorsque le conjoint est salarié au Smic qui, en plus de la baisse des aides au logement et de la prime d'activité, voit également son montant de prestations familiales baisser de 97 €. Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge qui n'a droit qu'aux aides au logement quand il n'y a qu'un emploi dans le couple.
+
+**Guillaume : au choix un graphique avec les 4 ou deux graphiques comme actuellement**
 
 ```{r}
 #| label: fig-TGE
@@ -760,105 +669,93 @@ castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
 base<-castyp %>% 
   mutate(
     casconj=case_when(isocou=="isolé" ~ "Sans conjoint",
-                  isocou=="couple" & actconj=="Inactif" ~ "Conjoint sans revenu",
-                  isocou=="couple" & actconj=="Chômeur" ~ "Conjoint chômeur",
-                  isocou=="couple" & actconj=="1 smic" ~ "Conjoint salarié au smic",
-                  TRUE ~ "Conjoint salarié à 1,5 smic"),
+                  isocou=="couple" & actconj=="Inactif" ~ "Conjoint \nsans revenu",
+                  isocou=="couple" & actconj=="Chômeur" ~ "Conjoint \nchômeur",
+                  isocou=="couple" & actconj=="1 smic" ~ "Conjoint \nsalarié au smic",
+                  TRUE ~ "Conjoint \nsalarié à 1,5 smic"),
     enf=case_when(nbenf==0 ~ "0 enfant",
                   nbenf==1 ~ "1 enfant",
                   nbenf==2 ~ "2 enfants",
                   TRUE ~ "3 enfants"),
-    cas=paste0(casconj," - ",enf),
     act=case_when(activite<1 ~ 100*activite,
                   Salaire==smic ~ 100,
                   TRUE ~ 150),
+    emp=case_when(
+    Salaire==0 ~ "Sans emploi",
+    Salaire==699.35 ~ "Emploi à mi-temps au Smic",
+    Salaire==1398.70 ~ "Emploi à temps plein au Smic",
+    TRUE~"autre"
+  ),
     RDISP_SSPA=RDISP-PA
     ) %>% 
-  select(casconj,enf,cas,Salaire,act,RDISP,RDISP_SSPA) 
+  select(casconj,enf,Salaire,act,RDISP,RDISP_SSPA) 
 
-basegr<-base %>% 
+basegr1<-base %>% 
   pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
   mutate(
-    var_rp_50=Salaire_50-Salaire_0,
-    var_rd_50=RDISP_50-RDISP_0,
-    var_rdspa_50=RDISP_SSPA_50-RDISP_SSPA_0,
-    TGM_50=100*(var_rd_50/var_rp_50),
-    TGMspa_50=100*(var_rdspa_50/var_rp_50),
-    var_rp_100=Salaire_100-Salaire_0,
-    var_rd_100=RDISP_100-RDISP_0,
-    var_rdspa_100=RDISP_SSPA_100-RDISP_SSPA_0,
-    TGM_100=100*(var_rd_100/var_rp_100),
-    TGMspa_100=100*(var_rdspa_100/var_rp_100),
-    var_rp_150=Salaire_150-Salaire_0,
-    var_rd_150=RDISP_150-RDISP_0,
-    var_rdspa_150=RDISP_SSPA_150-RDISP_SSPA_0,
-    TGM_150=100*(var_rd_150/var_rp_150),
-    TGMspa_150=100*(var_rdspa_150/var_rp_150)
+    TGM=round(100*((RDISP_50-RDISP_0)/(Salaire_50-Salaire_0)),1),
+    TGMspa=round(100*((RDISP_SSPA_50-RDISP_SSPA_0)/(Salaire_50-Salaire_0)),1),
+    emploi="Emploi à mi-temps"
  ) %>% 
-  select(casconj,enf,cas,TGM_50,TGM_100,TGM_150,TGMspa_50,TGMspa_100,TGMspa_150)
+  select(casconj,enf,emploi,TGM,TGMspa)
+
+basegr2<-base %>% 
+  pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
+  mutate(
+    TGM=round(100*((RDISP_100-RDISP_0)/(Salaire_100-Salaire_0)),1),
+    TGMspa=round(100*((RDISP_SSPA_100-RDISP_SSPA_0)/(Salaire_100-Salaire_0)),1),
+    emploi="Emploi à temps plein"
+ ) %>% 
+  select(casconj,enf,emploi,TGM,TGMspa)
+
+basegr<-rbind(basegr1, basegr2)
 
 basegr$enf <- factor(basegr$enf, levels=c("0 enfant","1 enfant","2 enfants","3 enfants"))
 
-basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint sans revenu",
-                                               "Conjoint chômeur","Conjoint salarié au smic",
-                                               "Conjoint salarié à 1,5 smic"))
+basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint \nsans revenu",
+                                               "Conjoint \nchômeur","Conjoint \nsalarié au smic",
+                                               "Conjoint \nsalarié à 1,5 smic"))
+
+basegr$emploi <- factor(basegr$emploi, levels=c("Emploi à mi-temps","Emploi à temps plein"))
 
 
+base_long <- basegr %>%
+  select(enf, emploi, casconj, TGM,TGMspa) %>%
+  pivot_longer(cols = c(TGM,TGMspa),
+               names_to = "prime_activite",
+               values_to = "TGM") %>%
+  mutate(prime_activite = ifelse(prime_activite == "TGM", "Avec \nprime d'activité", "Sans \nprime d'acivité"))
 
-graph4a <- ggplot() +
-  geom_point(data=basegr, aes(x = casconj, y = TGM_50, colour = enf, text = paste("", number(TGM_50, accuracy = 1))
-  ), size = 3) +  
+
+graph4 <- ggplot() +
+  geom_point_interactive(
+    data = base_long, aes(x =casconj, y = TGM, 
+      colour = enf, 
+      tooltip=paste("Taux effectif de gain à l'emploi :",TGM, "%")), 
+    size = 2
+  )+
+  facet_wrap(~emploi,nrow=1)+
+  labs(title = "Avec ou sans prime d'activité") +
   theme_minimal() +
-  scale_y_continuous(limits = c(0, 100)) + 
-  labs(title = "Emploi à mi-temps")+
+  scale_y_continuous(limits = c(-10, 100)) + 
   theme(
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    legend.title = element_blank(),
-    legend.position = "none",
-    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
-    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1),
-    plot.title = element_text(size = 10, color="#5E4FA2")
-  )
-
-
-graph4b <- ggplot() +
-  geom_point(data=basegr, aes(x = casconj, y = TGM_100, colour = enf, text = paste("", number(TGM_100, accuracy = 1))
-  ), size = 3) +  
-  theme_minimal() +
-  scale_y_continuous(limits = c(0, 100)) + 
-  labs(title = "Emploi à temps plein")+
-  theme(
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.3),
+    panel.spacing = unit(0.5, "lines"),
+    strip.background = element_blank(),
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.title = element_blank(),
     legend.position = "right",
     plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1),
-    plot.title = element_text(size = 10, color="#5E4FA2")
-  )
+    axis.text.x = element_text(size = rel(0.8), angle = 40, hjust = 1, vjust = 1),
+    axis.text.y = element_text(size = rel(0.8), angle = 40, hjust = 1, vjust = 1),
+    strip.text= element_text(size = rel(0.7),face="bold"),
+    plot.title = element_text(size = rel(0.9), color="#5E4FA2",face="bold")
+  )+
+  facet_grid(prime_activite ~ emploi)
 
-
-
-graph4<-graph4a+graph4b
-#+ plot_annotation(title="",
-    #               theme = theme(plot.title = element_text(size = rel(1.2))))
-
-igraph4<-ggplotly(graph4, tooltip="text")
-igraph4<-igraph4 %>%
-  plotly::layout(
-     legend = list(
-      orientation = 'v',  
-      x = 1,  
-      xanchor = 'left',  
-      y = 0.5,
-      title = list(text = ""),
-      itemwidth=60,
-      traceorder='normal'
-    )
-  )
+igraph4<-girafe(ggobj = graph4)
 
 if (is_html_output()) {
   igraph4
@@ -869,88 +766,79 @@ if (is_html_output()) {
 
 ```
 
-L'analyse des TEG sans prime d'activité met en lumière les effets différenciés de cette prestation selon la composition du ménage, le revenu du conjoint et sa nature. Pour une personne seule, la prime d'activité a augmenté le TEG d'un emploi à plein temps au Smic pour les célibataires sans enfant et les parents isolés avec un ou deux enfants, rapprochant les gains à l'emploi de ceux d'un parent isolé avec 3 enfants qui n'y est pas éligible. Pour les personnes vivant en couple, l'impact de la prime d'activité diffère fortement selon la situation du conjoint. La prime d'activité augmente fortement le TEG du premier emploi dans le couple (conjoint sans revenu) mais réduit celui du deuxième emploi (conjoint salarié au Smic ou à 1,5 Smic).
-
 ```{r}
-#| label: fig-TGE2
-#| fig-cap: Taux  effectif de gain à l'emploi sans prime d'activité pour une reprise d'emploi au Smic à mi-temps ou à temps plein selon la configuration familiale
-
+#| label: fig-TGEa
+#| fig-cap: Taux  effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps ou à temps-plein, selon la configuration familiale
 
 castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
 
 base<-castyp %>% 
   mutate(
     casconj=case_when(isocou=="isolé" ~ "Sans conjoint",
-                  isocou=="couple" & actconj=="Inactif" ~ "Conjoint sans revenu",
-                  isocou=="couple" & actconj=="Chômeur" ~ "Conjoint chômeur",
-                  isocou=="couple" & actconj=="1 smic" ~ "Conjoint salarié au smic",
-                  TRUE ~ "Conjoint salarié à 1,5 smic"),
+                  isocou=="couple" & actconj=="Inactif" ~ "Conjoint \nsans revenu",
+                  isocou=="couple" & actconj=="Chômeur" ~ "Conjoint \nchômeur",
+                  isocou=="couple" & actconj=="1 smic" ~ "Conjoint \nsalarié au smic",
+                  TRUE ~ "Conjoint \nsalarié à 1,5 smic"),
     enf=case_when(nbenf==0 ~ "0 enfant",
                   nbenf==1 ~ "1 enfant",
                   nbenf==2 ~ "2 enfants",
                   TRUE ~ "3 enfants"),
-    cas=paste0(casconj," - ",enf),
     act=case_when(activite<1 ~ 100*activite,
                   Salaire==smic ~ 100,
                   TRUE ~ 150),
+    emp=case_when(
+    Salaire==0 ~ "Sans emploi",
+    Salaire==699.35 ~ "Emploi à mi-temps au Smic",
+    Salaire==1398.70 ~ "Emploi à temps plein au Smic",
+    TRUE~"autre"
+  ),
     RDISP_SSPA=RDISP-PA
     ) %>% 
-  select(casconj,enf,cas,Salaire,act,RDISP,RDISP_SSPA) 
+  select(casconj,enf,Salaire,act,RDISP,RDISP_SSPA) 
 
-basegr<-base %>% 
+basegr1<-base %>% 
   pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
   mutate(
-    var_rp_50=Salaire_50-Salaire_0,
-    var_rd_50=RDISP_50-RDISP_0,
-    var_rdspa_50=RDISP_SSPA_50-RDISP_SSPA_0,
-    TGM_50=100*(var_rd_50/var_rp_50),
-    TGMspa_50=100*(var_rdspa_50/var_rp_50),
-    var_rp_100=Salaire_100-Salaire_0,
-    var_rd_100=RDISP_100-RDISP_0,
-    var_rdspa_100=RDISP_SSPA_100-RDISP_SSPA_0,
-    TGM_100=100*(var_rd_100/var_rp_100),
-    TGMspa_100=100*(var_rdspa_100/var_rp_100),
-    var_rp_150=Salaire_150-Salaire_0,
-    var_rd_150=RDISP_150-RDISP_0,
-    var_rdspa_150=RDISP_SSPA_150-RDISP_SSPA_0,
-    TGM_150=100*(var_rd_150/var_rp_150),
-    TGMspa_150=100*(var_rdspa_150/var_rp_150)
+    TGM=round(100*((RDISP_50-RDISP_0)/(Salaire_50-Salaire_0)),1),
+    TGMspa=round(100*((RDISP_SSPA_50-RDISP_SSPA_0)/(Salaire_50-Salaire_0)),1),
+    emploi="Emploi à mi-temps"
  ) %>% 
-  select(casconj,enf,cas,TGM_50,TGM_100,TGM_150,TGMspa_50,TGMspa_100,TGMspa_150)
+  select(casconj,enf,emploi,TGM,TGMspa)
+
+basegr2<-base %>% 
+  pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
+  mutate(
+    TGM=round(100*((RDISP_100-RDISP_0)/(Salaire_100-Salaire_0)),1),
+    TGMspa=round(100*((RDISP_SSPA_100-RDISP_SSPA_0)/(Salaire_100-Salaire_0)),1),
+    emploi="Emploi à temps plein"
+ ) %>% 
+  select(casconj,enf,emploi,TGM,TGMspa)
+
+basegr<-rbind(basegr1, basegr2)
 
 basegr$enf <- factor(basegr$enf, levels=c("0 enfant","1 enfant","2 enfants","3 enfants"))
 
-basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint sans revenu",
-                                               "Conjoint chômeur","Conjoint salarié au smic",
-                                               "Conjoint salarié à 1,5 smic"))
+basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint \nsans revenu",
+                                               "Conjoint \nchômeur","Conjoint \nsalarié au smic",
+                                               "Conjoint \nsalarié à 1,5 smic"))
+
+basegr$emploi <- factor(basegr$emploi, levels=c("Emploi à mi-temps","Emploi à temps plein"))
 
 
-
-graph4c <- ggplot() +
-  geom_point(data=basegr, aes(x = casconj, y = TGMspa_50, colour = enf, text = paste("Taux effectif de gain à l'emploi:", number(TGMspa_50, accuracy = 1))
-  ), size = 3) +  
+graph4a <- ggplot() +
+  geom_point_interactive(
+    data = basegr, aes(x =casconj, y = TGM, 
+      colour = enf, 
+      tooltip=paste("Taux effectif de gain à l'emploi :",TGM, "%")), 
+    size = 2
+  )+
+  facet_wrap(~emploi,nrow=1)+
   theme_minimal() +
   scale_y_continuous(limits = c(-10, 100)) + 
-  labs(title = "Emploi à mi-temps")+
   theme(
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    legend.title = element_blank(),
-    legend.position = "none",
-    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
-    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1),
-    plot.title = element_text(size = 10, color="#5E4FA2")
-  )
-
-
-graph4d <- ggplot() +
-  geom_point(data=basegr, aes(x = casconj, y = TGMspa_100, colour = enf, text = paste("Taux effectif de gain à l'emploi:", number(TGMspa_100, accuracy = 1))
-  ), size = 3) +  
-  theme_minimal() +
-  scale_y_continuous(limits = c(-10, 100)) + 
-  labs(title = "Emploi à temps plein")+
-  theme(
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.3),
+    panel.spacing = unit(0.5, "lines"),
+    strip.background = element_blank(),
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.title = element_blank(),
@@ -958,35 +846,114 @@ graph4d <- ggplot() +
     plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1),
-    plot.title = element_text(size = 10, color="#5E4FA2")
+    strip.text= element_text(size = rel(0.8),face="bold"),
+    plot.title = element_text(size = rel(0.9), color="#5E4FA2",face="bold")
   )
 
 
-
-graph4bis<-graph4c+graph4d
-#+ plot_annotation(title="",
- #                  theme = theme(plot.title = element_text(size = rel(1.2))))
-
-igraph4bis<-ggplotly(graph4bis, tooltip="text")
-igraph4bis<-igraph4bis %>%
-  plotly::layout(
-     legend = list(
-      orientation = 'v',  
-      x = 1,  
-      xanchor = 'left',  
-      y = 0.5,
-      title = list(text = ""),
-      itemwidth=60,
-      traceorder='normal'
-    )
-  )
+igraph4a<-girafe(ggobj = graph4a)
 
 if (is_html_output()) {
-  igraph4bis
+  igraph4a
 } else {
-  print(graph4bis)
+  print(graph4a)
 }
+```
 
+L'analyse des TEG sans prime d'activité met en lumière les effets différenciés de cette prestation selon la composition du ménage, le revenu du conjoint et sa nature. Pour une personne seule, la prime d'activité a augmenté le TEG d'un emploi à plein temps au Smic pour les célibataires sans enfant et les parents isolés avec un ou deux enfants, rapprochant les gains à l'emploi de ceux d'un parent isolé avec 3 enfants qui n'y est pas éligible. Pour les personnes vivant en couple, l'impact de la prime d'activité diffère fortement selon la situation du conjoint. La prime d'activité augmente fortement le TEG du premier emploi dans le couple (conjoint sans revenu) mais réduit celui du deuxième emploi (conjoint salarié au Smic ou à 1,5 Smic).
+
+```{r}
+#| label: fig-TGEb
+#| fig-cap: Taux  effectif de gain à l'emploi sans prime d'activité pour une reprise d'emploi au Smic à mi-temps ou à temps-plein, selon la configuration familiale
+
+castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
+
+base<-castyp %>% 
+  mutate(
+    casconj=case_when(isocou=="isolé" ~ "Sans conjoint",
+                  isocou=="couple" & actconj=="Inactif" ~ "Conjoint \nsans revenu",
+                  isocou=="couple" & actconj=="Chômeur" ~ "Conjoint \nchômeur",
+                  isocou=="couple" & actconj=="1 smic" ~ "Conjoint \nsalarié au smic",
+                  TRUE ~ "Conjoint \nsalarié à 1,5 smic"),
+    enf=case_when(nbenf==0 ~ "0 enfant",
+                  nbenf==1 ~ "1 enfant",
+                  nbenf==2 ~ "2 enfants",
+                  TRUE ~ "3 enfants"),
+    act=case_when(activite<1 ~ 100*activite,
+                  Salaire==smic ~ 100,
+                  TRUE ~ 150),
+    emp=case_when(
+    Salaire==0 ~ "Sans emploi",
+    Salaire==699.35 ~ "Emploi à mi-temps au Smic",
+    Salaire==1398.70 ~ "Emploi à temps plein au Smic",
+    TRUE~"autre"
+  ),
+    RDISP_SSPA=RDISP-PA
+    ) %>% 
+  select(casconj,enf,Salaire,act,RDISP,RDISP_SSPA) 
+
+basegr1<-base %>% 
+  pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
+  mutate(
+    TGM=round(100*((RDISP_50-RDISP_0)/(Salaire_50-Salaire_0)),1),
+    TGMspa=round(100*((RDISP_SSPA_50-RDISP_SSPA_0)/(Salaire_50-Salaire_0)),1),
+    emploi="Emploi à mi-temps"
+ ) %>% 
+  select(casconj,enf,emploi,TGM,TGMspa)
+
+basegr2<-base %>% 
+  pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
+  mutate(
+    TGM=round(100*((RDISP_100-RDISP_0)/(Salaire_100-Salaire_0)),1),
+    TGMspa=round(100*((RDISP_SSPA_100-RDISP_SSPA_0)/(Salaire_100-Salaire_0)),1),
+    emploi="Emploi à temps plein"
+ ) %>% 
+  select(casconj,enf,emploi,TGM,TGMspa)
+
+basegr<-rbind(basegr1, basegr2)
+
+basegr$enf <- factor(basegr$enf, levels=c("0 enfant","1 enfant","2 enfants","3 enfants"))
+
+basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint \nsans revenu",
+                                               "Conjoint \nchômeur","Conjoint \nsalarié au smic",
+                                               "Conjoint \nsalarié à 1,5 smic"))
+
+basegr$emploi <- factor(basegr$emploi, levels=c("Emploi à mi-temps","Emploi à temps plein"))
+
+
+graph4b <- ggplot() +
+  geom_point_interactive(
+    data = basegr, aes(x =casconj, y = TGMspa, 
+      colour = enf, 
+      tooltip=paste("Taux effectif de gain à l'emploi sans prime d'activité :",TGMspa, "%")), 
+    size = 2
+  )+
+  facet_wrap(~emploi,nrow=1)+
+  theme_minimal() +
+  scale_y_continuous(limits = c(-10, 100)) + 
+  theme(
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.3),
+    panel.spacing = unit(0.5, "lines"),
+    strip.background = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.title = element_blank(),
+    legend.position = "right",
+    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
+    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+    axis.text.x = element_text(size = rel(0.8), angle = 40, hjust = 1, vjust = 1),
+    strip.text= element_text(size = rel(0.8),face="bold"),
+    plot.title = element_text(size = rel(0.9), color="#5E4FA2",face="bold")
+  )
+
+
+igraph4b<-girafe(ggobj = graph4b)
+
+if (is_html_output()) {
+  igraph4b
+} else {
+  print(graph4b)
+}
 
 ```
 
@@ -1018,8 +985,8 @@ base<-castyp %>%
   )) %>% 
   filter(cas != "autre")  %>% 
   mutate(
-    gainmarginal = RDISP,
-    gainmarginal_sspa = round(RDISP-PA,2)
+    gainmarginal = round(RDISP,1),
+    gainmarginal_sspa = round(RDISP-PA,1)
     
   ) %>% 
   select(cas, activite, gainmarginal,gainmarginal_sspa)
@@ -1038,71 +1005,40 @@ base_long<-base %>% select(gainmarginal_sspa,gainmarginal,cas,revenu) %>%
 
 base_long$variable <- factor(base_long$variable, levels=c("gainmarginal_sspa","gainmarginal"),labels = c("Sans prime d'activité", "Avec prime d'activité"))
 
-graphG2a<-ggplot() +
-  geom_col(data = base_long, aes(x = revenu, y = valeur, fill = variable), 
+graphG2<-ggplot() +
+  geom_col_interactive(data = base_long, 
+                       aes(x = revenu, y = valeur, fill = variable,
+           tooltip=paste("Gain marginal pour 100 € de salaire en plus:",valeur, "euros")), 
            position = position_dodge(width = 0.6),  
            width = 0.4) + 
   facet_wrap(~ cas) +
   theme_minimal() +
-  scale_fill_manual(values = c("Sans prime d'activité" = "orange", "Avec prime d'activité" = "lightgreen")) +
+  scale_fill_manual(values = c("Sans prime d'activité" = "#482677FF", "Avec prime d'activité" = "#95D840FF")) +
   scale_y_continuous(limits = c(-10, 100)) +
   scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
- labs(x = "Revenu individuel en parts de smic",
+ labs(title="Avec ou sans prime d'activité",
+ x = "Revenu individuel en parts de smic",
       y = "Taux de gain marginal") + 
   theme(
     legend.position = "bottom",
     legend.title = element_blank(),
-    axis.title.x = element_text(size = 10),  
-    axis.title.y = element_text(size = 10),
-    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)
-    #plot.title = element_text(size = 10, color = "#FDAE61", face = "bold")
-    
+    plot.margin = margin(t = 2, r = 5, b = 2, l = 5),
+    axis.title.x = element_text(size = rel(0.8)),  
+    axis.title.y = element_text(size = rel(0.8)),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.3),
+    legend.key.size = unit(0.5, "lines"),  # taille des carrés
+    plot.title = element_text(size = 10, color = "#5E4FA2", face = "bold")
     )
 
 
 
-graphG2b<-ggplot() +
-  geom_col(data = base_long, aes(x = revenu, y = valeur, fill = cas), 
-           position = position_dodge(width = 0.6),  
-           width = 0.4) + 
-  facet_wrap(~ variable) +
-  theme_minimal() +
-  scale_fill_brewer(palette = "Spectral") +
-  scale_y_continuous(limits = c(-10, 100)) +
-  scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
- labs(x = "Revenu individuel en parts de smic",
-      y = "Taux de gain marginal") + 
-  theme(
-    legend.position = "bottom",
-    legend.title = element_blank(),
-    axis.title.x = element_text(size = 10),  
-    axis.title.y = element_text(size = 10),
-    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)
-    #plot.title = element_text(size = 10, color = "#FDAE61", face = "bold")
-    )
+igraphG2<-girafe(ggobj = graphG2)
 
-#graphG2i <- ggplotly(graphG2, tooltip = "text")
-#graphG2i <- graphG2i %>%
-#  plotly::layout(
-#     legend = list(
-#      orientation = 'h',  
-#      x = 0.5,  
-#      xanchor = 'center',  
-#      y = -0.3,
-#      title = list(text = ""),
-#      itemwidth=60,
-#      traceorder='normal'
-#    )
-#  )
-
-
-#if (is_html_output()) {
-#  graphG2i
-#} else {
-  print(graphG2a)
-  #print(graphG2b)
-  
-#}
+if (is_html_output()) {
+  igraphG2
+} else {
+  print(graphG2)
+}
 
   #la norme dans ces cas aujourd'hui c'est de choisir le graphique sur lequel il y a le plus de graphiques (plutôt que de multiplier les barres sur chaque graph)
 
@@ -1115,10 +1051,11 @@ Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvr
 [^3]: Si la prime d'activité permet à certains foyers de franchir le seuil de pauvreté monétaire, l'analyse par cas types montre que certains foyers à bas salaire n'y sont pas éligibles. S'y ajoutent ceux qui ne recourent pas à cette prestation bien que leur niveau de vie soit inférieur au seuil de pauvreté monétaire.
 
 ::: {#tip-tpm .callout-tip collapse="false"}
-##La pauvreté monétaire et les privations matérielles et sociales
-D'après la statistique publique (INSEE, Eurostat), un individu est pauvre d'un point de vue monétaire si le niveau de vie du ménage auquel il appartient est inférieur à 60% du niveau de vie médian. La pauvreté monétaire est ainsi un concept relatif : si le niveau de vie de tous les ménages augmente de 10%, le taux de pauvreté monétaire restera inchangé. Par convention, le seuil de pauvreté monétaire est le même dans tout le pays, mais il varie au sein de l'Union européenne d'un pays à l'autre. La pauvreté monétaire est donc définie uniquement par les revenus. La seule prise en compte des différences de besoins se fait par l'échelle d'équivalence qui définit le nombre d'unités de consommation (UC) du ménage selon sa composition. Le niveau de vie ne prend donc pas en compte le coût du logement ni les besoins différenciés en transport, logement ou chauffage selon le lieu de vie. Le dernier seuil de pauvreté monétaire publié par l'Insee est de 1 288 euros par UC pour l'année 2023. Pour le comparer aux montants des prestations en 2024, nous avons appliqué à ce seuil l'inflation observée entre 2023 et juillet 2024, ce qui amène à un seuil de 1 312 euros par UC. 
+## La pauvreté monétaire et les privations matérielles et sociales
 
-Le taux de privation matérielle et sociale est un indicateur social utilisé dans l'union européenne, défini comme la part de personnes ne pouvant pas couvrir les dépenses liées à au moins cinq éléments de la vie courante sur treize considérés comme souhaitables, voire nécessaires, pour avoir un niveau de vie acceptable (Guio et al., 2017). 
+D'après la statistique publique (INSEE, Eurostat), un individu est pauvre d'un point de vue monétaire si le niveau de vie du ménage auquel il appartient est inférieur à 60% du niveau de vie médian. La pauvreté monétaire est ainsi un concept relatif : si le niveau de vie de tous les ménages augmente de 10%, le taux de pauvreté monétaire restera inchangé. Par convention, le seuil de pauvreté monétaire est le même dans tout le pays, mais il varie au sein de l'Union européenne d'un pays à l'autre. La pauvreté monétaire est donc définie uniquement par les revenus. La seule prise en compte des différences de besoins se fait par l'échelle d'équivalence qui définit le nombre d'unités de consommation (UC) du ménage selon sa composition. Le niveau de vie ne prend donc pas en compte le coût du logement ni les besoins différenciés en transport, logement ou chauffage selon le lieu de vie. Le dernier seuil de pauvreté monétaire publié par l'Insee est de 1 288 euros par UC pour l'année 2023. Pour le comparer aux montants des prestations en 2024, nous avons appliqué à ce seuil l'inflation observée entre 2023 et juillet 2024, ce qui amène à un seuil de 1 312 euros par UC.
+
+Le taux de privation matérielle et sociale est un indicateur social utilisé dans l'union européenne, défini comme la part de personnes ne pouvant pas couvrir les dépenses liées à au moins cinq éléments de la vie courante sur treize considérés comme souhaitables, voire nécessaires, pour avoir un niveau de vie acceptable (Guio et al., 2017).
 :::
 
 Le niveau de vie d'un célibataire sans enfant sans revenus d'activité et recourant à toutes les prestations est de 851 euros par UC ce qui est inférieur de 35% au seuil de pauvreté monétaire : son intensité de pauvreté (c'est-à-dire écart au seuil de pauvreté) est donc de 35%. Un emploi à mi-temps au Smic ne lui permet pas de franchir le seuil de pauvreté (intensité de 9%). Le célibataire sans enfant franchit le seuil de pauvreté monétaire avec un Smic à plein temps même s'il ne recourt pas à la prime d'activité et son niveau de vie atteint 126% du seuil s'il y recourt. En revanche, un emploi à mi-temps ne permet pas de sortir de la pauvreté même si la prime d'activité en réduit l'intensité (de 30% avant prime à 9% après).
@@ -1167,7 +1104,7 @@ base$nbenf2 <- factor(base$nbenf2, levels = c("Sans enfant", "1 enfant", "2 enfa
 
 seuils <- data.frame(
   seuil = c(seuilpm, seuilpm*4/6),
-  type = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire")
+  type = c("Seuil de pauvreté monétaire (60 %)", "Seuil de grande pauvreté monétaire (40 %)")
 )
 
 base_long <- base %>%
@@ -1177,27 +1114,31 @@ base_long <- base %>%
                values_to = "montant") %>%
   mutate(prime_activite = ifelse(prime_activite == "NVIE", "Avec \nprime d'activité", "Sans \nprime d'acivité"))
 
-graph_pm<-ggplot(base_long, aes(x = nbenf2, y = montant, color = emp)) +
-  geom_point(size = 3) +
+graph_pm<-ggplot() +
+    geom_point_interactive(
+    data = base_long, aes(x =nbenf2, y = round(montant,0), 
+      colour = emp, 
+      tooltip=paste("Niveau de vie :",round(montant,0), "€")), 
+    size = 3
+  )+
   facet_wrap(~cas, nrow = 1) +
   geom_hline(data = seuils, aes(yintercept = seuil, linetype = type),
              color = "grey40", linewidth = 0.5) +
   scale_y_continuous(limits = c(0, 2500)) +
   scale_linetype_manual(
     name = "", 
-    values = c("Seuil de pauvreté monétaire" = "solid", 
-               "Seuil de grande pauvreté monétaire" = "dashed")
+    values = c("Seuil de pauvreté monétaire (60 %)" = "solid", 
+               "Seuil de grande pauvreté monétaire (40 %)" = "dashed")
   ) +
-  labs(title = "Montant avec/sans prime d'activité",
+  labs(title = "Avec ou sans prime d'activité",
        color = "Statut emploi",
-       linetype = "Seuils",
-       subtitle = "Comparaison selon le cas") +
+       linetype = "Seuils") +
   theme_minimal() +
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.title = element_blank(),
-    plot.title = element_text(size = rel(1.3)),
+    plot.title = element_text(size = rel(1.5),color="#5E4FA2",face="bold"),
     legend.position = "bottom",
     legend.box = "vertical",
     legend.spacing.y = unit(0.001, "cm"),
@@ -1206,13 +1147,18 @@ graph_pm<-ggplot(base_long, aes(x = nbenf2, y = montant, color = emp)) +
     axis.text.x = element_text(size = rel(1.3), angle = 40, hjust = 1),
     axis.text.y = element_text(size = rel(1.3)),
     panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
-    plot.subtitle = element_text(size = rel(1.3)),
-    legend.text = element_text(size =rel(1.3))
+    legend.text = element_text(size =rel(1.3)),
+    strip.text = element_text(size = rel(1.3),face="bold")
   ) +
   facet_grid(prime_activite ~ cas)
 
-graph_pm
+igraph_pm<-girafe(ggobj = graph_pm)
 
+if (is_html_output()) {
+  igraph_pm
+} else {
+  print(graph_pm)
+}
 ```
 
 Les revenus d'un couple mono-actif dans lequel l'un des conjoints travaille au Smic à plein temps, et l'autre conjoint est sans revenu permettent tout juste d'atteindre le seuil de pauvreté si le couple n'a pas d'enfant à condition que celui-ci recoure à la prime d'activité. À ce niveau de revenus, le système social ne compense pas entièrement la charge des enfants, et le niveau de vie des couples mono-actifs avec enfants est légèrement plus faible quand ils ont des enfants que quand ils n'en ont pas. L'intensité de la pauvreté monétaire est ainsi de 7% s'ils ont un enfant, 9% avec deux enfants, et 5% avec trois enfants.
@@ -1224,132 +1170,73 @@ Nous avons jusqu'ici utilisé des cas-types, mais les graphiques ci-dessous mont
 ```{r fig-pauvreté}
 #| fig-cap: Taux de pauvreté et taux de privation matérielle selon la tranche de revenu salarial et la configuration familiale
 
-castypp<-read_excel("Sorties_Privation.xlsx",sheet = "Sorties_Privation")
+srcv<-read_excel("Sorties_Privation.xlsx",sheet = "Sorties_Privation")
 
-base <- castypp %>%
+base1 <- srcv %>%
 pivot_longer(cols = c(TX_PAUVRETE, TX_ISO_PAUVRETE, TX_COU_PAUVRETE), names_to = "cas", values_to = "taux") %>%
   select(modalite, cas, taux) %>%
-  filter(modalite!="Ensemble")
-
-
-base <- base %>%
-  mutate(cas = fct_recode(cas,
+  filter(modalite!="Ensemble") %>% 
+  mutate(mesure="Pauvreté monétaire",
+         cas = fct_recode(cas,
                               "Ensemble" = "TX_PAUVRETE",
                               "Célibataire" = "TX_ISO_PAUVRETE", 
                               "En couple"= "TX_COU_PAUVRETE" ),
-         taux=taux*100)
+         taux=taux*100) 
 
-base$modalite<-factor(base$modalite, levels=c("moins de 0,3 smic", "[0,3 à 0,6[", "[0,6 à 0,9[", "[0,9 à 1,2[", "[1,2 à 1,5[", "[1,5 à 1,8[", "1,8 smic et plus"))
-
-
-graphG <- ggplot() +
-  geom_col(data = base, aes(x = modalite, y = taux, fill = cas), 
-           position = position_dodge(width = 0.6),  # Position des barres
-           width = 0.4) +  # Largeur des barres
-  theme_minimal() +
-  scale_fill_brewer(palette = "Spectral") +
-  scale_y_continuous(limits = c(0, 51)) +
-  #scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
-  labs(title = "Pauvreté monétaire",
-       x = "Revenu en tranche de Smic",
-       y = "") + 
-  theme(
-    legend.position = "bottom",
-    legend.title = element_blank(),
-    legend.key.size = unit(0.3, units="cm"),
-    legend.text =  element_text(size = rel(0.6)),
-    axis.title.x = element_text(size = rel(0.6)),  
-    axis.title.y = element_text(size = rel(0.6)), 
-    axis.text.x = element_text(angle = 45, hjust = 1, size = rel(0.6)),
-    plot.title = element_text(size=rel(0.6))
-    )+
-  guides(fill = guide_legend(nrow = 1))   
-
-graphG_interactif <- ggplotly(graphG, tooltip = "text")
-graphG_interactif <- graphG_interactif %>%
-  plotly::layout(
-     legend = list(
-      orientation = 'h',  
-      x = -2,  
-      #xanchor = 'left',
-      y = -0.3,
-      title = list(text = "Configuration:"),
-      itemwidth=80,
-      traceorder='normal'
-    )
-  )
-
-##########graph2############*
-
-base2 <- castypp %>%
+base2 <- srcv %>%
 pivot_longer(cols = c(TX_PMS, TX_ISO_PMS, TX_COU_PMS), names_to = "cas", values_to = "taux") %>%
   select(modalite, cas, taux) %>%
-  filter(modalite!="Ensemble")
-
-
-base2 <- base2 %>%
-  mutate(cas = fct_recode(cas,
+  filter(modalite!="Ensemble")%>% 
+  mutate(mesure="Privations matérielles et sociales",
+         cas = fct_recode(cas,
                               "Ensemble" = "TX_PMS",
                               "Célibataire" = "TX_ISO_PMS", 
                               "En couple"= "TX_COU_PMS" ),
          taux=taux*100)
 
-base2$modalite<-factor(base2$modalite, levels=c("moins de 0,3 smic", "[0,3 à 0,6[", "[0,6 à 0,9[", "[0,9 à 1,2[", "[1,2 à 1,5[", "[1,5 à 1,8[", "1,8 smic et plus"))
+base<-rbind(base1,base2)
 
 
-graphG2 <- ggplot() +
-  geom_col(data = base2, aes(x = modalite, y = taux, fill = cas), 
+
+base$modalite<-factor(base$modalite, levels=c("moins de 0,3 smic", "[0,3 à 0,6[", "[0,6 à 0,9[", "[0,9 à 1,2[", "[1,2 à 1,5[", "[1,5 à 1,8[", "1,8 smic et plus"))
+
+
+graphG <- ggplot() +
+  geom_col_interactive(data = base, aes(x = modalite, y = taux, fill = cas,
+                             tooltip=paste("Taux=",round(taux,1), "%")), 
            position = position_dodge(width = 0.6),  # Position des barres
            width = 0.4) +  # Largeur des barres
+  facet_wrap(~mesure)+
   theme_minimal() +
-  scale_fill_brewer(palette = "Spectral") +
+  #scale_fill_brewer(palette = "Spectral") +
   scale_y_continuous(limits = c(0, 51)) +
   #scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
-  labs(title = "Privations matérielles et sociales",
-       x = "Revenu en tranche de Smic",
-       y = "") + 
+  labs(x = "Revenu en tranche de Smic",
+       y = "Taux en %") + 
   theme(
-    legend.position = "none",
+    legend.position = "bottom",
     legend.title = element_blank(),
-    axis.title.x = element_text(size = rel(0.6)),  
-    axis.title.y = element_text(size = rel(0.6)), 
+    legend.key.size = unit(0.2, units="cm"),
+    legend.text =  element_text(size = rel(0.6)),
+    axis.title.x = element_text(size = rel(0.9)),  
+    axis.title.y = element_text(size = rel(0.8)), 
     axis.text.x = element_text(angle = 45, hjust = 1, size = rel(0.6)),
-        plot.title = element_text(size=rel(0.8))
+    plot.title = element_text(size=rel(0.6)),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
+    strip.text = element_text(size = rel(0.8),face="bold")
     )+
   guides(fill = guide_legend(nrow = 1))   
 
-graphG_interactif2 <- ggplotly(graphG2, tooltip = "text")
-graphG_interactif2 <- graphG_interactif2 %>%
-  plotly::layout(
-     legend = list(
-      orientation = 'h',  
-      x = 0.2,  
-      xanchor = 'left',  
-      y = -0.3,
-      title = list(text = ""),
-      itemwidth=60,
-      traceorder='normal'
-    )
-  )
-
-graph=graphG+graphG2
-graph
-
-# if (is_html_output()) {
-#   print(graphG_interactif)
-# } else {
-#   print(graphG)
-# }
-# 
-# if (is_html_output()) {
-#   print(graphG_interactif2)
-# } else {
-#   print(graphG2)
-# }
-# 
 
 
+igraphG<-girafe(ggobj = graphG)
 
+
+if (is_html_output()) {
+  igraphG
+} else {
+  print(graphG)
+}
 
 ```
 
@@ -1357,7 +1244,7 @@ Le taux de privation matérielle et sociale baisse également lorsque le salaire
 
 Si l'hypothèse du coût pour les emplois à temps partiel est juste, il existe deux réponses possibles en termes de politiques publiques : inciter de façon monétaire les individus pour qu'ils acceptent ces emplois ou favoriser une norme d'emploi à temps complet. Avant d'exposer nos recommandations (section 4), on peut noter qu'inciter au temps-partiel ou très-partiel, que ce soit côté entreprises ou côté individus, est potentiellement coûteux socialement en présence de coûts fixes à l'emploi (par exemple sous la forme de transports). Cette politique peut par exemple pousser un individu à accepter un emploi à temps très partiel et éloigné de chez lui. Or, ce type d'emploi ne sert pas toujours de marchepied et peut réduire les efforts de recherche et la probabilité d'obtenir un emploi de meilleure qualité (voir par exemple Autor et Houseman, 2006).
 
-# 3. Le minimum garanti est souvent en deçà du seuil de très grande pauvreté
+# Le minimum garanti est souvent en deçà du seuil de très grande pauvreté
 
 La reprise d'emploi est toujours rémunératrice mais l'intensité de la pauvreté des ménages sans emploi est forte.
 
@@ -1391,23 +1278,28 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
   theme_minimal() +
   scale_y_continuous(limits = c(0, 1500)) +  
     geom_hline(
-  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire"),
+  aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire (40 %)"),
               color = "grey40",linewidth = 0.5)+
-    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire"),
+    geom_hline(aes(yintercept = seuilpm,linetype = "Seuil de pauvreté monétaire (60 %)"),
     color = "grey40",linewidth = 0.5)+
-  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire" = "solid", "Seuil de grande pauvreté monétaire" = "dashed"),
-                        limits = c("Seuil de pauvreté monétaire", "Seuil de grande pauvreté monétaire"))+
+  scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire (60 %)" = "solid", "Seuil de grande pauvreté monétaire (40 %)" = "dashed"),
+                        limits = c("Seuil de pauvreté monétaire (60 %)", "Seuil de grande pauvreté monétaire (40 %)"))+
     guides(
     fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    linetype = guide_legend(order = 2) # La légende des lignes en dernier
+    linetype = guide_legend(order = 2,nrow=2) # La légende des lignes en dernier,
   ) +
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.title = element_blank(),
+    legend.position="bottom",
+    legend.box = "vertical",
+    legend.text=element_text(rel=0.6),
+    legend.key.size = unit(0.3, units="cm"),
+    legend.spacing.y = unit(0.001, "cm"),
     plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
+    axis.text.x = element_text(size = rel(0.9), angle = 00, hjust = 1, vjust = 1)
   )
 
 igraph5<-girafe(ggobj = graph5)
@@ -1529,8 +1421,9 @@ Cette réforme est celle qui permettrait d'atteindre simultanément les trois ob
 Une solution permettant de réduire le coût serait de réduire bien plus fortement le taux de cumul entre prestation d'assistance et revenus du travail, de sorte que les bénéfices de la hausse soient ciblés sur les plus pauvres. Nous avons simulé un scénario dans ce sens (taux de cumul de 35% de la prime d'activité au lieu de 45 %) qui présente l'inconvénient majeur de faire des perdants très bas dans l'échelle de revenus tout en réduisant drastiquement les gains à l'emploi.
 
 ::: {#tip-dons .callout-tip collapse="false"}
-##L’aide à sortir de l’assistance ne doit-elle concerner que le travail ?  
-Le débat sur les gains à l’emploi, les taux de prélèvements et les incitations ne concerne aujourd’hui que le travail. Cela montre l’importance du « mérite » associé au travail dans le débat public, indépendamment des difficultés rencontrées par certains pour accéder à l’emploi. Les plus pauvres peuvent cumuler (partiellement) leurs revenus du travail avec leurs prestations sociales, mais ce n’est pas le cas pour les autres ressources comme les revenus de remplacement (retraite, chômage), les pensions alimentaires, les héritages et les dons, les gains aux jeux, les loyers reçus pour un logement loué, la valeur locative des logements non loués (!), les revenus des capitaux, et les revenus fictifs des biens non productifs, comme les contrats d’assurance-vie, imputés à hauteur de 3% de leur valeur marchande. Or, nombre de ces ressources ne sont pas comprises dans la base fiscale des plus aisés, le Conseil constitutionnel ayant même tranché contre la prise en compte de revenus non effectifs (la valeur locative de logements non loués ne peut rentrer dans le revenu au titre de l’imposition sur le revenu) 4. Le RSA, prestation d’assistance, suit une logique de subsidiarité : le demandeur doit démontrer avoir fait valoir tous ses droits, aux autres prestations sociales et créances alimentaires, et même aux revenus de ses biens non utilisés. Tous les revenus non professionnels sont déductibles à 100% du RSA et de la prime d’activité : un don de 100 euros, le revenu tiré d’une chambre à louer ou d’une petite épargne. Cette logique crée des situations impossibles pour les allocataires, même sincères. S’ils reçoivent une aide familiale dans une situation d’urgence, une chaudière qui tombe en panne, un enfant malade, un évènement à l’autre bout de la France, ils doivent déclarer cette aide qui sera entièrement déduite de l’allocation versée. La conséquence est qu’il y aura plus de fraudes détectées chez les personnes vulnérables, qui contourne, parfois involontairement, une technocratie dont la rigueur est asymétrique entre les plus pauvres et les plus aisés. Ceci est d’autant plus problématique que le calcul de la base ressource à l’euro près s’applique à une prestation faible versée à des foyers pauvres ou modestes. Il peut en résulter un phénomène de spirale de la pauvreté puisque le moindre coup de pouce, le moindre effort d’épargne voient leurs effets annulés par le mode de calul du RSA et de la prime d’activité. Une solution serait de rendre le calcul de la prestation plus bienveillant en mettant en place un abattement sur l’ensemble des petits revenus (et non pas seulement les revenus du travail) : par exemple, les 450 premiers euros par trimestre (150 euros par mois) ne seraient pas pris en compte dans le calcul de la prestation, quelle que soit leur origine. Un avantage d’une telle réforme serait que le demandeur de l’allocation ayant des petits revenus n’aurait pas à détailler leur origine lors de la demande, il cocherait simplement la case « ressources inférieures à 450 euros ». Cette réforme pourrait être réalisée à coût constat en réduisant un peu le taux de cumula vec les revenus professionnels (58,5% au lieu de 61% actuellement). Un tel système réduirait la peur de se tromper, la peur des indus à rembourser, et donc le non-recours. Les premiers revenus d’activité seraient gardés à 100 % par les travailleurs, ce qui répond aussi à la problématique des coûts fixes à la reprise d’emploi. Au-delà de l’abattement, le taux de cumul des revenus d’activité et de la prime d’activité pourrait être abaissé pour garder les gains à la reprise d’emploi à plein temps constants par rapport à la situation actuelle. Si l’objectif est que les allocataires des minima sociaux en sortent par le haut, il faut aussi éviter d’annuler le moindre coup de pouce ou coup de chance. 
+## L’aide à sortir de l’assistance ne doit-elle concerner que le travail ?
+
+Le débat sur les gains à l’emploi, les taux de prélèvements et les incitations ne concerne aujourd’hui que le travail. Cela montre l’importance du « mérite » associé au travail dans le débat public, indépendamment des difficultés rencontrées par certains pour accéder à l’emploi. Les plus pauvres peuvent cumuler (partiellement) leurs revenus du travail avec leurs prestations sociales, mais ce n’est pas le cas pour les autres ressources comme les revenus de remplacement (retraite, chômage), les pensions alimentaires, les héritages et les dons, les gains aux jeux, les loyers reçus pour un logement loué, la valeur locative des logements non loués (!), les revenus des capitaux, et les revenus fictifs des biens non productifs, comme les contrats d’assurance-vie, imputés à hauteur de 3% de leur valeur marchande. Or, nombre de ces ressources ne sont pas comprises dans la base fiscale des plus aisés, le Conseil constitutionnel ayant même tranché contre la prise en compte de revenus non effectifs (la valeur locative de logements non loués ne peut rentrer dans le revenu au titre de l’imposition sur le revenu) 4. Le RSA, prestation d’assistance, suit une logique de subsidiarité : le demandeur doit démontrer avoir fait valoir tous ses droits, aux autres prestations sociales et créances alimentaires, et même aux revenus de ses biens non utilisés. Tous les revenus non professionnels sont déductibles à 100% du RSA et de la prime d’activité : un don de 100 euros, le revenu tiré d’une chambre à louer ou d’une petite épargne. Cette logique crée des situations impossibles pour les allocataires, même sincères. S’ils reçoivent une aide familiale dans une situation d’urgence, une chaudière qui tombe en panne, un enfant malade, un évènement à l’autre bout de la France, ils doivent déclarer cette aide qui sera entièrement déduite de l’allocation versée. La conséquence est qu’il y aura plus de fraudes détectées chez les personnes vulnérables, qui contourne, parfois involontairement, une technocratie dont la rigueur est asymétrique entre les plus pauvres et les plus aisés. Ceci est d’autant plus problématique que le calcul de la base ressource à l’euro près s’applique à une prestation faible versée à des foyers pauvres ou modestes. Il peut en résulter un phénomène de spirale de la pauvreté puisque le moindre coup de pouce, le moindre effort d’épargne voient leurs effets annulés par le mode de calul du RSA et de la prime d’activité. Une solution serait de rendre le calcul de la prestation plus bienveillant en mettant en place un abattement sur l’ensemble des petits revenus (et non pas seulement les revenus du travail) : par exemple, les 450 premiers euros par trimestre (150 euros par mois) ne seraient pas pris en compte dans le calcul de la prestation, quelle que soit leur origine. Un avantage d’une telle réforme serait que le demandeur de l’allocation ayant des petits revenus n’aurait pas à détailler leur origine lors de la demande, il cocherait simplement la case « ressources inférieures à 450 euros ». Cette réforme pourrait être réalisée à coût constat en réduisant un peu le taux de cumula vec les revenus professionnels (58,5% au lieu de 61% actuellement). Un tel système réduirait la peur de se tromper, la peur des indus à rembourser, et donc le non-recours. Les premiers revenus d’activité seraient gardés à 100 % par les travailleurs, ce qui répond aussi à la problématique des coûts fixes à la reprise d’emploi. Au-delà de l’abattement, le taux de cumul des revenus d’activité et de la prime d’activité pourrait être abaissé pour garder les gains à la reprise d’emploi à plein temps constants par rapport à la situation actuelle. Si l’objectif est que les allocataires des minima sociaux en sortent par le haut, il faut aussi éviter d’annuler le moindre coup de pouce ou coup de chance.
 :::
 
 ## Soutenir les emplois à temps partiel ou promouvoir la norme du temps plein ?
@@ -1552,10 +1445,10 @@ Avec le système actuel, les pouvoirs publics poursuivent deux objectifs : lutte
 Selon le principe de Tinbergen, lorsqu'il y a deux objectifs distincts, ici la lutte contre la pauvreté et les gains à l'emploi, il faut affecter à des instruments distincts la poursuite de chacun de ces objectifs. Dans cette optique, on pourrait considérer que le RSA et une prime d'activité entièrement familialisée (sans bonus individuels) permettent de lutter contre la pauvreté et les inégalités de niveau de vie mais n'ont pas pour objectif d'augmenter les gains l'emploi. Dans ce cas, il faudrait étendre le bénéfice de la prime d'activité aux chômeurs (les travailleurs sans emploi). Pour ce qui est de l'objectif de soutien aux bas salaires, le Smic, associé à la norme du temps plein, doit être l'instrument monétaire privilégié. Si l'objectif est la lutte efficiente contre la pauvreté, alors il faut éviter que les entreprises puissent se reposer sur le système social pour proposer des emplois qui ne seraient pas viables sans soutien public.
 
 ::: {#tip-simul .callout-tip collapse="false"}
-##Simulation de deux réformes
-Nous simulons deux réformes illustratives pour donner des ordres de grandeur concernant le coût de ce type de réformes ainsi que la répartition des foyers gagnants ou perdants. Pour cela, nous utilisons le modèle de microsimulation sociale et fiscale INES développé par l'INSEE, la DREES et la CNAF. La version utilisée d'INES simule la législation 2022 sur les données de l'Enquête Revenus fiscaux et sociaux (ERFS) 2020 actualisées à l'aide des dernières données démographiques et économiques disponibles. Nos simulations font l'hypothèse d'un taux de non-recours inchangé (en masse financière)5. Les deux réformes simulées s'appuient sur les points évoqués dans la section précédente.    
-La première réforme consiste simplement à augmenter le socle du RSA et à baisser le taux de cumul de la prime d'activité. Cela répond directement au point 4.1. Une telle réforme serait moins favorable aux incitations à temps-partiel (les travailleurs à temps-partiel ne seraient pas perdants mais l'écart avec les revenus d'assistance serait réduits). Cette réforme est justifiée si on prend au sérieux la lutte contre la grande pauvreté, si on souhaite verser un revenu minimum un peu plus décent, et/ou si l'on considère que les incitations ne jouent pas ou peu à ce niveau-là, les obstacles à la reprise d'emploi étant autres que les faibles gains. Le problème de cette réforme est son coût. Fixer le socle à 900 euros par mois pour une personne seule, permettant d'atteindre le seuil de pauvreté à 50%, pourrait se faire sans décaler le point de sortie de la prime d'activité en diminuant le taux de cumul de la prime d'activité de 61 % à 45 %. La combinaison de la hausse du socle et de la baisse du taux de cumul coûterait jusqu'à 30 milliards d'euros en plein recours et 24 milliards d'euros à taux de recours inchangé. Par construction, une telle réforme ne ferait presque pas de perdants : presque tous les bénéficiaires du RSA et de la prime d'activité actuels seraient gagnants mais il n'y aurait pas de gagnants au-delà. D'ailleurs le coût en termes de prime d'activité (13 milliards à recours inchangé) serait supérieur à celui du RSA (11 milliards). Par construction les plus gros gains sont concentrés sur le premier décile (avec une variation moyenne de revenu de 260 euros mensuels) puis sont très fortement dégressifs (170 euros pour les foyers du 2e décile des niveaux de vie, et 60 € pour un niveau de vie médian). 
-La deuxième réforme consiste à changer le mécanisme de cumul. Afin de permettre aux foyers allocataires de bénéficier de coups de pouces et de simplifier les déclarations, nous permettons un cumul à 100% jusqu'à 150 euros par mois (en pratique 450 € par trimestre) de l'ensemble des revenus hors prestations familiales et sociales (salaires, revenus de remplacement - chômage, retraites, dons, revenus du patrimoine financier et foncier). Le mécanisme se rapprocherait des mécanismes d'*earnings disregards,* relativement communs dans les pays anglo-saxons. L'abattement de revenus peut être justifié par des coûts fixes de reprise d'emploi ou pour minimiser les démarches administratives pour des revenus très faibles. En gardant la même pente de prime d'activité, la réforme ne ferait que des gagnants et le coût pour les finances publiques serait de 2,2 milliards en plein recours et 1,8 milliard à taux de non-recours inchangé. Pour atteindre la neutralité budgétaire, il conviendrait de réduire le taux de cumul de la prime d'activité de 61 à 58,5%. Cette réforme ferait quelques gagnants en bas de l'échelle des revenus (9% des ménages sont gagnants) et des perdants au-delà (16% des ménages perdants). Selon notre microsimulation, les gagnants se situeraient surtout dans le 1er décile (gain moyen de 19 euros mensuels sur l'ensemble des ménages du décile), tandis que les perdants se situeraient dans le 4e décile (perte de 8 euros mensuels sur l'ensemble des ménages du décile).     
+## Simulation de deux réformes
+
+Nous simulons deux réformes illustratives pour donner des ordres de grandeur concernant le coût de ce type de réformes ainsi que la répartition des foyers gagnants ou perdants. Pour cela, nous utilisons le modèle de microsimulation sociale et fiscale INES développé par l'INSEE, la DREES et la CNAF. La version utilisée d'INES simule la législation 2022 sur les données de l'Enquête Revenus fiscaux et sociaux (ERFS) 2020 actualisées à l'aide des dernières données démographiques et économiques disponibles. Nos simulations font l'hypothèse d'un taux de non-recours inchangé (en masse financière)5. Les deux réformes simulées s'appuient sur les points évoqués dans la section précédente.\
+La première réforme consiste simplement à augmenter le socle du RSA et à baisser le taux de cumul de la prime d'activité. Cela répond directement au point 4.1. Une telle réforme serait moins favorable aux incitations à temps-partiel (les travailleurs à temps-partiel ne seraient pas perdants mais l'écart avec les revenus d'assistance serait réduits). Cette réforme est justifiée si on prend au sérieux la lutte contre la grande pauvreté, si on souhaite verser un revenu minimum un peu plus décent, et/ou si l'on considère que les incitations ne jouent pas ou peu à ce niveau-là, les obstacles à la reprise d'emploi étant autres que les faibles gains. Le problème de cette réforme est son coût. Fixer le socle à 900 euros par mois pour une personne seule, permettant d'atteindre le seuil de pauvreté à 50%, pourrait se faire sans décaler le point de sortie de la prime d'activité en diminuant le taux de cumul de la prime d'activité de 61 % à 45 %. La combinaison de la hausse du socle et de la baisse du taux de cumul coûterait jusqu'à 30 milliards d'euros en plein recours et 24 milliards d'euros à taux de recours inchangé. Par construction, une telle réforme ne ferait presque pas de perdants : presque tous les bénéficiaires du RSA et de la prime d'activité actuels seraient gagnants mais il n'y aurait pas de gagnants au-delà. D'ailleurs le coût en termes de prime d'activité (13 milliards à recours inchangé) serait supérieur à celui du RSA (11 milliards). Par construction les plus gros gains sont concentrés sur le premier décile (avec une variation moyenne de revenu de 260 euros mensuels) puis sont très fortement dégressifs (170 euros pour les foyers du 2e décile des niveaux de vie, et 60 € pour un niveau de vie médian). La deuxième réforme consiste à changer le mécanisme de cumul. Afin de permettre aux foyers allocataires de bénéficier de coups de pouces et de simplifier les déclarations, nous permettons un cumul à 100% jusqu'à 150 euros par mois (en pratique 450 € par trimestre) de l'ensemble des revenus hors prestations familiales et sociales (salaires, revenus de remplacement - chômage, retraites, dons, revenus du patrimoine financier et foncier). Le mécanisme se rapprocherait des mécanismes d'*earnings disregards,* relativement communs dans les pays anglo-saxons. L'abattement de revenus peut être justifié par des coûts fixes de reprise d'emploi ou pour minimiser les démarches administratives pour des revenus très faibles. En gardant la même pente de prime d'activité, la réforme ne ferait que des gagnants et le coût pour les finances publiques serait de 2,2 milliards en plein recours et 1,8 milliard à taux de non-recours inchangé. Pour atteindre la neutralité budgétaire, il conviendrait de réduire le taux de cumul de la prime d'activité de 61 à 58,5%. Cette réforme ferait quelques gagnants en bas de l'échelle des revenus (9% des ménages sont gagnants) et des perdants au-delà (16% des ménages perdants). Selon notre microsimulation, les gagnants se situeraient surtout dans le 1er décile (gain moyen de 19 euros mensuels sur l'ensemble des ménages du décile), tandis que les perdants se situeraient dans le 4e décile (perte de 8 euros mensuels sur l'ensemble des ménages du décile).
 :::
 
 # Conclusion : dépasser les dilemmes par la redistribution réglementaire ?
