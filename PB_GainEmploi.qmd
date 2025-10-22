@@ -658,12 +658,11 @@ Pour les cas que nous avons étudiés, le taux effectif de gain pour le passage 
 
 Le taux effectif de gain pour le passage de l'inactivité à un emploi à temps plein rémunéré au Smic est plus élevé que pour un mi-temps. Il varie de 58% à 65% pour une personne seule selon le nombre d'enfants à charge et de 52% à 94% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Comme pour l'emploi à mi-temps, le TEG le plus faible est obtenu avec 3 enfants lorsque le conjoint est salarié au Smic qui, en plus de la baisse des aides au logement et de la prime d'activité, voit également son montant de prestations familiales baisser de 97 €. Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge qui n'a droit qu'aux aides au logement quand il n'y a qu'un emploi dans le couple.
 
-**Guillaume : au choix un graphique avec les 4 ou deux graphiques comme actuellement**
-
 ```{r}
 #| label: fig-TGE
 #| fig-cap: Taux  effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps ou à temps-plein, selon la configuration familiale
 
+#Guillaume : au choix un graphique avec les 4 ou deux graphiques comme actuellement
 castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
 
 base<-castyp %>% 
@@ -851,13 +850,13 @@ graph4a <- ggplot() +
   )
 
 
-igraph4a<-girafe(ggobj = graph4a)
-
-if (is_html_output()) {
-  igraph4a
-} else {
-  print(graph4a)
-}
+# igraph4a<-girafe(ggobj = graph4a)
+# 
+# if (is_html_output()) {
+#   igraph4a
+# } else {
+#   print(graph4a)
+# }
 ```
 
 L'analyse des TEG sans prime d'activité met en lumière les effets différenciés de cette prestation selon la composition du ménage, le revenu du conjoint et sa nature. Pour une personne seule, la prime d'activité a augmenté le TEG d'un emploi à plein temps au Smic pour les célibataires sans enfant et les parents isolés avec un ou deux enfants, rapprochant les gains à l'emploi de ceux d'un parent isolé avec 3 enfants qui n'y est pas éligible. Pour les personnes vivant en couple, l'impact de la prime d'activité diffère fortement selon la situation du conjoint. La prime d'activité augmente fortement le TEG du premier emploi dans le couple (conjoint sans revenu) mais réduit celui du deuxième emploi (conjoint salarié au Smic ou à 1,5 Smic).
@@ -947,13 +946,13 @@ graph4b <- ggplot() +
   )
 
 
-igraph4b<-girafe(ggobj = graph4b)
-
-if (is_html_output()) {
-  igraph4b
-} else {
-  print(graph4b)
-}
+# igraph4b<-girafe(ggobj = graph4b)
+# 
+# if (is_html_output()) {
+#   igraph4b
+# } else {
+#   print(graph4b)
+# }
 
 ```
 
@@ -978,8 +977,13 @@ castyp <- read_excel("cas types gains marginaux.xlsx",sheet = "synthese")
 base<-castyp %>% 
   mutate(
     cas = case_when(isocou=="isolé" & nbenf==0 ~ "Isolé sans enfant",
+                    isocou=="isolé" & nbenf==1 ~ "Isolé 1 enfant",
+                    isocou=="isolé" & nbenf==2 ~ "Isolé 2 enfants",
+                    isocou=="couple" & actconj=="Inactif" & nbenf==0 ~ "Couple monoactif sans enfant",
+                    isocou=="couple" & actconj=="Inactif" & nbenf==1 ~ "Couple monoactif 1 enfant",
                     isocou=="couple" & actconj=="Inactif" & nbenf==2 ~ "Couple monoactif deux enfants",
                     isocou=="couple" & actconj=="1 smic" & nbenf==0 ~ "Couple biactif sans enfant",
+                    isocou=="couple" & actconj=="1 smic" & nbenf==1 ~ "Couple biactif 1 enfant",
                     isocou=="couple" & actconj=="1 smic" & nbenf==2 ~ "Couple biactif deux enfants", 
                     TRUE ~ "autre"
   )) %>% 
@@ -996,7 +1000,10 @@ base <- base  %>%
     revenu=as.character(activite)
   )
 
-base$cas <- factor(base$cas, levels = c("Isolé sans enfant", "Couple monoactif deux enfants", "Couple biactif sans enfant", "Couple biactif deux enfants"))
+base$cas <- factor(base$cas, 
+                   levels = c("Isolé sans enfant","Isolé 1 enfant","Isolé 2 enfants", 
+                              "Couple monoactif sans enfant","Couple monoactif 1 enfant","Couple monoactif deux enfants", 
+                              "Couple biactif sans enfant","Couple biactif 1 enfant", "Couple biactif deux enfants"))
 
 
 
@@ -1014,15 +1021,18 @@ graphG2<-ggplot() +
   facet_wrap(~ cas) +
   theme_minimal() +
   scale_fill_manual(values = c("Sans prime d'activité" = "#482677FF", "Avec prime d'activité" = "#95D840FF")) +
-  scale_y_continuous(limits = c(-10, 100)) +
+  scale_y_continuous(limits = c(-50, 100),breaks = seq(-50, 100, by = 25)) +
   scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
- labs(title="Avec ou sans prime d'activité",
+ labs(
+   # title="Avec ou sans prime d'activité",
  x = "Revenu individuel en parts de smic",
       y = "Taux de gain marginal") + 
   theme(
     legend.position = "bottom",
     legend.title = element_blank(),
     plot.margin = margin(t = 2, r = 5, b = 2, l = 5),
+    axis.text.x = element_text(size = rel(0.7)),  
+    axis.text.y = element_text(size = rel(0.6)),  
     axis.title.x = element_text(size = rel(0.8)),  
     axis.title.y = element_text(size = rel(0.8)),
     panel.border = element_rect(color = "black", fill = NA, linewidth = 0.3),
@@ -1421,14 +1431,14 @@ Cette réforme est celle qui permettrait d'atteindre simultanément les trois ob
 Une solution permettant de réduire le coût serait de réduire bien plus fortement le taux de cumul entre prestation d'assistance et revenus du travail, de sorte que les bénéfices de la hausse soient ciblés sur les plus pauvres. Nous avons simulé un scénario dans ce sens (taux de cumul de 35% de la prime d'activité au lieu de 45 %) qui présente l'inconvénient majeur de faire des perdants très bas dans l'échelle de revenus tout en réduisant drastiquement les gains à l'emploi.
 
 ::: {#tip-dons .callout-tip collapse="false"}
-## L’aide à sortir de l’assistance ne doit-elle concerner que le travail ?
+## L'aide à sortir de l'assistance ne doit-elle concerner que le travail ?
 
-Le débat sur les gains à l’emploi, les taux de prélèvements et les incitations ne concerne aujourd’hui que le travail. Cela montre l’importance du « mérite » associé au travail dans le débat public, indépendamment des difficultés rencontrées par certains pour accéder à l’emploi. Les plus pauvres peuvent cumuler (partiellement) leurs revenus du travail avec leurs prestations sociales, mais ce n’est pas le cas pour les autres ressources comme les revenus de remplacement (retraite, chômage), les pensions alimentaires, les héritages et les dons, les gains aux jeux, les loyers reçus pour un logement loué, la valeur locative des logements non loués (!), les revenus des capitaux, et les revenus fictifs des biens non productifs, comme les contrats d’assurance-vie, imputés à hauteur de 3% de leur valeur marchande. Or, nombre de ces ressources ne sont pas comprises dans la base fiscale des plus aisés, le Conseil constitutionnel ayant même tranché contre la prise en compte de revenus non effectifs (la valeur locative de logements non loués ne peut rentrer dans le revenu au titre de l’imposition sur le revenu) 4. Le RSA, prestation d’assistance, suit une logique de subsidiarité : le demandeur doit démontrer avoir fait valoir tous ses droits, aux autres prestations sociales et créances alimentaires, et même aux revenus de ses biens non utilisés. Tous les revenus non professionnels sont déductibles à 100% du RSA et de la prime d’activité : un don de 100 euros, le revenu tiré d’une chambre à louer ou d’une petite épargne. Cette logique crée des situations impossibles pour les allocataires, même sincères. S’ils reçoivent une aide familiale dans une situation d’urgence, une chaudière qui tombe en panne, un enfant malade, un évènement à l’autre bout de la France, ils doivent déclarer cette aide qui sera entièrement déduite de l’allocation versée. La conséquence est qu’il y aura plus de fraudes détectées chez les personnes vulnérables, qui contourne, parfois involontairement, une technocratie dont la rigueur est asymétrique entre les plus pauvres et les plus aisés. Ceci est d’autant plus problématique que le calcul de la base ressource à l’euro près s’applique à une prestation faible versée à des foyers pauvres ou modestes. Il peut en résulter un phénomène de spirale de la pauvreté puisque le moindre coup de pouce, le moindre effort d’épargne voient leurs effets annulés par le mode de calul du RSA et de la prime d’activité. Une solution serait de rendre le calcul de la prestation plus bienveillant en mettant en place un abattement sur l’ensemble des petits revenus (et non pas seulement les revenus du travail) : par exemple, les 450 premiers euros par trimestre (150 euros par mois) ne seraient pas pris en compte dans le calcul de la prestation, quelle que soit leur origine. Un avantage d’une telle réforme serait que le demandeur de l’allocation ayant des petits revenus n’aurait pas à détailler leur origine lors de la demande, il cocherait simplement la case « ressources inférieures à 450 euros ». Cette réforme pourrait être réalisée à coût constat en réduisant un peu le taux de cumula vec les revenus professionnels (58,5% au lieu de 61% actuellement). Un tel système réduirait la peur de se tromper, la peur des indus à rembourser, et donc le non-recours. Les premiers revenus d’activité seraient gardés à 100 % par les travailleurs, ce qui répond aussi à la problématique des coûts fixes à la reprise d’emploi. Au-delà de l’abattement, le taux de cumul des revenus d’activité et de la prime d’activité pourrait être abaissé pour garder les gains à la reprise d’emploi à plein temps constants par rapport à la situation actuelle. Si l’objectif est que les allocataires des minima sociaux en sortent par le haut, il faut aussi éviter d’annuler le moindre coup de pouce ou coup de chance.
+Le débat sur les gains à l'emploi, les taux de prélèvements et les incitations ne concerne aujourd'hui que le travail. Cela montre l'importance du « mérite » associé au travail dans le débat public, indépendamment des difficultés rencontrées par certains pour accéder à l'emploi. Les plus pauvres peuvent cumuler (partiellement) leurs revenus du travail avec leurs prestations sociales, mais ce n'est pas le cas pour les autres ressources comme les revenus de remplacement (retraite, chômage), les pensions alimentaires, les héritages et les dons, les gains aux jeux, les loyers reçus pour un logement loué, la valeur locative des logements non loués (!), les revenus des capitaux, et les revenus fictifs des biens non productifs, comme les contrats d'assurance-vie, imputés à hauteur de 3% de leur valeur marchande. Or, nombre de ces ressources ne sont pas comprises dans la base fiscale des plus aisés, le Conseil constitutionnel ayant même tranché contre la prise en compte de revenus non effectifs (la valeur locative de logements non loués ne peut rentrer dans le revenu au titre de l'imposition sur le revenu) 4. Le RSA, prestation d'assistance, suit une logique de subsidiarité : le demandeur doit démontrer avoir fait valoir tous ses droits, aux autres prestations sociales et créances alimentaires, et même aux revenus de ses biens non utilisés. Tous les revenus non professionnels sont déductibles à 100% du RSA et de la prime d'activité : un don de 100 euros, le revenu tiré d'une chambre à louer ou d'une petite épargne. Cette logique crée des situations impossibles pour les allocataires, même sincères. S'ils reçoivent une aide familiale dans une situation d'urgence, une chaudière qui tombe en panne, un enfant malade, un évènement à l'autre bout de la France, ils doivent déclarer cette aide qui sera entièrement déduite de l'allocation versée. La conséquence est qu'il y aura plus de fraudes détectées chez les personnes vulnérables, qui contourne, parfois involontairement, une technocratie dont la rigueur est asymétrique entre les plus pauvres et les plus aisés. Ceci est d'autant plus problématique que le calcul de la base ressource à l'euro près s'applique à une prestation faible versée à des foyers pauvres ou modestes. Il peut en résulter un phénomène de spirale de la pauvreté puisque le moindre coup de pouce, le moindre effort d'épargne voient leurs effets annulés par le mode de calul du RSA et de la prime d'activité. Une solution serait de rendre le calcul de la prestation plus bienveillant en mettant en place un abattement sur l'ensemble des petits revenus (et non pas seulement les revenus du travail) : par exemple, les 450 premiers euros par trimestre (150 euros par mois) ne seraient pas pris en compte dans le calcul de la prestation, quelle que soit leur origine. Un avantage d'une telle réforme serait que le demandeur de l'allocation ayant des petits revenus n'aurait pas à détailler leur origine lors de la demande, il cocherait simplement la case « ressources inférieures à 450 euros ». Cette réforme pourrait être réalisée à coût constat en réduisant un peu le taux de cumula vec les revenus professionnels (58,5% au lieu de 61% actuellement). Un tel système réduirait la peur de se tromper, la peur des indus à rembourser, et donc le non-recours. Les premiers revenus d'activité seraient gardés à 100 % par les travailleurs, ce qui répond aussi à la problématique des coûts fixes à la reprise d'emploi. Au-delà de l'abattement, le taux de cumul des revenus d'activité et de la prime d'activité pourrait être abaissé pour garder les gains à la reprise d'emploi à plein temps constants par rapport à la situation actuelle. Si l'objectif est que les allocataires des minima sociaux en sortent par le haut, il faut aussi éviter d'annuler le moindre coup de pouce ou coup de chance.
 :::
 
 ## Soutenir les emplois à temps partiel ou promouvoir la norme du temps plein ?
 
-Faut-il cibler les compléments de revenus pour les travailleurs à bas revenu au niveau du tempspartiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles, souvent sous le seuil de pauvreté. Le débat sur la place du temps-partiel dans le dispositif de compléments de revenus pour travailleurs à bas revenus date des débuts de la prime pour l’emploi en 2001 (voir notamment Cahuc, 2002). Redistribution et incitation sont des objectifs non seulement inconciliables mais contradictoires. La redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, temps partiel, temps-plein au Smic et emploi mieux rémunéré. L’incitation implique de les maintenir ou de les augmenter. Il est possible de dépasser le dilemme localement (en augmentant le revenu disponible par les transferts à la fois à temps-partiel et à temps-plein au Smic), mais le problème est alors déplacé plus haut, à l’endroit où la prestation devient dégressive. On parle aujourd’hui de trappes à bas salaires (voir le rapport Bozio-Wasmer, 2024). A la redistribution et l’incitation, s’ajoute un autre objectif : rémunérer le « mérite ». Il est probable que beaucoup d’acteurs aient cet objectif en tête lorsqu’ils défendent l’idée que le travail doit payer (justifier la citation en étant plus précis sur ce que tu dis dans cette publi Allègre, 2011). Mais dans cet optique, faut-il cibler la prime d’activité sur le temps partiel ou sur le temps plein ? Tout dépend de la norme sociale prédominante. Deux philosophies s’opposent. Selon la première, le travail à temps plein doit payer. Il faudrait créer une norme de temps plein, forme d’emploi la plus propice pour réduire la pauvreté. A la création du RMI, l’écart entre le RMI et le Smic a été calculé sur la base d’un temps-plein. Initialement, le montant du RMI a été fixé à 50% du Smic, ce qui peut être interprété en termes incitatifs ou de mérite. Selon la seconde philosophie, chaque heure de travail doit payer, c’est-à-dire mérite une hausse du revenu disponible. La volonté de créer un écart de revenus à la fois entre l’inactivité et le mi-temps et entre le mi-temps et le temps-plein crée une pression à la baisse sur le niveau des revenus d’assistance (et en haut la création de “trappes à bas salaires”). En 1989, la norme d’emploi était le CDI à temps plein. Le RMI était différentiel oar rraport à un montant forfaitaire fixe. Après période d’intéressement temporaire\[2\], chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu’à terme une personne seule reprenant un emploi à mi-temps n’avait aucun gain financier par rapport au revenu d’assistance. Les gains étaient concentrés entre le mi-temps et le temps plein. À cette époque, malgré l’absence de gain financier (passé la période d’intéressement), il y avait tout de même des reprises d’emploi à temps partiel et même du cumul durable entre RMI et revenus professionnels (Guillemot, Petour et Zajdela, 2002), signe que les personnes concernées reconnaissaient les aspects positifs de l’emploi au-delà du revenu. A l’heure actuelle, la combinaison RSA-PA implique que le montant versé est différenciel par rapport à un revenu garanti qui augmente avec les revenus professionnels du foyer selon deux mécanismes : le taux de cumul et les bonus individuels. Il en résulte que le soutien relatif aux emplois à temps partiel a fortement augmenté, ce qui dénote une attention portée davantage sur les symptômes de la pauvreté laborieuse que sur les incitations à sortir de la pauvreté par l’emloi à temps complet. Faut-il revenir au système prévalent de 1989 jusqu’à la création du RSA en 2009. Ce système permettrait à la fois d’avoir un socle plus élevé et de réaffirmer le temps-plein comme norme de travail et de renforcer cette norme non pas avec des mesures qui visent les travailleurs, mais avec une régulation du temps de travail limitant le nombre de postes à pourvoir à temps partiel (voir conclusion).
+Faut-il cibler les compléments de revenus pour les travailleurs à bas revenu au niveau du tempspartiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles, souvent sous le seuil de pauvreté. Le débat sur la place du temps-partiel dans le dispositif de compléments de revenus pour travailleurs à bas revenus date des débuts de la prime pour l'emploi en 2001 (voir notamment Cahuc, 2002). Redistribution et incitation sont des objectifs non seulement inconciliables mais contradictoires. La redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, temps partiel, temps-plein au Smic et emploi mieux rémunéré. L'incitation implique de les maintenir ou de les augmenter. Il est possible de dépasser le dilemme localement (en augmentant le revenu disponible par les transferts à la fois à temps-partiel et à temps-plein au Smic), mais le problème est alors déplacé plus haut, à l'endroit où la prestation devient dégressive. On parle aujourd'hui de trappes à bas salaires (voir le rapport Bozio-Wasmer, 2024). A la redistribution et l'incitation, s'ajoute un autre objectif : rémunérer le « mérite ». Il est probable que beaucoup d'acteurs aient cet objectif en tête lorsqu'ils défendent l'idée que le travail doit payer (justifier la citation en étant plus précis sur ce que tu dis dans cette publi Allègre, 2011). Mais dans cet optique, faut-il cibler la prime d'activité sur le temps partiel ou sur le temps plein ? Tout dépend de la norme sociale prédominante. Deux philosophies s'opposent. Selon la première, le travail à temps plein doit payer. Il faudrait créer une norme de temps plein, forme d'emploi la plus propice pour réduire la pauvreté. A la création du RMI, l'écart entre le RMI et le Smic a été calculé sur la base d'un temps-plein. Initialement, le montant du RMI a été fixé à 50% du Smic, ce qui peut être interprété en termes incitatifs ou de mérite. Selon la seconde philosophie, chaque heure de travail doit payer, c'est-à-dire mérite une hausse du revenu disponible. La volonté de créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein crée une pression à la baisse sur le niveau des revenus d'assistance (et en haut la création de "trappes à bas salaires"). En 1989, la norme d'emploi était le CDI à temps plein. Le RMI était différentiel oar rraport à un montant forfaitaire fixe. Après période d'intéressement temporaire\[2\], chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier par rapport au revenu d'assistance. Les gains étaient concentrés entre le mi-temps et le temps plein. À cette époque, malgré l'absence de gain financier (passé la période d'intéressement), il y avait tout de même des reprises d'emploi à temps partiel et même du cumul durable entre RMI et revenus professionnels (Guillemot, Petour et Zajdela, 2002), signe que les personnes concernées reconnaissaient les aspects positifs de l'emploi au-delà du revenu. A l'heure actuelle, la combinaison RSA-PA implique que le montant versé est différenciel par rapport à un revenu garanti qui augmente avec les revenus professionnels du foyer selon deux mécanismes : le taux de cumul et les bonus individuels. Il en résulte que le soutien relatif aux emplois à temps partiel a fortement augmenté, ce qui dénote une attention portée davantage sur les symptômes de la pauvreté laborieuse que sur les incitations à sortir de la pauvreté par l'emloi à temps complet. Faut-il revenir au système prévalent de 1989 jusqu'à la création du RSA en 2009. Ce système permettrait à la fois d'avoir un socle plus élevé et de réaffirmer le temps-plein comme norme de travail et de renforcer cette norme non pas avec des mesures qui visent les travailleurs, mais avec une régulation du temps de travail limitant le nombre de postes à pourvoir à temps partiel (voir conclusion).
 
 ## Augmenter les gains à l'emploi par la hausse du Smic ou grâce à la prime d'activité ?
 
@@ -1457,9 +1467,9 @@ La réforme consistant à augmenter le socle nous paraît la plus juste dans la 
 
 # Bibliographie
 
-Allègre G. et M. Pucci, 2025 : « La reprise d’emploi est-elle rémunératrice ? », dans *L'économie française 2026* (OFCE), Repères La Découverte.
+Allègre G. et M. Pucci, 2025 : « La reprise d'emploi est-elle rémunératrice ? », dans *L'économie française 2026* (OFCE), Repères La Découverte.
 
-Allègre G., 2024 : « Les nouvelles lois sur les pauvres (1989-2023) : l’injonction au travail au risque de la pauvreté ? » *OFCE working paper*, n°2024-1.
+Allègre G., 2024 : « Les nouvelles lois sur les pauvres (1989-2023) : l'injonction au travail au risque de la pauvreté ? » *OFCE working paper*, n°2024-1.
 
 Bozio et Grenet 2017
 
