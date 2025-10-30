@@ -12,8 +12,6 @@
 \usepackage[some]{background}
 $if(draft)$
 \usepackage[stamp,color=red!10]{draftwatermark}
-\SetWatermarkText{Sous embargo}
-\SetWatermarkScale{0.75}
 $endif$
 \usepackage{lipsum}
 \usepackage{caption}
@@ -22,12 +20,13 @@ $endif$
 \usepackage{blindtext}
 \usepackage{scrlayer-scrpage}
 
+\KOMAoptions{BCOR=5mm}
 \setmainfont{OpenSans}[
   UprightFont = {*-Regular},
   BoldFont = {*-Bold},
   BoldItalicFont = {*-BoldItalic},
   ItalicFont = {*-Italic},
-  Path = {_extensions/ofce/wp/OpenSans/},
+  Path = {_extensions/ofce/pb/OpenSans/},
   Extension = {.ttf}
 ]
 \setsansfont{OpenSans}[
@@ -35,7 +34,7 @@ $endif$
   BoldFont = {*-Bold},
   BoldItalicFont = {*-BoldItalic},
   ItalicFont = {*-Italic},
-  Path = {_extensions/ofce/wp/OpenSans/},
+  Path = {_extensions/ofce/pb/OpenSans/},
   Extension = {.ttf}
 ]
 
@@ -51,12 +50,12 @@ $endif$
 
 \clearpairofpagestyles
 
-\KOMAoptions{headsepline=true}
+\KOMAoptions{headsepline=true, twoside=true}
 
 \pagestyle{scrheadings}
 \setkomafont{pageheadfoot}{\small}
 
-\rehead{Prévision de l'OFCE $wp$}
+\rehead{Policy Brief n°$pb$}
 \lohead{\includegraphics[height=0.25cm]{$logo$}}
 
 \lofoot*{\thepage}

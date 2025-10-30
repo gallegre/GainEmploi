@@ -55,7 +55,7 @@ if FORMAT:match 'html' or FORMAT:match 'html5' then
         {
             Inlines = function(inlines)
                 inlines = add_non_breaking_spaces(inlines)
-                -- inlines = wrap_nnbsp_in_span(inlines)
+                inlines = wrap_nnbsp_in_span(inlines)
                 return inlines
             end
         }

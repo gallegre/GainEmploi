@@ -74,9 +74,7 @@ contributes:
         - html_template/title-metadata.html
         - html_template/toc.html
     pdf:
-      documentclass: book
-      keep-pdf: true
-      keep-tex: true
+      documentclass: scrreprt
       toc-depth: 1
       pdffont: OpenSans
       number-sections: true
@@ -93,11 +91,6 @@ contributes:
       fig-format: png
       logo: ofce_m.png
       logo2: sciencespo.png
-      geometry:
-      - top = 3cm
-      - bottom = 3cm
-      - left = 3cm
-      - right = 3cm
       template-partials:
         - pdf_template/title.tex
         - pdf_template/before-body.tex

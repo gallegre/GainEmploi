@@ -1,7 +1,7 @@
 title: Format OFCE
 author: Anissa Saumtally et Xavier Timbeau
 version: 0.2.0
-quarto-required: ">=1.5.57"
+quarto-required: ">=1.4.300"
 contributes:
   formats:
     common:
@@ -15,7 +15,6 @@ contributes:
           title-block-author-plural: "Par"
           title-block-published: "Publié le"
           title-block-modified: "Modifié le"
-          section-title-appendices: "Annexes"
           toc-title: "Sur cette page"
         en:
           section-title-references: "Bibilography"
@@ -23,12 +22,13 @@ contributes:
           title-block-author-plural: "Authors"
           title-block-published: "Published on"
           title-block-modified: "Modified on"
-          section-title-appendices: "Appendices"
+          launch-dev-container-title: "OFCE working paper"
           callout-tip-title: "Box"
           toc-title: "On this page"
+      fig-asp: 0.61
       cap-location: top
       crossref:
-        chapters: true
+        chapters: false
         fig-prefix: graphique
         tbl-prefix: tableau
         eq-prefix: équation
@@ -44,6 +44,7 @@ contributes:
       filters:
         - nameref
         - fr-nbsp
+       # - custom-numbered-blocks
         - quotes
         - search-replace
         - collapse-callout
@@ -51,6 +52,10 @@ contributes:
         tip: true
       shortcodes:
         - fontawesome
+        - downloadthis
+      search-replace:
+        oe : "\u0153"
+        ae : "\u00e6"
       csl: csl/revue-francaise-de-gestion.csl
     html:
       theme:
@@ -69,8 +74,6 @@ contributes:
       callout-icon: false
       lightbox: true
       title-block-style: default
-      template-partials:
-        - html_template/title-metadata.html
     pdf:
       documentclass: scrartcl
       toc-depth: 1
@@ -78,22 +81,18 @@ contributes:
       number-sections: true
       number-depth: 3
       classoption:
-        - DIV=9
+        - DIV=11
       papersize: a4
       fontsize: 9pt
       extra_dependencies: ["float"]
       fig-dpi: 1200
       fig-width: 5
-      fig-format: svg
+      fig-format: png
       logo: ofce_m.png
       logo2: sciencespo.png
-      linestretch: 1.25
       template-partials:
         - pdf_template/title.tex
         - pdf_template/before-body.tex
-        - pdf_template/after-body.tex
-        - pdf_template/toc.tex
-        - pdf_template/biblio.tex
     dashboard:
       theme:
         - cosmo
@@ -101,6 +100,3 @@ contributes:
       mainfont: Open Sans
       logo: "none"
     typst: default
-    docx:
-      fig-format: svg
-

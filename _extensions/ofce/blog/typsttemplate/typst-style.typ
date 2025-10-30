@@ -10,5 +10,5 @@
 
   // Font definition
   #let main_title_font = "Helvetica"
-  #let serif_font = "Helvetica"
+  #let serif_font = "Palatino"
 

@@ -58,7 +58,7 @@ contributes:
     html:
       theme: 
         - cosmo
-        - ofce.scss
+        - blog.scss
       mainfont: Open Sans
       number-sections: false
       html-math-method: katex
@@ -73,9 +73,7 @@ contributes:
         - html_template/title-metadata.html
     typst: 
       mainfont: Arial
-      keep-typ: false
-      fig-dpi: 600
-      fig-format: svg
+      keep-typ: true
       toc: false 
       papersize: a4
       template-partials:

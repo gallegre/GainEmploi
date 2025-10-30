@@ -13,6 +13,7 @@ $else$
 \definecolor{scporouge}{RGB}{231, 0, 26}
 
 \begin{titlepage}
+
   \backgroundsetup{
     scale=1,
     angle=0,
@@ -22,26 +23,24 @@ $else$
     \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
       \node [anchor = center] at (-2.875-5.25,12.5) {\includegraphics[width=2.5cm]{$logo$}};
       \node [anchor = center] at (-2.875-5.25,-12.75){\includegraphics[width=2.5cm]{$logo2$}};
-      \node [anchor = east] at (8.5,-11.5){\textcolor{black}{$labels.published$ : $date$}};
-      \node [anchor = east] at (8.5,-12){\textcolor{black}{$labels.modified$ : $date-modified$}};
-      \node [anchor = east] at (8.5,13-0.7){\textcolor{gray}{\Huge\textit{Working Paper}}};
-      \draw [thick,black](-5.75,-13) -- (-5.75,13);
-      \draw [color = white, fill=ofcepbbleu] (8.7,11.4) rectangle (10.45,13.15);
-      \draw [color = white, fill=ofcepbbleu, very thick] (8.75-.5,11.25-.5) rectangle (8.75+.6,11.25+.6);
-      \node [anchor = east] at (11-0.7,13-0.7){\textcolor{white}{\huge\textbf{$wp$}}};
-      \node [anchor = east] at (10-0.74,12-0.67){\textcolor{white}{\textbf{$annee$}}};
-    \end{tikzpicture}
+      $if(date)$
+      \node [anchor = east] at (8.5,-11.5){\textcolor{black}{Publié le $date$}};
+      $endif$
+      $if(date-modified)$
+      \node [anchor = east] at (8.5,-12){\textcolor{black}{Modifié le $date-modified$}};
+      $endif$
+  \end{tikzpicture}
   }
 }
+
 \BgThispage
 
 \hspace{4cm}
 \begin{minipage}{12.5cm}
   \vspace{5cm}
   \begin{flushleft}
-    \begin{spacing}{2.5}
-      \textcolor{scporouge}{\Huge\textbf{\textsf{$title$}}}
-    \end{spacing}
+  \textcolor{scporouge}{\Huge\textbf{\textsf{$title$}}}
+
   $if(subtitle)$
  \vspace{5mm}
   \textcolor{scporouge}{\large\textbf{\textsf{$subtitle$}}}
@@ -49,9 +48,9 @@ $else$
   $endif$
   \vspace{20mm}
   \end{flushleft}
-  
+
   $for(by-author)$
-  
+
    \textbf{$it.name.literal$}$if(by-author.affiliations)$$for(by-author.affiliations)$,$if(by-author.affiliations.name)$
            $by-author.affiliations.name$$endif$$endfor$
    $endif$
@@ -71,15 +70,15 @@ $endif$
 
           \vspace{0.2cm}
           \vspace{0.2cm}
-        
-        \textbf{OFCE} 
-  
-        10 place de Catalogne 
-        
-        75014 Paris, FRANCE 
-        
+
+        \textbf{OFCE}
+
+        10 place de Catalogne
+
+        75014 Paris, FRANCE
+
         Tel : +33 1 44 18 54 24
-        
+
         \url{https://www.ofce.sciences-po.fr}
       }
     \end{minipage}
@@ -95,7 +94,7 @@ $endif$
 %%  \includegraphics[width=2cm]{$logo2$}
 %%  \end{minipage}}
 %%
- 
+
 \LARGE\textbf{$title$}
 
 \large\textbf{$subtitle$}
@@ -128,8 +127,8 @@ $if(thanks)$
 
       \vspace{0.2cm}
       \vspace{0.2cm}
-    
-    \textit{\small{$thanks$}} 
+
+    \textit{\small{$thanks$}}
   }
 \end{minipage}
 $endif$
