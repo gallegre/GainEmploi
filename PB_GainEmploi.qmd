@@ -2,7 +2,7 @@
 title: "La reprise d'emploi est-elle toujours rémunératrice?"
 subtitle: "Contradictions des politiques de lutte contre la pauvreté et pistes pour les surmonter"
 keywords: Assistance, Prime d'activité, Smic, Gains à l'emploi, Trappes à inactivité, Trappes à bas salaire
-abstract: "Depuis les réformes instaurant le RSA activité en 2009 puis la prime d'activité en 2016, l'emploi est toujours plus rémunérateur que l'inactivité. Toutefois, travailler ne garantit pas la sortie de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum garanti aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie plus que l'assistance, mais les travailleurs partent de trop bas."
+abstract: "Depuis les réformes instaurant le RSA activité (2008) puis la prime d'activité (2016), l'emploi est toujours plus rémunérateur que l'inactivité. Toutefois, travailler ne garantit pas la sortie de la pauvreté. Cela s'explique notamment par le fait que le revenu minimum versé aux personnes d'âge actif est très faible et maintient la plupart du temps les personnes sans emploi sous le seuil de grande pauvreté : le travail paie plus que l'assistance, mais les travailleurs partent de trop bas. Des pistes de réforme sont proposées permettant de concilier les trois objectifs des pouvoirs publics: faire en sorte que le travail soit toujours rémunérateur ; faire en sorte que le travail protège de la pauvreté ; soutenir le revenu des ménages les plus modestes."
 
 author:
   - name: Guillaume Allègre
@@ -30,7 +30,6 @@ formats:
           title-block-author-plural: "Par"
           title-block-published: "Publié le"
           title-block-modified: "Modifié le"
-          toc-title: "Sur cette page"
       fig-asp: 0.61
       cap-location: top
       citation:
@@ -48,11 +47,10 @@ formats:
         lof-title: Figures
         lot-title: Tableaux
 format: 
-  ofce-html: default
-  ofce-pdf: default
+  wp-pdf: default
   
 editor: visual
-bibliography: wp_references.bib
+bibliography: references.bib
 ---
 
 ```{r library, include=FALSE}
@@ -132,9 +130,7 @@ Le cas-type général commenté dans ce document est celui d'un ménage locatair
 L'approche par cas-type est critiquable dans la mesure où elle ne représente pas la diversité des situations individuelles. Par construction, elle renseigne, de façon synthétique, sur les caractéristiques du système social et fiscal plutôt que sur celles de l'ensemble des ménages. L'analyse est descriptive et ne présuppose pas que les individus ont le choix entre les différents horaires de travail ou taux de salaire.
 
 # La reprise d'emploi est toujours rémunératrice, mais pas toujours de façon homogène
-
 ## Des reprises d'emploi rémunératrices
-
 Dans les cas-types étudiés, le système socio-fiscal actuel garantit que la reprise d'emploi est toujours rémunératrice, mais pas nécessairement toujours dans les mêmes proportions. Pour le mesurer, on utilisera deux indicateurs : le taux de prélèvement effectif et le taux effectif de gain à l'emploi (voir @tip-teg).
 
 ::: {#tip-teg .callout-tip collapse="false"}
@@ -150,7 +146,6 @@ On peut définir le taux effectif de gain à l'emploi (TEG) comme la part de l'a
 TEG=\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}
 $$
 :::
-
 Le cas d'une personne seule illustre la façon dont le système socio-fiscal assure que le travail paie mieux que l'assistance, même pour de petites durées de travail. Sans revenus d'activité, cette personne peut percevoir 851 euros de prestations sociales (559 euros de RSA et 292 euros d'allocations logement).
 
 ```{r}
@@ -225,7 +220,10 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
   ) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 2500), breaks = seq(0, 2500, by = 500)) + 
   theme(panel.border = element_blank())+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,\ncalculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5)) 
+  )
 
 
 igraph <- girafe(ggobj = graph)
@@ -235,8 +233,6 @@ if (is_html_output()) {
 } else {
   print(graph)
 }
-
-
 
 ```
 
@@ -329,7 +325,10 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   ) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 500)) + 
   theme(panel.border = element_blank())+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,\ncalculs des auteurs")+
+  theme(
+   plot.caption = element_text(size = rel(0.5))
+  )
 
 
 igraph2 <- girafe(ggobj = graph2)
@@ -436,7 +435,10 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   ) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500)) + 
   theme(panel.border = element_blank())+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,\ncalculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5))  
+  )
 
 
 igraph3 <- girafe(ggobj = graph3)
@@ -542,7 +544,10 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     panel.border = element_blank()
   ) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500))+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs") 
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,\ncalculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5)) 
+  )
 
 
 igraph3b <- girafe(ggobj = graph3b)
@@ -649,7 +654,10 @@ labs(title = "Revenu disponible d'une famille avec un enfant âgé de 1 \nan gar
   ) +
   scale_y_continuous(limits = c(-500, 4000), breaks = seq(-500, 4000, by = 500)) + 
   theme(panel.border = element_blank())+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,\ncalculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5)) 
+  )
 
 
 igraph_cmg <- girafe(ggobj = graph_cmg)
@@ -778,7 +786,10 @@ graph4 <- ggplot() +
     plot.title = element_text(size = rel(0.9), color="#5E4FA2",face="bold")
   )+
   facet_grid(prime_activite ~ emploi)+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5))  
+  )
 
 igraph4<-girafe(ggobj = graph4)
 
@@ -874,12 +885,15 @@ graph4a <- ggplot() +
     strip.text= element_text(size = rel(0.8),face="bold"),
     plot.title = element_text(size = rel(0.9), color="#5E4FA2",face="bold")
   )+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5)) 
+  )
 
 
-# igraph4a<-girafe(ggobj = graph4a)
-# 
-# if (is_html_output()) {
+#igraph4a<-girafe(ggobj = graph4a)
+
+#if (is_html_output()) {
 #   igraph4a
 # } else {
 #   print(graph4a)
@@ -971,7 +985,10 @@ graph4b <- ggplot() +
     strip.text= element_text(size = rel(0.8),face="bold"),
     plot.title = element_text(size = rel(0.9), color="#5E4FA2",face="bold")
   )+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,calculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5)) 
+  )
 
 
  igraph4b<-girafe(ggobj = graph4b)
@@ -1067,7 +1084,10 @@ graphG2<-ggplot() +
     legend.key.size = unit(0.5, "lines"),  # taille des carrés
     plot.title = element_text(size = 10, color = "#5E4FA2", face = "bold")
     )+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,calculs des auteurs")+
+  theme(
+   plot.caption = element_text(size = rel(0.5)) 
+  )
 
 
 
@@ -1188,7 +1208,10 @@ graph_pm<-ggplot() +
     strip.text = element_text(size = rel(1.3),face="bold")
   ) +
   facet_grid(prime_activite ~ cas)+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")
+  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5)) 
+  )
 
 igraph_pm<-girafe(ggobj = graph_pm)
 
@@ -1256,7 +1279,7 @@ graphG <- ggplot() +
     legend.title = element_blank(),
     legend.key.size = unit(0.2, units="cm"),
     legend.text =  element_text(size = rel(0.6)),
-    axis.title.x = element_text(size = rel(0.9)),  
+    axis.title.x = element_text(size = rel(0.8)),  
     axis.title.y = element_text(size = rel(0.8)), 
     axis.text.x = element_text(angle = 45, hjust = 1, size = rel(0.6)),
     plot.title = element_text(size=rel(0.6)),
@@ -1264,7 +1287,10 @@ graphG <- ggplot() +
     strip.text = element_text(size = rel(0.8),face="bold")
     )+
   guides(fill = guide_legend(nrow = 1))+
-  labs(caption="Source : ERFS ; calcul des auteurs")
+  labs(caption="Source : ERFS ; calcul des auteurs")+
+  theme(
+   plot.caption = element_text(size = rel(0.5)) 
+  )
    
 
 
@@ -1341,7 +1367,10 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
     axis.text.x = element_text(size = rel(0.9), angle = 00, hjust = 1, vjust = 1)
   )+
-  labs(caption="Source : Législation avril 2024, calculs des auteurs")
+  labs(caption="Source : Législation avril 2024, calculs des auteurs")+
+  theme(
+    plot.caption = element_text(size = rel(0.5)) 
+  )
    
 
 igraph5<-girafe(ggobj = graph5)
@@ -1428,8 +1457,8 @@ graph4 <- Bareme_long %>%
   ) +
   theme_minimal()+
   scale_color_brewer(palette = "Set2") +
-  labs(caption="Source : DREES ; 
-       base 100 = 1990 ; Smic horaire et minima sociaux en euros constants")+
+  labs(caption="base 100 = 1990 ; Smic horaire et minima sociaux en euros constants ;
+  Source : DREES ; calculs des auteurs")+
   labs(x="", y="")+
   theme(
     text = element_text(size=8),
@@ -1494,3 +1523,5 @@ La première réforme consiste simplement à augmenter le socle du RSA et à bai
 # Conclusion : dépasser les dilemmes par la redistribution réglementaire ?
 
 La réforme consistant à augmenter le socle nous paraît la plus juste dans la mesure où elle réduit fortement les inégalités, avec -probablement- de très faibles coûts en termes d'efficacité et d'emploi. Le problème principal d'une telle réforme est son coût, 24 milliards d'euros à recours inchangé. On peut considérer que ce montant est le coût de l'injustice du système actuel tout en reconnaissant qu'avec un tel budget, il pourrait être possible de faire mieux pour la population concernée qu'en réformant le RSA et la prime d'activité. Il existe en effet une autre solution permettant de dépasser les dilemmes monétaires exposés dans ce document. On peut parler de redistribution réglementaire ou de redistribution des droits. De même que l'augmentation du Smic est potentiellement peu ou pas coûteuse, jusqu'à un certain niveau, en termes de finances publiques, c'est également le cas du renforcement des droits des travailleurs les plus précaires, par exemple en renforçant le droit au passage au temps plein ou en pénalisant la fragmentation journalière du travail. @devettervalentin2025IS montrent que le Smic n'est pas une protection suffisante contre la pauvreté des travailleurs, en raison de la prévalence du temps partiel contraint dans des métiers dont le taux horaire est faible : plus de 20% des salariés ont un revenu salarial annuel inférieur au niveau du Smic à temps plein. Le seuil de bas salaire mensuel (défini à deux tiers du salaire médian) étant proche du Smic mensuel, les bas salaires manquent d'heures dans le mois par rapport à un temps plein. Les métiers les plus touchés par les bas salaires sont les métiers du care (assistantes maternelles, aides à domicile) qui comptent 66% de bas salaires, les métiers du nettoyage (47%), les métiers de l'hôtellerie-restauration (50%). Ces trois secteurs concentrent 43% des bas-salaires mensuels. Or ces professions cumulent une forte amplitude et une faible densité de la journée de travail. Une réglementation plus protectrice permettrait de réduire le recours au temps partiel, ce qui pourrait même limiter les besoins en termes de prime d'activité. Le coût serait reporté sur les consommateurs de ces services. Le service de nettoyage, l'aide aux personnes et la restauration n'étant pas délocalisables, les risques sur l'emploi seraient limités.
+
+# Bibliographie
