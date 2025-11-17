@@ -209,14 +209,14 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
     legend.position =  "right",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
-    legend.text = element_text(size = rel(0.7)),
+    legend.text = element_text(size = rel(0.6)),
     legend.title = element_blank(),
     plot.title = element_text(size = rel(0.8), hjust = 0.7),
     plot.caption = element_text(size = rel(0.5)),
     plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1,vjust = 1)
+    axis.text.x = element_text(size = rel(0.7), angle = 40, hjust = 1,vjust = 1)
   ) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 2500), breaks = seq(0, 2500, by = 500)) + 
   theme(panel.border = element_blank())+
@@ -246,7 +246,7 @@ Comparativement à une personne seule, le couple mono-actif continue à percevoi
 
 ```{r}
 #| label: fig-C2A2ECI
-#| fig-cap: Revenu disponible d'un couple avec 2 enfants selon le revenu professionnel, conjoint inactif
+#| fig-cap: Revenu disponible d'un couple avec deux enfants selon le revenu professionnel, conjoint inactif
 
 castyp <- read_excel("cas types smic.xlsx",sheet = "synthese") 
 
@@ -314,14 +314,14 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     legend.position = "right",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
-    legend.text = element_text(size = rel(0.7)),
+    legend.text = element_text(size = rel(0.6)),
     legend.title = element_blank(),
     plot.title = element_text(size = rel(0.8), hjust = 0.7),
     plot.caption = element_text(size = rel(0.5)),
     plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 40, hjust = 1, vjust = 1)
+    axis.text.x = element_text(size = rel(0.7), angle = 40, hjust = 1, vjust = 1)
   ) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 3000), breaks = seq(0, 3000, by = 500)) + 
   theme(panel.border = element_blank())+
@@ -424,10 +424,10 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     legend.position = "right",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
-    legend.text = element_text(size = rel(0.7)),
+    legend.text = element_text(size = rel(0.6)),
     legend.title = element_blank(),
     plot.title = element_text(size = rel(0.8), hjust = 0.7),
-    plot.caption = element_text(size = rel(0.5)),
+    plot.caption = element_text(size = rel(0. 5)),
     plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
@@ -533,7 +533,7 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     legend.position = "right",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
-    legend.text = element_text(size = rel(0.7)),
+    legend.text = element_text(size = rel(0.6)),
     legend.title = element_blank(),
     plot.title = element_text(size = rel(0.8), hjust = 0.7),
     plot.caption = element_text(size = rel(0.5)),
@@ -991,13 +991,13 @@ graph4b <- ggplot() +
   )
 
 
- igraph4b<-girafe(ggobj = graph4b)
+ #igraph4b<-girafe(ggobj = graph4b)
  
- if (is_html_output()) {
-   igraph4b
- } else {
-   print(graph4b)
- }
+ #if (is_html_output()) {
+ #  igraph4b
+ #} else {
+#   print(graph4b)
+ #}
 
 ```
 
@@ -1210,7 +1210,7 @@ graph_pm<-ggplot() +
   facet_grid(prime_activite ~ cas)+
   labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")+
   theme(
-    plot.caption = element_text(size = rel(0.5)) 
+    plot.caption = element_text(size = rel(0.8)) 
   )
 
 igraph_pm<-girafe(ggobj = graph_pm)
