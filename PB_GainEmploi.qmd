@@ -14,83 +14,30 @@ author:
     affiliation: OFCE & Université Paris 1
 
 annee: 2025
+wp: 25p
 date: today
 date-modified: today
 lang: fr
-
-formats:
-    common:
-      toc: true
-      lang: fr
-      french: true
-      language:
-        fr:
-          section-title-references: "Bibliograhie"
-          title-block-author-single: "Par"
-          title-block-author-plural: "Par"
-          title-block-published: "Publié le"
-          title-block-modified: "Modifié le"
-      fig-asp: 0.61
-      cap-location: top
-      citation:
-        type: article-journal
-      crossref:
-        fig-prefix: figure
-        tbl-prefix: tableau
-        eq-prefix: équation
-        sec-prefix: section
-        tip-prefix: encadré
-        fig-title: "*Figure*"
-        tip-title: "*Encadré*"
-        title-delim: "."
-        tbl-title: "*Tableau*"
-        lof-title: Figures
-        lot-title: Tableaux
-format: 
-  wp-pdf: default
-  
+format:
+  wp-html: default
+  wp-pdf:
+    toc: false
 editor: visual
 bibliography: references.bib
 ---
 
 ```{r library, include=FALSE}
-
-library(knitr) 
-library(tidyverse) 
-library(ofce) 
-library(lubridate) 
-library(knitr) 
-library(scales) 
-library(dplyr) 
-library(tibble) 
-library(readxl) 
-library(skimr) 
-library(tidyr) 
-library(rsdmx) 
-library(ggthemes) 
-library(haven)
-library(glue)
-library(readr)
-library(reshape2)
-library(MetricsWeighted)
-library(questionr)
-library(patchwork)
-library(ggplot2)
-library(ggrepel)
-library(blorr)
-library(plotly)
+ofce::init_qmd()
 library(ggiraph)
-library(sf) 
 library(RColorBrewer)
 library(viridis)
 library(ggsci)
 library(quarto)
-library(patchwork)
 library(readxl)
-library(tinytex)
 
-opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.pos="H", out.extra="", dev="ragg_png", fig.showtext=TRUE, cache=FALSE)
-
+if(knitr::is_html_output()) 
+  update_theme(text = element_text(size = 10)) else  
+    update_theme(text = element_text(size = 8))
 ```
 
 # Introduction : les objectifs de la lutte contre la pauvreté par l'emploi
@@ -130,7 +77,9 @@ Le cas-type général commenté dans ce document est celui d'un ménage locatair
 L'approche par cas-type est critiquable dans la mesure où elle ne représente pas la diversité des situations individuelles. Par construction, elle renseigne, de façon synthétique, sur les caractéristiques du système social et fiscal plutôt que sur celles de l'ensemble des ménages. L'analyse est descriptive et ne présuppose pas que les individus ont le choix entre les différents horaires de travail ou taux de salaire.
 
 # La reprise d'emploi est toujours rémunératrice, mais pas toujours de façon homogène
+
 ## Des reprises d'emploi rémunératrices
+
 Dans les cas-types étudiés, le système socio-fiscal actuel garantit que la reprise d'emploi est toujours rémunératrice, mais pas nécessairement toujours dans les mêmes proportions. Pour le mesurer, on utilisera deux indicateurs : le taux de prélèvement effectif et le taux effectif de gain à l'emploi (voir @tip-teg).
 
 ::: {#tip-teg .callout-tip collapse="false"}
@@ -146,15 +95,18 @@ On peut définir le taux effectif de gain à l'emploi (TEG) comme la part de l'a
 TEG=\frac{\text{Variation du revenu disponible}}{\text{Variation du revenu professionnel}}
 $$
 :::
+
 Le cas d'une personne seule illustre la façon dont le système socio-fiscal assure que le travail paie mieux que l'assistance, même pour de petites durées de travail. Sans revenus d'activité, cette personne peut percevoir 851 euros de prestations sociales (559 euros de RSA et 292 euros d'allocations logement).
 
 ```{r}
 #| label: fig-C1A0E
 #| fig-cap: Revenu disponible d'une personne seule selon son revenu professionnel
+#| fig-asp: 0.7
 
 castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
-
-smic=1398.7
+sofi <- readxl::read_xlsx("Maquette Sofi 2024 -08-11-2024 - cas types smic -mp.xlsx", sheet = "synthèse")
+seuilpm=1312 # seuil de pauvreté à 60% actualisé en 2023. voir note dans le texte.
+smic=1398.7 # SMIC mensuel net en 2023
 
 base<-castyp %>% 
   filter(isocou=="isolé" & nbenf==0) %>% 
@@ -165,30 +117,32 @@ base<-castyp %>%
     TRUE ~ "Avec un temps plein \n à 1,5 Smic")
   ) %>% 
   mutate(
-    seuil60 = 1312
+    seuil60 = seuilpm
   ) %>% 
   select(typrev,Salaire,PF,PL,RSA,PA, RDISP, seuil60)	
 
 basegr<-base %>% 
   pivot_longer(cols=c(Salaire,PF,PL,RSA,PA, RDISP)) 
 
-seuilpm=1312
-
-
 basegr$typrev<-factor(basegr$typrev,levels=c("Sans revenu","Avec un mi-temps \n au Smic","Avec un temps plein\n au Smic","Avec un temps plein \n à 1,5 Smic"))
 
 basegr$name<-factor(basegr$name, levels=rev(c("Salaire", "PF", "PL", "RSA", "PA", "RDISP")))
+
+labels_rev <- c("Salaire" = "Salaire", "PF" = "Prestations familiales", "PL" = "#238A8DFF", 
+               "RSA" = "#55C667FF", "PA" = "#95D840FF")
 
 graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
   y = value, x = typrev)) + 
   scale_fill_manual(
     values = c("Salaire" = "#482677FF", "PF" = "#39568CFF", "PL" = "#238A8DFF", 
                "RSA" = "#55C667FF", "PA" = "#95D840FF"),
+    labels = labels_rev,
     guide = guide_legend(reverse = TRUE)  
   ) +
    geom_bar_interactive(
     position = "stack", 
     stat = "identity", 
+    width = 0.5,
     aes(y=value, fill=name,tooltip=paste(name, ":", round(value,0),"euros"))
   ) +
     geom_point_interactive(
@@ -200,39 +154,47 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
     size = 3
   ) +
     guides(
-    fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    colour=guide_legend(order = 2)  # La légende du point en dernier
+    fill = guide_legend(title = NULL, order = 1),  # La légende des couleurs en premier
+    colour=guide_legend(title = NULL, order = 2)  # La légende du point en dernier
   ) +
-  theme(
-    panel.background = element_rect(fill = "white"), 
-    plot.background = element_rect(fill = "white"),
-    legend.position =  "right",
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    legend.text = element_text(size = rel(0.6)),
-    legend.title = element_blank(),
-    plot.title = element_text(size = rel(0.8), hjust = 0.7),
-    plot.caption = element_text(size = rel(0.5)),
-    plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
-    axis.ticks.y = element_blank(),
-    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.7), angle = 40, hjust = 1,vjust = 1)
-  ) +
+  theme(legend.position.inside =  c(0.05, 0.95),
+        legend.justification = c(0,1)) +
+  xlab(NULL) + ylab(NULL) +
+  # theme(
+  #   panel.background = element_rect(fill = "white"), 
+  #   plot.background = element_rect(fill = "white"),
+  #   legend.position =  "right",
+  #   axis.title.x = element_blank(),
+  #   axis.title.y = element_blank(),
+  #   legend.text = element_text(size = rel(0.6)),
+  #   legend.title = element_blank(),
+  #   plot.title = element_text(size = rel(0.8), hjust = 0.7),
+  #   plot.caption = element_text(size = rel(0.5)),
+  #   plot.margin =  margin(t = 20, r = 10, b = 20, l = 10),
+  #   axis.ticks.y = element_blank(),
+  #   axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
+  #   axis.text.x = element_text(size = rel(0.7), angle = 40, hjust = 1,vjust = 1)
+  # ) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 2500), breaks = seq(0, 2500, by = 500)) + 
   theme(panel.border = element_blank())+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,\ncalculs des auteurs")+
-  theme(
-    plot.caption = element_text(size = rel(0.5)) 
-  )
+  # labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI,\ncalculs des auteurs")+
+  # theme(
+  #   plot.caption = element_text(size = rel(0.5)) 
+  # ) +
+  ofce_caption(
+    champ = "Familles sans enfant",
+    lecture = "Les couleurs sont jolies",
+    note = "Les calculs sont probablement à revoir",
+    source = "législation avril 2024, {.orange maquette Sofi} https://github.com/murielpucci/SOFI")
 
-
-igraph <- girafe(ggobj = graph)
-
-if (is_html_output()) {
-  igraph
-} else {
-  print(graph)
-}
+girafy(graph)
+# igraph <- girafe(ggobj = graph)
+# 
+# if (is_html_output()) {
+#   igraph
+# } else {
+#   print(graph)
+# }
 
 ```
 
@@ -427,7 +389,7 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     legend.text = element_text(size = rel(0.6)),
     legend.title = element_blank(),
     plot.title = element_text(size = rel(0.8), hjust = 0.7),
-    plot.caption = element_text(size = rel(0. 5)),
+    plot.caption = element_text(size = rel(0.5)),
     plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
     axis.ticks.y = element_blank(),
     axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
@@ -448,8 +410,6 @@ if (is_html_output()) {
 } else {
   print(graph3)
 }
-
-
 ```
 
 Pour un même niveau de revenu du conjoint (soit le Smic à temps plein), les gains à l'emploi sont plus importants si le conjoint perçoit une allocation chômage (ou une pension d'invalidité ou de retraite) plutôt qu'un revenu professionnel. Dans ce cas, lorsque le travailleur étudié n'a aucun revenu, le couple a un revenu disponible plus faible que lorsque le conjoint est salarié (1 891 euros contre 2 497 euros) car contrairement au salaire, l'allocation chômage du conjoint n'ouvre pas droit à la prime d'activité. La reprise d'emploi a donc un effet plus faible sur le montant de prestations perçues et le gain à l'emploi pour un Smic à temps plein est de 1 090 euros, ce qui correspond à un TEG de 78%. Le taux effectif de gain est également élevé pour un emploi a mi-temps (71 %) ou à temps plein avec un salaire de 1,5 Smic (83 %).
@@ -695,6 +655,7 @@ Le taux effectif de gain pour le passage de l'inactivité à un emploi à temps 
 ```{r}
 #| label: fig-TGE
 #| fig-cap: Taux  effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps ou à temps-plein, selon la configuration familiale
+#| fig-asp: 1
 
 #Guillaume : au choix un graphique avec les 4 ou deux graphiques comme actuellement
 castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
@@ -768,38 +729,18 @@ graph4 <- ggplot() +
     size = 2
   )+
   facet_wrap(~emploi,nrow=1)+
-  theme_minimal() +
   scale_y_continuous(limits = c(-10, 100)) + 
+  xlab(NULL)+ylab(NULL) +
   theme(
-    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.3),
-    panel.spacing = unit(0.5, "lines"),
-    strip.background = element_blank(),
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    legend.title = element_blank(),
-    legend.position = "right",
-    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
-    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.8), angle = 40, hjust = 1, vjust = 1),
-    axis.text.y = element_text(size = rel(0.8), angle = 40, hjust = 1, vjust = 1),
-    strip.text= element_text(size = rel(0.7),face="bold"),
-    plot.title = element_text(size = rel(0.9), color="#5E4FA2",face="bold")
-  )+
+    legend.position = "right", 
+    plot.caption = element_marquee(margin = margin(t=9)),
+    panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2),
+    panel.spacing = unit(12, "pt"))+
   facet_grid(prime_activite ~ emploi)+
-  labs(caption="Source : législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI, calculs des auteurs")+
-  theme(
-    plot.caption = element_text(size = rel(0.5))  
-  )
+  guides(x = guide_axis(n.dodge=2), color = guide_legend(title = NULL)) +
+  ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
 
-igraph4<-girafe(ggobj = graph4)
-
-if (is_html_output()) {
-  igraph4
-} else {
-  print(graph4)
-}
-
-
+girafy(graph4)
 ```
 
 ```{r}
@@ -1340,8 +1281,6 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
   geom_bar_interactive(stat = "identity", position = "dodge", 
     aes(y=NVIE, fill=enf,tooltip=paste("niveau de vie :",round(NVIE,0), "euros"))
   ) + 
-  scale_fill_economist() +  
-  theme_minimal() +
   scale_y_continuous(limits = c(0, 1500)) +  
     geom_hline(
   aes(yintercept = (4/6)*seuilpm, linetype = "Seuil de grande pauvreté monétaire (40 %)"),
@@ -1389,7 +1328,7 @@ En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum
 
 Malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'écart entre le RSA et le SMIC et la montée en charge des compléments de revenus pour travailleurs pauvres, la part d'allocataires du RSA dans la population d'âge actif a augmenté, passant de 3,0% en 2008 à 4,1% en 2022. La réduction du niveau de vie relatif du RSA n'a donc pas eu d'effets visibles en termes de baisse du nombre d'allocataires.
 
-```{r fig-minimasociaux}
+```{r fig-minimasociaux, eval=FALSE}
 #| fig-cap: Evolution des mimina sociaux et du Smic horaire, base 100 = 1990
 
 
@@ -1397,7 +1336,7 @@ Bareme <- read_excel("DREES-BaremesMS.xlsx")
 Bareme <-Bareme %>% mutate_all(as.numeric)
 
 IPC2015 <- "https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/001763852" %>%
-  readSDMX %>%
+  rsdmx::readSDMX %>%
   as_tibble
 
 IPC <- IPC2015 %>%  
