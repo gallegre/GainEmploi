@@ -8,20 +8,25 @@ author:
   - name: Guillaume Allègre
     email: guillaume.allegre@sciencespo.fr
     affiliation: OFCE, Sciences Po Paris
-   
   - name: Muriel Pucci
     email: muriel.pucci@gmail.com
     affiliation: OFCE & Université Paris 1
-
+citation:
+  type: article-journal
+  container-title: "Document de travail de l'OFCE"
+  issue: 2025-25p
+  url: https://xxx.github.io/yyyyyyy/
 annee: 2025
 wp: 25p
-date: today
+date: "2025-11-22"
 date-modified: today
 lang: fr
+
 format:
   wp-html: default
   wp-pdf:
     toc: false
+    output-file: "OFCEWP2025-25p.pdf"
 editor: visual
 bibliography: references.bib
 ---
