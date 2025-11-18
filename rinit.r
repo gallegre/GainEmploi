@@ -48,7 +48,7 @@ tooltip_css  <-
   box-shadow: 2px 2px 2px gray;
   r:20px;"
 
-set_theme(theme_ofce())
+ggplot2::set_theme(ofce::theme_ofce())
 
 if(.Platform$OS.type=="windows")
   Sys.setlocale(locale = "fr_FR.utf8") else
