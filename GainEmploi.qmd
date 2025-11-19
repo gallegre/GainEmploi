@@ -111,8 +111,8 @@ Le cas d'une personne seule illustre la façon dont le système socio-fiscal ass
 #| fig-cap: Revenu disponible d'une personne seule selon son revenu professionnel
 #| fig-asp: 0.7
 
-castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
-sofi <- readxl::read_xlsx("Maquette Sofi 2024 -08-11-2024 - cas types smic -mp.xlsx", sheet = "synthèse")
+
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 seuilpm=1312 # seuil de pauvreté à 60% actualisé en 2023. voir note dans le texte.
 smic=1398.7 # SMIC mensuel net en 2023
 
@@ -166,10 +166,10 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
     colour=guide_legend(title = NULL, order = 1)  
   ) +
   theme(legend.position.inside =  c(0.05, 0.95),
-        legend.justification = c(0,1)) +
+        legend.justification = c(0,1),
+        panel.border = element_blank()) +
   xlab(NULL) + ylab(NULL) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 2500), breaks = seq(0, 2500, by = 500)) + 
-  theme(panel.border = element_blank())+
   ofce_caption(
     source = "législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI"
     )
@@ -192,7 +192,7 @@ Comparativement à une personne seule, le couple mono-actif continue à percevoi
 #| fig-cap: Revenu disponible d'un couple avec deux enfants selon le revenu professionnel, conjoint inactif
 #| fig-asp: 0.7
 
-castyp <- read_excel("cas types smic.xlsx",sheet = "synthese") 
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 
 smic <- 1398.7
 
@@ -250,20 +250,15 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     values = c("Revenu disponible" = "orange")  
   ) +
     guides(
-    fill = guide_legend(order = 1),  
-    colour=guide_legend(order = 2)
+    fill = guide_legend(title = NULL, order = 1),  
+    colour=guide_legend(title = NULL, order = 2)
   ) +
   theme(legend.position.inside =  c(0.05, 1),
         legend.justification = c(0,1)) +
   xlab(NULL) + ylab(NULL) +
   ofce_caption(
     source = "législation avril 2024, maquette Sofi: https://github.com/murielpucci/SOFI"
-    )+
-    guides(
-    fill = guide_legend(title = NULL, order = 2), 
-    colour=guide_legend(title = NULL, order = 1)  
-  )
-
+    )
 
 
 girafy(graph2)
@@ -281,7 +276,7 @@ La situation est un peu différente pour une personne en couple avec deux enfant
 #| fig-cap: Revenu disponible couple 2 enfants, conjoint au Smic à plein-temps
 #| fig-asp: 0.7
 
-castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 
 smic=1398.7
 seuilpm=1312*2.1
@@ -344,21 +339,16 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     values = c("Revenu disponible" = "orange")  
   ) +
     guides(
-    fill = guide_legend(order = 2),  
-    colour=guide_legend(order = 1)
+    fill = guide_legend(title = NULL,order = 2),  
+    colour=guide_legend(title = NULL,order = 1)
   )+
   theme(legend.position.inside =  c(0.05, 1),
-        legend.justification = c(0,1)) +
+        legend.justification = c(0,1),
+        panel.border = element_blank()) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500)) + 
-  theme(panel.border = element_blank()) +
   xlab(NULL) + ylab(NULL) +
   ofce_caption(
-    source = "législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")+
-    guides(
-    fill = guide_legend(title = NULL, order = 2), 
-    colour=guide_legend(title = NULL, order = 1)  
-  )
-
+    source = "législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
 
 girafy(graph3)
 
@@ -371,7 +361,7 @@ Pour un même niveau de revenu du conjoint (soit le Smic à temps plein), les ga
 #| fig-cap: Revenu disponible d'un couple avec deux enfants selon le revenu professionnel, conjoint au chômage (ARE=1 smic)
 #| fig-asp: 0.7
 
-castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 
 smic=1398.7
 
@@ -465,8 +455,9 @@ Le coût net de la garde est relativement modéré et représente 300 euros maxi
 #| label: fig-garde
 #| fig-cap: Revenu disponible d'une famille avec un enfant gardé par sa mère et/ou une assitante maternelle
 #| fig-asp: 0.8
-castyp <- read_excel("cas types smic jeune enfant.xlsx",sheet = "synthese")
 
+
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE_JE")
 
 #  Isolé 1 enfant
 smic=1398.7
@@ -527,7 +518,8 @@ graph_cmg <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
     size = 3
   ) +
   theme(legend.position.inside =  c(0.05, 1),
-        legend.justification = c(0,1)) +
+        legend.justification = c(0,1),
+        panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2)) +
   xlab(NULL) + ylab(NULL) +
     guides(
     fill = guide_legend(title = NULL, order = 2), 
@@ -535,7 +527,6 @@ graph_cmg <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
   )+
   scale_y_continuous(expand = c(0, 0), limits = c(0, 4000), breaks = seq(0, 4000, by = 500)) + 
   guides(x = guide_axis(n.dodge=2), color = guide_legend(title = NULL)) +
-  theme(panel.border = element_blank())+
   ofce_caption(
     source = "législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI"
     )
@@ -571,7 +562,7 @@ Le taux effectif de gain pour le passage de l'inactivité à un emploi à temps 
 #| fig-cap: Taux  effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps ou à temps-plein, selon la configuration familiale
 #| fig-asp: 1
 
-castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 
 base<-castyp %>% 
   mutate(
@@ -656,168 +647,7 @@ graph4 <- ggplot() +
 girafy(graph4)
 ```
 
-```{r}
-#| label: fig-TGEa
-#| fig-cap: Taux  effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps ou à temps-plein, selon la configuration familiale
-
-castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
-
-base<-castyp %>% 
-  mutate(
-    casconj=case_when(isocou=="isolé" ~ "Sans conjoint",
-                  isocou=="couple" & actconj=="Inactif" ~ "Conjoint \nsans revenu",
-                  isocou=="couple" & actconj=="Chômeur" ~ "Conjoint \nchômeur",
-                  isocou=="couple" & actconj=="1 smic" ~ "Conjoint \nsalarié au smic",
-                  TRUE ~ "Conjoint \nsalarié à 1,5 smic"),
-    enf=case_when(nbenf==0 ~ "0 enfant",
-                  nbenf==1 ~ "1 enfant",
-                  nbenf==2 ~ "2 enfants",
-                  TRUE ~ "3 enfants"),
-    act=case_when(activite<1 ~ 100*activite,
-                  Salaire==smic ~ 100,
-                  TRUE ~ 150),
-    emp=case_when(
-    Salaire==0 ~ "Sans emploi",
-    Salaire==699.35 ~ "Emploi à mi-temps au Smic",
-    Salaire==1398.70 ~ "Emploi à temps plein au Smic",
-    TRUE~"autre"
-  ),
-    RDISP_SSPA=RDISP-PA
-    ) %>% 
-  select(casconj,enf,Salaire,act,RDISP,RDISP_SSPA) 
-
-basegr1<-base %>% 
-  pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
-  mutate(
-    TGM=round(100*((RDISP_50-RDISP_0)/(Salaire_50-Salaire_0)),1),
-    TGMspa=round(100*((RDISP_SSPA_50-RDISP_SSPA_0)/(Salaire_50-Salaire_0)),1),
-    emploi="Emploi à mi-temps"
- ) %>% 
-  select(casconj,enf,emploi,TGM,TGMspa)
-
-basegr2<-base %>% 
-  pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
-  mutate(
-    TGM=round(100*((RDISP_100-RDISP_0)/(Salaire_100-Salaire_0)),1),
-    TGMspa=round(100*((RDISP_SSPA_100-RDISP_SSPA_0)/(Salaire_100-Salaire_0)),1),
-    emploi="Emploi à temps plein"
- ) %>% 
-  select(casconj,enf,emploi,TGM,TGMspa)
-
-basegr<-rbind(basegr1, basegr2)
-
-basegr$enf <- factor(basegr$enf, levels=c("0 enfant","1 enfant","2 enfants","3 enfants"))
-
-basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint \nsans revenu",
-                                               "Conjoint \nchômeur","Conjoint \nsalarié au smic",
-                                               "Conjoint \nsalarié à 1,5 smic"))
-
-basegr$emploi <- factor(basegr$emploi, levels=c("Emploi à mi-temps","Emploi à temps plein"))
-
-
-graph4a <- ggplot() +
-  geom_point_interactive(
-    data = basegr, aes(x =casconj, y = TGM, 
-      colour = enf, 
-      tooltip=paste("Taux effectif de gain à l'emploi :",TGM, "%")), 
-    size = 2
-  )+
-  facet_wrap(~emploi,nrow=1)+
-  theme_minimal() +
-  scale_y_continuous(limits = c(-10, 100)) 
-
-
-#igraph4a<-girafe(ggobj = graph4a)
-
-#if (is_html_output()) {
-#   igraph4a
-# } else {
-#   print(graph4a)
-# }
-```
-
 L'analyse des TEG sans prime d'activité met en lumière les effets différenciés de cette prestation selon la composition du ménage, le revenu du conjoint et sa nature. Pour une personne seule, la prime d'activité a augmenté le TEG d'un emploi à plein temps au Smic pour les célibataires sans enfant et les parents isolés avec un ou deux enfants, rapprochant les gains à l'emploi de ceux d'un parent isolé avec 3 enfants qui n'y est pas éligible. Pour les personnes vivant en couple, l'impact de la prime d'activité diffère fortement selon la situation du conjoint. La prime d'activité augmente fortement le TEG du premier emploi dans le couple (conjoint sans revenu) mais réduit celui du deuxième emploi (conjoint salarié au Smic ou à 1,5 Smic).
-
-```{r}
-#| label: fig-TGEb
-#| fig-cap: Taux  effectif de gain à l'emploi sans prime d'activité pour une reprise d'emploi au Smic à mi-temps ou à temps-plein, selon la configuration familiale
-
-castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
-
-base<-castyp %>% 
-  mutate(
-    casconj=case_when(isocou=="isolé" ~ "Sans conjoint",
-                  isocou=="couple" & actconj=="Inactif" ~ "Conjoint \nsans revenu",
-                  isocou=="couple" & actconj=="Chômeur" ~ "Conjoint \nchômeur",
-                  isocou=="couple" & actconj=="1 smic" ~ "Conjoint \nsalarié au smic",
-                  TRUE ~ "Conjoint \nsalarié à 1,5 smic"),
-    enf=case_when(nbenf==0 ~ "0 enfant",
-                  nbenf==1 ~ "1 enfant",
-                  nbenf==2 ~ "2 enfants",
-                  TRUE ~ "3 enfants"),
-    act=case_when(activite<1 ~ 100*activite,
-                  Salaire==smic ~ 100,
-                  TRUE ~ 150),
-    emp=case_when(
-    Salaire==0 ~ "Sans emploi",
-    Salaire==699.35 ~ "Emploi à mi-temps au Smic",
-    Salaire==1398.70 ~ "Emploi à temps plein au Smic",
-    TRUE~"autre"
-  ),
-    RDISP_SSPA=RDISP-PA
-    ) %>% 
-  select(casconj,enf,Salaire,act,RDISP,RDISP_SSPA) 
-
-basegr1<-base %>% 
-  pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
-  mutate(
-    TGM=round(100*((RDISP_50-RDISP_0)/(Salaire_50-Salaire_0)),1),
-    TGMspa=round(100*((RDISP_SSPA_50-RDISP_SSPA_0)/(Salaire_50-Salaire_0)),1),
-    emploi="Emploi à mi-temps"
- ) %>% 
-  select(casconj,enf,emploi,TGM,TGMspa)
-
-basegr2<-base %>% 
-  pivot_wider(names_from=act, values_from = c(Salaire, RDISP,RDISP_SSPA)) %>% 
-  mutate(
-    TGM=round(100*((RDISP_100-RDISP_0)/(Salaire_100-Salaire_0)),1),
-    TGMspa=round(100*((RDISP_SSPA_100-RDISP_SSPA_0)/(Salaire_100-Salaire_0)),1),
-    emploi="Emploi à temps plein"
- ) %>% 
-  select(casconj,enf,emploi,TGM,TGMspa)
-
-basegr<-rbind(basegr1, basegr2)
-
-basegr$enf <- factor(basegr$enf, levels=c("0 enfant","1 enfant","2 enfants","3 enfants"))
-
-basegr$casconj <- factor(basegr$casconj,levels=c("Sans conjoint","Conjoint \nsans revenu",
-                                               "Conjoint \nchômeur","Conjoint \nsalarié au smic",
-                                               "Conjoint \nsalarié à 1,5 smic"))
-
-basegr$emploi <- factor(basegr$emploi, levels=c("Emploi à mi-temps","Emploi à temps plein"))
-
-
-graph4b <- ggplot() +
-  geom_point_interactive(
-    data = basegr, aes(x =casconj, y = TGMspa, 
-      colour = enf, 
-      tooltip=paste("Taux effectif de gain à l'emploi sans prime d'activité :",TGMspa, "%")), 
-    size = 2
-  )+
-  facet_wrap(~emploi,nrow=1)+
-  theme_minimal() +
-  scale_y_continuous(limits = c(-10, 100)) 
-
-
- #igraph4b<-girafe(ggobj = graph4b)
- 
- #if (is_html_output()) {
- #  igraph4b
- #} else {
-#   print(graph4b)
- #}
-
-```
 
 Selon la composition de son foyer, un travailleur acceptant un emploi ne bénéficie donc pas toujours d'un taux effectif de gain à l'emploi équivalent, et la prime d'activité ne permet pas toujours d'augmenter ce gain. Le second emploi dans un couple semble ainsi découragé par rapport à ce qui prévaudrait en l'absence de prime d'activité. En outre, la prise en compte différenciée des revenus du conjoint selon leur nature peut avoir des effets indésirables. Comme la formule le montre, les revenus non professionnels du foyer sont déduits à 100%. Par conséquent, si dans un couple biactif l'un des conjoints perd son emploi pour du chômage indemnisé, non seulement il perd son bonus d'activité individuel, mais son allocation chômage est déduite intégralement, ce qui peut annuler la prime d'activité pour son conjoint resté en emploi (@pucci2020blogpa). En pratique, dans la plupart des cas, les foyers incluant un chômeur indemnisé (ou un retraité) ne sont pas éligibles à la prime d'activité.
 
@@ -834,8 +664,9 @@ Avec les réformes visant à rendre le travail payant, les plus faibles gains à
 ```{r}
 #| label: fig-gainsmarginaux
 #| fig-cap: Gain marginaux effectifs pour une augmentation de 100 euros du revenu d'activité, selon la configuration familiale et le niveau de revenu initial 
+#| fig-asp: 1.2
 
-castyp <- read_excel("cas types gains marginaux.xlsx",sheet = "synthese")
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGME")
 
 base<-castyp %>% 
   mutate(
@@ -885,14 +716,12 @@ graphG2<-ggplot() +
   scale_fill_manual(values = c("Sans prime d'activité" = "#482677FF", "Avec prime d'activité" = "#95D840FF")) +
   scale_y_continuous(limits = c(-50, 100),breaks = seq(-50, 100, by = 25)) +
   scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
- labs(
-   # title="Avec ou sans prime d'activité",
- x = "Revenu individuel en parts de smic",
-      y = "Taux de gain marginal") +
   theme(
     legend.position = "below",
-    legend.title = element_blank()
+    legend.title = element_blank(),
+    panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2)
     ) +
+    xlab("Revenu individuel en parts de smic")+ylab(NULL) +
   ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
 
 
@@ -922,12 +751,18 @@ Une personne isolée avec enfant(s) en emploi à plein temps au Smic est au-dess
 ```{r}
 #| label: fig-nivvie
 #| fig-cap: Niveau de vie et risque de pauvreté monétaire selon le salaire et la configuration familiale
-#| fig-width: 12
-#| fig-height: 8
-#| fig-align: center
+#| fig-asp: 1
+
+
+#  fig-width: 12
+#  fig-height: 8
+#  fig-align: center
+
+
+
 seuilpm=1312
 
-castyp <- read_excel("cas types smic.xlsx",sheet = "synthese")
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 
 base<-castyp %>% 
   mutate(
@@ -994,6 +829,7 @@ graph_pm<-ggplot() +
     legend.position = "below",
     legend.title = element_blank()
     ) +
+  xlab("Nombre d'enfants")+ylab(NULL)+
   ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
 
 
@@ -1011,7 +847,7 @@ Nous avons jusqu'ici utilisé des cas-types, mais les graphiques ci-dessous mont
 ```{r fig-pauvreté}
 #| fig-cap: Taux de pauvreté et taux de privation matérielle selon la tranche de revenu salarial et la configuration familiale
 
-srcv<-read_excel("Sorties_Privation.xlsx",sheet = "Sorties_Privation")
+srcv<-read_excel("data/Sorties_Privation.xlsx",sheet = "Sorties_Privation")
 
 base1 <- srcv %>%
 pivot_longer(cols = c(TX_PAUVRETE, TX_ISO_PAUVRETE, TX_COU_PAUVRETE), names_to = "cas", values_to = "taux") %>%
@@ -1063,7 +899,7 @@ graphG <- ggplot() +
     axis.title.y = element_text(size = rel(0.8)), 
     axis.text.x = element_text(angle = 45, hjust = 1, size = rel(0.6)),
     plot.title = element_text(size=rel(0.6)),
-    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
+    panel.border = element_rect(color = "grey", fill = NA, linewidth = 0.2),
     strip.text = element_text(size = rel(0.8),face="bold")
     )+
   guides(fill = guide_legend(nrow = 1))+
@@ -1100,7 +936,7 @@ Dans les cas-types étudiés, les revenus d'assistance procurent un niveau de vi
 #| label: fig-ndvminimum
 #| fig-cap: Niveau de vie (en euros par uc) du revenu d'assistance et des allocations logement selon la configuration familiale, pour un foyer sans revenu primaire 
  
-castyp<-read_excel("cas types smic.xlsx",sheet = "synthese") 
+castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 seuilpm=1312
 seuil40=seuilpm*4/6
 
@@ -1171,7 +1007,7 @@ Malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'�
 #| fig-cap: Evolution des mimina sociaux et du Smic horaire, base 100 = 1990
 
 
-Bareme <- read_excel("DREES-BaremesMS.xlsx")
+Bareme <- read_excel("data/DREES-BaremesMS.xlsx")
 Bareme <-Bareme %>% mutate_all(as.numeric)
 
 IPC2015 <- "https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/001763852" %>%
