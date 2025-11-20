@@ -14,7 +14,7 @@ author:
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
-  issue: 2025-25p
+  issue: 2025-24
   url: https://https://github.com/gallegre/GainEmploi
 annee: 2025
 wp: 24
@@ -26,7 +26,7 @@ format:
   wp-html: default
   wp-pdf:
     toc: false
-    output-file: "OFCEWP2025-24p.pdf"
+    output-file: "OFCEWP2025-24.pdf"
 editor: visual
 bibliography: references.bib
 ---
@@ -70,7 +70,7 @@ Pour répondre à la question « la reprise d'emploi est-elle rémunératrice?
 
 L'approche par cas-type est simplificatrice. D'une part, les revenus disponibles, ou niveaux de vie, ne tiennent pas compte ni des différences de coûts de la vie induites par le fait de travailler plutôt qu'être au foyer, en particulier dans les ménages avec enfants, ou lorsque le trajet domicile-travail est coûteux ; ni des aides locales sous conditions de ressources (tarification de la cantine scolaire par exemple). D'autre part, elle ne tient pas compte non plus des avantages économiques liés à l'emploi qu'ils soient immédiats (tickets restaurant, prise en charge des cartes de transport) ou différés en termes de droits ouverts de chômage ou de retraite. L'approche néglige également le fait que les personnes peuvent accorder une valeur différente aux salaires et aux prestations sociales. Néanmoins, cette approche est cohérente avec la définition du niveau de vie utilisée pour mesurer les inégalités de revenus (rapport inter-décile, indice de Gini) et la pauvreté monétaire (voir @tip-ndvdef). Ces indicateurs, largement utilisés dans le débat public, ne tiennent pas compte, eux non plus, de la tarification de la cantine scolaire ou de l'avantage lié aux tickets-restaurant par exemple. Il ne faut donc pas exagérer le caractère simplificateur des cas-types que nous présentons : l'approche par le revenu disponible est une vision simplificatrice mais tangible, qui se traduit concrètement sur le compte en banque. Il y a des avantages à ne pas travailler qui ne se traduisent pas en revenus, mais il y a aussi des avantages à travailler.
 
-::: {#tip-ndvdef .callout-tip collapse="false"}
+::: {#tip-ndvdef .callout-tip collapse="false" icon="false"}
 ## Définition du niveau de vie
 
 Le niveau de vie d'un ménage est un indicateur conçu pour comparer les revenus disponibles de ménages de configuration différente en tenant compte des économies d'échelle liées à la vie commune et des dépenses pour les enfants. Il est obtenu en divisant le revenu disponible (revenus professionnels ou de remplacement, revenus fonciers ou financiers auxquels on ajoute les prestations sociales reçues et dont on déduit les impôts directs sur le revenu) de l'ensemble du ménage par un nombre d'unités de consommation. En France et en Europe, les unités de consommation sont définies par l'INSEE et Eurostat selon l'échelle d'équivalence dite de l'OCDE modifiée qui attribue 1 UC au premier adulte du ménage, 0,5 UC aux autres personnes de 14 ans ou plus et 0,3 UC aux enfants de moins de 14 ans (car considérés comme ayant moins de besoins). Selon cette convention, le niveau de vie est considéré comme identique pour une personne seule avec un revenu disponible de 2 000 euros, un couple sans enfant qui dispose 3000 euros (1,5x2000), ou un couple avec un enfants de 10 ans qui dispose de 3 600 euros (1,8x2000).
@@ -90,7 +90,7 @@ L'approche par cas-type est critiquable dans la mesure où elle ne représente p
 
 Dans les cas-types étudiés, le système socio-fiscal actuel garantit que la reprise d'emploi est toujours rémunératrice, mais pas nécessairement toujours dans les mêmes proportions. Pour le mesurer, on utilisera deux indicateurs : le taux de prélèvement effectif et le taux effectif de gain à l'emploi (voir @tip-teg).
 
-::: {#tip-teg .callout-tip collapse="false"}
+::: {#tip-teg .callout-tip collapse="false" icon="false"}
 ## Taux effectif de prélèvement et taux effectif de gain à l'emploi
 
 Outre la variation de revenu disponible du ménage, il est également possible de calculer un taux effectif de prélèvement (TEP) qui correspond à la baisse des transferts sociaux (nets d'impôt) par euro supplémentaire de revenu professionnel. Si, lorsque le revenu d'activité augmente de 1000 euros, les transferts sociaux nets baissent de 400 euros on dira que le TEP est de 40%. Dans ce cas, le revenu disponible augmente de 600 euros.
@@ -162,8 +162,8 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
     size = 3
   ) +
     guides(
-    fill = guide_legend(title = NULL, order = 2), 
-    colour=guide_legend(title = NULL, order = 1)  
+    fill = guide_legend(title = NULL, order = 1), 
+    colour=guide_legend(title = NULL, order = 2)  
   ) +
   theme(legend.position.inside =  c(0.05, 0.95),
         legend.justification = c(0,1),
@@ -250,8 +250,8 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     values = c("Revenu disponible" = "orange")  
   ) +
     guides(
-    fill = guide_legend(title = NULL, order = 1),  
-    colour=guide_legend(title = NULL, order = 2)
+    fill = guide_legend(title = NULL, order = 2),  
+    colour=guide_legend(title = NULL, order = 1)
   ) +
   theme(legend.position.inside =  c(0.05, 1),
         legend.justification = c(0,1)) +
@@ -403,7 +403,7 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
              "RSA"="RSA",
              "PA" = "Prime d'activité"
              ),
-    values = c('ARE conjoint' = 'grey80',
+    values = c('ARE conjoint' = 'grey50',
                'Salaire' = '#482677FF',
                'PF' = '#39568CFF',
                'PL' = '#238A8DFF',
@@ -453,7 +453,7 @@ Le coût net de la garde est relativement modéré et représente 300 euros maxi
 
 ```{r}
 #| label: fig-garde
-#| fig-cap: Revenu disponible d'une famille avec un enfant gardé par sa mère et/ou une assitante maternelle
+#| fig-cap: Revenu disponible d'une famille avec un enfant gardé par sa mère et/ou une assistante maternelle
 #| fig-asp: 0.8
 
 
@@ -555,12 +555,12 @@ Avec la prime d'activité, le système social et fiscal remplit bien l'objectif 
 
 Pour les cas que nous avons étudiés, le taux effectif de gain pour le passage de l'inactivité à un emploi à mi-temps au Smic est plus faible que pour un emploi à temps complet. Il varie de 48% à 58% pour une personne seule selon le nombre d'enfants à charge et de 36% à 87% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature et le nombre d'enfants à charge. Le TEG le plus faible est obtenu avec 3 enfants lorsque le conjoint est salarié au Smic car la reprise d'emploi réduit à la fois les montants d'aides au logement (-174 €) et de prime d'activité (-271 €). Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge car le couple ne bénéficie initialement que des aides au logement (89 €) et n'a donc que cela à perdre.
 
-Le taux effectif de gain pour le passage de l'inactivité à un emploi à temps plein rémunéré au Smic est plus élevé que pour un mi-temps. Il varie de 58% à 65% pour une personne seule selon le nombre d'enfants à charge et de 52% à 94% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Comme pour l'emploi à mi-temps, le TEG le plus faible est obtenu avec 3 enfants lorsque le conjoint est salarié au Smic qui, en plus de la baisse des aides au logement et de la prime d'activité, voit également son montant de prestations familiales baisser de 97 €. Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge qui n'a droit qu'aux aides au logement quand il n'y a qu'un emploi dans le couple.
+Le taux effectif de gain pour le passage de l'inactivité à un emploi à temps plein rémunéré au Smic est plus élevé que pour un mi-temps ( @fig-TGE). Il varie de 58% à 65% pour une personne seule selon le nombre d'enfants à charge et de 52% à 94% pour une personne vivant en couple selon le montant du revenu du conjoint, sa nature, et le nombre d'enfants à charge. Comme pour l'emploi à mi-temps, le TEG le plus faible est obtenu avec 3 enfants lorsque le conjoint est salarié au Smic qui, en plus de la baisse des aides au logement et de la prime d'activité, voit également son montant de prestations familiales baisser de 97 €. Le gain le plus élevé est obtenu avec un conjoint chômeur et aucun enfant à charge qui n'a droit qu'aux aides au logement quand il n'y a qu'un emploi dans le couple.
 
 ```{r}
 #| label: fig-TGE
 #| fig-cap: Taux  effectif de gain à l'emploi pour une reprise d'emploi au Smic à mi-temps ou à temps-plein, selon la configuration familiale
-#| fig-asp: 1
+#| fig-asp: 0.9
 
 castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 
@@ -659,7 +659,7 @@ Le graphique suivant décrit les gains associés à une hausse de salaire en fon
 
 Le graphique montre que la prime d'activité a réduit les gains marginaux à l'emploi autour de 1 à 1,2 Smic. La courbe des gains marginaux suit maintenant une courbe en U et, à l'inverse, la courbe des taux marginaux effectifs de prélèvement, une courbe en U inversé, en contradiction avec la courbe "optimale" en U des taux marginaux, telle que décrite par @diamond1998 ou @saez2001. Selon ces auteurs, les taux marginaux effectifs de prélèvement les plus bas devraient s'appliquer au milieu de l'échelle de revenus, là où les individus sont les plus nombreux.
 
-Avec les réformes visant à rendre le travail payant, les plus faibles gains à l'emploi se sont déplacés au niveau du Smic à temps complet ou juste au-dessus. Certains pourraient dire que les "trappes à inactivité" se sont transformées en "trappes à bas salaires" mais ces expressions ne sont pas appropriées puisqu'elles impliquent que les travailleurs répondent à ces plus faibles incitations. Or, il est difficile de trouver des études confirmant ces effets sur l'offre de travail en pratique. Selon le rapport @boziowasmer2024 les politiques d'exonérations sociales (ciblées autour du Smic à temps-plein), si les effets théoriques des exonérations et des primes d'activité dégressives sont soulignés régulièrement par les économistes, "la démonstration empirique de l'existence de trappes à bas salaire est néanmoins délicate", la littérature disponible en France offrant des preuves empiriques limitées.
+Avec les réformes visant à rendre le travail payant, les plus faibles gains à l'emploi se sont déplacés au niveau du Smic à temps complet ou juste au-dessus (@fig-gainsmarginaux). Certains pourraient dire que les "trappes à inactivité" se sont transformées en "trappes à bas salaires" mais ces expressions ne sont pas appropriées puisqu'elles impliquent que les travailleurs répondent à ces plus faibles incitations. Or, il est difficile de trouver des études confirmant ces effets sur l'offre de travail en pratique. Selon le rapport @boziowasmer2024 les politiques d'exonérations sociales (ciblées autour du Smic à temps-plein), si les effets théoriques des exonérations et des primes d'activité dégressives sont soulignés régulièrement par les économistes, "la démonstration empirique de l'existence de trappes à bas salaire est néanmoins délicate", la littérature disponible en France offrant des preuves empiriques limitées.
 
 ```{r}
 #| label: fig-gainsmarginaux
@@ -718,6 +718,7 @@ graphG2<-ggplot() +
   scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
   theme(
     legend.position = "below",
+    plot.caption = element_marquee(margin = margin(t=9)),
     legend.title = element_blank(),
     panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2)
     ) +
@@ -736,7 +737,7 @@ Si l'emploi est toujours rémunérateur, il ne protège pas toujours de la pauvr
 
 [^3]: Si la prime d'activité permet à certains foyers de franchir le seuil de pauvreté monétaire, l'analyse par cas types montre que certains foyers à bas salaire n'y sont pas éligibles. S'y ajoutent ceux qui ne recourent pas à cette prestation bien que leur niveau de vie soit inférieur au seuil de pauvreté monétaire.
 
-::: {#tip-tpm .callout-tip collapse="false"}
+::: {#tip-tpm .callout-tip collapse="false" icon="false"}
 ## La pauvreté monétaire et les privations matérielles et sociales
 
 D'après la statistique publique (INSEE, Eurostat), un individu est pauvre d'un point de vue monétaire si le niveau de vie du ménage auquel il appartient est inférieur à 60% du niveau de vie médian. La pauvreté monétaire est ainsi un concept relatif : si le niveau de vie de tous les ménages augmente de 10%, le taux de pauvreté monétaire restera inchangé. Par convention, le seuil de pauvreté monétaire est le même dans tout le pays, mais il varie au sein de l'Union européenne d'un pays à l'autre. La pauvreté monétaire est donc définie uniquement par les revenus. La seule prise en compte des différences de besoins se fait par l'échelle d'équivalence qui définit le nombre d'unités de consommation (UC) du ménage selon sa composition. Le niveau de vie ne prend donc pas en compte le coût du logement ni les besoins différenciés en transport, logement ou chauffage selon le lieu de vie. Le dernier seuil de pauvreté monétaire publié par l'Insee est de 1 288 euros par UC pour l'année 2023. Pour le comparer aux montants des prestations en 2024, nous avons appliqué à ce seuil l'inflation observée entre 2023 et juillet 2024, ce qui amène à un seuil de 1 312 euros par UC.
@@ -744,20 +745,14 @@ D'après la statistique publique (INSEE, Eurostat), un individu est pauvre d'un 
 Le taux de privation matérielle et sociale est un indicateur social utilisé dans l'union européenne, défini comme la part de personnes ne pouvant pas couvrir les dépenses liées à au moins cinq éléments de la vie courante sur treize considérés comme souhaitables, voire nécessaires, pour avoir un niveau de vie acceptable.
 :::
 
-Le niveau de vie d'un célibataire sans enfant sans revenus d'activité et recourant à toutes les prestations est de 851 euros par UC, ce qui est inférieur de 35% au seuil de pauvreté monétaire : son intensité de pauvreté (c'est-à-dire l'écart au seuil de pauvreté) est donc de 35%. Un emploi à mi-temps au Smic ne lmonétaire ui permet pas de franchir le seuil de pauvreté (intensité de 9%). Le célibataire sans enfant franchit le seuil de pauvreté monétaire avec un Smic à plein temps même s'il ne recourt pas à la prime d'activité et son niveau de vie atteint 126% du seuil s'il y recourt. En revanche, un emploi à mi-temps ne permet pas de sortir de la pauvreté même si la prime d'activité en réduit l'intensité (de 30% avant prime à 9% après).
+Le niveau de vie d'un célibataire sans enfant sans revenus d'activité et recourant à toutes les prestations est de 851 euros par UC, ce qui est inférieur de 35% au seuil de pauvreté monétaire : son intensité de pauvreté (c'est-à-dire l'écart au seuil de pauvreté) est donc de 35% ( @fig-nivvie). Un emploi à mi-temps au Smic ne lui permet pas de franchir le seuil de pauvreté (intensité de 9%). Le célibataire sans enfant franchit le seuil de pauvreté monétaire avec un Smic à plein temps même s'il ne recourt pas à la prime d'activité et son niveau de vie atteint 126% du seuil s'il y recourt. En revanche, un emploi à mi-temps ne permet pas de sortir de la pauvreté même si la prime d'activité en réduit l'intensité (de 30% avant prime à 9% après).
 
 Une personne isolée avec enfant(s) en emploi à plein temps au Smic est au-dessus du seuil de pauvreté monétaire, qu'elle ait un enfant (125% du seuil), deux enfants (119%), ou trois enfants (124%) et elle le serait même sans la prime d'activité. Le système socio-fiscal permet donc bien aux parents isolés de sortir de la pauvreté lorsqu'ils travaillent au Smic à temps plein et la prime d'activité leur permet de dépasser largement le seuil. La prime d'activité permet même aux parents isolés d'atteindre le seuil de pauvreté avec un emploi à mi-temps au Smic.
 
 ```{r}
 #| label: fig-nivvie
 #| fig-cap: Niveau de vie et risque de pauvreté monétaire selon le salaire et la configuration familiale
-#| fig-asp: 1
-
-
-#  fig-width: 12
-#  fig-height: 8
-#  fig-align: center
-
+#| fig-asp: 0.7
 
 
 seuilpm=1312
@@ -767,9 +762,9 @@ castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 base<-castyp %>% 
   mutate(
     cas = case_when(isocou=="isolé" ~ "Isolé",
-                    isocou=="couple" & actconj=="Inactif" ~ "En couple\nconjoint sans revenu",
-                    isocou=="couple" & actconj=="1 smic" ~ "En couple\nconjoint au Smic",
-                    isocou=="couple" & actconj=="Chômeur" ~ "En couple\nconjoint au chômage", 
+                    isocou=="couple" & actconj=="Inactif" ~ "conjoint sans revenu",
+                    isocou=="couple" & actconj=="1 smic" ~ "conjoint au Smic",
+                    isocou=="couple" & actconj=="Chômeur" ~ "conjoint au chômage", 
                     TRUE ~ "autre"
   ),
    nbenf2 = case_when(nbenf==0 ~ "Sans enfant",
@@ -790,7 +785,7 @@ base<-castyp %>%
 
 base$emp <- factor(base$emp, levels = c("Sans emploi", "Emploi à mi-temps au Smic", "Emploi à temps plein au Smic"))
 
-base$cas <- factor(base$cas, levels = c("Isolé", "En couple\nconjoint sans revenu", "En couple\nconjoint au Smic","En couple\nconjoint au chômage"))
+base$cas <- factor(base$cas, levels = c("Isolé", "conjoint sans revenu", "conjoint au Smic","conjoint au chômage"))
 
 base$nbenf2 <- factor(base$nbenf2, levels = c("Sans enfant", "1 enfant", "2 enfants")) 
 
@@ -825,27 +820,30 @@ graph_pm<-ggplot() +
   labs(color = "Statut emploi",
        linetype = "Seuils") +
   facet_grid(prime_activite ~ cas)+
+  guides(x = guide_axis(n.dodge=2), color = guide_legend(title = NULL)) +
   theme(
     legend.position = "below",
+    plot.caption = element_marquee(margin = margin(t=9)),
     legend.title = element_blank()
     ) +
-  xlab("Nombre d'enfants")+ylab(NULL)+
+  xlab(NULL)+ylab(NULL)+
   ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
-
 
 
 girafy(graph_pm)
 
 ```
 
-Les revenus d'un couple mono-actif dans lequel l'un des conjoints travaille au Smic à plein temps, et l'autre conjoint est sans revenu permettent tout juste d'atteindre le seuil de pauvreté si le couple n'a pas d'enfant à condition que celui-ci recoure à la prime d'activité. À ce niveau de revenus, le système social ne compense pas entièrement la charge des enfants, et le niveau de vie des couples mono-actifs avec enfants est légèrement plus faible quand ils ont des enfants que quand ils n'en ont pas. L'intensité de la pauvreté monétaire est ainsi de 7% s'ils ont un enfant, 9% avec deux enfants, et 5% avec trois enfants.
+Les revenus d'un couple mono-actif dans lequel l'un des conjoints travaille au Smic à plein temps, et l'autre conjoint est sans revenu permettent tout juste d'atteindre le seuil de pauvreté si le couple n'a pas d'enfant à condition que celui-ci recoure à la prime d'activité (@fig-pauvrete). À ce niveau de revenus, le système social ne compense pas entièrement la charge des enfants, et le niveau de vie des couples mono-actifs avec enfants est légèrement plus faible quand ils ont des enfants que quand ils n'en ont pas. L'intensité de la pauvreté monétaire est ainsi de 7% s'ils ont un enfant, 9% avec deux enfants, et 5% avec trois enfants.
 
 Les couples biactifs avec deux emplois au Smic à temps plein ont un revenu disponible avant prime d'activité supérieur au seuil de pauvreté et dépassent largement ce seuil avec la prime. Le système socio-fiscal ne compense que partiellement la charge des enfants telle qu'elle est appréhendée par les unités de consommation. Un couple biactif au Smic recourant à la prime d'activité a ainsi un niveau de vie équivalent à 153% du seuil de pauvreté s'il n'a pas d'enfant, 135% du seuil de pauvreté s'il en a un, 124% avec deux enfants et 117% avec trois.
 
 Nous avons jusqu'ici utilisé des cas-types, mais les graphiques ci-dessous montrent que ces cas-types se traduisent dans des situations moyennes. Les graphiques représentent les taux de pauvreté monétaire (gauche) et de privation matérielle et sociale (droite) des individus selon leur revenu salarial mensuel (en tranche de Smic) et leur situation conjugale (en couple ou célibataire). On voit que le taux de pauvreté monétaire baisse nettement lorsque les revenus salariaux augmentent. Cette baisse de la pauvreté est liée directement à l'augmentation des salaires (composantes du niveau de vie), mais aussi à des caractéristiques plus favorables.
 
-```{r fig-pauvreté}
+```{r}
+#| label: fig-pauvrete
 #| fig-cap: Taux de pauvreté et taux de privation matérielle selon la tranche de revenu salarial et la configuration familiale
+#| fig-asp: 0.7
 
 srcv<-read_excel("data/Sorties_Privation.xlsx",sheet = "Sorties_Privation")
 
@@ -874,51 +872,30 @@ pivot_longer(cols = c(TX_PMS, TX_ISO_PMS, TX_COU_PMS), names_to = "cas", values_
 base<-rbind(base1,base2)
 
 
-
-base$modalite<-factor(base$modalite, levels=c("moins de 0,3 smic", "[0,3 à 0,6[", "[0,6 à 0,9[", "[0,9 à 1,2[", "[1,2 à 1,5[", "[1,5 à 1,8[", "1,8 smic et plus"))
+base$modalite<-factor(base$modalite, levels=c("< 0,3 smic", "[0,3 à 0,6[", "[0,6 à 0,9[", "[0,9 à 1,2[", "[1,2 à 1,5[", "[1,5 à 1,8[", "1,8 et +"))
 
 
 graphG <- ggplot() +
   geom_col_interactive(data = base, aes(x = modalite, y = taux, fill = cas,
                              tooltip=paste("Taux=",round(taux,1), "%")), 
            position = position_dodge(width = 0.6),  # Position des barres
-           width = 0.4) +  # Largeur des barres
+           ) +  # Largeur des barres
   facet_wrap(~mesure)+
-  theme_minimal() +
-  #scale_fill_brewer(palette = "Spectral") +
   scale_y_continuous(limits = c(0, 51)) +
-  #scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
   labs(x = "Revenu en tranche de Smic",
        y = "Taux en %") + 
   theme(
     legend.position = "bottom",
+    plot.caption = element_marquee(margin = margin(t=9)),
     legend.title = element_blank(),
-    legend.key.size = unit(0.2, units="cm"),
-    legend.text =  element_text(size = rel(0.6)),
-    axis.title.x = element_text(size = rel(0.8)),  
-    axis.title.y = element_text(size = rel(0.8)), 
-    axis.text.x = element_text(angle = 45, hjust = 1, size = rel(0.6)),
-    plot.title = element_text(size=rel(0.6)),
     panel.border = element_rect(color = "grey", fill = NA, linewidth = 0.2),
-    strip.text = element_text(size = rel(0.8),face="bold")
     )+
   guides(fill = guide_legend(nrow = 1))+
-  labs(caption="Source : ERFS ; calcul des auteurs")+
-  theme(
-   plot.caption = element_text(size = rel(0.5)) 
-  )
+  guides(x = guide_axis(n.dodge=2), color = guide_legend(title = NULL)) +
+  ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")  
    
 
-
-
-igraphG<-girafe(ggobj = graphG)
-
-
-if (is_html_output()) {
-  igraphG
-} else {
-  print(graphG)
-}
+girafy(graphG)
 
 ```
 
@@ -930,11 +907,12 @@ Si l'hypothèse du coût pour les emplois à temps partiel est juste, il existe 
 
 La reprise d'emploi est toujours rémunératrice mais l'intensité de la pauvreté des ménages sans emploi est forte.
 
-Dans les cas-types étudiés, les revenus d'assistance procurent un niveau de vie inférieur au seuil de pauvreté à 60 %, et même inférieur au seuil de grande pauvreté à 40 % pour les couples et les personnes seules (graphique).
+Dans les cas-types étudiés, les revenus d'assistance procurent un niveau de vie inférieur au seuil de pauvreté à 60 %, et même inférieur au seuil de grande pauvreté à 40 % pour les couples et les personnes seules ( @fig-ndvminimum).
 
 ```{r}
 #| label: fig-ndvminimum
 #| fig-cap: Niveau de vie (en euros par uc) du revenu d'assistance et des allocations logement selon la configuration familiale, pour un foyer sans revenu primaire 
+#| fig_asp: 0.7
  
 castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 seuilpm=1312
@@ -965,46 +943,34 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
   scale_linetype_manual(name = "Références", values = c("Seuil de pauvreté monétaire (60 %)" = "solid", "Seuil de grande pauvreté monétaire (40 %)" = "dashed"),
                         limits = c("Seuil de pauvreté monétaire (60 %)", "Seuil de grande pauvreté monétaire (40 %)"))+
     guides(
-    fill = guide_legend(order = 1),  # La légende des couleurs en premier
-    linetype = guide_legend(order = 2,nrow=2) # La légende des lignes en dernier,
-  ) +
+    fill = guide_legend(order = 1),  
+    linetype = guide_legend(order = 2,nrow=2) 
+    ) +
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     legend.title = element_blank(),
     legend.position="bottom",
-    legend.box = "vertical",
-    legend.text=element_text(size = rel(0.6)),
-    legend.key.size = unit(0.3, units="cm"),
-    legend.spacing.y = unit(0.001, "cm"),
-    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
-    axis.line = element_line(color = "black", linewidth = 0.2, linetype = "solid"),
-    axis.text.x = element_text(size = rel(0.9), angle = 00, hjust = 1, vjust = 1)
+    legend.box = "vertical"
   )+
-  labs(caption="Source : Législation avril 2024, calculs des auteurs")+
-  theme(
-    plot.caption = element_text(size = rel(0.5)) 
-  )
+  ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
+  
    
+girafy(graph5)
 
-igraph5<-girafe(ggobj = graph5)
-
-if (is_html_output()) {
-  igraph5
-} else {
-  print(graph5)
-}
 
 ```
 
 Le niveau de vie des ménages sans revenus d'activité est faible. Il a décru dans le temps et relativement aux autres revenus. Depuis 1990, le niveau du minimum social en direction des personnes d'âge actif a ainsi progressé bien moins vite que le niveau du minimum vieillesse (ASPA) ou de l'allocation adulte handicapée (AAH) (voir graphique).
 
-En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum social pour les personnes valides d'âge actif. Si l'objectif est principalement distributif, le législateur a néanmoins voulu préserver les incitations à travailler en fixant le niveau du RMI à 50 % du SMIC à temps plein (mais en l'indexant sur l'inflation et non pas sur le niveau du Smic ou du salaire moyen par tête). Les débats font alors apparaître la volonté que le norme d'emploi soit le temps complet. Dans les années 1990, le nombre d'allocataires augmente rapidement et atteint un niveau non anticipé par les décideurs publics : de 500 000 allocataires en 1990, ce nombre dépasse le million en 1996. Face à cette montée rapide, le discours sur les « trappes à pauvreté » se répand. En 2001, l'introduction de la prime pour l'emploi (PPE) est une première réponse à ce discours. La PPE étant accusée d'être mal ciblée et de pénaliser les emplois à temps partiel, le RSA activité prend la relève en 2009 et permet de garantir que le revenu disponible d'un foyer augmente lorsque ses revenus d'activité augmentent, même à temps partiel ou très partiel. Il est ensuite remplacé par la prime d'activité en 2015, revalorisée lors de la crise des gilets jaunes pour les salaires proches du Smic. Durant cette période d'attention aux gains à l'emploi et à la pauvreté laborieuse, le montant de base du RSA est peu revalorisé.
+En 1989, la loi instaurant le RMI a pour principal objectif de donner un minimum social pour les personnes valides d'âge actif. Si l'objectif est principalement distributif, le législateur a néanmoins voulu préserver les incitations à travailler en fixant le niveau du RMI à 50 % du SMIC à temps plein (mais en l'indexant sur l'inflation et non pas sur le niveau du Smic ou du salaire moyen par tête). Les débats font alors apparaître la volonté que le norme d'emploi soit le temps complet. Dans les années 1990, le nombre d'allocataires augmente rapidement et atteint un niveau non anticipé par les décideurs publics : de 500 000 allocataires en 1990, ce nombre dépasse le million en 1996. Face à cette montée rapide, le discours sur les « trappes à pauvreté » se répand. En 2001, l'introduction de la prime pour l'emploi (PPE) est une première réponse à ce discours. La PPE étant accusée d'être mal ciblée et de pénaliser les emplois à temps partiel, le RSA activité prend la relève en 2009 et permet de garantir que le revenu disponible d'un foyer augmente lorsque ses revenus d'activité augmentent, même à temps partiel ou très partiel. Il est ensuite remplacé par la prime d'activité en 2015, revalorisée lors de la crise des gilets jaunes pour les salaires proches du Smic. Durant cette période d'attention aux gains à l'emploi et à la pauvreté laborieuse, le montant de base du RSA est peu revalorisé ( @fig-minima).
 
 Malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'écart entre le RSA et le SMIC et la montée en charge des compléments de revenus pour travailleurs pauvres, la part d'allocataires du RSA dans la population d'âge actif a augmenté, passant de 3,0% en 2008 à 4,1% en 2022. La réduction du niveau de vie relatif du RSA n'a donc pas eu d'effets visibles en termes de baisse du nombre d'allocataires.
 
-```{r fig-minimasociaux}
+```{r}
+#| label: fig-minima
 #| fig-cap: Evolution des mimina sociaux et du Smic horaire, base 100 = 1990
+#| fig-asp: 0.8
 
 
 Bareme <- read_excel("data/DREES-BaremesMS.xlsx")
@@ -1077,16 +1043,10 @@ graphMS <- Bareme_long %>%
     legend.title = element_blank(),
         ) +
   ofce_caption(
-  source = "DREES",
-  note = "base 100 = 1990 ; Smic horaire et minima sociaux en euros constants"
+  source= "DREES",
+  note= "base 100 = 1990 ; Smic horaire et minima sociaux en euros constants"
   )
 
-  
-  
-  
-  
-  
-  
 girafy(graphMS)
 
 
@@ -1109,7 +1069,7 @@ Une solution permettant de réduire le coût serait de réduire bien plus fortem
 
 ## Soutenir les emplois à temps partiel ou promouvoir la norme du temps plein ?
 
-Faut-il cibler les compléments de revenus pour les travailleurs à bas revenu au niveau du temps partiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles, souvent sous le seuil de pauvreté. Le débat sur la place du temps-partiel dans le dispositif de compléments de revenus pour travailleurs à bas revenus date des débuts de la prime pour l'emploi en 2001 (voir notamment Cahuc, 2002). Redistribution et incitation sont des objectifs non seulement inconciliables mais contradictoires. La redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, temps partiel, temps-plein au Smic et emploi mieux rémunéré. L'incitation implique de les maintenir ou de les augmenter. Il est possible de dépasser le dilemme localement (en augmentant le revenu disponible par les transferts à la fois à temps-partiel et à temps-plein au Smic), mais le problème est alors déplacé plus haut, à l'endroit où la prestation devient dégressive. On parle aujourd'hui de trappes à bas salaires (voir le rapport @boziowasmer2024). A la redistribution et l'incitation, s'ajoute un autre objectif : rémunérer le « mérite ». Il est probable que beaucoup d'acteurs aient cet objectif en tête lorsqu'ils défendent l'idée que le "travail doit payer", mais dans cet optique, faut-il cibler les gains sur le temps partiel ou sur le temps plein ? Deux philosophies s'opposent. Selon la première, le travail à temps plein doit payer. Il faudrait créer une norme de temps plein, forme d'emploi la plus propice pour réduire la pauvreté. A la création du RMI, l'écart entre le RMI et le Smic a été calculé sur la base d'un temps plein. Initialement, le montant du RMI a été fixé à 50% du Smic, ce qui peut être interprété en termes incitatifs ou de mérite. Selon la seconde philosophie, chaque heure de travail doit payer, c'est-à-dire que chaque heure travaillée mérite une hausse du revenu disponible. Toutefois, la volonté de créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein crée une pression à la baisse sur le niveau des revenus d'assistance. En 1989, la norme d'emploi était le CDI à temps plein. Le RMI était différentiel par rapport à un montant forfaitaire fixe. Après période d'intéressement temporaire\[2\], chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier par rapport au revenu d'assistance. Les gains étaient concentrés entre le mi-temps et le temps plein. À cette époque, malgré l'absence de gain financier (passé la période d'intéressement), il y avait tout de même des reprises d'emploi à temps partiel et même du cumul durable entre RMI et revenus professionnels, signe que les personnes concernées reconnaissaient les aspects positifs de l'emploi au-delà du revenu. À l'heure actuelle, la combinaison RSA-PA implique que le montant versé est différenciel par rapport à un revenu garanti qui augmente avec les revenus professionnels du foyer selon deux mécanismes : le taux de cumul et les bonus individuels. Il en résulte que le soutien relatif aux emplois à temps partiel a fortement augmenté, ce qui dénote une attention portée davantage sur les symptômes de la pauvreté laborieuse que sur les incitations à sortir de la pauvreté par l'emploi à temps complet. Faut-il revenir au système prévalent de 1989 jusqu'à la création du RSA en 2009 ? Ce système permettrait à la fois d'avoir un socle plus élevé et de réaffirmer le temps plein comme norme de travail et de renforcer cette norme non pas avec des mesures qui visent les travailleurs, mais avec une régulation du temps de travail limitant le nombre de postes à pourvoir à temps partiel (voir conclusion).
+Faut-il cibler les compléments de revenus pour les travailleurs à bas revenu au niveau du temps partiel ou du temps-plein ? Posé comme cela, le problème est insoluble : pour protéger de la pauvreté, il vaut mieux inciter au temps-plein ; mais pour réduire directement la pauvreté laborieuse, il vaut mieux donner plus aux travailleurs à temps-partiel, qui ont des niveaux de vie plus faibles, souvent sous le seuil de pauvreté. Le débat sur la place du temps-partiel dans le dispositif de compléments de revenus pour travailleurs à bas revenus date des débuts de la prime pour l'emploi en 2001 (voir notamment Cahuc, 2002). Redistribution et incitation sont des objectifs non seulement inconciliables mais contradictoires. La redistribution implique de réduire les écarts de revenus disponibles entre non-emploi, temps partiel, temps-plein au Smic et emploi mieux rémunéré. L'incitation implique de les maintenir ou de les augmenter. Il est possible de dépasser le dilemme localement (en augmentant le revenu disponible par les transferts à la fois à temps-partiel et à temps-plein au Smic), mais le problème est alors déplacé plus haut, à l'endroit où la prestation devient dégressive. On parle aujourd'hui de trappes à bas salaires (voir le rapport @boziowasmer2024). A la redistribution et l'incitation, s'ajoute un autre objectif : rémunérer le « mérite ». Il est probable que beaucoup d'acteurs aient cet objectif en tête lorsqu'ils défendent l'idée que le "travail doit payer", mais dans cet optique, faut-il cibler les gains sur le temps partiel ou sur le temps plein ? Deux philosophies s'opposent. Selon la première, le travail à temps plein doit payer. Il faudrait créer une norme de temps plein, forme d'emploi la plus propice pour réduire la pauvreté. A la création du RMI, l'écart entre le RMI et le Smic a été calculé sur la base d'un temps plein. Initialement, le montant du RMI a été fixé à 50% du Smic, ce qui peut être interprété en termes incitatifs ou de mérite. Selon la seconde philosophie, chaque heure de travail doit payer, c'est-à-dire que chaque heure travaillée mérite une hausse du revenu disponible. Toutefois, la volonté de créer un écart de revenus à la fois entre l'inactivité et le mi-temps et entre le mi-temps et le temps-plein crée une pression à la baisse sur le niveau des revenus d'assistance. En 1989, la norme d'emploi était le CDI à temps plein. Le RMI était différentiel par rapport à un montant forfaitaire fixe. Après période d'intéressement temporaire\[2\], chaque euro de revenus supplémentaires se déduisait à 100% du revenu versé. Cela veut dire qu'à terme une personne seule reprenant un emploi à mi-temps n'avait aucun gain financier par rapport au revenu d'assistance. Les gains étaient concentrés entre le mi-temps et le temps plein. À cette époque, malgré l'absence de gain financier (passé la période d'intéressement), il y avait tout de même des reprises d'emploi à temps partiel et même du cumul durable entre RMI et revenus professionnels, signe que les personnes concernées reconnaissaient les aspects positifs de l'emploi au-delà du revenu. À l'heure actuelle, la combinaison RSA-PA implique que le montant versé est différentiel par rapport à un revenu garanti qui augmente avec les revenus professionnels du foyer selon deux mécanismes : le taux de cumul et les bonus individuels. Il en résulte que le soutien relatif aux emplois à temps partiel a fortement augmenté, ce qui dénote une attention portée davantage sur les symptômes de la pauvreté laborieuse que sur les incitations à sortir de la pauvreté par l'emploi à temps complet. Faut-il revenir au système prévalent de 1989 jusqu'à la création du RSA en 2009 ? Ce système permettrait à la fois d'avoir un socle plus élevé et de réaffirmer le temps plein comme norme de travail et de renforcer cette norme non pas avec des mesures qui visent les travailleurs, mais avec une régulation du temps de travail limitant le nombre de postes à pourvoir à temps partiel (voir conclusion).
 
 ## Augmenter les gains à l'emploi par la hausse du Smic ou grâce à la prime d'activité ?
 
@@ -1129,7 +1089,7 @@ Selon le principe de Tinbergen, lorsqu'il y a deux objectifs distincts, ici la l
 
 Le débat sur les gains à l'emploi, les taux de prélèvements et les incitations ne concerne aujourd'hui que le travail. Cela montre l'importance du « mérite » associé au travail dans le débat public, indépendamment des difficultés rencontrées par certains pour accéder à l'emploi. Les plus pauvres peuvent cumuler (partiellement) leurs revenus du travail avec leurs prestations sociales, mais ce n'est pas le cas pour les autres ressources comme les revenus de remplacement (retraite, chômage), les pensions alimentaires, les héritages et les dons, les gains aux jeux, les loyers reçus pour un logement loué, la valeur locative des logements non loués (!), les revenus des capitaux, et les revenus fictifs des biens non productifs, comme les contrats d'assurance-vie, imputés à hauteur de 3% de leur valeur marchande. Nombre de ces ressources ne sont pas comprises dans la base fiscale des plus aisés, le Conseil constitutionnel ayant même tranché contre la prise en compte de revenus non effectifs (la valeur locative de logements non loués ne peut rentrer dans le revenu au titre de l'imposition sur le revenu). Le RSA, prestation d'assistance, suit une logique de subsidiarité : le demandeur doit démontrer avoir fait valoir tous ses droits, aux autres prestations sociales et créances alimentaires, et même aux revenus de ses biens non utilisés. Tous les revenus non professionnels sont déductibles à 100% du RSA et de la prime d'activité : un don de 100 euros, le revenu tiré d'une chambre à louer ou d'une petite épargne. Cette logique crée des situations impossibles pour les allocataires, même sincères. S'ils reçoivent une aide familiale dans une situation d'urgence, une chaudière qui tombe en panne, un enfant malade, un évènement à l'autre bout de la France, ils doivent déclarer cette aide qui sera entièrement déduite de l'allocation versée. La conséquence est qu'il y aura plus de fraudes détectées chez les personnes vulnérables, qui contournent, parfois involontairement, une technocratie dont la rigueur est asymétrique entre les plus pauvres et les plus aisés. Ceci est d'autant plus problématique que le calcul de la base ressource à l'euro près s'applique à une prestation faible versée à des foyers pauvres ou modestes. Il peut en résulter un phénomène de spirale de la pauvreté puisque le moindre coup de pouce, le moindre effort d'épargne voient leurs effets annulés par le mode de calcul du RSA et de la prime d'activité. Une solution serait de rendre le calcul de la prestation plus bienveillant en mettant en place un abattement sur l'ensemble des petits revenus (et non pas seulement les revenus du travail) : par exemple, les 450 premiers euros par trimestre (150 euros par mois) ne seraient pas pris en compte dans le calcul de la prestation, quelle que soit leur origine. Un avantage d'une telle réforme serait que le demandeur de l'allocation ayant des petits revenus n'aurait pas à détailler leur origine lors de la demande, il cocherait simplement la case « ressources inférieures à 450 euros ». Cette réforme pourrait être réalisée à coût constat en réduisant un peu le taux de cumul avec les revenus professionnels (58,5% au lieu de 61% actuellement). Un tel système réduirait la peur de se tromper, la peur des indus à rembourser, et donc le non-recours. Les premiers revenus d'activité seraient gardés à 100 % par les travailleurs, ce qui répond aussi à la problématique des coûts fixes à la reprise d'emploi. Au-delà de l'abattement, le taux de cumul des revenus d'activité et de la prime d'activité pourrait être abaissé pour garder les gains à la reprise d'emploi à plein temps constants par rapport à la situation actuelle. Si l'objectif est que les allocataires des minima sociaux en sortent par le haut, il faut aussi éviter d'annuler le moindre coup de pouce ou coup de chance.
 
-::: {#tip-simul .callout-tip collapse="false"}
+::: {#tip-simul .callout-tip collapse="false" icon="false"}
 ## Simulation de deux réformes
 
 Nous simulons deux réformes illustratives pour donner des ordres de grandeur concernant le coût de ce type de réformes ainsi que la répartition des foyers gagnants ou perdants. Pour cela, nous utilisons le modèle de microsimulation sociale et fiscale INES développé par l'INSEE, la DREES et la CNAF. La version utilisée d'INES simule la législation 2022 sur les données de l'Enquête Revenus fiscaux et sociaux (ERFS) 2020 actualisées à l'aide des dernières données démographiques et économiques disponibles. Nos simulations font l'hypothèse d'un taux de non-recours inchangé (en masse financière)5. Les deux réformes simulées s'appuient sur les points évoqués dans la section précédente.\
