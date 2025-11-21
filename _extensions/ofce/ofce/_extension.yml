@@ -1,4 +1,4 @@
-title: Format OFCE
+title: Format html OFCE
 author: Anissa Saumtally et Xavier Timbeau
 version: 0.2.0
 quarto-required: ">=1.8.26"
@@ -92,6 +92,7 @@ contributes:
       number-depth: 3
       classoption:
         - DIV=11
+      callout-icon: false
       papersize: a4
       fontsize: 9pt
       extra_dependencies: ["float"]

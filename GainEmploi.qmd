@@ -27,6 +27,7 @@ format:
   wp-pdf:
     toc: false
     output-file: "OFCEWP2025-24.pdf"
+    
 editor: visual
 bibliography: references.bib
 ---
@@ -161,13 +162,17 @@ graph <- ggplot(basegr %>% filter(name !='RDISP'), aes(fill = name,
       tooltip=paste("Revenu disponible",round(value,0), "euros")), 
     size = 3
   ) +
-    guides(
-    fill = guide_legend(title = NULL, order = 1), 
-    colour=guide_legend(title = NULL, order = 2)  
+    scale_color_manual(
+    values = c("Revenu disponible" = "orange")  
   ) +
-  theme(legend.position.inside =  c(0.05, 0.95),
-        legend.justification = c(0,1),
-        panel.border = element_blank()) +
+    guides(
+    colour=guide_legend(title = NULL, order = 1) ,
+    fill = guide_legend(title = NULL, order = 2) 
+  ) +
+  theme(legend.position.inside =  c(0.05, 1),
+        legend.justification = c(0,1),    
+        plot.caption = element_marquee(margin = margin(t=9))
+        ) +
   xlab(NULL) + ylab(NULL) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 2500), breaks = seq(0, 2500, by = 500)) + 
   ofce_caption(
@@ -191,6 +196,8 @@ Comparativement à une personne seule, le couple mono-actif continue à percevoi
 #| label: fig-C2A2ECI
 #| fig-cap: Revenu disponible d'un couple avec deux enfants selon le revenu professionnel, conjoint inactif
 #| fig-asp: 0.7
+
+
 
 castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGE")
 
@@ -249,12 +256,13 @@ graph2 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
   scale_color_manual(
     values = c("Revenu disponible" = "orange")  
   ) +
-    guides(
-    fill = guide_legend(title = NULL, order = 2),  
-    colour=guide_legend(title = NULL, order = 1)
+  guides(colour=guide_legend(title = NULL, order = 1),
+    fill = guide_legend(title = NULL, order = 2)
   ) +
   theme(legend.position.inside =  c(0.05, 1),
-        legend.justification = c(0,1)) +
+        legend.justification = c(0,1),    
+        plot.caption = element_marquee(margin = margin(t=9))
+        ) +
   xlab(NULL) + ylab(NULL) +
   ofce_caption(
     source = "législation avril 2024, maquette Sofi: https://github.com/murielpucci/SOFI"
@@ -343,8 +351,9 @@ graph3 <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     colour=guide_legend(title = NULL,order = 1)
   )+
   theme(legend.position.inside =  c(0.05, 1),
-        legend.justification = c(0,1),
-        panel.border = element_blank()) +
+        legend.justification = c(0,1),    
+        plot.caption = element_marquee(margin = margin(t=9))
+        ) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500)) + 
   xlab(NULL) + ylab(NULL) +
   ofce_caption(
@@ -428,21 +437,21 @@ graph3b <- ggplot(basegr1, aes(fill = name, y = value, x = typrev)) +
     values = c("Revenu disponible" = "orange")  
   ) +
     guides(
-    fill = guide_legend(order = 2), 
-    colour=guide_legend(order = 1)
+    fill = guide_legend(title = NULL,order = 2), 
+    colour=guide_legend(title = NULL,order = 1)
   ) +
-   scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500)
+    theme(legend.position.inside =  c(0.05, 1),
+        legend.justification = c(0,1),    
+        plot.caption = element_marquee(margin = margin(t=9))
+        ) +
+     scale_y_continuous(expand = c(0, 0), limits = c(0, 4500), breaks = seq(0, 4500, by = 500)
   )+
   xlab(NULL) + ylab(NULL) +
   ofce_caption(
-    source = "législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")+
-    guides(
-    fill = guide_legend(title = NULL, order = 2), 
-    colour=guide_legend(title = NULL, order = 1)  
-  )
+    source = "législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
 
 
-girafy(graph3)
+girafy(graph3b)
 ```
 
 ## Que change la prise en compte des coûts de garde des jeunes enfants ?
@@ -517,16 +526,21 @@ graph_cmg <- ggplot(basegr %>% filter(name !='RDISP_NET_CG'), aes(fill = name,
       tooltip=paste("Revenu disponible net de la garde :",round(value,0), "euros")), 
     size = 3
   ) +
+    scale_color_manual(
+    values = c("Revenu disponible net de la garde" = "orange")  
+  ) +
   theme(legend.position.inside =  c(0.05, 1),
         legend.justification = c(0,1),
-        panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2)) +
+        panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2),   
+        plot.caption = element_marquee(margin = margin(t=9))
+        ) +
   xlab(NULL) + ylab(NULL) +
     guides(
-    fill = guide_legend(title = NULL, order = 2), 
-    colour=guide_legend(title = NULL, order = 1)  
+       colour=guide_legend(title = NULL, order = 1) ,
+       fill = guide_legend(title = NULL, order = 2),
+       x = guide_axis(n.dodge=2), color = guide_legend(title = NULL)
   )+
   scale_y_continuous(expand = c(0, 0), limits = c(0, 4000), breaks = seq(0, 4000, by = 500)) + 
-  guides(x = guide_axis(n.dodge=2), color = guide_legend(title = NULL)) +
   ofce_caption(
     source = "législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI"
     )
@@ -641,7 +655,7 @@ graph4 <- ggplot() +
     panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2),
     panel.spacing = unit(12, "pt"))+
   facet_grid(prime_activite ~ emploi)+
-  guides(x = guide_axis(n.dodge=2), color = guide_legend(title = NULL)) +
+  guides(x = guide_axis(n.dodge=2), color = guide_legend(title = NULL),nrow=1) +
   ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
 
 girafy(graph4)
@@ -664,7 +678,8 @@ Avec les réformes visant à rendre le travail payant, les plus faibles gains à
 ```{r}
 #| label: fig-gainsmarginaux
 #| fig-cap: Gain marginaux effectifs pour une augmentation de 100 euros du revenu d'activité, selon la configuration familiale et le niveau de revenu initial 
-#| fig-asp: 1.2
+#| fig-asp: 1
+#| fig-pos: "H"
 
 castyp <- readxl::read_xlsx("data/Sofi2024_cas_types_smic.xlsx", sheet = "TGME")
 
@@ -717,7 +732,7 @@ graphG2<-ggplot() +
   scale_y_continuous(limits = c(-50, 100),breaks = seq(-50, 100, by = 25)) +
   scale_x_discrete(expand = expansion(add = c(0.5, 0.5))) + 
   theme(
-    legend.position = "below",
+    legend.position = "bottom",
     plot.caption = element_marquee(margin = margin(t=9)),
     legend.title = element_blank(),
     panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2)
@@ -765,29 +780,22 @@ base<-castyp %>%
                     isocou=="couple" & actconj=="Inactif" ~ "conjoint sans revenu",
                     isocou=="couple" & actconj=="1 smic" ~ "conjoint au Smic",
                     isocou=="couple" & actconj=="Chômeur" ~ "conjoint au chômage", 
-                    TRUE ~ "autre"
-  ),
-   nbenf2 = case_when(nbenf==0 ~ "Sans enfant",
-                    nbenf==1 ~ "1 enfant",
-                    nbenf==2 ~ "2 enfants",
-                    TRUE ~ "autre"
-  ),
+                    TRUE ~ "autre"),
   emp=case_when(
     Salaire==0 ~ "Sans emploi",
     Salaire==699.35 ~ "Emploi à mi-temps au Smic",
     Salaire==1398.70 ~ "Emploi à temps plein au Smic",
-    TRUE~"autre"
-  ),
+    TRUE~"autre"),
   NVIESSPA=(RDISP-PA)/(RDISP/NVIE)
   ) %>% 
-  filter(cas != "autre" & nbenf2!="autre" & emp !="autre") %>% 
-  select(cas, nbenf2, NVIE,NVIESSPA,emp)
+  filter(cas != "autre" & nbenf<3 & emp !="autre") %>% 
+  select(cas, nbenf, NVIE,NVIESSPA,emp)
 
 base$emp <- factor(base$emp, levels = c("Sans emploi", "Emploi à mi-temps au Smic", "Emploi à temps plein au Smic"))
 
 base$cas <- factor(base$cas, levels = c("Isolé", "conjoint sans revenu", "conjoint au Smic","conjoint au chômage"))
 
-base$nbenf2 <- factor(base$nbenf2, levels = c("Sans enfant", "1 enfant", "2 enfants")) 
+base$nbenf <- factor(base$nbenf, levels = c("0", "1", "2")) 
 
 seuils <- data.frame(
   seuil = c(seuilpm, seuilpm*4/6),
@@ -795,7 +803,7 @@ seuils <- data.frame(
 )
 
 base_long <- base %>%
-  select(nbenf2, emp, cas, NVIE, NVIESSPA) %>%
+  select(nbenf, emp, cas, NVIE, NVIESSPA) %>%
   pivot_longer(cols = c(NVIE, NVIESSPA),
                names_to = "prime_activite",
                values_to = "montant") %>%
@@ -803,10 +811,10 @@ base_long <- base %>%
 
 graph_pm<-ggplot() +
     geom_point_interactive(
-    data = base_long, aes(x =nbenf2, y = round(montant,0), 
+    data = base_long, aes(x =nbenf, y = round(montant,0), 
       colour = emp, 
       tooltip=paste("Niveau de vie :",round(montant,0), "€")), 
-    size = 3
+    size = 1.5
   )+
   facet_wrap(~cas, nrow = 1) +
   geom_hline(data = seuils, aes(yintercept = seuil, linetype = type),
@@ -817,16 +825,16 @@ graph_pm<-ggplot() +
     values = c("Seuil de pauvreté monétaire (60 %)" = "solid", 
                "Seuil de grande pauvreté monétaire (40 %)" = "dashed")
   ) +
-  labs(color = "Statut emploi",
+  labs(color = "Statut d'emploi",
        linetype = "Seuils") +
   facet_grid(prime_activite ~ cas)+
-  guides(x = guide_axis(n.dodge=2), color = guide_legend(title = NULL)) +
+  guides(x = guide_axis(n.dodge=1), color = guide_legend(title = NULL)) +
   theme(
-    legend.position = "below",
+    legend.position = "bottom",
     plot.caption = element_marquee(margin = margin(t=9)),
-    legend.title = element_blank()
+    panel.border = element_rect(colour = "grey", fill="transparent", linetype="solid", linewidth = 0.2),
     ) +
-  xlab(NULL)+ylab(NULL)+
+  xlab("Nombre d'enfants")+ylab(NULL)+
   ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
 
 
@@ -931,7 +939,8 @@ base<-castyp %>%
 base$enf <- factor(base$enf, levels = c("Sans enfant", "1 enfant", "2 enfants","3 enfants")) 
 
 graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) + 
-  geom_bar_interactive(stat = "identity", position = "dodge", 
+  geom_bar_interactive(stat = "identity", position = position_dodge(width = 0.6),  
+           width = 0.4,
     aes(y=NVIE, fill=enf,tooltip=paste("niveau de vie :",round(NVIE,0), "euros"))
   ) + 
   scale_y_continuous(limits = c(0, 1500)) +  
@@ -951,7 +960,7 @@ graph5 <- ggplot(base, aes(x = isocou, y = NVIE, fill = enf)) +
     axis.title.y = element_blank(),
     legend.title = element_blank(),
     legend.position="bottom",
-    legend.box = "vertical"
+    legend.box = "horizontal"
   )+
   ofce_caption(source ="législation avril 2024, maquette Sofi https://github.com/murielpucci/SOFI")
   
@@ -969,7 +978,7 @@ Malgré l'augmentation des gains à la reprise d'emploi via le creusement de l'�
 
 ```{r}
 #| label: fig-minima
-#| fig-cap: Evolution des mimina sociaux et du Smic horaire, base 100 = 1990
+#| fig-cap: Evolution des mimina sociaux et du Smic horaire, base 100 en 1990
 #| fig-asp: 0.8
 
 
@@ -1035,17 +1044,13 @@ graphMS <- Bareme_long %>%
     aes(tooltip = paste("Année:   ", year, "   ;", variables, ": ", round(valeurs, 0))),
     size = 2
   ) +
-  theme_minimal()+
   scale_color_brewer(palette = "Set2")+ 
   labs(x="", y="")+
   theme(
     text = element_text(size=8),
     legend.title = element_blank(),
         ) +
-  ofce_caption(
-  source= "DREES",
-  note= "base 100 = 1990 ; Smic horaire et minima sociaux en euros constants"
-  )
+  ofce_caption(source ="DREES")
 
 girafy(graphMS)
 
