@@ -5,7 +5,7 @@ execute:
 website:
   title: "La reprise d'emploi est-elle rémunératrice?"
   page-navigation: true
-  site-url: "https://gallegre.github.io/GainEemploi/"
+  site-url: "https://gallegre.github.io/GainEmploi/"
   repo-url: "https://github.com/gallegre/GainEmploi"
   reader-mode: false
   bread-crumbs: true
